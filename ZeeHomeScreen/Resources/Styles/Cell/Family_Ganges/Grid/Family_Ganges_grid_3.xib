@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CellViewController" customModule="ZeeHomeScreen" customModuleProvider="target">
+            <connections>
+                <outlet property="itemImageView" destination="dHF-p0-6ZX" id="qFB-AF-u1v"/>
+                <outlet property="shadowImageView" destination="5gM-KE-dC5" id="Zaw-z0-UwC"/>
+                <outlet property="view" destination="LIR-ij-6qB" id="hde-MW-KiF"/>
+                <outletCollection property="imageViewCollection" destination="XRm-xT-cUO" collectionClass="NSMutableArray" id="aQX-8X-eYp"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="LIR-ij-6qB" customClass="APHiddenKickerViewContainer">
+            <rect key="frame" x="0.0" y="0.0" width="136" height="76"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dHF-p0-6ZX" customClass="APImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="136" height="76"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="dHF-p0-6ZX" secondAttribute="height" multiplier="34:19" id="D2g-ye-D6Q"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5gM-KE-dC5" customClass="APImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="136" height="76"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" tag="112" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XRm-xT-cUO" customClass="APImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="67" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="67" id="Jwd-6u-Vyk"/>
+                        <constraint firstAttribute="height" constant="21" id="iYB-8u-cdp"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="dHF-p0-6ZX" firstAttribute="top" secondItem="LIR-ij-6qB" secondAttribute="top" id="2S9-p1-60C"/>
+                <constraint firstAttribute="bottom" secondItem="dHF-p0-6ZX" secondAttribute="bottom" id="7vr-6L-lub"/>
+                <constraint firstItem="5gM-KE-dC5" firstAttribute="trailing" secondItem="LIR-ij-6qB" secondAttribute="trailing" id="GBF-wg-ngh"/>
+                <constraint firstItem="5gM-KE-dC5" firstAttribute="bottom" secondItem="LIR-ij-6qB" secondAttribute="bottom" id="HQ1-ik-5Bp"/>
+                <constraint firstItem="5gM-KE-dC5" firstAttribute="height" secondItem="dHF-p0-6ZX" secondAttribute="height" id="HtJ-XJ-5wg"/>
+                <constraint firstItem="5gM-KE-dC5" firstAttribute="top" secondItem="LIR-ij-6qB" secondAttribute="top" id="Oot-4g-xZi"/>
+                <constraint firstItem="dHF-p0-6ZX" firstAttribute="trailing" secondItem="LIR-ij-6qB" secondAttribute="trailing" id="QaB-AE-Zir"/>
+                <constraint firstItem="XRm-xT-cUO" firstAttribute="leading" secondItem="LIR-ij-6qB" secondAttribute="leading" id="R64-eM-QRn"/>
+                <constraint firstItem="dHF-p0-6ZX" firstAttribute="leading" secondItem="LIR-ij-6qB" secondAttribute="leading" id="ZIF-QH-067"/>
+                <constraint firstItem="5gM-KE-dC5" firstAttribute="width" secondItem="dHF-p0-6ZX" secondAttribute="width" id="l0z-wZ-vRt"/>
+                <constraint firstItem="5gM-KE-dC5" firstAttribute="leading" secondItem="LIR-ij-6qB" secondAttribute="leading" id="qEQ-nO-FaM"/>
+                <constraint firstItem="XRm-xT-cUO" firstAttribute="top" secondItem="LIR-ij-6qB" secondAttribute="top" id="y9L-N2-LQY"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="136.95652173913044" y="153.68303571428569"/>
+        </view>
+    </objects>
+</document>

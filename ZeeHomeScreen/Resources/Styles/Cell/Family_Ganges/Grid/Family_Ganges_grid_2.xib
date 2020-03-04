@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CellViewController" customModule="ZeeHomeScreen" customModuleProvider="target">
+            <connections>
+                <outlet property="itemImageView" destination="1sp-5d-MbB" id="X91-k6-qVa"/>
+                <outlet property="shadowImageView" destination="PHc-0Z-WYS" id="YJA-n3-wLh"/>
+                <outlet property="view" destination="ePa-bF-SvL" id="D2C-wu-gxI"/>
+                <outletCollection property="imageViewCollection" destination="Hmt-BU-8q8" collectionClass="NSMutableArray" id="oif-nV-VC3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ePa-bF-SvL" customClass="APHiddenKickerViewContainer">
+            <rect key="frame" x="0.0" y="0.0" width="85" height="127"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1sp-5d-MbB" customClass="APImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="85" height="127"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="1sp-5d-MbB" secondAttribute="height" multiplier="85:127" id="q84-3d-aAi"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PHc-0Z-WYS" customClass="APImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="85" height="127"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" tag="112" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hmt-BU-8q8" customClass="APImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="67" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="67" id="9wS-jd-XDN"/>
+                        <constraint firstAttribute="height" constant="21" id="l6F-5F-CDe"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="PHc-0Z-WYS" firstAttribute="bottom" secondItem="s0q-wu-jAl" secondAttribute="bottom" id="F0q-7I-9x1"/>
+                <constraint firstItem="PHc-0Z-WYS" firstAttribute="trailing" secondItem="s0q-wu-jAl" secondAttribute="trailing" id="HMG-6r-fQK"/>
+                <constraint firstItem="PHc-0Z-WYS" firstAttribute="height" secondItem="1sp-5d-MbB" secondAttribute="height" id="OWY-Vt-ITv"/>
+                <constraint firstItem="1sp-5d-MbB" firstAttribute="leading" secondItem="s0q-wu-jAl" secondAttribute="leading" id="W28-cb-nVt"/>
+                <constraint firstItem="Hmt-BU-8q8" firstAttribute="leading" secondItem="s0q-wu-jAl" secondAttribute="leading" id="a0m-UY-dqm"/>
+                <constraint firstItem="Hmt-BU-8q8" firstAttribute="top" secondItem="s0q-wu-jAl" secondAttribute="top" id="hl7-31-xGN"/>
+                <constraint firstItem="1sp-5d-MbB" firstAttribute="top" secondItem="s0q-wu-jAl" secondAttribute="top" id="iZR-f3-XEB"/>
+                <constraint firstItem="PHc-0Z-WYS" firstAttribute="top" secondItem="s0q-wu-jAl" secondAttribute="top" id="o9w-wE-7Fo"/>
+                <constraint firstItem="PHc-0Z-WYS" firstAttribute="leading" secondItem="s0q-wu-jAl" secondAttribute="leading" id="qxW-TX-pfl"/>
+                <constraint firstItem="PHc-0Z-WYS" firstAttribute="width" secondItem="1sp-5d-MbB" secondAttribute="width" id="tKh-ve-l43"/>
+                <constraint firstItem="1sp-5d-MbB" firstAttribute="trailing" secondItem="s0q-wu-jAl" secondAttribute="trailing" id="w8Q-ky-QeL"/>
+                <constraint firstItem="s0q-wu-jAl" firstAttribute="bottom" secondItem="1sp-5d-MbB" secondAttribute="bottom" id="xxC-2W-dYb"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="s0q-wu-jAl"/>
+            <point key="canvasLocation" x="137.59999999999999" y="153.82308845577214"/>
+        </view>
+    </objects>
+</document>

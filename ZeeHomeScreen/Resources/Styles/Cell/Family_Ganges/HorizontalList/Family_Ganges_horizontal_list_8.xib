@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CellViewController" customModule="ZeeHomeScreen" customModuleProvider="target">
+            <connections>
+                <outlet property="itemImageView" destination="lUi-Zg-2CK" id="oLj-vJ-V5t"/>
+                <outlet property="itemNameLabel" destination="mW2-Wi-tUe" id="ImA-xK-0Eg"/>
+                <outlet property="promoVideoContainerView" destination="5e8-Rb-3Zg" id="NPq-LK-t1l"/>
+                <outlet property="shadowImageView" destination="Jty-UH-qKE" id="Bcr-SE-Kmg"/>
+                <outlet property="view" destination="c9d-ag-J0i" id="QuI-2R-iFG"/>
+                <outletCollection property="buttonsViewCollection" destination="FzF-7a-ezm" collectionClass="NSMutableArray" id="k30-5M-bjV"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="c9d-ag-J0i">
+            <rect key="frame" x="0.0" y="0.0" width="316" height="178"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lUi-Zg-2CK" customClass="APImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="316" height="178"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="lUi-Zg-2CK" secondAttribute="height" multiplier="158:89" id="oJB-FQ-gDD"/>
+                    </constraints>
+                </imageView>
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5e8-Rb-3Zg">
+                    <rect key="frame" x="0.0" y="0.0" width="316" height="178"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jty-UH-qKE" customClass="APImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="316" height="178"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mW2-Wi-tUe">
+                    <rect key="frame" x="8" y="155.5" width="300" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FzF-7a-ezm" customClass="CAButton">
+                    <rect key="frame" x="284" y="0.0" width="32" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="Xfx-bh-20Q"/>
+                        <constraint firstAttribute="width" constant="32" id="sKT-n2-P6K"/>
+                    </constraints>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="DFQ-tr-vaj" firstAttribute="bottom" secondItem="Jty-UH-qKE" secondAttribute="bottom" id="0qp-Kt-PgQ"/>
+                <constraint firstItem="5e8-Rb-3Zg" firstAttribute="width" secondItem="lUi-Zg-2CK" secondAttribute="width" id="0rg-Au-aH0"/>
+                <constraint firstItem="lUi-Zg-2CK" firstAttribute="top" secondItem="DFQ-tr-vaj" secondAttribute="top" id="7Gm-HH-KFd"/>
+                <constraint firstItem="Jty-UH-qKE" firstAttribute="top" secondItem="DFQ-tr-vaj" secondAttribute="top" id="AKd-mm-gkO"/>
+                <constraint firstItem="Jty-UH-qKE" firstAttribute="width" secondItem="lUi-Zg-2CK" secondAttribute="width" id="HYC-gZ-XDj"/>
+                <constraint firstItem="DFQ-tr-vaj" firstAttribute="trailing" secondItem="mW2-Wi-tUe" secondAttribute="trailing" constant="8" id="IgE-ee-COa"/>
+                <constraint firstItem="DFQ-tr-vaj" firstAttribute="trailing" secondItem="Jty-UH-qKE" secondAttribute="trailing" id="L4b-jI-Khf"/>
+                <constraint firstItem="Jty-UH-qKE" firstAttribute="height" secondItem="lUi-Zg-2CK" secondAttribute="height" id="NH3-wF-nxo"/>
+                <constraint firstItem="Jty-UH-qKE" firstAttribute="leading" secondItem="DFQ-tr-vaj" secondAttribute="leading" id="R7m-EW-I2f"/>
+                <constraint firstItem="FzF-7a-ezm" firstAttribute="trailing" secondItem="DFQ-tr-vaj" secondAttribute="trailing" id="T51-Ex-CPW"/>
+                <constraint firstItem="DFQ-tr-vaj" firstAttribute="trailing" secondItem="lUi-Zg-2CK" secondAttribute="trailing" id="Tyf-k7-6go"/>
+                <constraint firstItem="mW2-Wi-tUe" firstAttribute="leading" secondItem="DFQ-tr-vaj" secondAttribute="leading" constant="8" id="UvC-99-yHW"/>
+                <constraint firstItem="5e8-Rb-3Zg" firstAttribute="height" secondItem="lUi-Zg-2CK" secondAttribute="height" id="dMz-AQ-fsY"/>
+                <constraint firstItem="5e8-Rb-3Zg" firstAttribute="centerX" secondItem="DFQ-tr-vaj" secondAttribute="centerX" id="duH-nO-cSa"/>
+                <constraint firstItem="lUi-Zg-2CK" firstAttribute="leading" secondItem="DFQ-tr-vaj" secondAttribute="leading" id="lpo-iH-NQf"/>
+                <constraint firstItem="DFQ-tr-vaj" firstAttribute="bottom" secondItem="lUi-Zg-2CK" secondAttribute="bottom" id="pSL-ln-f94"/>
+                <constraint firstItem="5e8-Rb-3Zg" firstAttribute="centerY" secondItem="DFQ-tr-vaj" secondAttribute="centerY" id="ury-7u-c7p"/>
+                <constraint firstItem="DFQ-tr-vaj" firstAttribute="bottom" secondItem="mW2-Wi-tUe" secondAttribute="bottom" constant="8" id="uwU-Tx-YBa"/>
+                <constraint firstItem="FzF-7a-ezm" firstAttribute="top" secondItem="DFQ-tr-vaj" secondAttribute="top" id="xVJ-e0-7ZP"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="DFQ-tr-vaj"/>
+            <point key="canvasLocation" x="129.59999999999999" y="153.82308845577214"/>
+        </view>
+    </objects>
+</document>

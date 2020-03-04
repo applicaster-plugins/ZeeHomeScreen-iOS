@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZeeCarouselViewController">
+            <connections>
+                <outlet property="carouselView" destination="MPw-FD-aNZ" id="dWx-6V-b58"/>
+                <outlet property="view" destination="gqX-W3-Neq" id="6LR-w6-Ws6"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="gqX-W3-Neq">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="MPw-FD-aNZ" userLabel="CarouselView" customClass="APPromotionView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                    <subviews>
+                        <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Tcq-MA-pvg">
+                            <rect key="frame" x="140.5" y="143" width="39" height="37"/>
+                            <color key="pageIndicatorTintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="currentPageIndicatorTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </pageControl>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="Tcq-MA-pvg" secondAttribute="centerX" id="5Vb-iq-3hf"/>
+                        <constraint firstAttribute="bottom" secondItem="Tcq-MA-pvg" secondAttribute="bottom" id="co3-kD-CtP"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="yiW-ho-9kL"/>
+                        <outlet property="delegate" destination="-1" id="Axa-Zl-hA9"/>
+                        <outlet property="pageControl" destination="Tcq-MA-pvg" id="Vom-mU-e2S"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="cJq-8G-dxC" firstAttribute="bottom" secondItem="MPw-FD-aNZ" secondAttribute="bottom" id="5vH-iX-x3O"/>
+                <constraint firstItem="MPw-FD-aNZ" firstAttribute="top" secondItem="gqX-W3-Neq" secondAttribute="top" id="bbs-cx-9WU"/>
+                <constraint firstAttribute="trailing" secondItem="MPw-FD-aNZ" secondAttribute="trailing" id="gav-J8-nhs"/>
+                <constraint firstItem="MPw-FD-aNZ" firstAttribute="leading" secondItem="gqX-W3-Neq" secondAttribute="leading" id="ufO-Tb-F24"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="cJq-8G-dxC"/>
+            <point key="canvasLocation" x="764.0625" y="180.46875"/>
+        </view>
+    </objects>
+</document>

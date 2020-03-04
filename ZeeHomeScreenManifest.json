@@ -1,0 +1,90 @@
+{
+  "api": {
+    "class_name": "Zee5HomeScreenPluginAdapter",
+    "modules": [
+      "ZeeHomeScreen-iOS"
+    ],
+    "require_startup_execution": false
+  },
+  "dependency_repository_url": [
+    "git@github.com:applicaster-plugins/ZeeHomeScreen-iOS.git"
+  ],
+  "platform": "ios",
+  "author_name": "Miri Vecselboim",
+  "author_email": "m.vecselboim@applicaster.com",
+  "manifest_version": "1.0.0",
+  "name": "Zee5HomeScreen",
+  "description": "Zee5 Home Screen",
+  "type": "general",
+  "screen": true,
+  "identifier": "zee5_home_screen",
+  "ui_builder_support": true,
+  "dependency_name": "ZeeHomeScreen-iOS",
+  "dependency_version": "1.0.0",
+  "whitelisted_account_ids": [
+    "5cb825e102507200087bbdcc"
+  ],
+  "min_zapp_sdk": "13.0.0-Dev",
+  "deprecated_since_zapp_sdk": "",
+  "unsupported_since_zapp_sdk": "",
+  "supported_nav_items": [],
+  "react_native": false,
+  "data": {
+      "fields": [
+        {
+          "key": "source",
+          "type": "select"
+        },
+        {
+          "key": "type",
+          "type": "select"
+        }
+      ]
+    },
+    "general": {
+      "fields": [
+        {
+          "key": "list_divider",
+          "type": "text_input",
+          "placeholder": "10",
+          "initial_value": "10"
+        },
+        {
+          "key": "padding_horizontal",
+          "type": "text_input",
+          "placeholder": "10",
+          "initial_value": "10"
+        },
+        {
+          "key": "padding_top",
+          "type": "text_input",
+          "placeholder": "0",
+          "initial_value": "0"
+        },
+        {
+          "key": "padding_bottom",
+          "type": "text_input",
+          "placeholder": "10",
+          "initial_value": "10"
+        },
+        {
+          "key": "numberOfComponentsToLoad",
+          "type": "text_input",
+          "placeholder": "6",
+          "initial_value": "6",
+          "label_tooltip": "Max component that need to be load each time.."
+        },
+        {
+          "key": "componentsThresholdIndex",
+          "type": "text_input",
+          "placeholder": "3",
+          "initial_value": "3",
+          "label_tooltip": "Represent the max gap between the last visible component to the last compoentn. for example: if the list has 8 componenet the next loadin invoke once the 5 component will be visible."
+        }
+      ]
+    },
+    "custom_configuration_fields": [],
+    "targets": [
+      "mobile"
+    ]
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CellViewController" customModule="ZeeHomeScreen" customModuleProvider="target">
+            <connections>
+                <outlet property="itemImageView" destination="dzo-vb-qyw" id="0Uv-Y3-oyR"/>
+                <outlet property="itemNameLabel" destination="SkG-3R-aAz" id="4z8-Qr-JPN"/>
+                <outlet property="view" destination="W2i-GR-TqY" id="wZW-SO-iup"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="W2i-GR-TqY">
+            <rect key="frame" x="0.0" y="0.0" width="151" height="118"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dzo-vb-qyw" customClass="APImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="151" height="85"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="dzo-vb-qyw" secondAttribute="height" multiplier="151:85" id="3ub-sm-2yu"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkG-3R-aAz">
+                    <rect key="frame" x="8" y="93" width="135" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="SkG-3R-aAz" firstAttribute="leading" secondItem="3I9-o5-a1G" secondAttribute="leading" constant="8" id="1o2-OI-ymw"/>
+                <constraint firstItem="3I9-o5-a1G" firstAttribute="trailing" secondItem="dzo-vb-qyw" secondAttribute="trailing" id="4xb-Ot-G5S"/>
+                <constraint firstItem="3I9-o5-a1G" firstAttribute="bottom" secondItem="SkG-3R-aAz" secondAttribute="bottom" constant="8" id="LsR-fZ-Z4T"/>
+                <constraint firstItem="dzo-vb-qyw" firstAttribute="top" secondItem="3I9-o5-a1G" secondAttribute="top" id="Mbg-41-2F7"/>
+                <constraint firstItem="SkG-3R-aAz" firstAttribute="top" secondItem="dzo-vb-qyw" secondAttribute="bottom" constant="8" id="OV5-uP-9BU"/>
+                <constraint firstItem="3I9-o5-a1G" firstAttribute="trailing" secondItem="SkG-3R-aAz" secondAttribute="trailing" constant="8" id="Y5M-h6-QH3"/>
+                <constraint firstItem="dzo-vb-qyw" firstAttribute="leading" secondItem="3I9-o5-a1G" secondAttribute="leading" id="w9s-Pc-Idq"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="3I9-o5-a1G"/>
+            <point key="canvasLocation" x="129.59999999999999" y="153.82308845577214"/>
+        </view>
+    </objects>
+</document>

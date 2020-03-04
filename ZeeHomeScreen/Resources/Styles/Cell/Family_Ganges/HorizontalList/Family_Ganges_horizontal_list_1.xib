@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CellViewController" customModule="ZeeHomeScreen" customModuleProvider="target">
+            <connections>
+                <outlet property="itemImageView" destination="Zk4-kS-EEr" id="QwO-m1-Pde"/>
+                <outlet property="view" destination="iN0-l3-epB" id="vNV-BX-cX8"/>
+                <outletCollection property="imageViewCollection" destination="XtD-1m-StK" collectionClass="NSMutableArray" id="T6l-zw-TQo"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="106" height="159"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zk4-kS-EEr" customClass="APImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="106" height="159"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Zk4-kS-EEr" secondAttribute="height" multiplier="2:3" id="88U-Gt-mUB"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" tag="112" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XtD-1m-StK" customClass="APImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="67" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="67" id="6Tt-6L-kAh"/>
+                        <constraint firstAttribute="height" constant="21" id="jqi-BR-Epf"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="XtD-1m-StK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="1lH-94-wiw"/>
+                <constraint firstItem="Zk4-kS-EEr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="BKN-Kp-gPe"/>
+                <constraint firstItem="XtD-1m-StK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="FJr-44-JCU"/>
+                <constraint firstAttribute="trailing" secondItem="Zk4-kS-EEr" secondAttribute="trailing" id="Mou-0q-nfg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Zk4-kS-EEr" secondAttribute="bottom" id="dzc-zn-G7X"/>
+                <constraint firstItem="Zk4-kS-EEr" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="jcV-QW-z4l"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="40" y="46.326836581709152"/>
+        </view>
+    </objects>
+</document>
