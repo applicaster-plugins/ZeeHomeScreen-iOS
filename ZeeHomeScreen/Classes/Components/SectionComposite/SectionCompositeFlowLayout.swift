@@ -8,7 +8,6 @@
 import Foundation
 import ZappPlugins
 import ApplicasterSDK
-import ComponentsSDK
 
 @objc public class SectionCompositeFlowLayout: UICollectionViewFlowLayout {
     

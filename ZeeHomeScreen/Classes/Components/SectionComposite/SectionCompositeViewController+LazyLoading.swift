@@ -151,7 +151,7 @@ extension SectionCompositeViewController {
         }
         
         registerLayouts(sectionsArray: itemToInsert)
-        loadingIndicatorContainerView?.stopAnimating()
+//        loadingIndicatorContainerView?.stopAnimating()
         
         if itemsIndexesPaths.count > 0 {
             collectionView?.performBatchUpdates({
@@ -178,7 +178,7 @@ extension SectionCompositeViewController {
         }
         let sectionIndexSet = IndexSet(sectionsIndexesInt)
         registerLayouts(sectionsArray: sectionToInsert)
-        loadingIndicatorContainerView?.stopAnimating()
+//        loadingIndicatorContainerView?.stopAnimating()
         
         if sectionsIndexesInt.count > 0 {
             collectionView?.performBatchUpdates({

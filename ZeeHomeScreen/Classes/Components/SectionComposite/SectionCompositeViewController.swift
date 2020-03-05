@@ -16,7 +16,7 @@ import ZappPlugins
     
     @IBOutlet weak var backgroundImageView: APImageView?
     @IBOutlet weak var collectionView: UICollectionView?
-    @IBOutlet weak var loadingIndicatorContainerView:CAActivityIndicatorContainerView?
+//    @IBOutlet weak var loadingIndicatorContainerView:CAActivityIndicatorContainerView?
     
     @IBOutlet weak var noDataLabel:UILabel?
     @IBOutlet weak var horizontalListInnerLabel: UILabel?
@@ -162,7 +162,7 @@ import ZappPlugins
     
     func loadComponent() {
         noDataLabel?.isHidden = true
-        loadingIndicatorContainerView?.startAnimating()
+//        loadingIndicatorContainerView?.startAnimating()
         cancelRefreshTask()
         
         //when loading feed url remove local feed cache if exists
@@ -235,7 +235,7 @@ import ZappPlugins
                                                       name: NSNotification.Name(rawValue: uiTag),
                                                       object: nil)
         }
-        self.loadingIndicatorContainerView?.stopAnimating()
+//        self.loadingIndicatorContainerView?.stopAnimating()
     }
     
     deinit {
@@ -525,9 +525,9 @@ import ZappPlugins
     }
     
     func performCompletionAndStopLoadingIndicator() {
-        self.loadingIndicatorContainerView?.stopAnimating()
+//        self.loadingIndicatorContainerView?.stopAnimating()
         DispatchQueue.main.async {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: kCANotificationsLoadingFinishedKey),
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "kCANotificationsLoadingFinishedKey"),
                                             object: self)
         }
     }
