@@ -9,7 +9,7 @@
 @interface BaseComponentViewController : UIViewController
 @property (nonatomic, strong) NSDate *nextRefreshTime;
 @property (nonatomic, strong) NSObject *refreshTaskUniqueKey;
-@property (nonatomic, assign) BOOL shouldInvalidateCache
+@property (nonatomic, assign) BOOL shouldInvalidateCache;
 
 
 - (void)setupComponentDefinitions:(NSDictionary*)attributes;

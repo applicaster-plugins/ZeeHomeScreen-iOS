@@ -28,5 +28,6 @@ Pod::Spec.new do |s|
 
   s.dependency 'ZappPlugins'
   s.dependency 'ApplicasterSDK'
+  s.dependency 'ApplicasterUIKit'
 
 end
