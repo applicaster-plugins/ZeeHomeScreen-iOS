@@ -14,7 +14,6 @@
 @protocol ComponentProtocol;
 @protocol ComponentDelegate;
 
-
 @interface ComponenttFactory : NSObject
 
 #pragma mark - Public Methods

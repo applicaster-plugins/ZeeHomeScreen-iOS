@@ -13,6 +13,9 @@
 @protocol ComponentDelegate;
 
 @class APImageView;
+@class CellModel;
+@class ComponentModel;
+@class DatasourceManager;
 
 extern NSString * const kCACarouselSwipedNotification;
 

@@ -13,7 +13,6 @@
 
 @protocol ComponentProtocol;
 @protocol ComponentDelegate;
-@class ComponentModel;
 
 @interface ComponenttFactory (){
     

@@ -154,6 +154,7 @@ extern NSString *const kScreenPickerMarginKey;
 
 @class APProgram;
 @class ComponentModel;
+@class CellModel;
 
 @interface ComponentModel (Customization)
 
