@@ -8,7 +8,6 @@
 import ApplicasterSDK
 import Foundation
 import ZappPlugins
-import ComponentsSDK
 
 @objc class SectionCompositeViewController: BaseCollectionComponentViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ComponentProtocol, ComponentDelegate, UIScrollViewDelegate {
     
