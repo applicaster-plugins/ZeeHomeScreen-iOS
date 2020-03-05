@@ -9,7 +9,7 @@
 
 #import "ComponenttFactory.h"
 #import "BaseCollectionComponentViewController.h"
-#import "ComponentModel+Customization.h"
+//#import "ComponentModel+Customization.h"
 #import "RefreshManager.h"
 
 @interface BaseCollectionComponentViewController ()
@@ -19,22 +19,22 @@
 @implementation BaseCollectionComponentViewController
 
 - (void)setupComponentDefinitions:(NSDictionary*)attributes {
-    self.collectionMinimumLineSpacing = [attributes[kAttributesLineSpacingKey] floatValue];
+    self.collectionMinimumLineSpacing = [attributes[@"line_spacing"] floatValue];
     self.collectionMinimumLineSpacing = [APScreenMultiplierConverter convertedValueForScreenMultiplierWithValue:self.collectionMinimumLineSpacing];
     
-    self.collectionMinimumInteritemSpacing = [attributes[kAttributesInterItemSpacingKey] floatValue];
+    self.collectionMinimumInteritemSpacing = [attributes[@"interitem_spacing"] floatValue];
     self.collectionMinimumInteritemSpacing = [APScreenMultiplierConverter convertedValueForScreenMultiplierWithValue:self.collectionMinimumInteritemSpacing];
     
-    CGFloat topInset = [attributes[kAttributesInsetTopKey] floatValue];
+    CGFloat topInset = [attributes[@"inset_top"] floatValue];
     topInset = [APScreenMultiplierConverter convertedValueForScreenMultiplierWithValue:topInset];
     
-    CGFloat leftInset = [attributes[kAttributesInsetLeftKey] floatValue];
+    CGFloat leftInset = [attributes[@"inset_left"] floatValue];
     leftInset = [APScreenMultiplierConverter convertedValueForScreenMultiplierWithValue:leftInset];
     
-    CGFloat bottomInset = [attributes[kAttributesInsetBottomKey] floatValue];
+    CGFloat bottomInset = [attributes[@"inset_bottom"] floatValue];
     bottomInset = [APScreenMultiplierConverter convertedValueForScreenMultiplierWithValue:bottomInset];
     
-    CGFloat rightInset = [attributes[kAttributesInsetRightKey] floatValue];
+    CGFloat rightInset = [attributes[@"inset_right"] floatValue];
     rightInset = [APScreenMultiplierConverter convertedValueForScreenMultiplierWithValue:rightInset];
     
     self.collectionInsets = UIEdgeInsetsMake(topInset,

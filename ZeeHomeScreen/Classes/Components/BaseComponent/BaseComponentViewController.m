@@ -5,7 +5,7 @@
 //
 
 #import "BaseComponentViewController.h"
-#import "ComponentModel+Customization.h"
+//#import "ComponentModel+Customization.h"
 #import "RefreshManager.h"
 
 @import ApplicasterSDK;

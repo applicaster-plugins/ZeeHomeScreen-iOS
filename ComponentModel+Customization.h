@@ -8,7 +8,7 @@
 #import "ComponentProtocol.h"
 @import UIKit;
 @import ZappPlugins;
-#import <ZeeHomeScreen/ZeeHomeScreen-Swift.h>
+//#import "ZeeHomeScreen-Swift.h"
 
 #pragma mark - AttributeKeys
 extern NSString *const kAttributeImageTagKey;

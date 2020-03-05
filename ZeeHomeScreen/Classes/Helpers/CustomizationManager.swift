@@ -492,10 +492,10 @@ extension CustomizationManager {
     /// - Returns: new dictionary with copied attributes
     class func copySizeAttributes(from fromDictionary:[String:Any], to toDictionary:[String:Any]) -> [String:Any] {
         var retVal = toDictionary
-        if let heightPixel = fromDictionary[kAttributesHeightPixelKey],
-            retVal[kAttributesHeightPixelKey] == nil {
-            retVal[kAttributesHeightPixelKey] = heightPixel
-        }
+//        if let heightPixel = fromDictionary[kAttributesHeightPixelKey],
+//            retVal[kAttributesHeightPixelKey] == nil {
+//            retVal[kAttributesHeightPixelKey] = heightPixel
+//        }
         
         if let customScaling = fromDictionary["custom_scaling"],
             retVal["custom_scaling"] == nil {
