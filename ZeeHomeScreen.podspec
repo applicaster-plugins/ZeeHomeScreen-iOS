@@ -23,7 +23,8 @@ Pod::Spec.new do |s|
   s.xcconfig =  {
                   'ENABLE_BITCODE' => 'YES',
                   'FRAMEWORK_SEARCH_PATHS' => '$(inherited) "${PODS_ROOT}"/**',
-                  'SWIFT_VERSION' => '5.1'
+                  'SWIFT_VERSION' => '5.1',
+                  'DEFINES_MODULE' => 'YES'
                 }
 
   s.dependency 'ZappPlugins'
