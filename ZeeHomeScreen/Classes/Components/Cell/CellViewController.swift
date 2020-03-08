@@ -102,22 +102,24 @@ class CellViewController : UIViewController, ComponentProtocol {
     
     func updateLabels() {
         
-//        if let componentModel = componentModel as? CellModel {
-//            self.currentComponentModel?.customization(for: self.itemNameLabel, attributeKey: "label_title", withModel: componentModel, componentState: ZeeComponentState.normal)
-//            
-//             self.currentComponentModel?.customization(for: self.itemShowNameLabel, attributeKey: "label_subtitle", withModel: componentModel, componentState: ZeeComponentState.normal)
-//            
-//             self.currentComponentModel?.customization(for: self.itemDescriptionLabel, attributeKey: "label_description", withModel: componentModel, componentState: ZeeComponentState.normal)
-//            
-//            self.currentComponentModel?.customization(for: self.itemTimeLabel, attributeKey: "label_time", withModel: componentModel, componentState: ZeeComponentState.normal)
-//            
-//        }
+        if let componentModel = componentModel as? CellModel {
+            let customization = ComponentModelCustomization()
+            customization.customization(for: self.itemNameLabel, attributeKey: "label_title", withModel: componentModel, componentState: ZeeComponentState.normal)
+            
+             customization.customization(for: self.itemShowNameLabel, attributeKey: "label_subtitle", withModel: componentModel, componentState: ZeeComponentState.normal)
+
+             customization.customization(for: self.itemDescriptionLabel, attributeKey: "label_description", withModel: componentModel, componentState: ZeeComponentState.normal)
+
+            customization.customization(for: self.itemTimeLabel, attributeKey: "label_time", withModel: componentModel, componentState: ZeeComponentState.normal)
+            
+        }
     }
     
     func updateBorderColor() {
-//        if let color = self.currentComponentModel?.color(forAttributeKey: kAttributeBorderColorKey, attributesDict: nil, withModel: (componentModel as! NSObject), componentState: ZeeComponentState.normal) {
-//            self.borderView.backgroundColor = color
-//        }
+        let customization = ComponentModelCustomization()
+        if let color = customization.color(forAttributeKey: kAttributeBorderColorKey, attributesDict: nil, withModel: (componentModel as! NSObject), componentState: ZeeComponentState.normal) {
+            self.borderView.backgroundColor = color
+        }
     }
  
 }

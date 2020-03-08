@@ -12,7 +12,6 @@
             <connections>
                 <outlet property="backgroundImageView" destination="z76-Xr-Lga" id="clV-ZJ-ebu"/>
                 <outlet property="collectionView" destination="zbv-WY-xRs" id="Lk5-Fu-Ggj"/>
-                <outlet property="loadingIndicatorContainerView" destination="auB-e5-KDi" id="HV2-RZ-Qmg"/>
                 <outlet property="noDataLabel" destination="imO-bI-2cl" id="ixO-dr-QIO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
