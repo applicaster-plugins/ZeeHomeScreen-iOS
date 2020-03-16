@@ -288,13 +288,11 @@ import ZappPlugins
             let layoutName = componentModel.layoutStyle {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewCell {
                 cell.backgroundColor = UIColor.darkGray
-                if componentModel.type != "LAZY_LOADING" {
-                    cell.setComponentModel(componentModel,
-                                           model: self,
-                                           view: cell.contentView,
-                                           delegate: self,
-                                           parentViewController: self)
-                }
+                cell.setComponentModel(componentModel,
+                                       model: self,
+                                       view: cell.contentView,
+                                       delegate: self,
+                                       parentViewController: self)
                 return cell
             }
         }

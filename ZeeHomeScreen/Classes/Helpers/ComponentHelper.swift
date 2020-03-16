@@ -102,5 +102,5 @@ class ComponentHelper {
     
     class func isIPad() -> Bool {
            return UIDevice.current.userInterfaceIdiom == .pad
-       }
+    }
 }

@@ -106,6 +106,19 @@
                                                          bundle:bundle];
     }
     
+    NSArray *providers = [[ZAAppConnector sharedInstance].pluginsDelegate.generalPluginsManager getPluginsForFamilyType: ZPGeneralPluginsFamilyUi];
+    for (id<ZPGeneralPluginUIProtocol> provider in providers) {
+        NSMutableDictionary *optionsDict = [NSMutableDictionary dictionaryWithDictionary:@{@"xibKeyName": nibName,
+                                                                                           @"type": type,
+                                                                                           @"bundle": bundle}] ;
+        if (viewController != nil) {
+            [optionsDict setObject:viewController forKey:@"viewController"];
+        }
+        viewController = (UIViewController <ComponentProtocol> *)[provider viewControllerWithOptions: optionsDict];
+        if (viewController) {
+            break;
+        }
+    }
     return viewController;
 }
 
@@ -123,7 +136,6 @@
             if ([(UIViewController <ComponentProtocol> *) viewController respondsToSelector:@selector(setComponentModel:)]) {
                 [(UIViewController <ComponentProtocol> *) viewController setComponentModel:componentModel];
             }
-            [(UIViewController <ComponentProtocol> *) viewController setComponentModel:componentModel];
             if ([(UIViewController <ComponentProtocol> *) viewController respondsToSelector:@selector(setupAppDefaultDefinitions)]) {
                 [(UIViewController <ComponentProtocol> *) viewController setupAppDefaultDefinitions];
             }

@@ -36,11 +36,9 @@ import ApplicasterSDK
     }
         
     @objc open func load(atomFeedUrl: String, parentModel: ComponentModelProtocol, completion: @escaping (_ component: ComponentModelProtocol?) -> Void) {
-
         APAtomFeedLoader.loadPipes(model: APAtomFeed(url:atomFeedUrl)) { (success, atomFeed) in
-            let component = self.parse(data: atomFeed, componentModel: parentModel as! ComponentModel)
+            let component = self.parse(data: atomFeed, componentModel: parentModel as? ComponentModel)
             completion(component)
-
         }
     }
     

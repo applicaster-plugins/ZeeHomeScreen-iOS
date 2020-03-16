@@ -9,9 +9,11 @@ import Foundation
 
 class LazyLoadingViewController: UIViewController, ComponentProtocol, ComponentDelegate {
    
+    @IBOutlet weak var loadingIndicator : UIActivityIndicatorView?
+    
     public var componentModel: ComponentModelProtocol? {
         didSet {
-//            self.fillEntryData()
+            loadingIndicator?.startAnimating()
         }
     }
     
@@ -24,6 +26,10 @@ class LazyLoadingViewController: UIViewController, ComponentProtocol, ComponentD
     override func viewDidLoad()
     {
         super.viewDidLoad()
+    }
+    
+    deinit {
+        loadingIndicator?.stopAnimating()
     }
     
 }

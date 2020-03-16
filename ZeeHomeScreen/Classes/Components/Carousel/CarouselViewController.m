@@ -117,8 +117,6 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
                     weakSelf.dataSource = componentModel.childerns;
                     [weakSelf registerCarouselItems: componentModel.childerns];
                     [weakSelf updateDataArrayAndReload: componentModel.childerns];
-                } else {
-                    weakSelf.dataSource = [[NSArray alloc] initWithObjects:[APModel new], nil];
                 }
             }];
         }
