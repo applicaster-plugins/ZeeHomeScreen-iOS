@@ -17,7 +17,7 @@
 @class ComponentModel;
 @class DatasourceManager;
 
-extern NSString * const kCACarouselSwipedNotification;
+extern NSString * const kCarouselSwipedNotification;
 
 
 @interface CarouselViewController : UIViewController  <ComponentProtocol, ComponentDelegate, APPromotionViewDataSource, APPromotionViewDelegate>
