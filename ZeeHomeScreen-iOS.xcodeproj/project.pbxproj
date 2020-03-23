@@ -7,12 +7,90 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4DF6039323B938F300DD621F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF6039223B938F300DD621F /* AppDelegate.swift */; };
-		4DF6039523B938F300DD621F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF6039423B938F300DD621F /* SceneDelegate.swift */; };
-		4DF6039723B938F300DD621F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF6039623B938F300DD621F /* ContentView.swift */; };
-		4DF6039923B938F400DD621F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DF6039823B938F400DD621F /* Assets.xcassets */; };
-		4DF6039C23B938F400DD621F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DF6039B23B938F400DD621F /* Preview Assets.xcassets */; };
-		4DF6039F23B938F400DD621F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DF6039D23B938F400DD621F /* LaunchScreen.storyboard */; };
+		3E8F4D162428EF9D0020B6A8 /* DatasourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C942428EF9D0020B6A8 /* DatasourceManager.swift */; };
+		3E8F4D172428EF9D0020B6A8 /* ZeeHomeScreenMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C952428EF9D0020B6A8 /* ZeeHomeScreenMain.swift */; };
+		3E8F4D182428EF9D0020B6A8 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C972428EF9D0020B6A8 /* CellModel.swift */; };
+		3E8F4D192428EF9D0020B6A8 /* ComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C982428EF9D0020B6A8 /* ComponentModel.swift */; };
+		3E8F4D1A2428EF9D0020B6A8 /* AdditionalContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C992428EF9D0020B6A8 /* AdditionalContent.swift */; };
+		3E8F4D1B2428EF9D0020B6A8 /* AbstractModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C9C2428EF9D0020B6A8 /* AbstractModel.m */; };
+		3E8F4D1C2428EF9D0020B6A8 /* SectionComponentModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C9D2428EF9D0020B6A8 /* SectionComponentModelProtocol.swift */; };
+		3E8F4D1D2428EF9D0020B6A8 /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C9E2428EF9D0020B6A8 /* Pagination.swift */; };
+		3E8F4D1E2428EF9D0020B6A8 /* HeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C9F2428EF9D0020B6A8 /* HeaderModel.swift */; };
+		3E8F4D1F2428EF9D0020B6A8 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CA02428EF9D0020B6A8 /* BaseModel.swift */; };
+		3E8F4D202428EF9D0020B6A8 /* ScreenConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CA12428EF9D0020B6A8 /* ScreenConfiguration.swift */; };
+		3E8F4D212428EF9D0020B6A8 /* ComponentModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CA22428EF9D0020B6A8 /* ComponentModelProtocol.swift */; };
+		3E8F4D222428EF9D0020B6A8 /* SectionCompositeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CA52428EF9D0020B6A8 /* SectionCompositeViewController.swift */; };
+		3E8F4D232428EF9D0020B6A8 /* SectionCompositeViewController+LazyLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CA62428EF9D0020B6A8 /* SectionCompositeViewController+LazyLoading.swift */; };
+		3E8F4D242428EF9D0020B6A8 /* SectionCompositeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CA72428EF9D0020B6A8 /* SectionCompositeViewController.xib */; };
+		3E8F4D252428EF9D0020B6A8 /* SectionCompositeFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CA82428EF9D0020B6A8 /* SectionCompositeFlowLayout.swift */; };
+		3E8F4D262428EF9D0020B6A8 /* CollectionViewLayoutAttributesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CAA2428EF9D0020B6A8 /* CollectionViewLayoutAttributesList.swift */; };
+		3E8F4D272428EF9D0020B6A8 /* SectionCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CAD2428EF9D0020B6A8 /* SectionCollectionViewLayoutAttributes.swift */; };
+		3E8F4D282428EF9D0020B6A8 /* CarouselViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CAF2428EF9D0020B6A8 /* CarouselViewController.m */; };
+		3E8F4D292428EF9D0020B6A8 /* ZeeCarouselVC_Center_Photogallery.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CB02428EF9D0020B6A8 /* ZeeCarouselVC_Center_Photogallery.xib */; };
+		3E8F4D2A2428EF9D0020B6A8 /* ComponentsCustomization.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CB42428EF9D0020B6A8 /* ComponentsCustomization.m */; };
+		3E8F4D2B2428EF9D0020B6A8 /* ComponentModelCustomization.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CB72428EF9D0020B6A8 /* ComponentModelCustomization.m */; };
+		3E8F4D2C2428EF9D0020B6A8 /* CellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CB82428EF9D0020B6A8 /* CellViewController.swift */; };
+		3E8F4D2D2428EF9D0020B6A8 /* CommandPattern.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CBA2428EF9D0020B6A8 /* CommandPattern.m */; };
+		3E8F4D2E2428EF9D0020B6A8 /* UniversalCollectionViewHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CBD2428EF9D0020B6A8 /* UniversalCollectionViewHeaderFooterView.m */; };
+		3E8F4D2F2428EF9D0020B6A8 /* UniversalCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CBE2428EF9D0020B6A8 /* UniversalCollectionViewCell.m */; };
+		3E8F4D302428EF9D0020B6A8 /* LazyLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CC22428EF9D0020B6A8 /* LazyLoadingViewController.swift */; };
+		3E8F4D312428EF9D0020B6A8 /* BannerCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CC42428EF9D0020B6A8 /* BannerCellViewController.swift */; };
+		3E8F4D322428EF9D0020B6A8 /* BaseComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CC72428EF9D0020B6A8 /* BaseComponentViewController.m */; };
+		3E8F4D332428EF9D0020B6A8 /* BaseCollectionComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CC82428EF9D0020B6A8 /* BaseCollectionComponentViewController.m */; };
+		3E8F4D342428EF9D0020B6A8 /* GangasFamilyStyleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CCB2428EF9D0020B6A8 /* GangasFamilyStyleHelper.swift */; };
+		3E8F4D352428EF9D0020B6A8 /* RefreshManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CCE2428EF9D0020B6A8 /* RefreshManager.m */; };
+		3E8F4D362428EF9D0020B6A8 /* CustomizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CCF2428EF9D0020B6A8 /* CustomizationManager.swift */; };
+		3E8F4D372428EF9D0020B6A8 /* ComponentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD02428EF9D0020B6A8 /* ComponentHelper.swift */; };
+		3E8F4D382428EF9D0020B6A8 /* AtomHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD12428EF9D0020B6A8 /* AtomHelper.swift */; };
+		3E8F4D392428EF9D0020B6A8 /* ComponenttFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD42428EF9D0020B6A8 /* ComponenttFactory.m */; };
+		3E8F4D3A2428EF9D0020B6A8 /* ZeeCustomizationLayouts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD72428EF9D0020B6A8 /* ZeeCustomizationLayouts.plist */; };
+		3E8F4D3B2428EF9D0020B6A8 /* Family_Ganges_hero_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CDB2428EF9D0020B6A8 /* Family_Ganges_hero_1.xib */; };
+		3E8F4D3C2428EF9D0020B6A8 /* Family_Ganges_hero_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CDC2428EF9D0020B6A8 /* Family_Ganges_hero_3.xib */; };
+		3E8F4D3D2428EF9D0020B6A8 /* Family_Ganges_hero_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CDD2428EF9D0020B6A8 /* Family_Ganges_hero_2.xib */; };
+		3E8F4D3E2428EF9D0020B6A8 /* Family_Ganges_search_bar_cell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE12428EF9D0020B6A8 /* Family_Ganges_search_bar_cell_1.xib */; };
+		3E8F4D3F2428EF9D0020B6A8 /* Family_Ganges_consumption_cell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE32428EF9D0020B6A8 /* Family_Ganges_consumption_cell_1.xib */; };
+		3E8F4D402428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE52428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14~ipad.xib */; };
+		3E8F4D412428EF9D0020B6A8 /* Family_Ganges_horizontal_list_9.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE62428EF9D0020B6A8 /* Family_Ganges_horizontal_list_9.xib */; };
+		3E8F4D422428EF9D0020B6A8 /* Family_Ganges_horizontal_list_8.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE72428EF9D0020B6A8 /* Family_Ganges_horizontal_list_8.xib */; };
+		3E8F4D432428EF9D0020B6A8 /* Family_Ganges_horizontal_list_5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE82428EF9D0020B6A8 /* Family_Ganges_horizontal_list_5.xib */; };
+		3E8F4D442428EF9D0020B6A8 /* Family_Ganges_horizontal_list_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE92428EF9D0020B6A8 /* Family_Ganges_horizontal_list_4.xib */; };
+		3E8F4D452428EF9D0020B6A8 /* Family_Ganges_horizontal_list_6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CEA2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_6.xib */; };
+		3E8F4D462428EF9D0020B6A8 /* Family_Ganges_horizontal_list_7.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CEB2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_7.xib */; };
+		3E8F4D472428EF9D0020B6A8 /* Family_Ganges_horizontal_list_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CEC2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_3.xib */; };
+		3E8F4D482428EF9D0020B6A8 /* Family_Ganges_horizontal_list_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CED2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_2.xib */; };
+		3E8F4D492428EF9D0020B6A8 /* Family_Ganges_horizontal_list_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CEE2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_1.xib */; };
+		3E8F4D4A2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_11.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CEF2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_11.xib */; };
+		3E8F4D4B2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_10.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF02428EF9D0020B6A8 /* Family_Ganges_horizontal_list_10.xib */; };
+		3E8F4D4C2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_12.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF12428EF9D0020B6A8 /* Family_Ganges_horizontal_list_12.xib */; };
+		3E8F4D4D2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_13.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF22428EF9D0020B6A8 /* Family_Ganges_horizontal_list_13.xib */; };
+		3E8F4D4E2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_16.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF32428EF9D0020B6A8 /* Family_Ganges_horizontal_list_16.xib */; };
+		3E8F4D4F2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF42428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14.xib */; };
+		3E8F4D502428EF9D0020B6A8 /* Family_Ganges_horizontal_list_15.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF52428EF9D0020B6A8 /* Family_Ganges_horizontal_list_15.xib */; };
+		3E8F4D512428EF9D0020B6A8 /* Family_Ganges_list_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF72428EF9D0020B6A8 /* Family_Ganges_list_1.xib */; };
+		3E8F4D522428EF9D0020B6A8 /* Family_Ganges_list_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF82428EF9D0020B6A8 /* Family_Ganges_list_3.xib */; };
+		3E8F4D532428EF9D0020B6A8 /* Family_Ganges_list_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF92428EF9D0020B6A8 /* Family_Ganges_list_2.xib */; };
+		3E8F4D542428EF9D0020B6A8 /* Family_Ganges_list_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CFA2428EF9D0020B6A8 /* Family_Ganges_list_4.xib */; };
+		3E8F4D552428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CFC2428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_2.xib */; };
+		3E8F4D562428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CFD2428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_1.xib */; };
+		3E8F4D572428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CFF2428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib */; };
+		3E8F4D582428EF9D0020B6A8 /* Family_Ganges_header_cell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D012428EF9D0020B6A8 /* Family_Ganges_header_cell_1.xib */; };
+		3E8F4D592428EF9D0020B6A8 /* Family_Ganges_header_cell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D022428EF9D0020B6A8 /* Family_Ganges_header_cell_2.xib */; };
+		3E8F4D5A2428EF9D0020B6A8 /* Family_Ganges_header_cell_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D032428EF9D0020B6A8 /* Family_Ganges_header_cell_3.xib */; };
+		3E8F4D5B2428EF9D0020B6A8 /* Family_Ganges_banner_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D052428EF9D0020B6A8 /* Family_Ganges_banner_1.xib */; };
+		3E8F4D5C2428EF9D0020B6A8 /* Family_Ganges_hero_cell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D072428EF9D0020B6A8 /* Family_Ganges_hero_cell_4.xib */; };
+		3E8F4D5D2428EF9D0020B6A8 /* Family_Ganges_hero_cell_5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D082428EF9D0020B6A8 /* Family_Ganges_hero_cell_5.xib */; };
+		3E8F4D5E2428EF9D0020B6A8 /* Family_Ganges_hero_cell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D092428EF9D0020B6A8 /* Family_Ganges_hero_cell_2.xib */; };
+		3E8F4D5F2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D0A2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3.xib */; };
+		3E8F4D602428EF9D0020B6A8 /* Family_Ganges_hero_cell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D0B2428EF9D0020B6A8 /* Family_Ganges_hero_cell_1.xib */; };
+		3E8F4D612428EF9D0020B6A8 /* Family_Ganges_hero_cell_4~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D0C2428EF9D0020B6A8 /* Family_Ganges_hero_cell_4~ipad.xib */; };
+		3E8F4D622428EF9D0020B6A8 /* Family_Ganges_hero_cell_5~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D0D2428EF9D0020B6A8 /* Family_Ganges_hero_cell_5~ipad.xib */; };
+		3E8F4D632428EF9D0020B6A8 /* Family_Ganges_hero_cell_3~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D0E2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3~ipad.xib */; };
+		3E8F4D642428EF9D0020B6A8 /* Family_Ganges_hero_cell_2~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D0F2428EF9D0020B6A8 /* Family_Ganges_hero_cell_2~ipad.xib */; };
+		3E8F4D652428EF9D0020B6A8 /* Family_Ganges_hero_cell_1~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D102428EF9D0020B6A8 /* Family_Ganges_hero_cell_1~ipad.xib */; };
+		3E8F4D662428EF9D0020B6A8 /* Family_Ganges_grid_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D122428EF9D0020B6A8 /* Family_Ganges_grid_1.xib */; };
+		3E8F4D672428EF9D0020B6A8 /* Family_Ganges_grid_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D132428EF9D0020B6A8 /* Family_Ganges_grid_2.xib */; };
+		3E8F4D682428EF9D0020B6A8 /* Family_Ganges_grid_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D142428EF9D0020B6A8 /* Family_Ganges_grid_3.xib */; };
+		3E8F4D692428EF9D0020B6A8 /* ZeeComponentsMapping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D152428EF9D0020B6A8 /* ZeeComponentsMapping.plist */; };
 		4DF603AA23B938F400DD621F /* ZeeHomeScreen_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF603A923B938F400DD621F /* ZeeHomeScreen_iOSTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,14 +105,105 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E8F4C942428EF9D0020B6A8 /* DatasourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatasourceManager.swift; sourceTree = "<group>"; };
+		3E8F4C952428EF9D0020B6A8 /* ZeeHomeScreenMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZeeHomeScreenMain.swift; sourceTree = "<group>"; };
+		3E8F4C972428EF9D0020B6A8 /* CellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
+		3E8F4C982428EF9D0020B6A8 /* ComponentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentModel.swift; sourceTree = "<group>"; };
+		3E8F4C992428EF9D0020B6A8 /* AdditionalContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalContent.swift; sourceTree = "<group>"; };
+		3E8F4C9B2428EF9D0020B6A8 /* AbstractModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractModel.h; sourceTree = "<group>"; };
+		3E8F4C9C2428EF9D0020B6A8 /* AbstractModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractModel.m; sourceTree = "<group>"; };
+		3E8F4C9D2428EF9D0020B6A8 /* SectionComponentModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionComponentModelProtocol.swift; sourceTree = "<group>"; };
+		3E8F4C9E2428EF9D0020B6A8 /* Pagination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
+		3E8F4C9F2428EF9D0020B6A8 /* HeaderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderModel.swift; sourceTree = "<group>"; };
+		3E8F4CA02428EF9D0020B6A8 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		3E8F4CA12428EF9D0020B6A8 /* ScreenConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenConfiguration.swift; sourceTree = "<group>"; };
+		3E8F4CA22428EF9D0020B6A8 /* ComponentModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentModelProtocol.swift; sourceTree = "<group>"; };
+		3E8F4CA52428EF9D0020B6A8 /* SectionCompositeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionCompositeViewController.swift; sourceTree = "<group>"; };
+		3E8F4CA62428EF9D0020B6A8 /* SectionCompositeViewController+LazyLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SectionCompositeViewController+LazyLoading.swift"; sourceTree = "<group>"; };
+		3E8F4CA72428EF9D0020B6A8 /* SectionCompositeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionCompositeViewController.xib; sourceTree = "<group>"; };
+		3E8F4CA82428EF9D0020B6A8 /* SectionCompositeFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionCompositeFlowLayout.swift; sourceTree = "<group>"; };
+		3E8F4CAA2428EF9D0020B6A8 /* CollectionViewLayoutAttributesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutAttributesList.swift; sourceTree = "<group>"; };
+		3E8F4CAB2428EF9D0020B6A8 /* ComponentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentProtocol.h; sourceTree = "<group>"; };
+		3E8F4CAC2428EF9D0020B6A8 /* ComponentDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentDelegate.h; sourceTree = "<group>"; };
+		3E8F4CAD2428EF9D0020B6A8 /* SectionCollectionViewLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewLayoutAttributes.swift; sourceTree = "<group>"; };
+		3E8F4CAF2428EF9D0020B6A8 /* CarouselViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarouselViewController.m; sourceTree = "<group>"; };
+		3E8F4CB02428EF9D0020B6A8 /* ZeeCarouselVC_Center_Photogallery.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZeeCarouselVC_Center_Photogallery.xib; sourceTree = "<group>"; };
+		3E8F4CB12428EF9D0020B6A8 /* CarouselViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarouselViewController.h; sourceTree = "<group>"; };
+		3E8F4CB42428EF9D0020B6A8 /* ComponentsCustomization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentsCustomization.m; sourceTree = "<group>"; };
+		3E8F4CB52428EF9D0020B6A8 /* ComponentModelCustomization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentModelCustomization.h; sourceTree = "<group>"; };
+		3E8F4CB62428EF9D0020B6A8 /* ComponentsCustomization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentsCustomization.h; sourceTree = "<group>"; };
+		3E8F4CB72428EF9D0020B6A8 /* ComponentModelCustomization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentModelCustomization.m; sourceTree = "<group>"; };
+		3E8F4CB82428EF9D0020B6A8 /* CellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellViewController.swift; sourceTree = "<group>"; };
+		3E8F4CBA2428EF9D0020B6A8 /* CommandPattern.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandPattern.m; sourceTree = "<group>"; };
+		3E8F4CBB2428EF9D0020B6A8 /* CommandPattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandPattern.h; sourceTree = "<group>"; };
+		3E8F4CBD2428EF9D0020B6A8 /* UniversalCollectionViewHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversalCollectionViewHeaderFooterView.m; sourceTree = "<group>"; };
+		3E8F4CBE2428EF9D0020B6A8 /* UniversalCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversalCollectionViewCell.m; sourceTree = "<group>"; };
+		3E8F4CBF2428EF9D0020B6A8 /* UniversalCollectionViewHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalCollectionViewHeaderFooterView.h; sourceTree = "<group>"; };
+		3E8F4CC02428EF9D0020B6A8 /* UniversalCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalCollectionViewCell.h; sourceTree = "<group>"; };
+		3E8F4CC22428EF9D0020B6A8 /* LazyLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyLoadingViewController.swift; sourceTree = "<group>"; };
+		3E8F4CC42428EF9D0020B6A8 /* BannerCellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerCellViewController.swift; sourceTree = "<group>"; };
+		3E8F4CC62428EF9D0020B6A8 /* BaseCollectionComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCollectionComponentViewController.h; sourceTree = "<group>"; };
+		3E8F4CC72428EF9D0020B6A8 /* BaseComponentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseComponentViewController.m; sourceTree = "<group>"; };
+		3E8F4CC82428EF9D0020B6A8 /* BaseCollectionComponentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCollectionComponentViewController.m; sourceTree = "<group>"; };
+		3E8F4CC92428EF9D0020B6A8 /* BaseComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseComponentViewController.h; sourceTree = "<group>"; };
+		3E8F4CCB2428EF9D0020B6A8 /* GangasFamilyStyleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GangasFamilyStyleHelper.swift; sourceTree = "<group>"; };
+		3E8F4CCD2428EF9D0020B6A8 /* RefreshManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshManager.h; sourceTree = "<group>"; };
+		3E8F4CCE2428EF9D0020B6A8 /* RefreshManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshManager.m; sourceTree = "<group>"; };
+		3E8F4CCF2428EF9D0020B6A8 /* CustomizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizationManager.swift; sourceTree = "<group>"; };
+		3E8F4CD02428EF9D0020B6A8 /* ComponentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentHelper.swift; sourceTree = "<group>"; };
+		3E8F4CD12428EF9D0020B6A8 /* AtomHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomHelper.swift; sourceTree = "<group>"; };
+		3E8F4CD32428EF9D0020B6A8 /* ComponenttFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponenttFactory.h; sourceTree = "<group>"; };
+		3E8F4CD42428EF9D0020B6A8 /* ComponenttFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponenttFactory.m; sourceTree = "<group>"; };
+		3E8F4CD52428EF9D0020B6A8 /* ZeeHomeScreenPlugin_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZeeHomeScreenPlugin_iOS.h; sourceTree = "<group>"; };
+		3E8F4CD72428EF9D0020B6A8 /* ZeeCustomizationLayouts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZeeCustomizationLayouts.plist; sourceTree = "<group>"; };
+		3E8F4CDB2428EF9D0020B6A8 /* Family_Ganges_hero_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_1.xib; sourceTree = "<group>"; };
+		3E8F4CDC2428EF9D0020B6A8 /* Family_Ganges_hero_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_3.xib; sourceTree = "<group>"; };
+		3E8F4CDD2428EF9D0020B6A8 /* Family_Ganges_hero_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_2.xib; sourceTree = "<group>"; };
+		3E8F4CE12428EF9D0020B6A8 /* Family_Ganges_search_bar_cell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_search_bar_cell_1.xib; sourceTree = "<group>"; };
+		3E8F4CE32428EF9D0020B6A8 /* Family_Ganges_consumption_cell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_consumption_cell_1.xib; sourceTree = "<group>"; };
+		3E8F4CE52428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Family_Ganges_horizontal_list_14~ipad.xib"; sourceTree = "<group>"; };
+		3E8F4CE62428EF9D0020B6A8 /* Family_Ganges_horizontal_list_9.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_9.xib; sourceTree = "<group>"; };
+		3E8F4CE72428EF9D0020B6A8 /* Family_Ganges_horizontal_list_8.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_8.xib; sourceTree = "<group>"; };
+		3E8F4CE82428EF9D0020B6A8 /* Family_Ganges_horizontal_list_5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_5.xib; sourceTree = "<group>"; };
+		3E8F4CE92428EF9D0020B6A8 /* Family_Ganges_horizontal_list_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_4.xib; sourceTree = "<group>"; };
+		3E8F4CEA2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_6.xib; sourceTree = "<group>"; };
+		3E8F4CEB2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_7.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_7.xib; sourceTree = "<group>"; };
+		3E8F4CEC2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_3.xib; sourceTree = "<group>"; };
+		3E8F4CED2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_2.xib; sourceTree = "<group>"; };
+		3E8F4CEE2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_1.xib; sourceTree = "<group>"; };
+		3E8F4CEF2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_11.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_11.xib; sourceTree = "<group>"; };
+		3E8F4CF02428EF9D0020B6A8 /* Family_Ganges_horizontal_list_10.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_10.xib; sourceTree = "<group>"; };
+		3E8F4CF12428EF9D0020B6A8 /* Family_Ganges_horizontal_list_12.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_12.xib; sourceTree = "<group>"; };
+		3E8F4CF22428EF9D0020B6A8 /* Family_Ganges_horizontal_list_13.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_13.xib; sourceTree = "<group>"; };
+		3E8F4CF32428EF9D0020B6A8 /* Family_Ganges_horizontal_list_16.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_16.xib; sourceTree = "<group>"; };
+		3E8F4CF42428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_14.xib; sourceTree = "<group>"; };
+		3E8F4CF52428EF9D0020B6A8 /* Family_Ganges_horizontal_list_15.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_15.xib; sourceTree = "<group>"; };
+		3E8F4CF72428EF9D0020B6A8 /* Family_Ganges_list_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_list_1.xib; sourceTree = "<group>"; };
+		3E8F4CF82428EF9D0020B6A8 /* Family_Ganges_list_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_list_3.xib; sourceTree = "<group>"; };
+		3E8F4CF92428EF9D0020B6A8 /* Family_Ganges_list_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_list_2.xib; sourceTree = "<group>"; };
+		3E8F4CFA2428EF9D0020B6A8 /* Family_Ganges_list_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_list_4.xib; sourceTree = "<group>"; };
+		3E8F4CFC2428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_screen_picker_cell_2.xib; sourceTree = "<group>"; };
+		3E8F4CFD2428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_screen_picker_cell_1.xib; sourceTree = "<group>"; };
+		3E8F4CFF2428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_lazy_loading_1.xib; sourceTree = "<group>"; };
+		3E8F4D012428EF9D0020B6A8 /* Family_Ganges_header_cell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_header_cell_1.xib; sourceTree = "<group>"; };
+		3E8F4D022428EF9D0020B6A8 /* Family_Ganges_header_cell_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_header_cell_2.xib; sourceTree = "<group>"; };
+		3E8F4D032428EF9D0020B6A8 /* Family_Ganges_header_cell_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_header_cell_3.xib; sourceTree = "<group>"; };
+		3E8F4D052428EF9D0020B6A8 /* Family_Ganges_banner_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_banner_1.xib; sourceTree = "<group>"; };
+		3E8F4D072428EF9D0020B6A8 /* Family_Ganges_hero_cell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_cell_4.xib; sourceTree = "<group>"; };
+		3E8F4D082428EF9D0020B6A8 /* Family_Ganges_hero_cell_5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_cell_5.xib; sourceTree = "<group>"; };
+		3E8F4D092428EF9D0020B6A8 /* Family_Ganges_hero_cell_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_cell_2.xib; sourceTree = "<group>"; };
+		3E8F4D0A2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_cell_3.xib; sourceTree = "<group>"; };
+		3E8F4D0B2428EF9D0020B6A8 /* Family_Ganges_hero_cell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_cell_1.xib; sourceTree = "<group>"; };
+		3E8F4D0C2428EF9D0020B6A8 /* Family_Ganges_hero_cell_4~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Family_Ganges_hero_cell_4~ipad.xib"; sourceTree = "<group>"; };
+		3E8F4D0D2428EF9D0020B6A8 /* Family_Ganges_hero_cell_5~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Family_Ganges_hero_cell_5~ipad.xib"; sourceTree = "<group>"; };
+		3E8F4D0E2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Family_Ganges_hero_cell_3~ipad.xib"; sourceTree = "<group>"; };
+		3E8F4D0F2428EF9D0020B6A8 /* Family_Ganges_hero_cell_2~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Family_Ganges_hero_cell_2~ipad.xib"; sourceTree = "<group>"; };
+		3E8F4D102428EF9D0020B6A8 /* Family_Ganges_hero_cell_1~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Family_Ganges_hero_cell_1~ipad.xib"; sourceTree = "<group>"; };
+		3E8F4D122428EF9D0020B6A8 /* Family_Ganges_grid_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_grid_1.xib; sourceTree = "<group>"; };
+		3E8F4D132428EF9D0020B6A8 /* Family_Ganges_grid_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_grid_2.xib; sourceTree = "<group>"; };
+		3E8F4D142428EF9D0020B6A8 /* Family_Ganges_grid_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_grid_3.xib; sourceTree = "<group>"; };
+		3E8F4D152428EF9D0020B6A8 /* ZeeComponentsMapping.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZeeComponentsMapping.plist; sourceTree = "<group>"; };
 		4DF6038F23B938F300DD621F /* ZeeHomeScreen-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZeeHomeScreen-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4DF6039223B938F300DD621F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4DF6039423B938F300DD621F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4DF6039623B938F300DD621F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		4DF6039823B938F400DD621F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4DF6039B23B938F400DD621F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		4DF6039E23B938F400DD621F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		4DF603A023B938F400DD621F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DF603A523B938F400DD621F /* ZeeHomeScreen-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZeeHomeScreen-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DF603A923B938F400DD621F /* ZeeHomeScreen_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeeHomeScreen_iOSTests.swift; sourceTree = "<group>"; };
 		4DF603AB23B938F400DD621F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,10 +227,387 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E8F4C912428EF9D0020B6A8 /* ZeeHomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4C922428EF9D0020B6A8 /* Classes */,
+				3E8F4CD52428EF9D0020B6A8 /* ZeeHomeScreenPlugin_iOS.h */,
+				3E8F4CD62428EF9D0020B6A8 /* Resources */,
+			);
+			path = ZeeHomeScreen;
+			sourceTree = "<group>";
+		};
+		3E8F4C922428EF9D0020B6A8 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4C932428EF9D0020B6A8 /* Datasource */,
+				3E8F4C952428EF9D0020B6A8 /* ZeeHomeScreenMain.swift */,
+				3E8F4C962428EF9D0020B6A8 /* Models */,
+				3E8F4CA32428EF9D0020B6A8 /* Components */,
+				3E8F4CCA2428EF9D0020B6A8 /* Helpers */,
+				3E8F4CD22428EF9D0020B6A8 /* Factory */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		3E8F4C932428EF9D0020B6A8 /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4C942428EF9D0020B6A8 /* DatasourceManager.swift */,
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
+		3E8F4C962428EF9D0020B6A8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4C972428EF9D0020B6A8 /* CellModel.swift */,
+				3E8F4C982428EF9D0020B6A8 /* ComponentModel.swift */,
+				3E8F4C992428EF9D0020B6A8 /* AdditionalContent.swift */,
+				3E8F4C9A2428EF9D0020B6A8 /* AbstractModel */,
+				3E8F4C9D2428EF9D0020B6A8 /* SectionComponentModelProtocol.swift */,
+				3E8F4C9E2428EF9D0020B6A8 /* Pagination.swift */,
+				3E8F4C9F2428EF9D0020B6A8 /* HeaderModel.swift */,
+				3E8F4CA02428EF9D0020B6A8 /* BaseModel.swift */,
+				3E8F4CA12428EF9D0020B6A8 /* ScreenConfiguration.swift */,
+				3E8F4CA22428EF9D0020B6A8 /* ComponentModelProtocol.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3E8F4C9A2428EF9D0020B6A8 /* AbstractModel */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4C9B2428EF9D0020B6A8 /* AbstractModel.h */,
+				3E8F4C9C2428EF9D0020B6A8 /* AbstractModel.m */,
+			);
+			path = AbstractModel;
+			sourceTree = "<group>";
+		};
+		3E8F4CA32428EF9D0020B6A8 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CA42428EF9D0020B6A8 /* SectionComposite */,
+				3E8F4CA92428EF9D0020B6A8 /* Component */,
+				3E8F4CAE2428EF9D0020B6A8 /* Carousel */,
+				3E8F4CB22428EF9D0020B6A8 /* Cell */,
+				3E8F4CBC2428EF9D0020B6A8 /* BasicContainerCell */,
+				3E8F4CC12428EF9D0020B6A8 /* LazyLoading */,
+				3E8F4CC32428EF9D0020B6A8 /* Banner */,
+				3E8F4CC52428EF9D0020B6A8 /* BaseComponent */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3E8F4CA42428EF9D0020B6A8 /* SectionComposite */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CA52428EF9D0020B6A8 /* SectionCompositeViewController.swift */,
+				3E8F4CA62428EF9D0020B6A8 /* SectionCompositeViewController+LazyLoading.swift */,
+				3E8F4CA72428EF9D0020B6A8 /* SectionCompositeViewController.xib */,
+				3E8F4CA82428EF9D0020B6A8 /* SectionCompositeFlowLayout.swift */,
+			);
+			path = SectionComposite;
+			sourceTree = "<group>";
+		};
+		3E8F4CA92428EF9D0020B6A8 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CAA2428EF9D0020B6A8 /* CollectionViewLayoutAttributesList.swift */,
+				3E8F4CAB2428EF9D0020B6A8 /* ComponentProtocol.h */,
+				3E8F4CAC2428EF9D0020B6A8 /* ComponentDelegate.h */,
+				3E8F4CAD2428EF9D0020B6A8 /* SectionCollectionViewLayoutAttributes.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		3E8F4CAE2428EF9D0020B6A8 /* Carousel */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CAF2428EF9D0020B6A8 /* CarouselViewController.m */,
+				3E8F4CB02428EF9D0020B6A8 /* ZeeCarouselVC_Center_Photogallery.xib */,
+				3E8F4CB12428EF9D0020B6A8 /* CarouselViewController.h */,
+			);
+			path = Carousel;
+			sourceTree = "<group>";
+		};
+		3E8F4CB22428EF9D0020B6A8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CB32428EF9D0020B6A8 /* Customization */,
+				3E8F4CB82428EF9D0020B6A8 /* CellViewController.swift */,
+				3E8F4CB92428EF9D0020B6A8 /* CommandsPattern */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		3E8F4CB32428EF9D0020B6A8 /* Customization */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CB42428EF9D0020B6A8 /* ComponentsCustomization.m */,
+				3E8F4CB52428EF9D0020B6A8 /* ComponentModelCustomization.h */,
+				3E8F4CB62428EF9D0020B6A8 /* ComponentsCustomization.h */,
+				3E8F4CB72428EF9D0020B6A8 /* ComponentModelCustomization.m */,
+			);
+			path = Customization;
+			sourceTree = "<group>";
+		};
+		3E8F4CB92428EF9D0020B6A8 /* CommandsPattern */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CBA2428EF9D0020B6A8 /* CommandPattern.m */,
+				3E8F4CBB2428EF9D0020B6A8 /* CommandPattern.h */,
+			);
+			path = CommandsPattern;
+			sourceTree = "<group>";
+		};
+		3E8F4CBC2428EF9D0020B6A8 /* BasicContainerCell */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CBD2428EF9D0020B6A8 /* UniversalCollectionViewHeaderFooterView.m */,
+				3E8F4CBE2428EF9D0020B6A8 /* UniversalCollectionViewCell.m */,
+				3E8F4CBF2428EF9D0020B6A8 /* UniversalCollectionViewHeaderFooterView.h */,
+				3E8F4CC02428EF9D0020B6A8 /* UniversalCollectionViewCell.h */,
+			);
+			path = BasicContainerCell;
+			sourceTree = "<group>";
+		};
+		3E8F4CC12428EF9D0020B6A8 /* LazyLoading */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CC22428EF9D0020B6A8 /* LazyLoadingViewController.swift */,
+			);
+			path = LazyLoading;
+			sourceTree = "<group>";
+		};
+		3E8F4CC32428EF9D0020B6A8 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CC42428EF9D0020B6A8 /* BannerCellViewController.swift */,
+			);
+			path = Banner;
+			sourceTree = "<group>";
+		};
+		3E8F4CC52428EF9D0020B6A8 /* BaseComponent */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CC62428EF9D0020B6A8 /* BaseCollectionComponentViewController.h */,
+				3E8F4CC72428EF9D0020B6A8 /* BaseComponentViewController.m */,
+				3E8F4CC82428EF9D0020B6A8 /* BaseCollectionComponentViewController.m */,
+				3E8F4CC92428EF9D0020B6A8 /* BaseComponentViewController.h */,
+			);
+			path = BaseComponent;
+			sourceTree = "<group>";
+		};
+		3E8F4CCA2428EF9D0020B6A8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CCB2428EF9D0020B6A8 /* GangasFamilyStyleHelper.swift */,
+				3E8F4CCC2428EF9D0020B6A8 /* Utils */,
+				3E8F4CCF2428EF9D0020B6A8 /* CustomizationManager.swift */,
+				3E8F4CD02428EF9D0020B6A8 /* ComponentHelper.swift */,
+				3E8F4CD12428EF9D0020B6A8 /* AtomHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3E8F4CCC2428EF9D0020B6A8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CCD2428EF9D0020B6A8 /* RefreshManager.h */,
+				3E8F4CCE2428EF9D0020B6A8 /* RefreshManager.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		3E8F4CD22428EF9D0020B6A8 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CD32428EF9D0020B6A8 /* ComponenttFactory.h */,
+				3E8F4CD42428EF9D0020B6A8 /* ComponenttFactory.m */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		3E8F4CD62428EF9D0020B6A8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CD72428EF9D0020B6A8 /* ZeeCustomizationLayouts.plist */,
+				3E8F4CD82428EF9D0020B6A8 /* Styles */,
+				3E8F4D152428EF9D0020B6A8 /* ZeeComponentsMapping.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3E8F4CD82428EF9D0020B6A8 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CD92428EF9D0020B6A8 /* Carousel */,
+				3E8F4CDE2428EF9D0020B6A8 /* Cell */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		3E8F4CD92428EF9D0020B6A8 /* Carousel */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CDA2428EF9D0020B6A8 /* Family_Ganges */,
+			);
+			path = Carousel;
+			sourceTree = "<group>";
+		};
+		3E8F4CDA2428EF9D0020B6A8 /* Family_Ganges */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CDB2428EF9D0020B6A8 /* Family_Ganges_hero_1.xib */,
+				3E8F4CDC2428EF9D0020B6A8 /* Family_Ganges_hero_3.xib */,
+				3E8F4CDD2428EF9D0020B6A8 /* Family_Ganges_hero_2.xib */,
+			);
+			path = Family_Ganges;
+			sourceTree = "<group>";
+		};
+		3E8F4CDE2428EF9D0020B6A8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CDF2428EF9D0020B6A8 /* Family_Ganges */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		3E8F4CDF2428EF9D0020B6A8 /* Family_Ganges */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CE02428EF9D0020B6A8 /* SearchBar */,
+				3E8F4CE22428EF9D0020B6A8 /* Consumption */,
+				3E8F4CE42428EF9D0020B6A8 /* HorizontalList */,
+				3E8F4CF62428EF9D0020B6A8 /* List */,
+				3E8F4CFB2428EF9D0020B6A8 /* ScreenPicker */,
+				3E8F4CFE2428EF9D0020B6A8 /* LazyLoading */,
+				3E8F4D002428EF9D0020B6A8 /* Header */,
+				3E8F4D042428EF9D0020B6A8 /* Banner */,
+				3E8F4D062428EF9D0020B6A8 /* HeroCell */,
+				3E8F4D112428EF9D0020B6A8 /* Grid */,
+			);
+			path = Family_Ganges;
+			sourceTree = "<group>";
+		};
+		3E8F4CE02428EF9D0020B6A8 /* SearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CE12428EF9D0020B6A8 /* Family_Ganges_search_bar_cell_1.xib */,
+			);
+			path = SearchBar;
+			sourceTree = "<group>";
+		};
+		3E8F4CE22428EF9D0020B6A8 /* Consumption */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CE32428EF9D0020B6A8 /* Family_Ganges_consumption_cell_1.xib */,
+			);
+			path = Consumption;
+			sourceTree = "<group>";
+		};
+		3E8F4CE42428EF9D0020B6A8 /* HorizontalList */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CE52428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14~ipad.xib */,
+				3E8F4CE62428EF9D0020B6A8 /* Family_Ganges_horizontal_list_9.xib */,
+				3E8F4CE72428EF9D0020B6A8 /* Family_Ganges_horizontal_list_8.xib */,
+				3E8F4CE82428EF9D0020B6A8 /* Family_Ganges_horizontal_list_5.xib */,
+				3E8F4CE92428EF9D0020B6A8 /* Family_Ganges_horizontal_list_4.xib */,
+				3E8F4CEA2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_6.xib */,
+				3E8F4CEB2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_7.xib */,
+				3E8F4CEC2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_3.xib */,
+				3E8F4CED2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_2.xib */,
+				3E8F4CEE2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_1.xib */,
+				3E8F4CEF2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_11.xib */,
+				3E8F4CF02428EF9D0020B6A8 /* Family_Ganges_horizontal_list_10.xib */,
+				3E8F4CF12428EF9D0020B6A8 /* Family_Ganges_horizontal_list_12.xib */,
+				3E8F4CF22428EF9D0020B6A8 /* Family_Ganges_horizontal_list_13.xib */,
+				3E8F4CF32428EF9D0020B6A8 /* Family_Ganges_horizontal_list_16.xib */,
+				3E8F4CF42428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14.xib */,
+				3E8F4CF52428EF9D0020B6A8 /* Family_Ganges_horizontal_list_15.xib */,
+			);
+			path = HorizontalList;
+			sourceTree = "<group>";
+		};
+		3E8F4CF62428EF9D0020B6A8 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CF72428EF9D0020B6A8 /* Family_Ganges_list_1.xib */,
+				3E8F4CF82428EF9D0020B6A8 /* Family_Ganges_list_3.xib */,
+				3E8F4CF92428EF9D0020B6A8 /* Family_Ganges_list_2.xib */,
+				3E8F4CFA2428EF9D0020B6A8 /* Family_Ganges_list_4.xib */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		3E8F4CFB2428EF9D0020B6A8 /* ScreenPicker */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CFC2428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_2.xib */,
+				3E8F4CFD2428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_1.xib */,
+			);
+			path = ScreenPicker;
+			sourceTree = "<group>";
+		};
+		3E8F4CFE2428EF9D0020B6A8 /* LazyLoading */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4CFF2428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib */,
+			);
+			path = LazyLoading;
+			sourceTree = "<group>";
+		};
+		3E8F4D002428EF9D0020B6A8 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4D012428EF9D0020B6A8 /* Family_Ganges_header_cell_1.xib */,
+				3E8F4D022428EF9D0020B6A8 /* Family_Ganges_header_cell_2.xib */,
+				3E8F4D032428EF9D0020B6A8 /* Family_Ganges_header_cell_3.xib */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		3E8F4D042428EF9D0020B6A8 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4D052428EF9D0020B6A8 /* Family_Ganges_banner_1.xib */,
+			);
+			path = Banner;
+			sourceTree = "<group>";
+		};
+		3E8F4D062428EF9D0020B6A8 /* HeroCell */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4D072428EF9D0020B6A8 /* Family_Ganges_hero_cell_4.xib */,
+				3E8F4D082428EF9D0020B6A8 /* Family_Ganges_hero_cell_5.xib */,
+				3E8F4D092428EF9D0020B6A8 /* Family_Ganges_hero_cell_2.xib */,
+				3E8F4D0A2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3.xib */,
+				3E8F4D0B2428EF9D0020B6A8 /* Family_Ganges_hero_cell_1.xib */,
+				3E8F4D0C2428EF9D0020B6A8 /* Family_Ganges_hero_cell_4~ipad.xib */,
+				3E8F4D0D2428EF9D0020B6A8 /* Family_Ganges_hero_cell_5~ipad.xib */,
+				3E8F4D0E2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3~ipad.xib */,
+				3E8F4D0F2428EF9D0020B6A8 /* Family_Ganges_hero_cell_2~ipad.xib */,
+				3E8F4D102428EF9D0020B6A8 /* Family_Ganges_hero_cell_1~ipad.xib */,
+			);
+			path = HeroCell;
+			sourceTree = "<group>";
+		};
+		3E8F4D112428EF9D0020B6A8 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F4D122428EF9D0020B6A8 /* Family_Ganges_grid_1.xib */,
+				3E8F4D132428EF9D0020B6A8 /* Family_Ganges_grid_2.xib */,
+				3E8F4D142428EF9D0020B6A8 /* Family_Ganges_grid_3.xib */,
+			);
+			path = Grid;
+			sourceTree = "<group>";
+		};
 		4DF6038623B938F300DD621F = {
 			isa = PBXGroup;
 			children = (
-				4DF6039123B938F300DD621F /* ZeeHomeScreen-iOS */,
+				3E8F4C912428EF9D0020B6A8 /* ZeeHomeScreen */,
 				4DF603A823B938F400DD621F /* ZeeHomeScreen-iOSTests */,
 				4DF6039023B938F300DD621F /* Products */,
 			);
@@ -74,28 +620,6 @@
 				4DF603A523B938F400DD621F /* ZeeHomeScreen-iOSTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		4DF6039123B938F300DD621F /* ZeeHomeScreen-iOS */ = {
-			isa = PBXGroup;
-			children = (
-				4DF6039223B938F300DD621F /* AppDelegate.swift */,
-				4DF6039423B938F300DD621F /* SceneDelegate.swift */,
-				4DF6039623B938F300DD621F /* ContentView.swift */,
-				4DF6039823B938F400DD621F /* Assets.xcassets */,
-				4DF6039D23B938F400DD621F /* LaunchScreen.storyboard */,
-				4DF603A023B938F400DD621F /* Info.plist */,
-				4DF6039A23B938F400DD621F /* Preview Content */,
-			);
-			path = "ZeeHomeScreen-iOS";
-			sourceTree = "<group>";
-		};
-		4DF6039A23B938F400DD621F /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				4DF6039B23B938F400DD621F /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		4DF603A823B938F400DD621F /* ZeeHomeScreen-iOSTests */ = {
@@ -188,9 +712,56 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DF6039F23B938F400DD621F /* LaunchScreen.storyboard in Resources */,
-				4DF6039C23B938F400DD621F /* Preview Assets.xcassets in Resources */,
-				4DF6039923B938F400DD621F /* Assets.xcassets in Resources */,
+				3E8F4D682428EF9D0020B6A8 /* Family_Ganges_grid_3.xib in Resources */,
+				3E8F4D472428EF9D0020B6A8 /* Family_Ganges_horizontal_list_3.xib in Resources */,
+				3E8F4D642428EF9D0020B6A8 /* Family_Ganges_hero_cell_2~ipad.xib in Resources */,
+				3E8F4D662428EF9D0020B6A8 /* Family_Ganges_grid_1.xib in Resources */,
+				3E8F4D442428EF9D0020B6A8 /* Family_Ganges_horizontal_list_4.xib in Resources */,
+				3E8F4D412428EF9D0020B6A8 /* Family_Ganges_horizontal_list_9.xib in Resources */,
+				3E8F4D4B2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_10.xib in Resources */,
+				3E8F4D4E2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_16.xib in Resources */,
+				3E8F4D462428EF9D0020B6A8 /* Family_Ganges_horizontal_list_7.xib in Resources */,
+				3E8F4D572428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib in Resources */,
+				3E8F4D482428EF9D0020B6A8 /* Family_Ganges_horizontal_list_2.xib in Resources */,
+				3E8F4D522428EF9D0020B6A8 /* Family_Ganges_list_3.xib in Resources */,
+				3E8F4D3F2428EF9D0020B6A8 /* Family_Ganges_consumption_cell_1.xib in Resources */,
+				3E8F4D512428EF9D0020B6A8 /* Family_Ganges_list_1.xib in Resources */,
+				3E8F4D432428EF9D0020B6A8 /* Family_Ganges_horizontal_list_5.xib in Resources */,
+				3E8F4D5A2428EF9D0020B6A8 /* Family_Ganges_header_cell_3.xib in Resources */,
+				3E8F4D402428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14~ipad.xib in Resources */,
+				3E8F4D5B2428EF9D0020B6A8 /* Family_Ganges_banner_1.xib in Resources */,
+				3E8F4D492428EF9D0020B6A8 /* Family_Ganges_horizontal_list_1.xib in Resources */,
+				3E8F4D4F2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14.xib in Resources */,
+				3E8F4D452428EF9D0020B6A8 /* Family_Ganges_horizontal_list_6.xib in Resources */,
+				3E8F4D5F2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3.xib in Resources */,
+				3E8F4D502428EF9D0020B6A8 /* Family_Ganges_horizontal_list_15.xib in Resources */,
+				3E8F4D612428EF9D0020B6A8 /* Family_Ganges_hero_cell_4~ipad.xib in Resources */,
+				3E8F4D5C2428EF9D0020B6A8 /* Family_Ganges_hero_cell_4.xib in Resources */,
+				3E8F4D562428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_1.xib in Resources */,
+				3E8F4D5E2428EF9D0020B6A8 /* Family_Ganges_hero_cell_2.xib in Resources */,
+				3E8F4D3B2428EF9D0020B6A8 /* Family_Ganges_hero_1.xib in Resources */,
+				3E8F4D5D2428EF9D0020B6A8 /* Family_Ganges_hero_cell_5.xib in Resources */,
+				3E8F4D622428EF9D0020B6A8 /* Family_Ganges_hero_cell_5~ipad.xib in Resources */,
+				3E8F4D4D2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_13.xib in Resources */,
+				3E8F4D3A2428EF9D0020B6A8 /* ZeeCustomizationLayouts.plist in Resources */,
+				3E8F4D292428EF9D0020B6A8 /* ZeeCarouselVC_Center_Photogallery.xib in Resources */,
+				3E8F4D3D2428EF9D0020B6A8 /* Family_Ganges_hero_2.xib in Resources */,
+				3E8F4D242428EF9D0020B6A8 /* SectionCompositeViewController.xib in Resources */,
+				3E8F4D3C2428EF9D0020B6A8 /* Family_Ganges_hero_3.xib in Resources */,
+				3E8F4D692428EF9D0020B6A8 /* ZeeComponentsMapping.plist in Resources */,
+				3E8F4D552428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_2.xib in Resources */,
+				3E8F4D4C2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_12.xib in Resources */,
+				3E8F4D672428EF9D0020B6A8 /* Family_Ganges_grid_2.xib in Resources */,
+				3E8F4D3E2428EF9D0020B6A8 /* Family_Ganges_search_bar_cell_1.xib in Resources */,
+				3E8F4D592428EF9D0020B6A8 /* Family_Ganges_header_cell_2.xib in Resources */,
+				3E8F4D602428EF9D0020B6A8 /* Family_Ganges_hero_cell_1.xib in Resources */,
+				3E8F4D422428EF9D0020B6A8 /* Family_Ganges_horizontal_list_8.xib in Resources */,
+				3E8F4D632428EF9D0020B6A8 /* Family_Ganges_hero_cell_3~ipad.xib in Resources */,
+				3E8F4D542428EF9D0020B6A8 /* Family_Ganges_list_4.xib in Resources */,
+				3E8F4D4A2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_11.xib in Resources */,
+				3E8F4D652428EF9D0020B6A8 /* Family_Ganges_hero_cell_1~ipad.xib in Resources */,
+				3E8F4D582428EF9D0020B6A8 /* Family_Ganges_header_cell_1.xib in Resources */,
+				3E8F4D532428EF9D0020B6A8 /* Family_Ganges_list_2.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,9 +779,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DF6039323B938F300DD621F /* AppDelegate.swift in Sources */,
-				4DF6039523B938F300DD621F /* SceneDelegate.swift in Sources */,
-				4DF6039723B938F300DD621F /* ContentView.swift in Sources */,
+				3E8F4D302428EF9D0020B6A8 /* LazyLoadingViewController.swift in Sources */,
+				3E8F4D2F2428EF9D0020B6A8 /* UniversalCollectionViewCell.m in Sources */,
+				3E8F4D2C2428EF9D0020B6A8 /* CellViewController.swift in Sources */,
+				3E8F4D372428EF9D0020B6A8 /* ComponentHelper.swift in Sources */,
+				3E8F4D332428EF9D0020B6A8 /* BaseCollectionComponentViewController.m in Sources */,
+				3E8F4D272428EF9D0020B6A8 /* SectionCollectionViewLayoutAttributes.swift in Sources */,
+				3E8F4D322428EF9D0020B6A8 /* BaseComponentViewController.m in Sources */,
+				3E8F4D2B2428EF9D0020B6A8 /* ComponentModelCustomization.m in Sources */,
+				3E8F4D352428EF9D0020B6A8 /* RefreshManager.m in Sources */,
+				3E8F4D342428EF9D0020B6A8 /* GangasFamilyStyleHelper.swift in Sources */,
+				3E8F4D252428EF9D0020B6A8 /* SectionCompositeFlowLayout.swift in Sources */,
+				3E8F4D392428EF9D0020B6A8 /* ComponenttFactory.m in Sources */,
+				3E8F4D2A2428EF9D0020B6A8 /* ComponentsCustomization.m in Sources */,
+				3E8F4D172428EF9D0020B6A8 /* ZeeHomeScreenMain.swift in Sources */,
+				3E8F4D212428EF9D0020B6A8 /* ComponentModelProtocol.swift in Sources */,
+				3E8F4D1E2428EF9D0020B6A8 /* HeaderModel.swift in Sources */,
+				3E8F4D162428EF9D0020B6A8 /* DatasourceManager.swift in Sources */,
+				3E8F4D1A2428EF9D0020B6A8 /* AdditionalContent.swift in Sources */,
+				3E8F4D2E2428EF9D0020B6A8 /* UniversalCollectionViewHeaderFooterView.m in Sources */,
+				3E8F4D1F2428EF9D0020B6A8 /* BaseModel.swift in Sources */,
+				3E8F4D312428EF9D0020B6A8 /* BannerCellViewController.swift in Sources */,
+				3E8F4D1C2428EF9D0020B6A8 /* SectionComponentModelProtocol.swift in Sources */,
+				3E8F4D232428EF9D0020B6A8 /* SectionCompositeViewController+LazyLoading.swift in Sources */,
+				3E8F4D222428EF9D0020B6A8 /* SectionCompositeViewController.swift in Sources */,
+				3E8F4D1B2428EF9D0020B6A8 /* AbstractModel.m in Sources */,
+				3E8F4D282428EF9D0020B6A8 /* CarouselViewController.m in Sources */,
+				3E8F4D262428EF9D0020B6A8 /* CollectionViewLayoutAttributesList.swift in Sources */,
+				3E8F4D1D2428EF9D0020B6A8 /* Pagination.swift in Sources */,
+				3E8F4D202428EF9D0020B6A8 /* ScreenConfiguration.swift in Sources */,
+				3E8F4D182428EF9D0020B6A8 /* CellModel.swift in Sources */,
+				3E8F4D362428EF9D0020B6A8 /* CustomizationManager.swift in Sources */,
+				3E8F4D2D2428EF9D0020B6A8 /* CommandPattern.m in Sources */,
+				3E8F4D192428EF9D0020B6A8 /* ComponentModel.swift in Sources */,
+				3E8F4D382428EF9D0020B6A8 /* AtomHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,17 +833,6 @@
 			targetProxy = 4DF603A623B938F400DD621F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		4DF6039D23B938F400DD621F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4DF6039E23B938F400DD621F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4DF603AC23B938F400DD621F /* Debug */ = {
@@ -363,7 +954,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"ZeeHomeScreen-iOS/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "ZeeHomeScreen-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -382,7 +973,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"ZeeHomeScreen-iOS/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "ZeeHomeScreen-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -15,7 +15,7 @@ struct ScreenConfiguration {
     // determined the screen ds
     var ds: String?
     
-    var additionalContent: [AdditionalContent]?
+    var additionalContent: [AdditionalContent] = []
     
     //the number of componentModels need to be load in each request.
     var numberOfComponentsToLoad: Int?
@@ -28,8 +28,8 @@ struct ScreenConfiguration {
     var divider: Int = 10
 
     /// Init
-    public init(config: [String: Any]?, dataSource: APAtomFeed?) {
-        guard let config = config else {
+    public init(config: [String: Any]?, style: [String: Any]?, dataSource: APAtomFeed?) {
+        guard let config = config, let style = style else {
             return
         }
         
@@ -37,37 +37,46 @@ struct ScreenConfiguration {
             self.feed = dataSource
         }
         
-        if let numberOfComponentsToLoadStr = config["numberOfComponentsToLoad"] as? String,
+        if let numberOfComponentsToLoadStr = style["numberOfComponentsToLoad"] as? String,
             let numberOfComponentsToLoad = Int(numberOfComponentsToLoadStr) {
             self.numberOfComponentsToLoad = numberOfComponentsToLoad
         }
         
-        if let componentsThresholdIndexStr = config["componentsThresholdIndex"] as? String,
+        if let componentsThresholdIndexStr = style["componentsThresholdIndex"] as? String,
             let componentsThresholdIndex = Int(componentsThresholdIndexStr) {
             self.componentsThresholdIndex = componentsThresholdIndex
         }
         
-        if let paddingHorizontalStr = config["padding_horizontal"] as? String,
+        if let paddingHorizontalStr = style["padding_horizontal"] as? String,
             let paddingHorizontal = Int(paddingHorizontalStr) {
             self.paddingHorizontal = paddingHorizontal
         }
         
-        if let paddingTopStr = config["padding_top"] as? String,
+        if let paddingTopStr = style["padding_top"] as? String,
             let paddingTop = Int(paddingTopStr) {
             self.paddingTop = paddingTop
         }
         
-        if let paddingBottomStr = config["padding_bottom"] as? String,
+        if let paddingBottomStr = style["padding_bottom"] as? String,
             let paddingBottom = Int(paddingBottomStr) {
             self.paddingBottom = paddingBottom
         }
         
-        if let dividerStr = config["list_divider"] as? String,
+        if let dividerStr = style["list_divider"] as? String,
             let divider = Int(dividerStr) {
             self.divider = divider
         }
 
+        if let recommendation = config["recommendation"] as? String {
+            let recommendation = AdditionalContent.init(dsName: "recommendation", dsUrl: recommendation)
+            additionalContent.append(recommendation)
+        }
         
-        // TO DO: SET THE additionalContent AND ds PARAMS
+        if let continueWatching = config["continue_watching"] as? String {
+            let continueWatching = AdditionalContent.init(dsName: "continue_watching", dsUrl: continueWatching)
+            additionalContent.append(continueWatching)
+        }
+        
+        ds = dataSource?.linkURL as String?
     }
 }

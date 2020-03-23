@@ -16,8 +16,8 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol{
     public var screenPluginDelegate: ZPPlugableScreenDelegate?
     var mainViewController: SectionCompositeViewController?
     
-    fileprivate let config: PluginKeys
-    fileprivate let style: PluginKeys
+    fileprivate var config: PluginKeys
+    fileprivate var style: PluginKeys
 
     fileprivate let atomFeedUrl: String?
     var atomFeed: APAtomFeed?
@@ -27,10 +27,10 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol{
     required public init?(pluginModel: ZPPluginModel, screenModel: ZLScreenModel, dataSourceModel: NSObject?) {
         self.config = screenModel.general as? PluginKeys ?? PluginKeys()
         self.style = screenModel.style?.object as? PluginKeys ?? PluginKeys()
-
+        
         guard
-            case let .atomFeed(model) = screenModel.dataSource,
-            let atomFeed = model as? APAtomFeed else {
+           // case let .atomFeed(model) = screenModel.dataSource,
+            let atomFeed = dataSourceModel as? APAtomFeed else {
                 
                 self.atomFeedUrl = nil
                 return
@@ -47,7 +47,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol{
         result.modalPresentationStyle = .fullScreen
         result.setComponentModel((self.getBaseComponent())!)
         result.atomFeedUrl = self.atomFeedUrl
-        result.screenConfiguration = ScreenConfiguration.init(config: config, dataSource: atomFeed)
+        result.screenConfiguration = ScreenConfiguration.init(config: config, style: style, dataSource: atomFeed)
         return result
     }
     

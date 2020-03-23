@@ -332,7 +332,7 @@ import ZappPlugins
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        var reusableview:UICollectionReusableView? = nil
+        var reusableview: UICollectionReusableView!
         
         if kind == UICollectionView.elementKindSectionHeader,
             let sectionsDataSourceArray = sectionsDataSourceArray,
@@ -361,7 +361,14 @@ import ZappPlugins
                 reusableview = headerView
             }
         }
-        return reusableview!
+        
+        if reusableview == nil {
+            reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "Family_Ganges_header_cell_1", for: indexPath) as? UniversalCollectionViewHeaderFooterView
+            reusableview.frame.size.height = 0
+            reusableview.frame.size.width = 0
+        }
+        
+        return reusableview
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
