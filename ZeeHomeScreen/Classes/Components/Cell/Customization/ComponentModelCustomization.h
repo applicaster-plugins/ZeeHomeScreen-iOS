@@ -5,10 +5,30 @@
 //  Created by Miri on 18/02/2020.
 //
 
-#import "ComponentProtocol.h"
 @import UIKit;
 @import ZappPlugins;
-//#import "ZeeHomeScreen-Swift.h"
+@protocol ComponentProtocol;
+
+extern NSString * const kZeeCellTappedShareButtonNotification;
+extern NSString * const kZeeCellTappedCleanButtonNotification;
+extern NSString * const kZeeCellTappedBackButtonNotification;
+extern NSString * const kZeeCellSetupSearchBarNotification;
+
+static NSNotificationName const ZeeComponentLoaded = @"CAComponentLoaded";
+
+typedef NS_ENUM(NSInteger, ZeeComponentState) {
+    ZeeComponentStateNormal,
+    ZeeComponentStateSelected,
+    ZeeComponentStateHighlighted,
+    ZeeComponentStateDisabled
+};
+
+typedef NS_ENUM(NSInteger, ZeeComponentEndDisplayingReason)
+{
+    ZeeComponentEndDisplayingReasonUndefined = 0,
+    ZeeComponentEndDisplayingReasonCellQueued = 1,
+    ZeeComponentEndDisplayingReasonParent = 2
+};
 
 #pragma mark - AttributeKeys
 extern NSString *const kAttributeImageTagKey;

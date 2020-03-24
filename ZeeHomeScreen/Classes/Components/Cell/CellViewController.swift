@@ -8,9 +8,13 @@
 import Foundation
 import ApplicasterSDK
 
-//MARK: - ComponentProtocol
-
-public class CellViewController : UIViewController, ComponentProtocol {
+@objc open class CellViewController : UIViewController, ComponentProtocol {
+    public var componentDataSourceModel: NSObject?
+    
+    public var selectedModel: NSObject?
+    
+    public var delegate: ComponentDelegate?
+    
     
     //MARK: Properties
     
@@ -63,10 +67,10 @@ public class CellViewController : UIViewController, ComponentProtocol {
     
     //MARK:
     
-    override public func viewDidLoad()
-    {
-        super.viewDidLoad()
-    }
+//    override public func viewDidLoad()
+//    {
+//        super.viewDidLoad()
+//    }
     
     func fillEntryData() {
         if self.isViewLoaded

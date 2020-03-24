@@ -35,6 +35,7 @@ import ApplicasterSDK
 //}
  
 @objc open class ComponentModel:NSObject, ComponentModelProtocol {
+    
     open var containerType: String?
     //, ComponentModelProtocol {
     

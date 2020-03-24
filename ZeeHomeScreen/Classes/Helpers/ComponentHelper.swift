@@ -10,7 +10,7 @@ import Foundation
 class ComponentHelper {
     
     static let iPhoneMinWidth:CGFloat = 320.0
-    static let iPadMinWidth:CGFloat   = 1024.0 
+    static let iPadMinWidth:CGFloat   = 1024.0
     
     public enum ComponentItemTypes:String {
         case body

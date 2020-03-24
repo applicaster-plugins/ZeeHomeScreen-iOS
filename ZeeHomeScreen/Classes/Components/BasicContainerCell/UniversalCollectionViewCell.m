@@ -8,6 +8,7 @@
 #import "UniversalCollectionViewCell.h"
 #import "CarouselViewController.h"
 #import <ZeeHomeScreen/ComponenttFactory.h>
+#import <ZeeHomeScreen/ZeeHomeScreen-Swift.h>
 
 @interface UniversalCollectionViewCell()
 

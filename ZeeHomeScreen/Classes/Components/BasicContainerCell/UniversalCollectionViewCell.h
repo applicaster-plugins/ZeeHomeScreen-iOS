@@ -8,9 +8,9 @@
 
 @import ZappPlugins;
 #import <Foundation/Foundation.h>
-#import "ComponentProtocol.h"
 #import "ComponentDelegate.h"
 @class ComponentModel;
+@class ComponentProtocol;
 
 /**
  *  This cell used as container for all components. Do not remove or modify anything without premission

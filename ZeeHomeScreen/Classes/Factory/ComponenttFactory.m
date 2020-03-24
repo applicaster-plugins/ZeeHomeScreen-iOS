@@ -11,7 +11,6 @@
 #import <ZeeHomeScreen/ZeeHomeScreen-Swift.h>
 #import "ComponentProtocol.h"
 
-@protocol ComponentProtocol;
 @protocol ComponentDelegate;
 
 @interface ComponenttFactory (){

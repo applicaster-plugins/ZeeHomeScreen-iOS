@@ -8,6 +8,8 @@
 import Foundation
 
 class LazyLoadingViewController: UIViewController, ComponentProtocol, ComponentDelegate {
+    var componentDataSourceModel: NSObject?
+    
    
     @IBOutlet weak var loadingIndicator : UIActivityIndicatorView?
     

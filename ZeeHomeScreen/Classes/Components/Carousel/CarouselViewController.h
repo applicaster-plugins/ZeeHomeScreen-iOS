@@ -6,7 +6,6 @@
 //
 
 @import ApplicasterUIKit;
-#import "ComponentProtocol.h"
 #import "ComponentDelegate.h"
 
 @protocol ComponentProtocol;

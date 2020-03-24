@@ -7,6 +7,7 @@
 
 
 #import "UniversalCollectionViewHeaderFooterView.h"
+#import <ZeeHomeScreen/ZeeHomeScreen-Swift.h>
 
 @implementation UniversalCollectionViewHeaderFooterView
 
@@ -39,7 +40,7 @@
 
     if ([self.delegate respondsToSelector:@selector(headerFooterViewDidSelect:)]) {
         [self.delegate headerFooterViewDidSelect:self];
-    } 
+    }
 }
 
 @end

@@ -9,6 +9,7 @@ import Foundation
 import ApplicasterSDK
 
 class BannerCellViewController : UIViewController, ComponentProtocol, ComponentDelegate, ZPAdViewProtocol {
+    
     func adLoaded(view: UIView?) {
         
     }
@@ -41,8 +42,8 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         private var backgroundEnabled: Bool?
         private var bannerView: UIView?
         
-        var componentDataSourceModel: NSObject!
-        var componentModel: ComponentModelProtocol! {
+        var componentDataSourceModel: NSObject?
+        var componentModel: ComponentModelProtocol? {
             willSet(value) {
                 //if I get the same componentModel I don't need to reload it unless the plugin requires it.
                 let adPlugin = ZPAdvertisementManager.sharedInstance.getAdPlugin()

@@ -72,7 +72,7 @@ import ZappPlugins
         return self.componentModel as? ComponentModel
     }
     
-    var liveComponentModel:ComponentModel? 
+    var liveComponentModel:ComponentModel?
         
     var componentDataSourceModel: NSObject? {
         didSet {
@@ -350,13 +350,12 @@ import ZappPlugins
                                                               for: headerView,
                                                               delegate: self,
                                                               parentViewController: self)
-                    
                     if headerView.componentViewController?.responds(to: #selector(setter: ComponentProtocol.delegate)) == true {
                         _ = headerView.componentViewController?.perform(#selector(setter: ComponentProtocol.delegate), with: self)
                     }
                 }
                 if headerView.componentViewController?.responds(to: #selector(setter: ComponentProtocol.componentModel)) == true {
-                    _ = headerView.componentViewController?.perform(#selector(setter: ComponentProtocol.componentModel), with: header)
+                    _ = headerView.componentViewController?.perform(#selector( setter: ComponentProtocol.componentModel), with: header)
                 }
                 reusableview = headerView
             }
@@ -431,7 +430,7 @@ import ZappPlugins
     
     // MARK: - ComponentDelegate
     
-    func componentViewController(_ componentViewController: (UIViewController & ComponentProtocol)?,
+    @nonobjc func componentViewController(_ componentViewController: (UIViewController & ComponentProtocol)?,
                                  didSelectModel model: NSObject?,
                                  componentModel: ComponentModelProtocol?,
                                  at indexPath: IndexPath?,
