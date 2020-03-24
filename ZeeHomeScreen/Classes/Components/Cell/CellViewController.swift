@@ -10,7 +10,7 @@ import ApplicasterSDK
 
 //MARK: - ComponentProtocol
 
-class CellViewController : UIViewController, ComponentProtocol {
+open class CellViewController : UIViewController, ComponentProtocol {
     
     //MARK: Properties
     

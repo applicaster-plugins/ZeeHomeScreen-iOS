@@ -205,6 +205,11 @@ class GangasFamilyStyleHelper {
             self.iphoneHeight = 170.0
             self.ipadHeight = 424.0
             break
+        case "BANNER_1":
+            self.componentStyle = "Family_Ganges_banner_1"
+            self.cellStyle = "Family_Ganges_banner_1"
+            self.iphoneHeight = 73.0
+            self.ipadHeight = 92.0
         default:
             break
         }

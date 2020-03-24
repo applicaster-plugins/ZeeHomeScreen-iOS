@@ -81,6 +81,9 @@
     else  if ([type isEqualToString:@"LAZY_LOADING"]) {
         retVal = @"LazyLoadingViewController";
     }
+    else if ([type isEqualToString:@"BANNER"]) {
+        retVal = @"BannerCellViewController";
+    }
     else {
         retVal = @"CellViewController";
     }

@@ -8,10 +8,13 @@ import Foundation
 import ZappPlugins
 import UIKit
 import ApplicasterSDK
+import ZappSDK
 
 typealias PluginKeys = [String: String]
 
-public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol{
+public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadingHookProtocol {
+    
+    public var configurationJSON: NSDictionary?
     
     public var screenPluginDelegate: ZPPlugableScreenDelegate?
     var mainViewController: SectionCompositeViewController?
@@ -21,6 +24,28 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol{
 
     fileprivate let atomFeedUrl: String?
     var atomFeed: APAtomFeed?
+    
+    //MARK: ZPAppLoadingHookProtocol
+    
+    public required override init() {
+          super.init()
+      }
+
+      public required init(configurationJSON: NSDictionary?) {
+          self.configurationJSON = configurationJSON
+      }
+
+    public func executeOnApplicationReady(displayViewController: UIViewController?, completion: (() -> Void)?) {
+
+        // hardcode all translations to the TranslationResponse key
+        let translations_data = LocalStorage.sharedInstance.get(key: "translations_data", namespace: "zee5localstorage")
+        LocalStorage.sharedInstance.set(key: "TranslationResponse", value: translations_data!, namespace: "zee5localstorage")
+
+        guard completion != nil else {
+            return
+        }
+        completion!()
+    }
 
     // MARK: ZPPluggableScreenProtocol
         
