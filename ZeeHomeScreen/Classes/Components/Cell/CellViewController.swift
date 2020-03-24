@@ -10,7 +10,7 @@ import ApplicasterSDK
 
 //MARK: - ComponentProtocol
 
-open class CellViewController : UIViewController, ComponentProtocol {
+public class CellViewController : UIViewController, ComponentProtocol {
     
     //MARK: Properties
     
@@ -63,7 +63,7 @@ open class CellViewController : UIViewController, ComponentProtocol {
     
     //MARK:
     
-    override open func viewDidLoad()
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
     }

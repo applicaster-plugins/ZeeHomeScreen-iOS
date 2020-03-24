@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E51F51A242A7F390028642B /* CellViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CB82428EF9D0020B6A8 /* CellViewController.swift */; };
 		3E8F4D162428EF9D0020B6A8 /* DatasourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C942428EF9D0020B6A8 /* DatasourceManager.swift */; };
 		3E8F4D172428EF9D0020B6A8 /* ZeeHomeScreenMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C952428EF9D0020B6A8 /* ZeeHomeScreenMain.swift */; };
 		3E8F4D182428EF9D0020B6A8 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C972428EF9D0020B6A8 /* CellModel.swift */; };
@@ -712,6 +713,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E51F51A242A7F390028642B /* CellViewController.swift in Resources */,
 				3E8F4D682428EF9D0020B6A8 /* Family_Ganges_grid_3.xib in Resources */,
 				3E8F4D472428EF9D0020B6A8 /* Family_Ganges_horizontal_list_3.xib in Resources */,
 				3E8F4D642428EF9D0020B6A8 /* Family_Ganges_hero_cell_2~ipad.xib in Resources */,
