@@ -19,17 +19,17 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadin
     public var screenPluginDelegate: ZPPlugableScreenDelegate?
     var mainViewController: SectionCompositeViewController?
     
-    fileprivate var config: PluginKeys
-    fileprivate var style: PluginKeys
+    fileprivate var config: PluginKeys?
+    fileprivate var style: PluginKeys?
 
-    fileprivate let atomFeedUrl: String?
+    fileprivate var atomFeedUrl: String = ""
     var atomFeed: APAtomFeed?
     
     //MARK: ZPAppLoadingHookProtocol
     
-    public required override init() {
-          super.init()
-      }
+    required public override init() {
+        super.init()
+    }
 
       public required init(configurationJSON: NSDictionary?) {
           self.configurationJSON = configurationJSON
@@ -57,13 +57,13 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadin
            // case let .atomFeed(model) = screenModel.dataSource,
             let atomFeed = dataSourceModel as? APAtomFeed else {
                 
-                self.atomFeedUrl = nil
+       
                 return
         }
        
        
         self.atomFeed = atomFeed
-        self.atomFeedUrl = atomFeed.linkURL as String?
+        self.atomFeedUrl = atomFeed.linkURL! as String
     }
     
     public func createScreen() -> UIViewController {
@@ -80,9 +80,8 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadin
         if let feed = self.atomFeed {
             let model = ComponentModel.init(entry: feed, threshold: 3)
             model.isVertical = true
-            if let feedUrl = self.atomFeedUrl {
-                model.dsUrl = feedUrl
-            }
+            model.dsUrl = self.atomFeedUrl
+
             return model
         }
         return nil
