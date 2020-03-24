@@ -63,7 +63,7 @@ open class CellViewController : UIViewController, ComponentProtocol {
     
     //MARK:
     
-    override func viewDidLoad()
+    override open func viewDidLoad()
     {
         super.viewDidLoad()
     }
