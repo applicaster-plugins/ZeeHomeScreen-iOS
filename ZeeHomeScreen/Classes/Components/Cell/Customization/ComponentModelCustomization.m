@@ -663,10 +663,10 @@ NSString *const kAttributeLabelCustomizationIgnoreDefaultsKey = @"ignore_default
             id hiddenValue = [self valueOfCustomizationDictionary:labelDictionary
                                                          forModel:model
                                                           withKey:kAttributeLabelCustomizationHiddenKey];
-			BOOL shouldHide = YES;
+            BOOL shouldHide = YES;
             if([hiddenValue isKindOfClass:[NSNumber class]]) {
                 BOOL hidden = [hiddenValue boolValue];
-				shouldHide = hidden;
+                shouldHide = hidden;
                 label.hidden = hidden;
 //                label.componentHidden = hidden;
                 
@@ -677,7 +677,7 @@ NSString *const kAttributeLabelCustomizationIgnoreDefaultsKey = @"ignore_default
             }
             else if ([labelDictionary[kAttributeLabelCustomizationHiddenKey] isKindOfClass:[NSNumber class]]) {
                 BOOL hidden = [labelDictionary[kAttributeLabelCustomizationHiddenKey] boolValue];
-				shouldHide = hidden;
+                shouldHide = hidden;
                 label.hidden = hidden;
 //                label.componentHidden = hidden;
                 
@@ -745,18 +745,18 @@ NSString *const kAttributeLabelCustomizationIgnoreDefaultsKey = @"ignore_default
                     }
                 }
             }
-			
-			// if `hidden` key is set to `NO` do not hide if text is nil or zero length
-			if (shouldHide) {
-				if (label.text == nil || label.text.length == 0) {
-					label.hidden = YES;
-//					label.componentHidden = YES;
-				} else {
-					label.hidden = NO;
-//					label.componentHidden = NO;
-				}
-			}
-			
+            
+            // if `hidden` key is set to `NO` do not hide if text is nil or zero length
+            if (shouldHide) {
+                if (label.text == nil || label.text.length == 0) {
+                    label.hidden = YES;
+//                    label.componentHidden = YES;
+                } else {
+                    label.hidden = NO;
+//                    label.componentHidden = NO;
+                }
+            }
+            
             NSString *stringCase = [self valueFromDictionary:labelDictionary
                                                        model:model
                                                          key:kAttributeLabelCustomizationLetterCaseKey
@@ -875,23 +875,23 @@ NSString *const kAttributeLabelCustomizationIgnoreDefaultsKey = @"ignore_default
                     needUseAttributeString = YES;
                 }
 
-				NSString *minimumLineHeightString = [self valueFromDictionary:labelDictionary
-																		model:model
-																		  key:kAttributeLabelCustomizationMinimumLineHeightKey
-															   componentState:componentState];
-				if ([minimumLineHeightString isKindOfClass:[NSNumber class]]) {
-					style.minimumLineHeight = [minimumLineHeightString floatValue];
-					needUseAttributeString = YES;
-				}
+                NSString *minimumLineHeightString = [self valueFromDictionary:labelDictionary
+                                                                        model:model
+                                                                          key:kAttributeLabelCustomizationMinimumLineHeightKey
+                                                               componentState:componentState];
+                if ([minimumLineHeightString isKindOfClass:[NSNumber class]]) {
+                    style.minimumLineHeight = [minimumLineHeightString floatValue];
+                    needUseAttributeString = YES;
+                }
 
-				NSString *maximumLineHeightString = [self valueFromDictionary:labelDictionary
-																		model:model
-																		  key:kAttributeLabelCustomizationMaximumLineHeightKey
-															   componentState:componentState];
-				if ([maximumLineHeightString isKindOfClass:[NSNumber class]]) {
-					style.maximumLineHeight = [maximumLineHeightString floatValue];
-					needUseAttributeString = YES;
-				}
+                NSString *maximumLineHeightString = [self valueFromDictionary:labelDictionary
+                                                                        model:model
+                                                                          key:kAttributeLabelCustomizationMaximumLineHeightKey
+                                                               componentState:componentState];
+                if ([maximumLineHeightString isKindOfClass:[NSNumber class]]) {
+                    style.maximumLineHeight = [maximumLineHeightString floatValue];
+                    needUseAttributeString = YES;
+                }
                 
                 NSString *highlightedTextBackgroundColor = [self valueFromDictionary:labelDictionary
                                                                         model:model

@@ -139,7 +139,7 @@
                                                model:abstractModel];
     }
 
-	return retVal;
+    return retVal;
 }
 
 + (NSDictionary *)extractModelForProgramAccordingToState:(NSObject <APProgramProtocol> *)program

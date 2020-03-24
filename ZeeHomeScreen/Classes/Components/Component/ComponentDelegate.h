@@ -5,8 +5,10 @@
 //  Created by Miri on 28/01/2020.
 //
 
+
 @class APModel;
 @protocol ComponentModelProtocol;
+@protocol ComponentProtocol;
 
 @protocol ComponentDelegate <NSObject>
 
