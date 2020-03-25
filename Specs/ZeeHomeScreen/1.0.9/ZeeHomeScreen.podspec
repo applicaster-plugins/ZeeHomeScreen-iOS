@@ -15,6 +15,8 @@ Pod::Spec.new do |s|
   s.public_header_files = 'ZeeHomeScreen/**/*.h'
   s.source_files = 'ZeeHomeScreen/**/*.{h,m,swift}'
 
+  s.static_framework = true
+
   s.resources = [
     "ZeeHomeScreen/**/*.{png,xib}",
     'ZeeHomeScreen/**/*.plist',
