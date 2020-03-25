@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E51F51A242A7F390028642B /* CellViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CB82428EF9D0020B6A8 /* CellViewController.swift */; };
 		3E51F51F242AA9310028642B /* ComponentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E51F51E242AA9310028642B /* ComponentProtocol.swift */; };
 		3E8F4D162428EF9D0020B6A8 /* DatasourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C942428EF9D0020B6A8 /* DatasourceManager.swift */; };
 		3E8F4D172428EF9D0020B6A8 /* ZeeHomeScreenMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4C952428EF9D0020B6A8 /* ZeeHomeScreenMain.swift */; };
@@ -94,6 +93,7 @@
 		3E8F4D682428EF9D0020B6A8 /* Family_Ganges_grid_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D142428EF9D0020B6A8 /* Family_Ganges_grid_3.xib */; };
 		3E8F4D692428EF9D0020B6A8 /* ZeeComponentsMapping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D152428EF9D0020B6A8 /* ZeeComponentsMapping.plist */; };
 		4DF603AA23B938F400DD621F /* ZeeHomeScreen_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF603A923B938F400DD621F /* ZeeHomeScreen_iOSTests.swift */; };
+		C322E313B97D63A3E62579D3 /* Pods_ZeeHomeScreen_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B952517DF42CC7E904998F /* Pods_ZeeHomeScreen_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +107,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31B952517DF42CC7E904998F /* Pods_ZeeHomeScreen_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZeeHomeScreen_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E51F51E242AA9310028642B /* ComponentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentProtocol.swift; sourceTree = "<group>"; };
 		3E8F4C942428EF9D0020B6A8 /* DatasourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatasourceManager.swift; sourceTree = "<group>"; };
 		3E8F4C952428EF9D0020B6A8 /* ZeeHomeScreenMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZeeHomeScreenMain.swift; sourceTree = "<group>"; };
@@ -205,10 +206,13 @@
 		3E8F4D132428EF9D0020B6A8 /* Family_Ganges_grid_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_grid_2.xib; sourceTree = "<group>"; };
 		3E8F4D142428EF9D0020B6A8 /* Family_Ganges_grid_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_grid_3.xib; sourceTree = "<group>"; };
 		3E8F4D152428EF9D0020B6A8 /* ZeeComponentsMapping.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZeeComponentsMapping.plist; sourceTree = "<group>"; };
-		4DF6038F23B938F300DD621F /* ZeeHomeScreen-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZeeHomeScreen-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ED5879D242B6ED8008AF7B7 /* ZeeHomeScreen-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZeeHomeScreen-Bridging-Header.h"; sourceTree = "<group>"; };
+		4DF6038F23B938F300DD621F /* ZeeHomeScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZeeHomeScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DF603A523B938F400DD621F /* ZeeHomeScreen-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZeeHomeScreen-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DF603A923B938F400DD621F /* ZeeHomeScreen_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeeHomeScreen_iOSTests.swift; sourceTree = "<group>"; };
 		4DF603AB23B938F400DD621F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EE30B3D0193B8EFF9938AB0 /* Pods-ZeeHomeScreen-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZeeHomeScreen-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ZeeHomeScreen-iOS/Pods-ZeeHomeScreen-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		98C933E99F334E6516C0802E /* Pods-ZeeHomeScreen-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZeeHomeScreen-iOS.release.xcconfig"; path = "Target Support Files/Pods-ZeeHomeScreen-iOS/Pods-ZeeHomeScreen-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +220,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C322E313B97D63A3E62579D3 /* Pods_ZeeHomeScreen_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,11 +234,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19E0BE5F933002FEE5464ECD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6EE30B3D0193B8EFF9938AB0 /* Pods-ZeeHomeScreen-iOS.debug.xcconfig */,
+				98C933E99F334E6516C0802E /* Pods-ZeeHomeScreen-iOS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		3E8F4C912428EF9D0020B6A8 /* ZeeHomeScreen */ = {
 			isa = PBXGroup;
 			children = (
 				3E8F4C922428EF9D0020B6A8 /* Classes */,
 				3E8F4CD52428EF9D0020B6A8 /* ZeeHomeScreenPlugin_iOS.h */,
+				3ED5879D242B6ED8008AF7B7 /* ZeeHomeScreen-Bridging-Header.h */,
 				3E8F4CD62428EF9D0020B6A8 /* Resources */,
 			);
 			path = ZeeHomeScreen;
@@ -612,13 +627,15 @@
 				3E8F4C912428EF9D0020B6A8 /* ZeeHomeScreen */,
 				4DF603A823B938F400DD621F /* ZeeHomeScreen-iOSTests */,
 				4DF6039023B938F300DD621F /* Products */,
+				19E0BE5F933002FEE5464ECD /* Pods */,
+				B0697AE6266C03EEB38DC18E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		4DF6039023B938F300DD621F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4DF6038F23B938F300DD621F /* ZeeHomeScreen-iOS.app */,
+				4DF6038F23B938F300DD621F /* ZeeHomeScreen.app */,
 				4DF603A523B938F400DD621F /* ZeeHomeScreen-iOSTests.xctest */,
 			);
 			name = Products;
@@ -633,24 +650,35 @@
 			path = "ZeeHomeScreen-iOSTests";
 			sourceTree = "<group>";
 		};
+		B0697AE6266C03EEB38DC18E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				31B952517DF42CC7E904998F /* Pods_ZeeHomeScreen_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4DF6038E23B938F300DD621F /* ZeeHomeScreen-iOS */ = {
+		4DF6038E23B938F300DD621F /* ZeeHomeScreen */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4DF603AE23B938F400DD621F /* Build configuration list for PBXNativeTarget "ZeeHomeScreen-iOS" */;
+			buildConfigurationList = 4DF603AE23B938F400DD621F /* Build configuration list for PBXNativeTarget "ZeeHomeScreen" */;
 			buildPhases = (
+				FBE16E00689CF0529051E077 /* [CP] Check Pods Manifest.lock */,
 				4DF6038B23B938F300DD621F /* Sources */,
 				4DF6038C23B938F300DD621F /* Frameworks */,
 				4DF6038D23B938F300DD621F /* Resources */,
+				60B5D7815A1D88BB7D86803E /* [CP] Embed Pods Frameworks */,
+				A2DD7C4D09EC779DFB50CC3C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "ZeeHomeScreen-iOS";
+			name = ZeeHomeScreen;
 			productName = "ZeeHomeScreen-iOS";
-			productReference = 4DF6038F23B938F300DD621F /* ZeeHomeScreen-iOS.app */;
+			productReference = 4DF6038F23B938F300DD621F /* ZeeHomeScreen.app */;
 			productType = "com.apple.product-type.application";
 		};
 		4DF603A423B938F400DD621F /* ZeeHomeScreen-iOSTests */ = {
@@ -703,7 +731,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4DF6038E23B938F300DD621F /* ZeeHomeScreen-iOS */,
+				4DF6038E23B938F300DD621F /* ZeeHomeScreen */,
 				4DF603A423B938F400DD621F /* ZeeHomeScreen-iOSTests */,
 			);
 		};
@@ -714,7 +742,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E51F51A242A7F390028642B /* CellViewController.swift in Resources */,
 				3E8F4D682428EF9D0020B6A8 /* Family_Ganges_grid_3.xib in Resources */,
 				3E8F4D472428EF9D0020B6A8 /* Family_Ganges_horizontal_list_3.xib in Resources */,
 				3E8F4D642428EF9D0020B6A8 /* Family_Ganges_hero_cell_2~ipad.xib in Resources */,
@@ -777,6 +804,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		60B5D7815A1D88BB7D86803E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZeeHomeScreen-iOS/Pods-ZeeHomeScreen-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZeeHomeScreen-iOS/Pods-ZeeHomeScreen-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZeeHomeScreen-iOS/Pods-ZeeHomeScreen-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2DD7C4D09EC779DFB50CC3C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZeeHomeScreen-iOS/Pods-ZeeHomeScreen-iOS-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZeeHomeScreen-iOS/Pods-ZeeHomeScreen-iOS-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZeeHomeScreen-iOS/Pods-ZeeHomeScreen-iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBE16E00689CF0529051E077 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZeeHomeScreen-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4DF6038B23B938F300DD621F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -833,7 +919,7 @@
 /* Begin PBXTargetDependency section */
 		4DF603A723B938F400DD621F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4DF6038E23B938F300DD621F /* ZeeHomeScreen-iOS */;
+			target = 4DF6038E23B938F300DD621F /* ZeeHomeScreen */;
 			targetProxy = 4DF603A623B938F400DD621F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -890,7 +976,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -945,7 +1031,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -957,18 +1043,21 @@
 		};
 		4DF603AF23B938F400DD621F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6EE30B3D0193B8EFF9938AB0 /* Pods-ZeeHomeScreen-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "ZeeHomeScreen-iOS/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/ZeeHomeScreen-iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ZeeHomeScreen-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(TARGET_NAME)/$(TARGET_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -976,18 +1065,21 @@
 		};
 		4DF603B023B938F400DD621F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98C933E99F334E6516C0802E /* Pods-ZeeHomeScreen-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "ZeeHomeScreen-iOS/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/ZeeHomeScreen-iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ZeeHomeScreen-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(TARGET_NAME)/$(TARGET_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1047,7 +1139,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4DF603AE23B938F400DD621F /* Build configuration list for PBXNativeTarget "ZeeHomeScreen-iOS" */ = {
+		4DF603AE23B938F400DD621F /* Build configuration list for PBXNativeTarget "ZeeHomeScreen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4DF603AF23B938F400DD621F /* Debug */,
