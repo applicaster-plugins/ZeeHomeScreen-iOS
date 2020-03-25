@@ -23,7 +23,6 @@ Pod::Spec.new do |s|
   s.xcconfig =  {
                   'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
                   'ENABLE_BITCODE' => 'YES',
-                  'OTHER_CFLAGS'  => '-fembed-bitcode',
                   'SWIFT_VERSION' => '5.1'
                 }
 
