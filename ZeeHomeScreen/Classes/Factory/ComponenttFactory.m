@@ -9,7 +9,6 @@
 
 #import "ComponenttFactory.h"
 #import <ZeeHomeScreen/ZeeHomeScreen-Swift.h>
-#import "ComponentProtocol.h"
 
 @protocol ComponentDelegate;
 

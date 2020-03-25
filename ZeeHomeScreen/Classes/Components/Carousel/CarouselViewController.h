@@ -15,6 +15,7 @@
 @class CellModel;
 @class ComponentModel;
 @class DatasourceManager;
+@class ComponentProtocol;
 
 extern NSString * const kCarouselSwipedNotification;
 
