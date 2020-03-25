@@ -18,29 +18,36 @@ import ApplicasterSDK
     
     //MARK: Properties
     
-    @IBOutlet weak var itemNameLabel: UILabel!
-    @IBOutlet weak var itemShowNameLabel: UILabel!
-    @IBOutlet weak var itemTimeLabel: UILabel!
-    @IBOutlet weak var itemDescriptionLabel: UILabel!
+    @IBOutlet public weak var itemNameLabel: UILabel!
+    @IBOutlet public weak var itemShowNameLabel: UILabel!
+    @IBOutlet public weak var itemTimeLabel: UILabel!
+    @IBOutlet public weak var itemDescriptionLabel: UILabel!
     
-    @IBOutlet weak var itemImageView: APImageView!
-    @IBOutlet weak var shadowImageView: APImageView!
-    @IBOutlet weak var parentTitleLabel: UILabel!
-    @IBOutlet weak var authorLabel: UILabel!
-    @IBOutlet weak var updatedLabel: UILabel!
-    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet public weak var itemImageView: APImageView!
+    @IBOutlet public weak var shadowImageView: APImageView!
+    @IBOutlet public weak var parentTitleLabel: UILabel!
+    @IBOutlet public weak var authorLabel: UILabel!
+    @IBOutlet public weak var updatedLabel: UILabel!
+    @IBOutlet public weak var descriptionTextView: UITextView!
     
-    @IBOutlet weak var borderView: UIView!
+    @IBOutlet public weak var borderView: UIView!
 
     
-    @IBOutlet weak var promoVideoContainerView: UIView!
+    @IBOutlet public weak var promoVideoContainerView: UIView!
 
-    @IBOutlet var imageViewCollection: [UIImageView]!
-    @IBOutlet var buttonsViewCollection: [UIButton]!
-    @IBOutlet var labelsCollection: [UILabel]!
-    @IBOutlet var viewCollection: [UIView]!
+    @IBOutlet public var imageViewCollection: [UIImageView]!
+    @IBOutlet public var buttonsViewCollection: [UIButton]!
+    @IBOutlet public var labelsCollection: [UILabel]!
+    @IBOutlet public var viewCollection: [UIView]!
 
-
+    public required override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     var atomEntry: APAtomEntry? {
         get
         {

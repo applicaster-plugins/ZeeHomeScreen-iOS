@@ -22,7 +22,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadin
     fileprivate var config: PluginKeys?
     fileprivate var style: PluginKeys?
 
-    fileprivate var atomFeedUrl: String = ""
+    fileprivate var atomFeedUrl: String?
     var atomFeed: APAtomFeed?
     
     //MARK: ZPAppLoadingHookProtocol
@@ -63,7 +63,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadin
        
        
         self.atomFeed = atomFeed
-        self.atomFeedUrl = atomFeed.linkURL! as String
+        self.atomFeedUrl = atomFeed.link as String?
     }
     
     public func createScreen() -> UIViewController {
@@ -81,7 +81,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadin
             let model = ComponentModel.init(entry: feed, threshold: 3)
             model.isVertical = true
             model.dsUrl = self.atomFeedUrl
-
+            
             return model
         }
         return nil

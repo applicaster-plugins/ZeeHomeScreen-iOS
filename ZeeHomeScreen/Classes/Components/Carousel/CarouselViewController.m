@@ -74,7 +74,8 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
         if ([visibleCell isKindOfClass:[UniversalCollectionViewCell class]]) {
             UniversalCollectionViewCell *universalCollectionViewCell = (UniversalCollectionViewCell *)visibleCell;
             if ([universalCollectionViewCell.componentViewController respondsToSelector:@selector(didEndDisplayingWithReason:)]) {
-                [universalCollectionViewCell.componentViewController didEndDisplayingWithReason:reason];
+               
+                [universalCollectionViewCell.componentViewController didEndDisplayingWith:reason];
             }
         }
     }
@@ -330,7 +331,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     if ([cell isKindOfClass:UniversalCollectionViewCell.class]) {
         UniversalCollectionViewCell *universalCollectionViewCell = (UniversalCollectionViewCell *)cell;
         if ([universalCollectionViewCell.componentViewController respondsToSelector:@selector(didEndDisplayingWithReason:)]) {
-            [universalCollectionViewCell.componentViewController didEndDisplayingWithReason:ZeeComponentEndDisplayingReasonCellQueued];
+            [universalCollectionViewCell.componentViewController didEndDisplayingWith:ZeeComponentEndDisplayingReasonCellQueued];
         }
     }
 }
