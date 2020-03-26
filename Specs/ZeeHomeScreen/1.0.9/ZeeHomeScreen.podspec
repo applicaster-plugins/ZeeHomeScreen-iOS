@@ -15,8 +15,6 @@ Pod::Spec.new do |s|
   s.public_header_files = 'ZeeHomeScreen/**/*.h'
   s.source_files = 'ZeeHomeScreen/**/*.{h,m,swift}'
 
-  s.static_framework = true
-
   s.resources = [
     "ZeeHomeScreen/**/*.{png,xib}",
     'ZeeHomeScreen/**/*.plist',
@@ -25,7 +23,8 @@ Pod::Spec.new do |s|
   s.xcconfig =  {
                   'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
                   'ENABLE_BITCODE' => 'YES',
-                  'SWIFT_VERSION' => '5.1'
+                  'SWIFT_VERSION' => '5.1',
+                  'OTHER_CFLAGS'  => '-fembed-bitcode'
                 }
 
   s.dependency 'ZappPlugins'
