@@ -23,8 +23,7 @@ Pod::Spec.new do |s|
   s.xcconfig =  {
                   'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
                   'ENABLE_BITCODE' => 'YES',
-                  'SWIFT_VERSION' => '5.1',
-                  'OTHER_CFLAGS'  => '-fembed-bitcode'
+                  'SWIFT_VERSION' => '5.1'
                 }
 
   s.dependency 'ZappPlugins'
