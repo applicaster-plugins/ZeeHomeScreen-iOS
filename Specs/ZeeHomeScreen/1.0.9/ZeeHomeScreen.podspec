@@ -20,13 +20,10 @@ Pod::Spec.new do |s|
     'ZeeHomeScreen/**/*.plist'
   ]
 
-  s.xcconfig =  {         'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
-                          'FRAMEWORK_SEARCH_PATHS' => '$(inherited)',
-                          'LIBRARY_SEARCH_PATHS' => '$(inherited) "${PODS_ROOT}/**"',
-                          'OTHER_LDFLAGS' => '$(inherited)',
-                          'ENABLE_BITCODE' => 'YES',
-                          'SWIFT_VERSION' => '5.1',
-                          'OTHER_CFLAGS'  => '-fembed-bitcode'
+  s.xcconfig =  { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
+                  'ENABLE_BITCODE' => 'YES',
+		              'OTHER_CFLAGS'  => '-fembed-bitcode',
+                  'SWIFT_VERSION' => '5.1'
                 }
 
   s.dependency 'ZappPlugins'
