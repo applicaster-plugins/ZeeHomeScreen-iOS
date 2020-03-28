@@ -17,13 +17,16 @@ Pod::Spec.new do |s|
 
   s.resources = [
     "ZeeHomeScreen/**/*.{png,xib}",
-    'ZeeHomeScreen/**/*.plist',
+    'ZeeHomeScreen/**/*.plist'
   ]
 
-  s.xcconfig =  {
-                  'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
-                  'ENABLE_BITCODE' => 'YES',
-                  'SWIFT_VERSION' => '5.1'
+  s.xcconfig =  {         'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
+                          'FRAMEWORK_SEARCH_PATHS' => '$(inherited)',
+                          'LIBRARY_SEARCH_PATHS' => '$(inherited) "${PODS_ROOT}/**"',
+                          'OTHER_LDFLAGS' => '$(inherited)',
+                          'ENABLE_BITCODE' => 'YES',
+                          'SWIFT_VERSION' => '5.1',
+                          'OTHER_CFLAGS'  => '-fembed-bitcode'
                 }
 
   s.dependency 'ZappPlugins'
