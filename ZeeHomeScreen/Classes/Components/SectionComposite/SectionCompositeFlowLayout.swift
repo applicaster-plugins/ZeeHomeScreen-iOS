@@ -711,6 +711,11 @@ extension SectionCompositeFlowLayout {
         //        newGroupSectionInset.top = sectionInset.top
         //        newGroupSectionInset.bottom = sectionInset.bottom
         //        return newGroupSectionInset
+//        if сollectionItemTypes == .header {
+//            return UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
+//        } else if сollectionItemTypes == .body {
+//            return UIEdgeInsets.init(top: 0, left: 16, bottom: 0, right: 16)
+//        }
         return  UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
     }
     
@@ -738,7 +743,8 @@ extension SectionCompositeFlowLayout {
                     return CGSize.init(width: lazyLoadingWidth, height: horizontalContentHeight)
                 }
             }
-            else if let cellModel = sectionsDataSourceArray[indexPath.row] as? CellModel {
+            else if let cellModel = sectionsDataSourceArray[indexPath.row] as? CellModel,
+                let layoutStyle: String = cellModel.layoutStyle {
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     return CGSize.init(width: cellModel.ipadWidth, height: cellModel.ipadHeight)
                 }
@@ -746,7 +752,7 @@ extension SectionCompositeFlowLayout {
                     return CGSize.init(width: cellModel.iphoneWidth, height: cellModel.iphoneHeight)
                 }
             }
-            else if let componentModel = sectionsDataSourceArray[indexPath.row] as? ComponentModel,
+            else if sectionsDataSourceArray.count > indexPath.section, let componentModel = sectionsDataSourceArray[indexPath.section] as? ComponentModel,
                 let componentHelper = componentModel.styleHelper {
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     return CGSize.init(width: contentWidth, height: componentHelper.ipadHeight)
@@ -757,14 +763,14 @@ extension SectionCompositeFlowLayout {
             }
         }
         else if сollectionItemTypes == .header,
-            let componentModel = sectionsDataSourceArray[indexPath.row] as? ComponentModel,
+            let componentModel = sectionsDataSourceArray[indexPath.section] as? ComponentModel,
             let componentHeaderModel = componentModel.componentHeaderModel,
             let height = componentHeaderModel.height {
             
             return CGSize.init(width: UIScreen.main.bounds.width, height: height)
         }
         
-        return CGSize.init(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 4)
+        return CGSize.zero //init(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 4)
     }
 
     //    /**
@@ -779,7 +785,7 @@ extension SectionCompositeFlowLayout {
     func cellSize(for indexPath: IndexPath,
                   сollectionItemTypes: ComponentHelper.ComponentItemTypes) -> CGSize? {
         //        return CGSize.init(width: 150.0, height: 150.0)
-        return  cachedIndexPathSizes[indexPath] ?? estimatedCellSize(for: indexPath, сollectionItemTypes: сollectionItemTypes)
+        return  /*cachedIndexPathSizes[indexPath] ??*/ estimatedCellSize(for: indexPath, сollectionItemTypes: сollectionItemTypes)
     }
     
     //    /**

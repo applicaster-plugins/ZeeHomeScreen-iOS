@@ -44,54 +44,7 @@
 		3E8F4D372428EF9D0020B6A8 /* ComponentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD02428EF9D0020B6A8 /* ComponentHelper.swift */; };
 		3E8F4D382428EF9D0020B6A8 /* AtomHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD12428EF9D0020B6A8 /* AtomHelper.swift */; };
 		3E8F4D392428EF9D0020B6A8 /* ComponenttFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD42428EF9D0020B6A8 /* ComponenttFactory.m */; };
-		3E8F4D3A2428EF9D0020B6A8 /* ZeeCustomizationLayouts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD72428EF9D0020B6A8 /* ZeeCustomizationLayouts.plist */; };
-		3E8F4D3B2428EF9D0020B6A8 /* Family_Ganges_hero_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CDB2428EF9D0020B6A8 /* Family_Ganges_hero_1.xib */; };
-		3E8F4D3C2428EF9D0020B6A8 /* Family_Ganges_hero_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CDC2428EF9D0020B6A8 /* Family_Ganges_hero_3.xib */; };
-		3E8F4D3D2428EF9D0020B6A8 /* Family_Ganges_hero_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CDD2428EF9D0020B6A8 /* Family_Ganges_hero_2.xib */; };
-		3E8F4D3E2428EF9D0020B6A8 /* Family_Ganges_search_bar_cell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE12428EF9D0020B6A8 /* Family_Ganges_search_bar_cell_1.xib */; };
-		3E8F4D3F2428EF9D0020B6A8 /* Family_Ganges_consumption_cell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE32428EF9D0020B6A8 /* Family_Ganges_consumption_cell_1.xib */; };
-		3E8F4D402428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE52428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14~ipad.xib */; };
-		3E8F4D412428EF9D0020B6A8 /* Family_Ganges_horizontal_list_9.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE62428EF9D0020B6A8 /* Family_Ganges_horizontal_list_9.xib */; };
-		3E8F4D422428EF9D0020B6A8 /* Family_Ganges_horizontal_list_8.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE72428EF9D0020B6A8 /* Family_Ganges_horizontal_list_8.xib */; };
-		3E8F4D432428EF9D0020B6A8 /* Family_Ganges_horizontal_list_5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE82428EF9D0020B6A8 /* Family_Ganges_horizontal_list_5.xib */; };
-		3E8F4D442428EF9D0020B6A8 /* Family_Ganges_horizontal_list_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CE92428EF9D0020B6A8 /* Family_Ganges_horizontal_list_4.xib */; };
-		3E8F4D452428EF9D0020B6A8 /* Family_Ganges_horizontal_list_6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CEA2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_6.xib */; };
-		3E8F4D462428EF9D0020B6A8 /* Family_Ganges_horizontal_list_7.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CEB2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_7.xib */; };
-		3E8F4D472428EF9D0020B6A8 /* Family_Ganges_horizontal_list_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CEC2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_3.xib */; };
-		3E8F4D482428EF9D0020B6A8 /* Family_Ganges_horizontal_list_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CED2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_2.xib */; };
-		3E8F4D492428EF9D0020B6A8 /* Family_Ganges_horizontal_list_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CEE2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_1.xib */; };
-		3E8F4D4A2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_11.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CEF2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_11.xib */; };
-		3E8F4D4B2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_10.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF02428EF9D0020B6A8 /* Family_Ganges_horizontal_list_10.xib */; };
-		3E8F4D4C2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_12.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF12428EF9D0020B6A8 /* Family_Ganges_horizontal_list_12.xib */; };
-		3E8F4D4D2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_13.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF22428EF9D0020B6A8 /* Family_Ganges_horizontal_list_13.xib */; };
-		3E8F4D4E2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_16.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF32428EF9D0020B6A8 /* Family_Ganges_horizontal_list_16.xib */; };
-		3E8F4D4F2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF42428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14.xib */; };
-		3E8F4D502428EF9D0020B6A8 /* Family_Ganges_horizontal_list_15.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF52428EF9D0020B6A8 /* Family_Ganges_horizontal_list_15.xib */; };
-		3E8F4D512428EF9D0020B6A8 /* Family_Ganges_list_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF72428EF9D0020B6A8 /* Family_Ganges_list_1.xib */; };
-		3E8F4D522428EF9D0020B6A8 /* Family_Ganges_list_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF82428EF9D0020B6A8 /* Family_Ganges_list_3.xib */; };
-		3E8F4D532428EF9D0020B6A8 /* Family_Ganges_list_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CF92428EF9D0020B6A8 /* Family_Ganges_list_2.xib */; };
-		3E8F4D542428EF9D0020B6A8 /* Family_Ganges_list_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CFA2428EF9D0020B6A8 /* Family_Ganges_list_4.xib */; };
-		3E8F4D552428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CFC2428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_2.xib */; };
-		3E8F4D562428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CFD2428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_1.xib */; };
 		3E8F4D572428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CFF2428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib */; };
-		3E8F4D582428EF9D0020B6A8 /* Family_Ganges_header_cell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D012428EF9D0020B6A8 /* Family_Ganges_header_cell_1.xib */; };
-		3E8F4D592428EF9D0020B6A8 /* Family_Ganges_header_cell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D022428EF9D0020B6A8 /* Family_Ganges_header_cell_2.xib */; };
-		3E8F4D5A2428EF9D0020B6A8 /* Family_Ganges_header_cell_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D032428EF9D0020B6A8 /* Family_Ganges_header_cell_3.xib */; };
-		3E8F4D5B2428EF9D0020B6A8 /* Family_Ganges_banner_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D052428EF9D0020B6A8 /* Family_Ganges_banner_1.xib */; };
-		3E8F4D5C2428EF9D0020B6A8 /* Family_Ganges_hero_cell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D072428EF9D0020B6A8 /* Family_Ganges_hero_cell_4.xib */; };
-		3E8F4D5D2428EF9D0020B6A8 /* Family_Ganges_hero_cell_5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D082428EF9D0020B6A8 /* Family_Ganges_hero_cell_5.xib */; };
-		3E8F4D5E2428EF9D0020B6A8 /* Family_Ganges_hero_cell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D092428EF9D0020B6A8 /* Family_Ganges_hero_cell_2.xib */; };
-		3E8F4D5F2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D0A2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3.xib */; };
-		3E8F4D602428EF9D0020B6A8 /* Family_Ganges_hero_cell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D0B2428EF9D0020B6A8 /* Family_Ganges_hero_cell_1.xib */; };
-		3E8F4D612428EF9D0020B6A8 /* Family_Ganges_hero_cell_4~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D0C2428EF9D0020B6A8 /* Family_Ganges_hero_cell_4~ipad.xib */; };
-		3E8F4D622428EF9D0020B6A8 /* Family_Ganges_hero_cell_5~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D0D2428EF9D0020B6A8 /* Family_Ganges_hero_cell_5~ipad.xib */; };
-		3E8F4D632428EF9D0020B6A8 /* Family_Ganges_hero_cell_3~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D0E2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3~ipad.xib */; };
-		3E8F4D642428EF9D0020B6A8 /* Family_Ganges_hero_cell_2~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D0F2428EF9D0020B6A8 /* Family_Ganges_hero_cell_2~ipad.xib */; };
-		3E8F4D652428EF9D0020B6A8 /* Family_Ganges_hero_cell_1~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D102428EF9D0020B6A8 /* Family_Ganges_hero_cell_1~ipad.xib */; };
-		3E8F4D662428EF9D0020B6A8 /* Family_Ganges_grid_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D122428EF9D0020B6A8 /* Family_Ganges_grid_1.xib */; };
-		3E8F4D672428EF9D0020B6A8 /* Family_Ganges_grid_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D132428EF9D0020B6A8 /* Family_Ganges_grid_2.xib */; };
-		3E8F4D682428EF9D0020B6A8 /* Family_Ganges_grid_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D142428EF9D0020B6A8 /* Family_Ganges_grid_3.xib */; };
-		3E8F4D692428EF9D0020B6A8 /* ZeeComponentsMapping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4D152428EF9D0020B6A8 /* ZeeComponentsMapping.plist */; };
 		3ED587B0242B9817008AF7B7 /* ComponentDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED587AF242B9817008AF7B7 /* ComponentDataSource.m */; };
 		4DF603AA23B938F400DD621F /* ZeeHomeScreen_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF603A923B938F400DD621F /* ZeeHomeScreen_iOSTests.swift */; };
 		C322E313B97D63A3E62579D3 /* Pods_ZeeHomeScreen_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B952517DF42CC7E904998F /* Pods_ZeeHomeScreen_iOS.framework */; };
@@ -159,54 +112,7 @@
 		3E8F4CD32428EF9D0020B6A8 /* ComponenttFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponenttFactory.h; sourceTree = "<group>"; };
 		3E8F4CD42428EF9D0020B6A8 /* ComponenttFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponenttFactory.m; sourceTree = "<group>"; };
 		3E8F4CD52428EF9D0020B6A8 /* ZeeHomeScreenPlugin_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZeeHomeScreenPlugin_iOS.h; sourceTree = "<group>"; };
-		3E8F4CD72428EF9D0020B6A8 /* ZeeCustomizationLayouts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZeeCustomizationLayouts.plist; sourceTree = "<group>"; };
-		3E8F4CDB2428EF9D0020B6A8 /* Family_Ganges_hero_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_1.xib; sourceTree = "<group>"; };
-		3E8F4CDC2428EF9D0020B6A8 /* Family_Ganges_hero_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_3.xib; sourceTree = "<group>"; };
-		3E8F4CDD2428EF9D0020B6A8 /* Family_Ganges_hero_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_2.xib; sourceTree = "<group>"; };
-		3E8F4CE12428EF9D0020B6A8 /* Family_Ganges_search_bar_cell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_search_bar_cell_1.xib; sourceTree = "<group>"; };
-		3E8F4CE32428EF9D0020B6A8 /* Family_Ganges_consumption_cell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_consumption_cell_1.xib; sourceTree = "<group>"; };
-		3E8F4CE52428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Family_Ganges_horizontal_list_14~ipad.xib"; sourceTree = "<group>"; };
-		3E8F4CE62428EF9D0020B6A8 /* Family_Ganges_horizontal_list_9.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_9.xib; sourceTree = "<group>"; };
-		3E8F4CE72428EF9D0020B6A8 /* Family_Ganges_horizontal_list_8.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_8.xib; sourceTree = "<group>"; };
-		3E8F4CE82428EF9D0020B6A8 /* Family_Ganges_horizontal_list_5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_5.xib; sourceTree = "<group>"; };
-		3E8F4CE92428EF9D0020B6A8 /* Family_Ganges_horizontal_list_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_4.xib; sourceTree = "<group>"; };
-		3E8F4CEA2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_6.xib; sourceTree = "<group>"; };
-		3E8F4CEB2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_7.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_7.xib; sourceTree = "<group>"; };
-		3E8F4CEC2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_3.xib; sourceTree = "<group>"; };
-		3E8F4CED2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_2.xib; sourceTree = "<group>"; };
-		3E8F4CEE2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_1.xib; sourceTree = "<group>"; };
-		3E8F4CEF2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_11.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_11.xib; sourceTree = "<group>"; };
-		3E8F4CF02428EF9D0020B6A8 /* Family_Ganges_horizontal_list_10.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_10.xib; sourceTree = "<group>"; };
-		3E8F4CF12428EF9D0020B6A8 /* Family_Ganges_horizontal_list_12.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_12.xib; sourceTree = "<group>"; };
-		3E8F4CF22428EF9D0020B6A8 /* Family_Ganges_horizontal_list_13.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_13.xib; sourceTree = "<group>"; };
-		3E8F4CF32428EF9D0020B6A8 /* Family_Ganges_horizontal_list_16.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_16.xib; sourceTree = "<group>"; };
-		3E8F4CF42428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_14.xib; sourceTree = "<group>"; };
-		3E8F4CF52428EF9D0020B6A8 /* Family_Ganges_horizontal_list_15.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_horizontal_list_15.xib; sourceTree = "<group>"; };
-		3E8F4CF72428EF9D0020B6A8 /* Family_Ganges_list_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_list_1.xib; sourceTree = "<group>"; };
-		3E8F4CF82428EF9D0020B6A8 /* Family_Ganges_list_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_list_3.xib; sourceTree = "<group>"; };
-		3E8F4CF92428EF9D0020B6A8 /* Family_Ganges_list_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_list_2.xib; sourceTree = "<group>"; };
-		3E8F4CFA2428EF9D0020B6A8 /* Family_Ganges_list_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_list_4.xib; sourceTree = "<group>"; };
-		3E8F4CFC2428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_screen_picker_cell_2.xib; sourceTree = "<group>"; };
-		3E8F4CFD2428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_screen_picker_cell_1.xib; sourceTree = "<group>"; };
 		3E8F4CFF2428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_lazy_loading_1.xib; sourceTree = "<group>"; };
-		3E8F4D012428EF9D0020B6A8 /* Family_Ganges_header_cell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_header_cell_1.xib; sourceTree = "<group>"; };
-		3E8F4D022428EF9D0020B6A8 /* Family_Ganges_header_cell_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_header_cell_2.xib; sourceTree = "<group>"; };
-		3E8F4D032428EF9D0020B6A8 /* Family_Ganges_header_cell_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_header_cell_3.xib; sourceTree = "<group>"; };
-		3E8F4D052428EF9D0020B6A8 /* Family_Ganges_banner_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_banner_1.xib; sourceTree = "<group>"; };
-		3E8F4D072428EF9D0020B6A8 /* Family_Ganges_hero_cell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_cell_4.xib; sourceTree = "<group>"; };
-		3E8F4D082428EF9D0020B6A8 /* Family_Ganges_hero_cell_5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_cell_5.xib; sourceTree = "<group>"; };
-		3E8F4D092428EF9D0020B6A8 /* Family_Ganges_hero_cell_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_cell_2.xib; sourceTree = "<group>"; };
-		3E8F4D0A2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_cell_3.xib; sourceTree = "<group>"; };
-		3E8F4D0B2428EF9D0020B6A8 /* Family_Ganges_hero_cell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_hero_cell_1.xib; sourceTree = "<group>"; };
-		3E8F4D0C2428EF9D0020B6A8 /* Family_Ganges_hero_cell_4~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Family_Ganges_hero_cell_4~ipad.xib"; sourceTree = "<group>"; };
-		3E8F4D0D2428EF9D0020B6A8 /* Family_Ganges_hero_cell_5~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Family_Ganges_hero_cell_5~ipad.xib"; sourceTree = "<group>"; };
-		3E8F4D0E2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Family_Ganges_hero_cell_3~ipad.xib"; sourceTree = "<group>"; };
-		3E8F4D0F2428EF9D0020B6A8 /* Family_Ganges_hero_cell_2~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Family_Ganges_hero_cell_2~ipad.xib"; sourceTree = "<group>"; };
-		3E8F4D102428EF9D0020B6A8 /* Family_Ganges_hero_cell_1~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Family_Ganges_hero_cell_1~ipad.xib"; sourceTree = "<group>"; };
-		3E8F4D122428EF9D0020B6A8 /* Family_Ganges_grid_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_grid_1.xib; sourceTree = "<group>"; };
-		3E8F4D132428EF9D0020B6A8 /* Family_Ganges_grid_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_grid_2.xib; sourceTree = "<group>"; };
-		3E8F4D142428EF9D0020B6A8 /* Family_Ganges_grid_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_grid_3.xib; sourceTree = "<group>"; };
-		3E8F4D152428EF9D0020B6A8 /* ZeeComponentsMapping.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZeeComponentsMapping.plist; sourceTree = "<group>"; };
 		3ED5879D242B6ED8008AF7B7 /* ZeeHomeScreen-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZeeHomeScreen-Bridging-Header.h"; sourceTree = "<group>"; };
 		3ED587AE242B9817008AF7B7 /* ComponentDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentDataSource.h; sourceTree = "<group>"; };
 		3ED587AF242B9817008AF7B7 /* ComponentDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentDataSource.m; sourceTree = "<group>"; };
@@ -456,9 +362,7 @@
 		3E8F4CD62428EF9D0020B6A8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F4CD72428EF9D0020B6A8 /* ZeeCustomizationLayouts.plist */,
 				3E8F4CD82428EF9D0020B6A8 /* Styles */,
-				3E8F4D152428EF9D0020B6A8 /* ZeeComponentsMapping.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -483,9 +387,6 @@
 		3E8F4CDA2428EF9D0020B6A8 /* Family_Ganges */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F4CDB2428EF9D0020B6A8 /* Family_Ganges_hero_1.xib */,
-				3E8F4CDC2428EF9D0020B6A8 /* Family_Ganges_hero_3.xib */,
-				3E8F4CDD2428EF9D0020B6A8 /* Family_Ganges_hero_2.xib */,
 			);
 			path = Family_Ganges;
 			sourceTree = "<group>";
@@ -518,7 +419,6 @@
 		3E8F4CE02428EF9D0020B6A8 /* SearchBar */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F4CE12428EF9D0020B6A8 /* Family_Ganges_search_bar_cell_1.xib */,
 			);
 			path = SearchBar;
 			sourceTree = "<group>";
@@ -526,7 +426,6 @@
 		3E8F4CE22428EF9D0020B6A8 /* Consumption */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F4CE32428EF9D0020B6A8 /* Family_Ganges_consumption_cell_1.xib */,
 			);
 			path = Consumption;
 			sourceTree = "<group>";
@@ -534,23 +433,6 @@
 		3E8F4CE42428EF9D0020B6A8 /* HorizontalList */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F4CE52428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14~ipad.xib */,
-				3E8F4CE62428EF9D0020B6A8 /* Family_Ganges_horizontal_list_9.xib */,
-				3E8F4CE72428EF9D0020B6A8 /* Family_Ganges_horizontal_list_8.xib */,
-				3E8F4CE82428EF9D0020B6A8 /* Family_Ganges_horizontal_list_5.xib */,
-				3E8F4CE92428EF9D0020B6A8 /* Family_Ganges_horizontal_list_4.xib */,
-				3E8F4CEA2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_6.xib */,
-				3E8F4CEB2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_7.xib */,
-				3E8F4CEC2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_3.xib */,
-				3E8F4CED2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_2.xib */,
-				3E8F4CEE2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_1.xib */,
-				3E8F4CEF2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_11.xib */,
-				3E8F4CF02428EF9D0020B6A8 /* Family_Ganges_horizontal_list_10.xib */,
-				3E8F4CF12428EF9D0020B6A8 /* Family_Ganges_horizontal_list_12.xib */,
-				3E8F4CF22428EF9D0020B6A8 /* Family_Ganges_horizontal_list_13.xib */,
-				3E8F4CF32428EF9D0020B6A8 /* Family_Ganges_horizontal_list_16.xib */,
-				3E8F4CF42428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14.xib */,
-				3E8F4CF52428EF9D0020B6A8 /* Family_Ganges_horizontal_list_15.xib */,
 			);
 			path = HorizontalList;
 			sourceTree = "<group>";
@@ -558,10 +440,6 @@
 		3E8F4CF62428EF9D0020B6A8 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F4CF72428EF9D0020B6A8 /* Family_Ganges_list_1.xib */,
-				3E8F4CF82428EF9D0020B6A8 /* Family_Ganges_list_3.xib */,
-				3E8F4CF92428EF9D0020B6A8 /* Family_Ganges_list_2.xib */,
-				3E8F4CFA2428EF9D0020B6A8 /* Family_Ganges_list_4.xib */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -569,8 +447,6 @@
 		3E8F4CFB2428EF9D0020B6A8 /* ScreenPicker */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F4CFC2428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_2.xib */,
-				3E8F4CFD2428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_1.xib */,
 			);
 			path = ScreenPicker;
 			sourceTree = "<group>";
@@ -586,9 +462,6 @@
 		3E8F4D002428EF9D0020B6A8 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F4D012428EF9D0020B6A8 /* Family_Ganges_header_cell_1.xib */,
-				3E8F4D022428EF9D0020B6A8 /* Family_Ganges_header_cell_2.xib */,
-				3E8F4D032428EF9D0020B6A8 /* Family_Ganges_header_cell_3.xib */,
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -596,7 +469,6 @@
 		3E8F4D042428EF9D0020B6A8 /* Banner */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F4D052428EF9D0020B6A8 /* Family_Ganges_banner_1.xib */,
 			);
 			path = Banner;
 			sourceTree = "<group>";
@@ -604,16 +476,6 @@
 		3E8F4D062428EF9D0020B6A8 /* HeroCell */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F4D072428EF9D0020B6A8 /* Family_Ganges_hero_cell_4.xib */,
-				3E8F4D082428EF9D0020B6A8 /* Family_Ganges_hero_cell_5.xib */,
-				3E8F4D092428EF9D0020B6A8 /* Family_Ganges_hero_cell_2.xib */,
-				3E8F4D0A2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3.xib */,
-				3E8F4D0B2428EF9D0020B6A8 /* Family_Ganges_hero_cell_1.xib */,
-				3E8F4D0C2428EF9D0020B6A8 /* Family_Ganges_hero_cell_4~ipad.xib */,
-				3E8F4D0D2428EF9D0020B6A8 /* Family_Ganges_hero_cell_5~ipad.xib */,
-				3E8F4D0E2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3~ipad.xib */,
-				3E8F4D0F2428EF9D0020B6A8 /* Family_Ganges_hero_cell_2~ipad.xib */,
-				3E8F4D102428EF9D0020B6A8 /* Family_Ganges_hero_cell_1~ipad.xib */,
 			);
 			path = HeroCell;
 			sourceTree = "<group>";
@@ -621,9 +483,6 @@
 		3E8F4D112428EF9D0020B6A8 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F4D122428EF9D0020B6A8 /* Family_Ganges_grid_1.xib */,
-				3E8F4D132428EF9D0020B6A8 /* Family_Ganges_grid_2.xib */,
-				3E8F4D142428EF9D0020B6A8 /* Family_Ganges_grid_3.xib */,
 			);
 			path = Grid;
 			sourceTree = "<group>";
@@ -749,56 +608,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E8F4D682428EF9D0020B6A8 /* Family_Ganges_grid_3.xib in Resources */,
-				3E8F4D472428EF9D0020B6A8 /* Family_Ganges_horizontal_list_3.xib in Resources */,
-				3E8F4D642428EF9D0020B6A8 /* Family_Ganges_hero_cell_2~ipad.xib in Resources */,
-				3E8F4D662428EF9D0020B6A8 /* Family_Ganges_grid_1.xib in Resources */,
-				3E8F4D442428EF9D0020B6A8 /* Family_Ganges_horizontal_list_4.xib in Resources */,
-				3E8F4D412428EF9D0020B6A8 /* Family_Ganges_horizontal_list_9.xib in Resources */,
-				3E8F4D4B2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_10.xib in Resources */,
-				3E8F4D4E2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_16.xib in Resources */,
-				3E8F4D462428EF9D0020B6A8 /* Family_Ganges_horizontal_list_7.xib in Resources */,
 				3E8F4D572428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib in Resources */,
-				3E8F4D482428EF9D0020B6A8 /* Family_Ganges_horizontal_list_2.xib in Resources */,
-				3E8F4D522428EF9D0020B6A8 /* Family_Ganges_list_3.xib in Resources */,
-				3E8F4D3F2428EF9D0020B6A8 /* Family_Ganges_consumption_cell_1.xib in Resources */,
-				3E8F4D512428EF9D0020B6A8 /* Family_Ganges_list_1.xib in Resources */,
-				3E8F4D432428EF9D0020B6A8 /* Family_Ganges_horizontal_list_5.xib in Resources */,
-				3E8F4D5A2428EF9D0020B6A8 /* Family_Ganges_header_cell_3.xib in Resources */,
-				3E8F4D402428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14~ipad.xib in Resources */,
-				3E8F4D5B2428EF9D0020B6A8 /* Family_Ganges_banner_1.xib in Resources */,
-				3E8F4D492428EF9D0020B6A8 /* Family_Ganges_horizontal_list_1.xib in Resources */,
-				3E8F4D4F2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_14.xib in Resources */,
-				3E8F4D452428EF9D0020B6A8 /* Family_Ganges_horizontal_list_6.xib in Resources */,
-				3E8F4D5F2428EF9D0020B6A8 /* Family_Ganges_hero_cell_3.xib in Resources */,
-				3E8F4D502428EF9D0020B6A8 /* Family_Ganges_horizontal_list_15.xib in Resources */,
-				3E8F4D612428EF9D0020B6A8 /* Family_Ganges_hero_cell_4~ipad.xib in Resources */,
-				3E8F4D5C2428EF9D0020B6A8 /* Family_Ganges_hero_cell_4.xib in Resources */,
-				3E8F4D562428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_1.xib in Resources */,
-				3E8F4D5E2428EF9D0020B6A8 /* Family_Ganges_hero_cell_2.xib in Resources */,
-				3E8F4D3B2428EF9D0020B6A8 /* Family_Ganges_hero_1.xib in Resources */,
-				3E8F4D5D2428EF9D0020B6A8 /* Family_Ganges_hero_cell_5.xib in Resources */,
-				3E8F4D622428EF9D0020B6A8 /* Family_Ganges_hero_cell_5~ipad.xib in Resources */,
-				3E8F4D4D2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_13.xib in Resources */,
-				3E8F4D3A2428EF9D0020B6A8 /* ZeeCustomizationLayouts.plist in Resources */,
 				3E8F4D292428EF9D0020B6A8 /* ZeeCarouselVC_Center_Photogallery.xib in Resources */,
-				3E8F4D3D2428EF9D0020B6A8 /* Family_Ganges_hero_2.xib in Resources */,
 				3E8F4D242428EF9D0020B6A8 /* SectionCompositeViewController.xib in Resources */,
-				3E8F4D3C2428EF9D0020B6A8 /* Family_Ganges_hero_3.xib in Resources */,
-				3E8F4D692428EF9D0020B6A8 /* ZeeComponentsMapping.plist in Resources */,
-				3E8F4D552428EF9D0020B6A8 /* Family_Ganges_screen_picker_cell_2.xib in Resources */,
-				3E8F4D4C2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_12.xib in Resources */,
-				3E8F4D672428EF9D0020B6A8 /* Family_Ganges_grid_2.xib in Resources */,
-				3E8F4D3E2428EF9D0020B6A8 /* Family_Ganges_search_bar_cell_1.xib in Resources */,
-				3E8F4D592428EF9D0020B6A8 /* Family_Ganges_header_cell_2.xib in Resources */,
-				3E8F4D602428EF9D0020B6A8 /* Family_Ganges_hero_cell_1.xib in Resources */,
-				3E8F4D422428EF9D0020B6A8 /* Family_Ganges_horizontal_list_8.xib in Resources */,
-				3E8F4D632428EF9D0020B6A8 /* Family_Ganges_hero_cell_3~ipad.xib in Resources */,
-				3E8F4D542428EF9D0020B6A8 /* Family_Ganges_list_4.xib in Resources */,
-				3E8F4D4A2428EF9D0020B6A8 /* Family_Ganges_horizontal_list_11.xib in Resources */,
-				3E8F4D652428EF9D0020B6A8 /* Family_Ganges_hero_cell_1~ipad.xib in Resources */,
-				3E8F4D582428EF9D0020B6A8 /* Family_Ganges_header_cell_1.xib in Resources */,
-				3E8F4D532428EF9D0020B6A8 /* Family_Ganges_list_2.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

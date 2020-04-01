@@ -288,8 +288,13 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     if ([cell.componentViewController respondsToSelector:@selector(delegate)]) {
         cell.componentViewController.delegate = self;
     }
-    [cell.componentViewController setComponentModel:cellModel];
-    
+    if ([cell.componentViewController respondsToSelector:@selector(setComponentModel:)]) {
+        [cell.componentViewController setComponentModel:cellModel];
+    }
+    if ([cell.componentViewController respondsToSelector:@selector(setComponentDataSourceModel:)]) {
+        [cell.componentViewController setComponentDataSourceModel:cellModel]; 
+    }
+   
     return cell;
 }
 
@@ -387,7 +392,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     for (CellModel *localComponentModel in items) {
         NSString *layoutName = localComponentModel.layoutStyle;
         if ([layoutName isNotEmptyOrWhiteSpaces]) {
-            NSString *reuseIdentifier = [localComponentModel.identifier stringByAppendingFormat:@"_%@", layoutName];
+            
             [self.carouselView registerClass:[UniversalCollectionViewCell class] forCellWithReuseIdentifier:layoutName];
         }
     }

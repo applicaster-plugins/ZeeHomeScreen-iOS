@@ -133,7 +133,7 @@
             modelInstance = (APModel*)model;
             modelObject = [modelInstance respondsToSelector:@selector(object)] ? modelInstance.object : nil;
         }
-        AbstractModel *abstractModel = [[AbstractModel alloc] initWithDictionary:modelObject];
+        CAAbstractModel *abstractModel = [[CAAbstractModel alloc] initWithDictionary:modelObject];
         abstractModel.originModel = model;
         retVal = [CommandPattern resultFromCommand:retVal
                                                model:abstractModel];

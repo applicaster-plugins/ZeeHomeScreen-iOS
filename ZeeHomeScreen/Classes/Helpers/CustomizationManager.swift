@@ -76,12 +76,12 @@ public enum ComponentTypes: Equatable, ComponentTypeProtocol {
     lazy var customizationLayoutsDict: [String: [String: [String: Any]]]? = {
         var retVal: [String: [String: [String: Any]]]?
         var currValue:NSMutableDictionary = [:]
-        let plistFileName = "ZeeCustomizationLayouts"
+        let plistFileName = "ZeeHomeScreen_ZLCustomizationLayouts"
         
-        if let path = CustomizationManager.plistPathForName(plistFileName),
-            let value = NSMutableDictionary(contentsOfFile: path) {
-            currValue += value
-        }
+//        if let path = CustomizationManager.plistPathForName(plistFileName),
+//            let value = NSMutableDictionary(contentsOfFile: path) {
+//            currValue += value
+//        }
         
         for pluginModelOfCellStyleFamily in ZPPluginManager.pluginModels(.CellStyleFamily) ?? [] {
             if let classType = ZPPluginManager.adapterClass(pluginModelOfCellStyleFamily),

@@ -29,7 +29,7 @@ import ApplicasterSDK
         if let model = model as? ComponentModel,
             let feedUrl = model.dsUrl {
             APAtomFeedLoader.loadPipes(model: APAtomFeed(url:feedUrl)) { (success, atomFeed) in
-                let component = self.parse(data: atomFeed, componentModel: model)
+                let component = self.parse(data: atomFeed, componentModel: model, isParentModel: false)
                  completion(component)
             }
         }
@@ -37,7 +37,7 @@ import ApplicasterSDK
         
     @objc open func load(atomFeedUrl: String, parentModel: ComponentModelProtocol, completion: @escaping (_ component: ComponentModelProtocol?) -> Void) {
         APAtomFeedLoader.loadPipes(model: APAtomFeed(url:atomFeedUrl)) { (success, atomFeed) in
-            let component = self.parse(data: atomFeed, componentModel: parentModel as? ComponentModel)
+            let component = self.parse(data: atomFeed, componentModel: parentModel as? ComponentModel, isParentModel: true)
             completion(component)
         }
     }
@@ -70,7 +70,7 @@ import ApplicasterSDK
         return liveItems
     }
     
-    public func parse(data: NSObject?, componentModel: ComponentModel?) -> ComponentModelProtocol? {
+    public func parse(data: NSObject?, componentModel: ComponentModel?, isParentModel: Bool) -> ComponentModelProtocol? {
       var components = [ComponentModelProtocol]()
 
         guard
@@ -81,9 +81,13 @@ import ApplicasterSDK
         }
         
         let feedComponent = ComponentModel.init(entry: feed, threshold: 3)
+        if isParentModel == true {
+            feedComponent.parentModel = componentModel
+        }
         
         for (index, entry) in entries.enumerated() {
             if let component = self.parseComponent(at: index, entry: entry, componentModel: componentModel) {
+                component.parentModel = feedComponent
                 components.append(component)
             }
         }
