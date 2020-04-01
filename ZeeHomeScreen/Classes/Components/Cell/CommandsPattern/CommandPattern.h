@@ -7,14 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-@class AbstractModel;
+#import "CAAbstractModel.h"
+//@import ApplicasterSDK;
+@class CAAbstractModel;
 
 @interface CommandPattern : NSObject
 
 + (BOOL)hasCommandInObject:(id)object;
 
 + (id)resultFromCommand:(NSString *)command
-                  model:(AbstractModel *)modCACommandPatternrnmark;
+                  model:(CAAbstractModel *)modCACommandPatternrnmark;
 
 // Path command should follow this convection "${model}.tes1.test2"
 
@@ -23,8 +25,8 @@
 // MODEL
 // ZAPP_STYLES
 
-+ (AbstractModel *)pathModelFromPathVariable:(NSString *)pathVariable
-                                         model:(AbstractModel *)model;
++ (CAAbstractModel *)pathModelFromPathVariable:(NSString *)pathVariable
+                                         model:(CAAbstractModel *)model;
 
 // Condition command should follow this convection  "${condition} ? trueValue : falseValue"
 

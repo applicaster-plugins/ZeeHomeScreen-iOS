@@ -244,18 +244,22 @@ NSString *const kScreenPickerMarginKey                 = @"screen_picker_margin"
 
 @implementation ComponentModelCustomization
 
+
 - (id)valueForAttributeKey:(NSString *)key
-                 withModel:(NSObject *)model {
+                 withModel:(ComponentModel *)model {
     id retVal = nil;
     
+    NSString *type = model.containerType;
+    NSString *cellKey = model.cellKey;
     NSMutableDictionary *customizationDict = [[self customizationStyleForModel:model] mutableCopy];
+    NSDictionary *cellDict = [CustomizationManager dataForZappLayout:cellKey zappComponentType:type zappFamily:@"FAMILY_GANGES"];
     if (customizationDict == nil) { //the customization is taken only from the attributes, no customization in the componentCustomizationDictionary
-//        retVal = [self valueOfCustomizationDictionary:self.attributes
-//                                             forModel:model
-//                                              withKey:key];
+        retVal = [self valueOfCustomizationDictionary:cellDict
+                                             forModel:model
+                                              withKey:key];
     }
     else {
-//        [customizationDict uniteWithDictionary:self.attributes];
+        [customizationDict uniteWithDictionary:cellDict];
         retVal = [self valueOfCustomizationDictionary:[customizationDict copy]
                                              forModel:model
                                               withKey:key];
@@ -263,7 +267,36 @@ NSString *const kScreenPickerMarginKey                 = @"screen_picker_margin"
     
     return retVal;
 }
+/*
+- (id)valueForAttributeKey:(NSString *)key
+                 withModel:(ComponentModel *)model {
+    id retVal = nil;
 
+    NSString *type = model.containerType;
+    NSString *cellKey = model.cellKey;
+    NSDictionary *cellDict = [CustomizationManager dataForZappLayout:cellKey zappComponentType:type zappFamily:@"FAMILY_GANGES"];
+    id value = [cellDict objectForKey:key];
+
+    if (value == nil) { //the customization is taken only from the attributes, no customization in the componentCustomizationDictionary
+    }
+    else {
+        if ([value isKindOfClass:NSDictionary.class]) {
+            retVal = [self valueOfCustomizationDictionary:[value copy]
+            forModel:model
+             withKey:key];
+        } else {
+
+            retVal = [self valueOfCustomizationDictionary:@{key: value}
+            forModel:model
+             withKey:key];
+        }
+
+
+    }
+
+    return retVal;
+}
+*/
 - (id)valueOfCustomizationDictionary:(NSDictionary *)dictionary forModel:(NSObject *)model withKey:(NSString *)key {
     id retVal = [ComponentsCustomization valueFromDictionary:dictionary
                                                       forModel:model
@@ -1036,14 +1069,14 @@ NSString *const kAttributeLabelCustomizationIgnoreDefaultsKey = @"ignore_default
 - (NSDictionary *)componentStylesMappingDictionary {
     NSDictionary *retVal = nil;
     
-    NSBundle *stylesBundle = [[NSBundle mainBundle] pathForResource:@"ZeeComponentsMapping" ofType:@"plist"];
-    
-    if (stylesBundle &&
-        [stylesBundle pathForResource:@"ZeeComponentsMapping"
-                               ofType:@"plist"]) {
-            retVal = [NSDictionary dictionaryWithContentsOfFile:[stylesBundle pathForResource:@"ZeeComponentsMapping"
-                                                                                       ofType:@"plist"]];
+    NSArray<ZPPluginModel *> *pluginModels = [ZPPluginManager pluginModels:@"cell_style_family"];
+    for (ZPPluginModel *pluginModel in pluginModels) {
+        NSBundle *bundle = [ZPPluginManager bundleForModelClass:pluginModel];
+        if ([bundle pathForResource:@"ZeeHomeScreen_ZLComponentsMapping" ofType:@"plist"] != nil) {
+            retVal = [NSDictionary dictionaryWithContentsOfFile:[bundle pathForResource:@"ZeeHomeScreen_ZLComponentsMapping" ofType:@"plist"]];
         }
+    }
+    
     return retVal;
 }
 

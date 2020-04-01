@@ -289,7 +289,7 @@ import ZappPlugins
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewCell {
                 cell.backgroundColor = UIColor.darkGray
                 cell.setComponentModel(componentModel,
-                                       model: self,
+                                       model: componentModel.cellModel,
                                        view: cell.contentView,
                                        delegate: self,
                                        parentViewController: self)
@@ -297,7 +297,7 @@ import ZappPlugins
             }
         }
         
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "Family_Ganges_horizontal_list_1", for: indexPath)
+        return collectionView.dequeueReusableCell(withReuseIdentifier: "ZeeHomeScreen_Family_Ganges_horizontal_list_1", for: indexPath)
     }
     
     // MARK: - UICollectionViewDelegate
@@ -336,16 +336,15 @@ import ZappPlugins
         
         if kind == UICollectionView.elementKindSectionHeader,
             let sectionsDataSourceArray = sectionsDataSourceArray,
-            let componentModel = sectionsDataSourceArray[indexPath.row] as? ComponentModel,
+            let componentModel = sectionsDataSourceArray[indexPath.section] as? ComponentModel,
             let header =  componentModel.componentHeaderModel,
             let layoutName =  header.layoutStyle {
             if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewHeaderFooterView {
                 
                 headerView.delegate = self
-                if headerView.componentViewController == nil,
-                    let currentModel = header.entry as? APModel {
-                    headerView.componentViewController = CellViewController.init() as? UIViewController & ComponentProtocol
-                    ComponenttFactory.componentViewController(with: header,
+                /*if headerView.componentViewController == nil,*/
+                    if let currentModel = header.entry as? APModel {
+                    headerView.componentViewController = /*CellViewController.init() as? UIViewController & ComponentProtocol */ ComponenttFactory.componentViewController(with: header,
                                                               andModel: currentModel,
                                                               for: headerView,
                                                               delegate: self,
@@ -357,12 +356,15 @@ import ZappPlugins
                 if headerView.componentViewController?.responds(to: #selector(setter: ComponentProtocol.componentModel)) == true {
                     _ = headerView.componentViewController?.perform(#selector( setter: ComponentProtocol.componentModel), with: header)
                 }
+                if headerView.componentViewController?.responds(to: #selector(setter: ComponentProtocol.componentDataSourceModel)) == true {
+                    _ = headerView.componentViewController?.perform(#selector( setter: ComponentProtocol.componentDataSourceModel), with: header)
+                }
                 reusableview = headerView
             }
         }
         
         if reusableview == nil {
-            reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "Family_Ganges_header_cell_1", for: indexPath) as? UniversalCollectionViewHeaderFooterView
+            reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ZeeHomeScreen_Family_Ganges_header_cell_1", for: indexPath) as? UniversalCollectionViewHeaderFooterView
             reusableview.frame.size.height = 0
             reusableview.frame.size.width = 0
         }
@@ -494,7 +496,17 @@ import ZappPlugins
     }
     
     func customizeBackgroundColor() {
-      
+    let componentCustomization = ComponentModelCustomization()
+      let color = componentCustomization.color(forAttributeKey: kAttributeBackgroundColorKey,
+                                               attributesDict: nil,
+                                               withModel: componentDataSourceModel,
+                                               componentState: .normal)
+
+      if let color = color, color.isNotEmpty() {
+          view.backgroundColor = color
+      } else {
+        view.backgroundColor = .black
+      }
     }
     
     // MARK: - Helper functions

@@ -36,9 +36,10 @@ import ApplicasterSDK
  
 @objc open class ComponentModel:NSObject, ComponentModelProtocol {
     
-    open var containerType: String?
+    @objc open var containerType: String?
     //, ComponentModelProtocol {
     
+    open var parentModel: ComponentModel?
     open var title: String?
     
     open var identifier: String?
@@ -145,6 +146,9 @@ import ApplicasterSDK
                    case "BANNER":
                        self.isVertical = true
                        break
+                   case "GRID":
+                       self.isVertical = true
+                       break
                    default:
                        self.isVertical = true
                    }
@@ -172,6 +176,7 @@ import ApplicasterSDK
         let dataSourceDictionary: [AnyHashable : Any]? = entry.pipesObject["datasource"] != nil ? entry.pipesObject!["datasource"] as? [AnyHashable : Any] : nil
         dataSource = ComponentDataSource()
         dataSource!.parseDataSource(with: dataSourceDictionary)
+        
     }
     
     func getNextPageFromFeed(entry: APAtomEntryProtocol) -> Pagination {

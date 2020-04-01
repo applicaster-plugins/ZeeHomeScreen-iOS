@@ -107,6 +107,35 @@
                                                          bundle:bundle];
     }
     
+    //Get xibs from cell style family plugins
+    if (viewController == nil) {
+        NSArray<ZPPluginModel *> *pluginModels = [ZPPluginManager pluginModels:@"cell_style_family"];
+        for (ZPPluginModel *pluginModel in pluginModels) {
+            NSBundle *bundle = [ZPPluginManager bundleForModelClass:pluginModel];
+            if ([bundle pathForResource:nibName ofType:@"nib"] != nil) {
+                viewController = [[classFromName alloc] initWithNibName:nibName bundle:bundle];
+            }
+            
+            if (viewController) {
+                break;
+            }
+        }
+    }
+    
+    if (viewController == nil && classFromName != nil) {
+        viewController = [[classFromName alloc] init];
+    }
+
+//
+//    NSMutableArray *pluginModels = [ZPPluginManager pluginModels:@"cell_style_family"];
+//    for (ZPPluginModel *item in pluginModels) {
+//        NSBundle *bundle = [ZPPluginManager bundleForModelClass:item];
+//        if ([bundle pathForResource:nibName ofType:"nib"] != nil) {
+//            viewController = [[classFromName alloc] init];
+//        }
+//    }
+
+    
     NSArray *providers = [[ZAAppConnector sharedInstance].pluginsDelegate.generalPluginsManager getPluginsForFamilyType: ZPGeneralPluginsFamilyUi];
     for (id<ZPGeneralPluginUIProtocol> provider in providers) {
         NSMutableDictionary *optionsDict = [NSMutableDictionary dictionaryWithDictionary:@{@"xibKeyName": nibName,

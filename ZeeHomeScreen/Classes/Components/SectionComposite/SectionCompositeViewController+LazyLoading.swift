@@ -137,6 +137,8 @@ extension SectionCompositeViewController {
     func lazyLoadingComponent() -> ComponentModel {
         let lazyComponent = ComponentModel.init(type: "LAZY_LOADING")
         lazyComponent.layoutStyle = "Family_Ganges_lazy_loading_1"
+        lazyComponent.isVertical = currentComponentModel?.isVertical ?? false
+        lazyComponent.styleHelper = GangasFamilyStyleHelper.init(cellKey: "LAZY_LOADING", containerType: "LAZY_LOADING")
         return lazyComponent
     }
     

@@ -82,6 +82,10 @@ extern NSString *const kAttributesHeaderInsetRightKey;
 extern NSString *const kAttributesFooterInsetLeftKey;
 extern NSString *const kAttributesFooterInsetRightKey;
 
+extern NSString *const kAttributeImageShadowKey;
+extern NSString *const kAttributeImageItemKey;
+extern NSString *const kAttributeImageNameKey;
+
 extern NSString *const kAttributesPaddingTopKey;
 extern NSString *const kAttributesPaddingLeftKey;
 extern NSString *const kAttributesPaddingBottomKey;

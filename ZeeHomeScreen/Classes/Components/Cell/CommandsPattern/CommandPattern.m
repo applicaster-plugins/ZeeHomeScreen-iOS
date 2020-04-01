@@ -7,7 +7,8 @@
 //
 
 #import "CommandPattern.h"
-#import "AbstractModel.h"
+#import "CAAbstractModel.h"
+#import "CAAppDefineComponent.h"
 @import ApplicasterSDK;
 
 static NSDictionary *__conditionMethodsDictionary;
@@ -24,7 +25,7 @@ static NSDictionary *__conditionMethodsDictionary;
 }
 
 + (id)resultFromCommand:(NSString *)command
-                  model:(AbstractModel *)model {
+                  model:(CAAbstractModel *)model {
     id retVal = nil;
     if ([self hasPathCommandInCommand:command]) {
         retVal = [self objectFromPathCommand:command
@@ -54,7 +55,7 @@ static NSDictionary *__conditionMethodsDictionary;
 }
 
 + (id)objectFromPathCommand:(NSString *)pathCommand
-                      model:(AbstractModel *)model {
+                      model:(CAAbstractModel *)model {
     id retVal = nil;
     NSString *pathCommandOnly = [[self stringsArrayInString:pathCommand
                                     matchingRegexPattern:@"^\\$\\{\\w+\\}(\\.\\w+)*"] firstObject];
@@ -62,7 +63,7 @@ static NSDictionary *__conditionMethodsDictionary;
     NSArray *pathCommandComponents = [self stringsArrayInString:pathCommandOnly
                                          matchingRegexPattern:@"\\w+"];
     
-    AbstractModel *pathModel = [self pathModelFromPathVariable:[pathCommandComponents firstObject]
+    CAAbstractModel *pathModel = [self pathModelFromPathVariable:[pathCommandComponents firstObject]
                                                            model:model];
     
     NSMutableArray *pathKeyComponents = [NSMutableArray arrayWithArray:pathCommandComponents];
@@ -104,19 +105,19 @@ static NSDictionary *__conditionMethodsDictionary;
     return retVal;
 }
 
-+ (AbstractModel *)pathModelFromPathVariable:(NSString *)pathVariable
-                                         model:(AbstractModel *)model {
-    __block AbstractModel *retVal = nil;
++ (CAAbstractModel *)pathModelFromPathVariable:(NSString *)pathVariable
+                                         model:(CAAbstractModel *)model {
+    __block CAAbstractModel *retVal = nil;
     
-    if ([pathVariable isKindOfClass:[NSString class]] && [model isKindOfClass:[AbstractModel class]]) {
+    if ([pathVariable isKindOfClass:[NSString class]] && [model isKindOfClass:[CAAbstractModel class]]) {
         if ([pathVariable isEqualToString:@"MODEL"]) {
             retVal = model;
         }
-//        else {
-//            [[CAAppDefineComponent sharedInstance] abstractModelForAbstractModelName:pathVariable completion:^(AbstractModel *abstractModel, NSError *error) {
-//                retVal = abstractModel;
-//            }];
-//        }
+        else {
+            [[CAAppDefineComponent sharedInstance] abstractModelForAbstractModelName:pathVariable completion:^(CAAbstractModel *abstractModel, NSError *error) {
+                retVal = abstractModel;
+            }];
+        }
     }
     
     return retVal;
@@ -136,7 +137,7 @@ static NSDictionary *__conditionMethodsDictionary;
 }
 
 + (id)objectFromConditionCommand:(NSString *)command
-                           model:(AbstractModel *)model {
+                           model:(CAAbstractModel *)model {
     id retVal = nil;
     static NSUInteger kConditionIndex = 0;
     static NSUInteger kTrueValueIndex = 1;
@@ -173,7 +174,7 @@ static NSDictionary *__conditionMethodsDictionary;
 
 // Return @"Yes" for true, @"No" for false or nil
 + (NSString *)resultFromCondition:(NSString *)condition
-                      model:(AbstractModel *)model {
+                      model:(CAAbstractModel *)model {
     NSString *retVal = nil;
     BOOL boolValue = NO;
 //    NSString *methodName = [self conditionMethodMappedName:condition];
@@ -242,7 +243,7 @@ static NSDictionary *__conditionMethodsDictionary;
     return ([[[APApplicasterController sharedInstance] endUserProfile] latestVoucherDomainTypeApp] != nil);
 }
 
-- (BOOL)isSubscribedOrFreeItem:(AbstractModel *)model {
+- (BOOL)isSubscribedOrFreeItem:(CAAbstractModel *)model {
     BOOL retVal = NO;
     if ([self isSubscribed]) {
         retVal = YES;

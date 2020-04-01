@@ -49,20 +49,20 @@
 {
     
     
-    if (self.componentViewController == nil) {
+//    if (self.componentViewController == nil) {
         self.componentViewController = [ComponenttFactory componentViewControllerWithComponentModel:componentModel
                                                                                            andModel:model
                                                                                             forView:view
                                                                                            delegate:delegate
                                                                                parentViewController:parentViewController];
-    }
+//    }
 
     if ([self.componentViewController respondsToSelector:@selector(setDelegate:)]) {
         self.componentViewController.delegate = delegate;
     }
 
     if ([self.componentViewController respondsToSelector:@selector(setComponentDataSourceModel:)]) {
-        self.componentViewController.componentDataSourceModel = model;
+        self.componentViewController.componentDataSourceModel = componentModel;
     }
 
     if ([self.componentViewController respondsToSelector:@selector(setComponentModel:)]) {

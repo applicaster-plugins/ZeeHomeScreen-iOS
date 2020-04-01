@@ -35,7 +35,7 @@ open class HeaderModel: ComponentModel {
         
     }
     
-    public init(entry: APAtomEntryProtocol?, layoutStyle: String?, imageKey: String?, isClickable: Bool, actionUrlScheme: String?, height: CGFloat?) {
+    public init(entry: APAtomEntryProtocol?, layoutStyle: String?, imageKey: String?, isClickable: Bool, actionUrlScheme: String?, height: CGFloat?, containerType: String, cellKey: String) {
         
         super.init(type: "HEADER")
 
@@ -58,5 +58,8 @@ open class HeaderModel: ComponentModel {
         if let height = height {
             self.height = height
         }
+        
+        self.cellKey = cellKey
+        self.containerType = containerType
     }
 }
