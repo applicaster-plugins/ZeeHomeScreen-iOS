@@ -8,7 +8,7 @@
 @import ZappSDK;
 #import "CommandPattern.h"
 #import <ZappSDK/CAAbstractModel.h>
-#import "CAAppDefineComponent.h"
+#import <ZappSDK/CAAppDefineComponent.h>
 @import ApplicasterSDK;
 
 static NSDictionary *__conditionMethodsDictionary;

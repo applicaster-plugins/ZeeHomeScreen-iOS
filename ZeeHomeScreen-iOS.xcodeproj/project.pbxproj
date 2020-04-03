@@ -45,7 +45,6 @@
 		3E8F4D382428EF9D0020B6A8 /* AtomHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD12428EF9D0020B6A8 /* AtomHelper.swift */; };
 		3E8F4D392428EF9D0020B6A8 /* ComponenttFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD42428EF9D0020B6A8 /* ComponenttFactory.m */; };
 		3E8F4D572428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CFF2428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib */; };
-		3ED587B0242B9817008AF7B7 /* ComponentDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED587AF242B9817008AF7B7 /* ComponentDataSource.m */; };
 		4DF603AA23B938F400DD621F /* ZeeHomeScreen_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF603A923B938F400DD621F /* ZeeHomeScreen_iOSTests.swift */; };
 		C322E313B97D63A3E62579D3 /* Pods_ZeeHomeScreen_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B952517DF42CC7E904998F /* Pods_ZeeHomeScreen_iOS.framework */; };
 /* End PBXBuildFile section */
@@ -114,8 +113,6 @@
 		3E8F4CD52428EF9D0020B6A8 /* ZeeHomeScreenPlugin_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZeeHomeScreenPlugin_iOS.h; sourceTree = "<group>"; };
 		3E8F4CFF2428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_lazy_loading_1.xib; sourceTree = "<group>"; };
 		3ED5879D242B6ED8008AF7B7 /* ZeeHomeScreen-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZeeHomeScreen-Bridging-Header.h"; sourceTree = "<group>"; };
-		3ED587AE242B9817008AF7B7 /* ComponentDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentDataSource.h; sourceTree = "<group>"; };
-		3ED587AF242B9817008AF7B7 /* ComponentDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentDataSource.m; sourceTree = "<group>"; };
 		3ED587B1242B9842008AF7B7 /* ZeeHomeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZeeHomeScreen.h; sourceTree = "<group>"; };
 		4DF6038F23B938F300DD621F /* ZeeHomeScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZeeHomeScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DF603A523B938F400DD621F /* ZeeHomeScreen-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZeeHomeScreen-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,8 +189,6 @@
 				3E8F4C972428EF9D0020B6A8 /* CellModel.swift */,
 				3E8F4C982428EF9D0020B6A8 /* ComponentModel.swift */,
 				3E8F4C992428EF9D0020B6A8 /* AdditionalContent.swift */,
-				3ED587AE242B9817008AF7B7 /* ComponentDataSource.h */,
-				3ED587AF242B9817008AF7B7 /* ComponentDataSource.m */,
 				3E8F4C9A2428EF9D0020B6A8 /* AbstractModel */,
 				3E8F4C9D2428EF9D0020B6A8 /* SectionComponentModelProtocol.swift */,
 				3E8F4C9E2428EF9D0020B6A8 /* Pagination.swift */,
@@ -709,7 +704,6 @@
 				3E8F4D2E2428EF9D0020B6A8 /* UniversalCollectionViewHeaderFooterView.m in Sources */,
 				3E8F4D1F2428EF9D0020B6A8 /* BaseModel.swift in Sources */,
 				3E8F4D312428EF9D0020B6A8 /* BannerCellViewController.swift in Sources */,
-				3ED587B0242B9817008AF7B7 /* ComponentDataSource.m in Sources */,
 				3E8F4D1C2428EF9D0020B6A8 /* SectionComponentModelProtocol.swift in Sources */,
 				3E8F4D232428EF9D0020B6A8 /* SectionCompositeViewController+LazyLoading.swift in Sources */,
 				3E8F4D222428EF9D0020B6A8 /* SectionCompositeViewController.swift in Sources */,
