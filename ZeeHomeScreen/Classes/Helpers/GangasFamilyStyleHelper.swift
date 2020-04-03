@@ -301,7 +301,7 @@ class GangasFamilyStyleHelper {
             self.ipadHeight = 424.0
             break
         case "BANNER_1":
-            self.componentStyle = "BannerCellViewController"
+            self.componentStyle = "ZeeHomeScreen_Family_Ganges_banner_1"
             self.cellStyle = "ZeeHomeScreen_Family_Ganges_banner_1"
             self.iphoneHeight = 73.0
             self.ipadHeight = 92.0

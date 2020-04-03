@@ -6,9 +6,11 @@
 //
 //
 
+@import ApplicasterSDK;
+
 #import <Foundation/Foundation.h>
 #import "CAAbstractModel.h"
-//@import ApplicasterSDK;
+
 @class CAAbstractModel;
 
 @interface CommandPattern : NSObject
