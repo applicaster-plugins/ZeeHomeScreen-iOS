@@ -31,26 +31,12 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         private var adPresenter: ZPAdPresenterProtocol?
         private var backgroundEnabled: Bool?
         private var bannerView: UIView?
+        var isRemoved = false
         
         var componentDataSourceModel: NSObject?
         var componentModel: ComponentModelProtocol? {
             didSet {
-                //if I get the same componentModel I don't need to reload it unless the plugin requires it.
-               /* if let adPlugin: ZPAdPluginProtocol = ZPAdvertisementManager.sharedInstance.getAdPlugin() {
-                    if adPlugin.responds(to: #selector(ZPAdPluginRefreshProtocol.reloadOnPullToRefresh)) {
-                        if adPlugin.perform(#selector(ZPAdPluginRefreshProtocol.reloadOnPullToRefresh)) != nil {
-                            updateComponentData()
-                        }
-                    }
-                }*/
-                
-                if let adPlugin: ZPAdPluginProtocol = ZPAdvertisementManager.sharedInstance.getAdPlugin() {
-                    if adPlugin.conforms(to: ZPAdPluginRefreshProtocol.self) {
-                        if let adPlugin = adPlugin as? ZPAdPluginRefreshProtocol, adPlugin.reloadOnPullToRefresh() {
-                            updateComponentData()
-                        }
-                    }
-                }
+               
             }
         }
 
@@ -63,14 +49,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
             
-            /*
-            if let adPlugin: ZPAdPluginProtocol = ZPAdvertisementManager.sharedInstance.getAdPlugin() {
-                if adPlugin.responds(to: #selector(ZPAdPluginRefreshProtocol.reloadOnDidAppear)) {
-                    if adPlugin.perform(#selector(ZPAdPluginRefreshProtocol.reloadOnDidAppear)) != nil {
-                        updateComponentData()
-                    }
-                }
-            }*/
+            updateComponentData()
         }
         
         override func viewDidLayoutSubviews() {
@@ -84,12 +63,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         func prepareComponentForReuse() {
 //            loadingActivityIndicator.stopAnimating()
         }
-    
-    
-        
-//        func currentComponentModel() -> ComponentModel {
-//            return componentModel as! ComponentModel
-//        }
+
 
         //MARK: Private Methods
   
@@ -135,10 +109,10 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         let adPlugin = ZPAdvertisementManager.sharedInstance.getAdPlugin()
         adPresenter = adPlugin?.createAdPresenter(adView: self, parentVC: self)
         
-        if let bannerModel = currentComponentModel().entry as? APBannerModel {
+        if let bannerModel = currentComponentModel().entry, let extensions: [String: Any] = bannerModel.pipesObject!["extensions"] as? [String : Any], let config: [String: Any] = extensions["ad_config"] as? [String: Any] {
             bannerContainerView.removeAllSubviews()
-            let adConfig: ZPAdConfig = ZPAdConfig.init(adUnitId: bannerModel.adUnitID()!, inlineBannerSize: bannerModel.type()!)
-            if let size: CGSize = adPlugin?.size(forInlineBannerSize: bannerModel.type()!) {
+            let adConfig: ZPAdConfig = ZPAdConfig.init(adUnitId: config["ad_tag"] as! String , inlineBannerSize: config["ad_size"] as! String)
+            if let size: CGSize = adPlugin?.size(forInlineBannerSize: config["ad_size"] as! String) {
                 bannerContainerWidthConstraint.constant = size.width
             }
             adPresenter?.load(adConfig: adConfig)
@@ -175,8 +149,11 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
     
     func adLoadFailed(error: Error) {
         loadingActivityIndicator.stopAnimating()
-        if delegate.responds(to: #selector(ComponentDelegate.removeComponent(forModel:andComponentModel:))) {
-            delegate.removeComponent?(forModel: currentComponentModel().entry as? NSObject, andComponentModel: currentComponentModel())
+        if !isRemoved {
+            isRemoved = true
+            if delegate.responds(to: #selector(ComponentDelegate.removeComponent(forModel:andComponentModel:))) {
+                       delegate.removeComponent?(forModel: currentComponentModel().entry as? NSObject, andComponentModel: currentComponentModel())
+                   }
         }
     }
     
@@ -194,18 +171,19 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
             frame.size.height += CGFloat(BannerCellViewController.kBannerTopContainerMargin) + CGFloat(BannerCellViewController.kBannerBottomContainerMargin)
         }
         view.frame = frame
-        if let model: APBannerModel = currentComponentModel().entry as? APBannerModel {
-            bannerView.accessibilityIdentifier = model.adUnitID()
+        if let bannerModel = currentComponentModel().entry, let extensions: [String: Any] = bannerModel.pipesObject!["extensions"] as? [String : Any], let config: [String: Any] = extensions["ad_config"] as? [String: Any] {
+            bannerView.accessibilityIdentifier = config["ad_tag"] as? String
         }
 
         delegate.loadingFinished?(with: Notification.init(name: NSNotification.Name.ZeeComponentLoaded, object: self))
 
+        view.translatesAutoresizingMaskIntoConstraints = false
         setConstantConstraintWith(attribute: .height, value: bannerView.size.height, inView: bannerContainerView)
         setConstantConstraintWith(attribute: .width, value: view.size.width, inView: contentView)
         bannerContainerView.addSubview(bannerView)
         bannerView.centerInSuperview()
         view.layoutIfNeeded()
-        view.translatesAutoresizingMaskIntoConstraints = false
+        
     }
     
     func setConstantConstraintWith(attribute: NSLayoutConstraint.Attribute, value:CGFloat, inView: UIView) {
@@ -225,10 +203,11 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
     func adUnitDictionary() -> [String: AnyHashable] {
         var retVal: [String: AnyHashable] = [:]
         
-        if let bannerModel = currentComponentModel().entry as? APBannerModel {
-            retVal["Ad Provider"] = bannerModel.adProvider()
-            retVal["Ad Unit"] = bannerModel.adUnitID()
+        if let bannerModel = currentComponentModel().entry, let extensions: [String: Any] = bannerModel.pipesObject!["extensions"] as? [String : Any], let config: [String: Any] = extensions["ad_config"] as? [String: Any] {
+            //retVal["Ad Provider"] = bannerModel.adProvider()
+             retVal["Ad Unit"] = config["ad_tag"] as! String
         }
+
         retVal["Configuration Source"] = "Zapp"
 
         
@@ -245,7 +224,8 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         // Banner sizing type and name
         var bannerSizingType = "Fixed Size"
         var bannerSizeName = "Standard Banner"
-        
+        if let bannerModel = currentComponentModel().entry, let extensions: [String: Any] = bannerModel.pipesObject!["extensions"] as? [String : Any], let config: [String: Any] = extensions["ad_config"] as? [String: Any] {
+        }
         if let bannerModel = currentComponentModel().entry as? APBannerModel {
         
             if bannerModel.type() == APBannerModel.uibuilderTypeSmartBanner {

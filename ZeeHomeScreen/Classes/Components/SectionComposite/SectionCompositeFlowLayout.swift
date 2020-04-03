@@ -470,11 +470,12 @@ import ApplicasterSDK
         
         //Perform update to remove old and insert new cells based on new data
         self.collectionView?.performBatchUpdates({
-            if let currentIndexPaths = modelSectionDataIndexPaths(at: sectionIndex) {
-                self.collectionView?.deleteItems(at: currentIndexPaths)
-            }
-            // Callback after collection clear section indexes
+           
+           
+            sectionsDataSourceArray?.remove(at: sectionIndex)
+            self.collectionView?.deleteItems(at: [IndexPath.init(row: 0, section: sectionIndex)])
             clearSectionData()
+            
         })
         
         //Callback before insert new cell, on this callback ds updated
@@ -796,9 +797,9 @@ extension SectionCompositeFlowLayout {
     //     - returns: Array of index paths in exists, otherwise nil
     //     */
     fileprivate func modelSectionDataIndexPaths(at sectionIndex: Int) -> [IndexPath]? {
-        //        return self.sectionsDataSourceArray?[sectionIndex].model?.sectionData.enumerated().map({ (offset, _) -> IndexPath in
-        //            return IndexPath(item: offset, section: sectionIndex)
-        //        }).nilIfEmpty()
+//        return []sectionsDataSourceArray[sectionIndex]?.enumerated().map({ (offset, _) -> IndexPath in
+//            IndexPath(item: offset, section: sectionIndex)
+//        }).nilIfEmpty()
         return nil
     }
     

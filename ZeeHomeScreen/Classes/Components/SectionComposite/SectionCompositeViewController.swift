@@ -89,6 +89,27 @@ import ZappPlugins
     var lastSelectedIndexPath: IndexPath?
     var pullToRefreshEnabled = true
     
+    //MARK: ComponentDelegate
+    
+        func removeComponent(forModel model: NSObject?, andComponentModel componentModel: ComponentModelProtocol?) {
+        if let componentModel = componentModel as? ComponentModel {
+            if let index = sectionsDataSourceArray?.firstIndex(where: { (component) -> Bool in
+                return componentModel.identifier == component.identifier && componentModel.containerType == component.containerType
+            }) {
+                
+                collectionView?.performBatchUpdates({
+                    
+                    self.sectionsDataSourceArray?.remove(at: index)
+                    self.collectionView?.deleteSections(IndexSet(integer: index))
+                    if self.shouldLoadMoreItems() == true && !isLoading {
+                        self.loadMoreItems()
+                    }
+                    
+                })
+            }
+        }
+    }
+    
     //MARK: - ComponentProtocol
     
     func setComponentModel(_ model:ComponentModelProtocol) {
