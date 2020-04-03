@@ -7,9 +7,10 @@
 //
 
 @import ApplicasterSDK;
+@import ZappSDK;
 
 #import <Foundation/Foundation.h>
-#import "CAAbstractModel.h"
+#import <ZappSDK/CAAbstractModel.h>
 
 @class CAAbstractModel;
 

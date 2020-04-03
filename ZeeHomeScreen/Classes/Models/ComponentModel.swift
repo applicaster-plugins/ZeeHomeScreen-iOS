@@ -58,8 +58,6 @@ import ApplicasterSDK
     open var layoutStyle: String?
     
     open var cellKey: String?
-    
-    @objc open var dataSource: ComponentDataSource?
 
     open var aspectRatio: Double?
     
@@ -172,11 +170,6 @@ import ApplicasterSDK
                    self.nextPage = self.getNextPageFromFeed(entry: entry)
                    self.componentHeaderModel = self.getHeaderFromFeed(entry: entry)
         }
-        
-        let dataSourceDictionary: [AnyHashable : Any]? = entry.pipesObject["datasource"] != nil ? entry.pipesObject!["datasource"] as? [AnyHashable : Any] : nil
-        dataSource = ComponentDataSource()
-        dataSource!.parseDataSource(with: dataSourceDictionary)
-        
     }
     
     func getNextPageFromFeed(entry: APAtomEntryProtocol) -> Pagination {
