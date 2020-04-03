@@ -5,9 +5,9 @@
 //  Created by Miri on 18/02/2020.
 //
 //
-
+@import ZappSDK;
 #import "CommandPattern.h"
-#import "CAAbstractModel.h"
+#import <ZappSDK/CAAbstractModel.h>
 #import "CAAppDefineComponent.h"
 @import ApplicasterSDK;
 
