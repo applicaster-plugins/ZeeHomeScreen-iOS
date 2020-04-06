@@ -27,6 +27,8 @@ import ZappPlugins
     
     var liveComponents = [ComponentModelProtocol]()
     
+    private var adPresenter: ZPAdPresenterProtocol?
+    
     weak var delegate:ComponentDelegate?
     var collectionViewFlowLayout:SectionCompositeFlowLayout? {
         return collectionView?.collectionViewLayout as? SectionCompositeFlowLayout
@@ -604,11 +606,38 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
             APUtils.shouldOpenURLExternally(linkURL) else {
                 return
         }
-        
+
         self.dismiss(animated: true) {
             UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
         }
     }
 }
 
+extension SectionCompositeViewController: ZPAdViewProtocol {
+    
+    //MARK: ZPAdViewProtocol
+    
+    func adLoaded(view: UIView?) {
+        adPresenter?.showInterstitial()
+    }
+    
+    func stateChanged(adViewState: ZPAdViewState) {
+    }
+    
+    func adLoadFailed(error: Error) {
+    }
+    
+    func showInterstitial() {
+        
+        guard let extensions = currentComponentModel?.entry?.extensions, let ad_config = extensions["ad_config"] as? [String: Any], let adID = ad_config["interstitial_ad_tag"] as? String, let videoDuration = ad_config["interstitial_video_view_duration"] as? Int  else {
+            return
+        }
+        let adPlugin = ZPAdvertisementManager.sharedInstance.getAdPlugin()
+        adPresenter = adPlugin?.createAdPresenter(adView: self, parentVC: self)
+        
+        let adConfig: ZPAdConfig = ZPAdConfig.init(adUnitId: adID, adType: .interstitial)
+        
+        adPresenter?.load(adConfig: adConfig)
 
+    }
+}

@@ -25,7 +25,7 @@ extension SectionCompositeViewController {
                 guard let component = component as? ComponentModel else {
                     return
                 }
-              
+                
                 self.liveComponentModel = component
 
                 if let componentsArray = component.childerns,
@@ -44,6 +44,9 @@ extension SectionCompositeViewController {
                 }
                 
                 self.setComponentModel(component)
+                DispatchQueue.main.async {
+                    self.showInterstitial()
+                }
             }
         }
     }
