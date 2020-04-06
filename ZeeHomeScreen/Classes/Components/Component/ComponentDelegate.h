@@ -48,5 +48,7 @@
  */
 - (void)removeComponentForModel:(NSObject *)model
               andComponentModel:(NSObject <ComponentModelProtocol> *)componentModel;
+- (void)reloadComponentForModel:(NSObject *)model
+andComponentModel:(NSObject <ComponentModelProtocol> *)componentModel;
 
 @end

@@ -81,14 +81,8 @@ import ApplicasterSDK
     fileprivate var cachedIndexPathSizes = [IndexPath: CGSize]()
     
     var stickyHeader:Bool {
-        //        get {
-        //            if let componentModel = componentModel {
-        //                if let stickyHeader = componentModel.attributes?["sticky_header"] as? Bool {
-        //                    return stickyHeader
-        //                }
-        //            }
+
         return false
-        //        }
     }
     
     override init() {
@@ -153,8 +147,14 @@ import ApplicasterSDK
             
             // Retrieve margings from Collection CAComponendtModel (base collection component) or Group Cell CAComponentModel,
             // Group component model rertrieving from first cell data from section body
-            let minimumLineSpacing: CGFloat = 10.0 //estimatedMinimumLineSpacing(for: sectionIndex)
-            let minimumInteritemSpacing: CGFloat = 10.0//estimatedMinimumInteritemSpacing(for: sectionIndex)
+            var minimumLineSpacing: CGFloat = 8
+            var minimumInteritemSpacing: CGFloat = 8
+            
+            if sectionIndex < self.sectionsDataSourceArray!.count, let component: ComponentModel = self.sectionsDataSourceArray![sectionIndex] as? ComponentModel, let styleHelper = component.styleHelper {
+                minimumLineSpacing = styleHelper.minimumLineSpacing
+                minimumInteritemSpacing = styleHelper.minimumInteritemSpacing
+            }
+            
             let edgeInsets  = UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)//estimatedEdgeInsets(for: sectionIndex,
             //                                                              сollectionItemTypes: .sectionBody)
             
@@ -282,8 +282,15 @@ import ApplicasterSDK
             
             // Retrieve margings from Collection CAComponentModel (base collection component) or Group Cell CAComponentModel,
             // Group component model rertrieving from first cell data from section body
-            let minimumLineSpacing: CGFloat = 10.0//estimatedMinimumLineSpacing(for: sectionIndex)
-            let minimumInteritemSpacing: CGFloat = 0.0//estimatedMinimumInteritemSpacing(for: sectionIndex)
+            
+            var minimumLineSpacing: CGFloat = 8
+            var minimumInteritemSpacing: CGFloat = 8
+            
+            if sectionIndex < self.sectionsDataSourceArray!.count, let component: ComponentModel = self.sectionsDataSourceArray![sectionIndex] as? ComponentModel, let styleHelper = component.styleHelper {
+                minimumLineSpacing = styleHelper.minimumLineSpacing
+                minimumInteritemSpacing = styleHelper.minimumInteritemSpacing
+            }
+
             let edgeInsets              =  UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
             //                estimatedEdgeInsets(for: sectionIndex,
             //                                                              сollectionItemTypes: .body)

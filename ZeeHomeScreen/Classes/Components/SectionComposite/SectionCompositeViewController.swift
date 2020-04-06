@@ -52,18 +52,12 @@ import ZappPlugins
                 flowLayout.componentModel = componentModel
             }
             
-            if oldValue != nil {
-                if let sectionsDataSourceArray = sectionsDataSourceArray,
-                    sectionsDataSourceArray.count > 0 {
-                    registerLayouts(sectionsArray: sectionsDataSourceArray)
-                    collectionView?.reloadData()
-                } else if componentModel != nil,
-                    componentInitialized,
-                    oldValue as? ComponentModel != componentModel as? ComponentModel {
-                    loadComponent()
+            if let sectionsDataSourceArray = sectionsDataSourceArray,
+                sectionsDataSourceArray.count > 0 {
+                registerLayouts(sectionsArray: sectionsDataSourceArray)
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadData()
                 }
-            } else {
-                collectionView?.reloadData()
             }
         }
     }
@@ -91,7 +85,7 @@ import ZappPlugins
     
     //MARK: ComponentDelegate
     
-        func removeComponent(forModel model: NSObject?, andComponentModel componentModel: ComponentModelProtocol?) {
+    func removeComponent(forModel model: NSObject?, andComponentModel componentModel: ComponentModelProtocol?) {
         if let componentModel = componentModel as? ComponentModel {
             if let index = sectionsDataSourceArray?.firstIndex(where: { (component) -> Bool in
                 return componentModel.identifier == component.identifier && componentModel.containerType == component.containerType
@@ -106,6 +100,21 @@ import ZappPlugins
                     }
                     
                 })
+            }
+        }
+    }
+    
+    func reloadComponent(forModel model: NSObject!, andComponentModel componentModel: ComponentModelProtocol!) {
+        if let componentModel = componentModel as? ComponentModel {
+            if let index = sectionsDataSourceArray?.firstIndex(where: { (component) -> Bool in
+                return componentModel.identifier == component.identifier && componentModel.containerType == component.containerType
+            }) {
+                collectionView?.performBatchUpdates({
+                    
+                    self.collectionView?.reloadSections(IndexSet.init(integer: index))
+                    
+                })
+                
             }
         }
     }
@@ -182,8 +191,9 @@ import ZappPlugins
     }
     
     func loadComponent() {
+     
         noDataLabel?.isHidden = true
-//        loadingIndicatorContainerView?.startAnimating()
+
         cancelRefreshTask()
         
         //when loading feed url remove local feed cache if exists
@@ -201,6 +211,7 @@ import ZappPlugins
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+       // collectionView?.delegate = self
         collectionView?.collectionViewLayout = collectionFlowLayout()
         self.view.backgroundColor = UIColor.black
         
@@ -249,6 +260,7 @@ import ZappPlugins
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         if let componentModel = componentModel,
             let uiTag = componentModel.uiTag,
             uiTag.isNotEmptyOrWhiteSpaces() == true {
@@ -282,7 +294,7 @@ import ZappPlugins
     // MARK: - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let currentComponentModel = currentComponentModel,
-            currentComponentModel.isVertical == true {
+        currentComponentModel.isVertical == true && currentComponentModel.type != "GRID" {
             return 1
         }
         return sectionsDataSourceArray?.count ?? 0
@@ -293,7 +305,7 @@ import ZappPlugins
             return 1
         }
         if let currentComponentModel = currentComponentModel,
-            currentComponentModel.isVertical == true {
+        currentComponentModel.isVertical == true && currentComponentModel.type != "GRID"  {
             return sectionsDataSourceArray.count
         }
         return  1
@@ -304,17 +316,26 @@ import ZappPlugins
         
         var bannerLayoutName:String? = nil
         
-        if let sectionsDataSourceArray = sectionsDataSourceArray,
-            let componentModel = sectionsDataSourceArray[ComponentHelper.cellIndexFromModel(currentComponentModel, indexPath: indexPath)] as? ComponentModel,
-            let layoutName = componentModel.layoutStyle {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewCell {
-                cell.backgroundColor = UIColor.darkGray
-                cell.setComponentModel(componentModel,
-                                       model: componentModel.cellModel,
-                                       view: cell.contentView,
-                                       delegate: self,
-                                       parentViewController: self)
-                return cell
+        if let sectionsDataSourceArray = self.sectionsDataSourceArray {
+            
+            var subarray = sectionsDataSourceArray
+            subarray.removeLast()
+            var index: Int
+            if let _ = subarray as? [CellModel] {
+                index = indexPath.row
+            } else { index = indexPath.section }
+            
+            if let componentModel = sectionsDataSourceArray[index] as? ComponentModel,
+                let layoutName = componentModel.layoutStyle {
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewCell {
+                    cell.backgroundColor = UIColor.darkGray
+                    cell.setComponentModel(componentModel,
+                                           model: componentModel,
+                                           view: cell.contentView,
+                                           delegate: self,
+                                           parentViewController: self)
+                    return cell
+                }
             }
         }
         
@@ -491,13 +512,6 @@ import ZappPlugins
     
         if let atomFeed = self.componentDataSourceModel as? APAtomFeed {
             setHorizontalListInnerHeaderFrom(atomFeed: atomFeed)
-            
-            //            if (atomFeed.mediaGroups != nil) {
-            //                let feedBackGroundImages = atomFeed.mediaGroups.compactMap({(($0 as? APAtomMediaGroup)?.mediaItems.object(forKey: "horizontal_list_background") as? String)})
-            //                if let firstFeedBackGroundImage = feedBackGroundImages.first {
-            //                    imageURL = URL(string: firstFeedBackGroundImage)
-            //                }
-            //            }
         }
     }
     
@@ -505,10 +519,6 @@ import ZappPlugins
         if let horizontalListTitle = atomFeed.title {
             if let horizontalListInnerLabel = self.horizontalListInnerLabel {
                 horizontalListInnerLabel.text = horizontalListTitle
-                //                self.currentComponentModel?.customization(for: horizontalListInnerLabel,
-                //                                                   attributeKey: "component_title_text_style",
-                //                                                   withModel: self.componentDataSourceModel,
-                //                                                   componentState: .normal)
                 self.horizontalListInnerLabel?.isHidden = horizontalListTitle.isEmptyOrWhitespace()
             }
         }
@@ -532,27 +542,12 @@ import ZappPlugins
     
     private func refreshFromDataSourceArray() {
         // In case on none connected screens - componentDataSourceModel is nil. Therefore in this case the refresh will be defined by the earliest of the section's datasource.
-        //        var earlyExpiration:Date? = nil
-        //        self.sectionsDataSourceArray?.forEach({ (sectionDS) in
-        //            let parentModel = sectionDS.model?.parentModel
-        //            if let expirableParentModel = parentModel as? APExpirable,
-        //                let expiresAt = expirableParentModel.expiresAt(),
-        //                earlyExpiration == nil || expiresAt < earlyExpiration! {
-        //                earlyExpiration = expiresAt
-        //            }
-        //        })
-        //        if let earlyExpiration = earlyExpiration {
-        //            let refreshDelay = TimeInterval.maximum(earlyExpiration.timeIntervalSinceNow, CASectionCompositeViewController.minimumRefreshDelay)
-        //            APLoggerDebug("Next refresh in: \(refreshDelay)s")
-        //            self.addRefreshTask(afterDelay: refreshDelay)
-        //        }
     }
     
     // MARK: - Notifications
     override func refreshComponentNotification(_ notification:Notification) {
         super.refreshComponentNotification(notification)
         self.shouldInvalidateCache = true
-        //        loadComponent()
     }
     
     @objc func didReceiveActionNotification(_ notification:Notification) {
@@ -560,7 +555,6 @@ import ZappPlugins
     }
     
     func performCompletionAndStopLoadingIndicator() {
-//        self.loadingIndicatorContainerView?.stopAnimating()
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "kCANotificationsLoadingFinishedKey"),
                                             object: self)
@@ -612,8 +606,6 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
         self.dismiss(animated: true) {
             UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
         }
-        
-        
     }
 }
 

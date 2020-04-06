@@ -16,35 +16,50 @@ extension SectionCompositeViewController {
             return
         }
         
+        if sectionsDataSourceArray == nil {
+            sectionsDataSourceArray = []
+        }
+        
         if let currentComponentModel = self.currentComponentModel {
             DatasourceManager.sharedInstance().load(model: currentComponentModel) { (component) in
                 guard let component = component as? ComponentModel else {
                     return
                 }
+              
                 self.liveComponentModel = component
 
                 if let componentsArray = component.childerns,
                     componentsArray.count > 0 {
                     let liveComponentsArray = self.liveComponentsWithLazyLoading(componentsArray: componentsArray, liveComponents: self.sectionsDataSourceArray)
                     
-                    
-                    DispatchQueue.main.async(execute: {
-                        if currentComponentModel.isVertical == true {
-                            self.insertSections(sectionToInsert: liveComponentsArray)
+                        if currentComponentModel.isVertical == true && component.type != "GRID" {
+                            self.prepareCollectionSections(sections: liveComponentsArray)
                         }
                         else {
-                            self.insertItems(itemToInsert: liveComponentsArray)
+                            self.prepareCollectionItems(items: liveComponentsArray)
                         }
-                    })
                 }
                 else {
                     // delete lazy loading components if needed
                 }
+                
+                self.setComponentModel(component)
             }
         }
-        
-        sectionsDataSourceArray = []
-        collectionView?.reloadData()
+    }
+    
+    func prepareCollectionSections(sections: [ComponentModelProtocol]) {
+        if sectionsDataSourceArray == nil {
+            sectionsDataSourceArray = []
+        }
+        sectionsDataSourceArray = sectionsDataSourceArray! + sections
+    }
+    
+    func prepareCollectionItems(items: [ComponentModelProtocol]) {
+        if sectionsDataSourceArray == nil {
+            sectionsDataSourceArray = []
+        }
+        sectionsDataSourceArray = sectionsDataSourceArray! + items
     }
     
     func shouldLoadMoreItems() -> Bool {
@@ -72,6 +87,7 @@ extension SectionCompositeViewController {
             
             DatasourceManager.sharedInstance().load(atomFeedUrl: nextPageUrl, parentModel: liveComponentModel) { (component) in
                 guard let component = component as? ComponentModel else {
+                    self.isLoading = false
                     return
                 }
                 self.liveComponentModel = component
@@ -153,7 +169,6 @@ extension SectionCompositeViewController {
         }
         
         registerLayouts(sectionsArray: itemToInsert)
-//        loadingIndicatorContainerView?.stopAnimating()
         
         if itemsIndexesPaths.count > 0 {
             collectionView?.performBatchUpdates({
@@ -180,7 +195,6 @@ extension SectionCompositeViewController {
         }
         let sectionIndexSet = IndexSet(sectionsIndexesInt)
         registerLayouts(sectionsArray: sectionToInsert)
-//        loadingIndicatorContainerView?.stopAnimating()
         
         if sectionsIndexesInt.count > 0 {
             collectionView?.performBatchUpdates({

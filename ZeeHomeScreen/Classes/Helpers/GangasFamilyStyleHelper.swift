@@ -28,6 +28,8 @@ class GangasFamilyStyleHelper {
     var cellStyle = ""
     var componentStyle = "component_rv_default"
     var containerType = ""
+    var minimumLineSpacing: CGFloat = 8
+    var minimumInteritemSpacing: CGFloat = 8
     
     //HEADERS
     var headerStyle: String?
@@ -75,37 +77,49 @@ class GangasFamilyStyleHelper {
             self.iphoneHeight = 50.0
             self.ipadWidth = 50.0
         case "GRID_1":
-            self.componentStyle = "SectionCompositeViewController"
+            self.componentStyle = "ZeeHomeScreen_Family_Ganges_grid_1"
             self.cellStyle = "ZeeHomeScreen_Family_Ganges_grid_1"
             self.iphoneHeight = 159.0
             self.iphoneWidth = 106.0
+            
+            self.minimumLineSpacing = 16
+            self.minimumInteritemSpacing = 16
             
             self.ipadHeight = 210.0
             self.ipadWidth = 140.0
             break
         case "GRID_2":
-            self.componentStyle = "SectionCompositeViewController"
+            self.componentStyle = "ZeeHomeScreen_Family_Ganges_grid_2"
             self.cellStyle = "ZeeHomeScreen_Family_Ganges_grid_2"
             self.iphoneHeight = 1000.0
             self.iphoneWidth = 106.0
+            
+            self.minimumLineSpacing = 16
+            self.minimumInteritemSpacing = 16
             
             self.ipadHeight = 210.0
             self.ipadWidth = 140.0
             break
         case "GRID_3":
-            self.componentStyle = "SectionCompositeViewController"
+            self.componentStyle = "ZeeHomeScreen_Family_Ganges_grid_3"
             self.cellStyle = "ZeeHomeScreen_Family_Ganges_grid_3"
             self.iphoneHeight = 159.0
             self.iphoneWidth = 106.0
+            
+            self.minimumLineSpacing = 16
+            self.minimumInteritemSpacing = 16
             
             self.ipadHeight = 210.0
             self.ipadWidth = 140.0
             break
         case "GRID_4":
-            self.componentStyle = "SectionCompositeViewController"
+            self.componentStyle = "ZeeHomeScreen_Family_Ganges_grid_4"
             self.cellStyle = "ZeeHomeScreen_Family_Ganges_grid_4"
             self.iphoneHeight = 159.0
             self.iphoneWidth = 106.0
+            
+            self.minimumLineSpacing = 16
+            self.minimumInteritemSpacing = 16
             
             self.ipadHeight = 210.0
             self.ipadWidth = 140.0
