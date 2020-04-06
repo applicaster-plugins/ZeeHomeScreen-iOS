@@ -80,13 +80,19 @@ import ApplicasterSDK
             return nil
         }
         
-        let feedComponent = ComponentModel.init(entry: feed, threshold: 3)
+        var feedComponent: ComponentModel!
+        if let extensions = componentModel.entry?.extensions, let _ = extensions["ui_component"] {
+            feedComponent = ComponentModel.init(entry: componentModel.entry!, threshold: 3)
+        } else {
+            feedComponent = ComponentModel.init(entry: feed, threshold: 3)
+        }
+
         if isParentModel == true {
             feedComponent.parentModel = componentModel
         }
         
         for (index, entry) in entries.enumerated() {
-            if let component = self.parseComponent(at: index, entry: entry, componentModel: componentModel) {
+            if let component = self.parseComponent(at: index, entry: entry, componentModel: feedComponent) {
                 component.parentModel = feedComponent
                 components.append(component)
             }
@@ -98,7 +104,7 @@ import ApplicasterSDK
         
     fileprivate func parseComponent(at index: Int, entry: APAtomEntryProtocol, componentModel: ComponentModel?) -> ComponentModel? {
 
-        if isChildComponent(for: entry) == true,
+        if /*isChildComponent(for: entry) == true,*/
             let componentModel = componentModel,
             let cellModel = componentModel.cellModel {
             

@@ -90,10 +90,10 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
                 self.backgroundView.backgroundColor = backgroundColor;
             }
         } else {
-            self.advertisementLabel.isHidden = true
-            self.bannerTopContainerConstraint.constant = 0.0
-            self.bannerBottomContainerConstraint.constant = 0.0
-            self.backgroundView.isHidden = true
+            advertisementLabel.isHidden = true
+            bannerTopContainerConstraint.constant = 0.0
+            bannerBottomContainerConstraint.constant = 0.0
+            backgroundView.isHidden = true
         }
     }
 
@@ -183,7 +183,14 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         bannerContainerView.addSubview(bannerView)
         bannerView.centerInSuperview()
         view.layoutIfNeeded()
-        
+        if currentComponentModel().styleHelper?.iphoneHeight != bannerView.size.height {
+            currentComponentModel().styleHelper?.iphoneHeight = bannerView.size.height
+            if delegate.responds(to: #selector(ComponentDelegate.reloadComponent(forModel:andComponentModel:))) {
+                delegate.reloadComponent?(forModel: currentComponentModel().entry as? NSObject, andComponentModel: currentComponentModel())
+            }
+        } else {
+            contentView.backgroundColor = .black
+        }
     }
     
     func setConstantConstraintWith(attribute: NSLayoutConstraint.Attribute, value:CGFloat, inView: UIView) {

@@ -62,7 +62,6 @@ class ComponentHelper {
         guard let componentModel = componentModel else {
             return 0
         }
-        
         if componentModel.isVertical == true {
             return indexPath.section
         }
