@@ -334,9 +334,7 @@ import ZappPlugins
                             let pipesObject = p.pipesObject {
                             playable.pipesObject = pipesObject as NSDictionary
                         }
-                        else {
-                            playable.play()
-                        }
+                        playable.play()
                     }
                 }
                 else if atomEntry.entryType == .link {
