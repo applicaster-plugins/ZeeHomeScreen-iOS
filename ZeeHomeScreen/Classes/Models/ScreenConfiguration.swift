@@ -26,9 +26,10 @@ struct ScreenConfiguration {
     var paddingTop: Int = 10
     var paddingBottom: Int = 10
     var divider: Int = 10
+    var shouldShowInterstitial = true
 
     /// Init
-    public init(config: [String: Any]?, style: [String: Any]?, dataSource: APAtomFeed?) {
+    public init(config: [String: Any]?, style: [String: Any]?, dataSource: APAtomFeed?, configurationJSON: NSDictionary?) {
         guard let config = config, let style = style else {
             return
         }
@@ -75,6 +76,10 @@ struct ScreenConfiguration {
         if let continueWatching = config["continue_watching"] as? String {
             let continueWatching = AdditionalContent.init(dsName: "continue_watching", dsUrl: continueWatching)
             additionalContent.append(continueWatching)
+        }
+        
+        if let configurationJSON = configurationJSON as? [String: Any], let showInterstitial: Int = configurationJSON["should_display_interstitial"] as? Int {
+            shouldShowInterstitial = showInterstitial != 0
         }
         
         ds = dataSource?.linkURL as String?

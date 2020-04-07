@@ -316,8 +316,6 @@ import ZappPlugins
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        var bannerLayoutName:String? = nil
-        
         if let sectionsDataSourceArray = self.sectionsDataSourceArray {
             
             var subarray = sectionsDataSourceArray
@@ -386,7 +384,7 @@ import ZappPlugins
                 headerView.delegate = self
                 /*if headerView.componentViewController == nil,*/
                     if let currentModel = header.entry as? APModel {
-                    headerView.componentViewController = /*CellViewController.init() as? UIViewController & ComponentProtocol */ ComponenttFactory.componentViewController(with: header,
+                    headerView.componentViewController =  ComponenttFactory.componentViewController(with: header,
                                                               andModel: currentModel,
                                                               for: headerView,
                                                               delegate: self,
@@ -627,7 +625,11 @@ extension SectionCompositeViewController: ZPAdViewProtocol {
     
     func showInterstitial() {
         
-        guard let extensions = currentComponentModel?.entry?.extensions, let ad_config = extensions["ad_config"] as? [String: Any], let adID = ad_config["interstitial_ad_tag"] as? String, let videoDuration = ad_config["interstitial_video_view_duration"] as? Int  else {
+        guard let screenConfiguration = self.screenConfiguration, screenConfiguration.shouldShowInterstitial == true else {
+            return
+        }
+        
+        guard let extensions = currentComponentModel?.entry?.extensions, let ad_config = extensions["ad_config"] as? [String: Any], let adID = ad_config["interstitial_ad_tag"] as? String, let _ = ad_config["interstitial_video_view_duration"] as? Int  else {
             return
         }
         let adPlugin = ZPAdvertisementManager.sharedInstance.getAdPlugin()
@@ -636,6 +638,5 @@ extension SectionCompositeViewController: ZPAdViewProtocol {
         let adConfig: ZPAdConfig = ZPAdConfig.init(adUnitId: adID, adType: .interstitial)
         
         adPresenter?.load(adConfig: adConfig)
-
     }
 }

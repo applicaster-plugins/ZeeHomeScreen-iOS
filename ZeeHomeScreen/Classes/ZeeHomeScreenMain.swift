@@ -37,10 +37,6 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadin
 
     public func executeOnApplicationReady(displayViewController: UIViewController?, completion: (() -> Void)?) {
 
-        // hardcode all translations to the TranslationResponse key
-//        let translations_data = LocalStorage.sharedInstance.get(key: "translations_data", namespace: "zee5localstorage")
-//        LocalStorage.sharedInstance.set(key: "TranslationResponse", value: translations_data!, namespace: "zee5localstorage")
-
         guard completion != nil else {
             return
         }
@@ -72,7 +68,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadin
         result.modalPresentationStyle = .fullScreen
         result.setComponentModel((self.getBaseComponent())!)
         result.atomFeedUrl = self.atomFeedUrl
-        result.screenConfiguration = ScreenConfiguration.init(config: config, style: style, dataSource: atomFeed)
+        result.screenConfiguration = ScreenConfiguration.init(config: config, style: style, dataSource: atomFeed, configurationJSON: configurationJSON)
         return result
     }
     
