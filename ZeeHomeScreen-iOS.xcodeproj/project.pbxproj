@@ -45,6 +45,7 @@
 		3E8F4D382428EF9D0020B6A8 /* AtomHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD12428EF9D0020B6A8 /* AtomHelper.swift */; };
 		3E8F4D392428EF9D0020B6A8 /* ComponenttFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD42428EF9D0020B6A8 /* ComponenttFactory.m */; };
 		3E8F4D572428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CFF2428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib */; };
+		4D6DC6FD243CA7BB00F24177 /* Zee5dsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6DC6FC243CA7BB00F24177 /* Zee5dsAdapter.swift */; };
 		4DF603AA23B938F400DD621F /* ZeeHomeScreen_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF603A923B938F400DD621F /* ZeeHomeScreen_iOSTests.swift */; };
 		C322E313B97D63A3E62579D3 /* Pods_ZeeHomeScreen_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B952517DF42CC7E904998F /* Pods_ZeeHomeScreen_iOS.framework */; };
 /* End PBXBuildFile section */
@@ -114,6 +115,7 @@
 		3E8F4CFF2428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_lazy_loading_1.xib; sourceTree = "<group>"; };
 		3ED5879D242B6ED8008AF7B7 /* ZeeHomeScreen-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZeeHomeScreen-Bridging-Header.h"; sourceTree = "<group>"; };
 		3ED587B1242B9842008AF7B7 /* ZeeHomeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZeeHomeScreen.h; sourceTree = "<group>"; };
+		4D6DC6FC243CA7BB00F24177 /* Zee5dsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Zee5dsAdapter.swift; path = ZeeHomeScreen/Classes/Zee5dsAdapter.swift; sourceTree = SOURCE_ROOT; };
 		4DF6038F23B938F300DD621F /* ZeeHomeScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZeeHomeScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DF603A523B938F400DD621F /* ZeeHomeScreen-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZeeHomeScreen-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DF603A923B938F400DD621F /* ZeeHomeScreen_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeeHomeScreen_iOSTests.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 		3E8F4C932428EF9D0020B6A8 /* Datasource */ = {
 			isa = PBXGroup;
 			children = (
+				4D6DC6FC243CA7BB00F24177 /* Zee5dsAdapter.swift */,
 				3E8F4C942428EF9D0020B6A8 /* DatasourceManager.swift */,
 			);
 			path = Datasource;
@@ -689,6 +692,7 @@
 				3E8F4D332428EF9D0020B6A8 /* BaseCollectionComponentViewController.m in Sources */,
 				3E8F4D272428EF9D0020B6A8 /* SectionCollectionViewLayoutAttributes.swift in Sources */,
 				3E8F4D322428EF9D0020B6A8 /* BaseComponentViewController.m in Sources */,
+				4D6DC6FD243CA7BB00F24177 /* Zee5dsAdapter.swift in Sources */,
 				3E8F4D2B2428EF9D0020B6A8 /* ComponentModelCustomization.m in Sources */,
 				3E8F4D352428EF9D0020B6A8 /* RefreshManager.m in Sources */,
 				3E8F4D342428EF9D0020B6A8 /* GangasFamilyStyleHelper.swift in Sources */,
