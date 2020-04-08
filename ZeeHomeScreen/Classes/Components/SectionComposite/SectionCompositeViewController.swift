@@ -121,7 +121,11 @@ import ZappPlugins
         }
     }
     
-    func insertComponent(index: Int, components: [ComponentModelProtocol]) {
+    func insertComponents(index: Int, from component: ComponentModelProtocol) {
+        
+        guard let components = component.childerns else {
+            return
+        }
         
         var indexes: [Int] = []
         for item in components {
@@ -130,10 +134,11 @@ import ZappPlugins
             })
             indexes.append(index + componentIndex!)
         }
-        
+
         let indexSet = IndexSet(indexes)
         if let _ = componentModel as? ComponentModel {
             collectionView?.performBatchUpdates({
+                self.sectionsDataSourceArray?.insert(contentsOf: components, at: index)
                 self.collectionView?.insertSections(indexSet)
             })
         }

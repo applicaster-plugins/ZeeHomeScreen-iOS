@@ -751,7 +751,7 @@ extension SectionCompositeFlowLayout {
                     return CGSize.init(width: lazyLoadingWidth, height: horizontalContentHeight)
                 }
             }
-            else if let cellModel = sectionsDataSourceArray[indexPath.row] as? CellModel,
+            else if sectionsDataSourceArray.count > indexPath.row, let cellModel = sectionsDataSourceArray[indexPath.row] as? CellModel,
                 let layoutStyle: String = cellModel.layoutStyle {
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     return CGSize.init(width: cellModel.ipadWidth, height: cellModel.ipadHeight)

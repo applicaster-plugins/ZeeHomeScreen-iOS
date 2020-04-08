@@ -163,7 +163,7 @@ import ApplicasterSDK
                    let imageKey = uiComponent["image_key"] as? String
             
             if self.cellKey == nil {
-                self.cellKey = "HORIZONTAL_LIST_17"
+                self.cellKey = "HORIZONTAL_LIST_11"
             }
                    
                    self.styleHelper = GangasFamilyStyleHelper.init(entry: entry, cellKey: cellKey, imageKey: imageKey, containerType: self.type)

@@ -183,7 +183,13 @@ import ApplicasterSDK
         }
         for item in buttonsViewCollection {
             let buttonKey = "button_\(buttonsViewCollection.firstIndex(of: item)!)"
-            componentCustomization.customization(for: item, attributeKey: buttonKey, defaultAttributesDictionary: nil, withModel: componentDataSourceModel, withDelegate: self)
+            
+            if let attributesDictionary: [String: Any] = componentCustomization.value(forAttributeKey: buttonKey, withModel: componentDataSourceModel) as? [String : Any] {
+                if let buttonImage = attributesDictionary[kAttributeImageNameKey] as? String {
+                    item.setImage(UIImage.init(named: buttonImage), for: .normal)
+                }
+            }
+//            componentCustomization.customization(for: item, attributeKey: buttonKey, defaultAttributesDictionary: nil, withModel: componentDataSourceModel, withDelegate: self)
             /*
             componentCustomization.customization(for: item, attributeKey: buttonKey, defaultAttributesDictionary: nil, withModel: componentDataSourceModel, withDelegate: self)
             let attributesDictionary = componentCustomization.value(forAttributeKey: buttonKey, withModel: componentDataSourceModel)
