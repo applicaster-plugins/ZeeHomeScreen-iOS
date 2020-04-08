@@ -64,9 +64,8 @@ extension SectionCompositeViewController {
                         guard let component = component as? ComponentModel else {
                             return
                         }
-                        
-                        self.sectionsDataSourceArray?.insert(component, at: 1)
-                        self.insertComponent(index: 1, components: [component])
+
+                        self.insertComponents(index: 1, from: component)
                     }
                 }
             }
@@ -79,8 +78,7 @@ extension SectionCompositeViewController {
                             return
                         }
                         
-                        self.sectionsDataSourceArray?.insert(contentsOf: component.childerns!, at: 2)
-                        self.insertComponent(index: 2, components: component.childerns!)
+                        self.insertComponents(index: 2, from: component)
                     }
                 }
             }

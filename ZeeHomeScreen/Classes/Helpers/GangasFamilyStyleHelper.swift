@@ -276,7 +276,7 @@ class GangasFamilyStyleHelper {
             break
         case "HORIZONTAL_LIST_17":
             self.componentStyle = "SectionCompositeViewController"
-            self.cellStyle = "ZeeHomeScreen_Family_Ganges_horizontal_list_16"
+            self.cellStyle = "ZeeHomeScreen_Family_Ganges_horizontal_list_17"
 
             self.iphoneHeight = 126.0
             self.iphoneWidth = 151.0

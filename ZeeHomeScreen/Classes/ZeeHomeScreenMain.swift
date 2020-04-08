@@ -12,7 +12,7 @@ import ZappSDK
 
 typealias PluginKeys = [String: String]
 
-public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadingHookProtocol {
+public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol /*ZPAppLoadingHookProtocol*/ {
     
     public var configurationJSON: NSDictionary?
     
@@ -34,7 +34,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadin
       public required init(configurationJSON: NSDictionary?) {
           self.configurationJSON = configurationJSON
       }
-
+/*
     public func executeOnApplicationReady(displayViewController: UIViewController?, completion: (() -> Void)?) {
 
         guard completion != nil else {
@@ -42,7 +42,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadin
         }
         completion!()
     }
-
+*/
     // MARK: ZPPluggableScreenProtocol
         
     required public init?(pluginModel: ZPPluginModel, screenModel: ZLScreenModel, dataSourceModel: NSObject?) {
