@@ -121,6 +121,24 @@ import ZappPlugins
         }
     }
     
+    func insertComponent(index: Int, components: [ComponentModelProtocol]) {
+        
+        var indexes: [Int] = []
+        for item in components {
+            let componentIndex = components.firstIndex(where: { (component) -> Bool in
+                return component.identifier == item.identifier && component.containerType == item.containerType && component.title == item.title && (component.entry?.isEqual(item.entry))!
+            })
+            indexes.append(index + componentIndex!)
+        }
+        
+        let indexSet = IndexSet(indexes)
+        if let _ = componentModel as? ComponentModel {
+            collectionView?.performBatchUpdates({
+                self.collectionView?.insertSections(indexSet)
+            })
+        }
+    }
+    
     //MARK: - ComponentProtocol
     
     func setComponentModel(_ model:ComponentModelProtocol) {
@@ -595,7 +613,7 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
                                    at indexPath: IndexPath) {
         
         guard let sectionsDataSourceArray = sectionsDataSourceArray,
-            let componentModel = sectionsDataSourceArray[indexPath.row] as? ComponentModel,
+            let componentModel = sectionsDataSourceArray[indexPath.section] as? ComponentModel,
             let headerModel =  componentModel.componentHeaderModel,
             let urlScheme = headerModel.actionUrlScheme,
             let linkURL = URL(string: urlScheme),

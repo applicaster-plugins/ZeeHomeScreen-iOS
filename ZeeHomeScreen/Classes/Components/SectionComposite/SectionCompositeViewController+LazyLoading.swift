@@ -44,8 +44,44 @@ extension SectionCompositeViewController {
                 }
                 
                 self.setComponentModel(component)
+                
+                self.loadAdditionalContent(component: component)
+                
                 DispatchQueue.main.async {
                     self.showInterstitial()
+                }
+            }
+        }
+    }
+    
+    func loadAdditionalContent(component: ComponentModel) {
+        if let extensions = component.entry?.extensions {
+            if let continueWatching = extensions["continue_watching"] as? String {
+                if !continueWatching.isEmptyOrWhitespace() {
+                    let componentModel = ComponentModel.init(entry: APAtomFeed.init(url: continueWatching))
+                    componentModel.dsUrl = continueWatching
+                    DatasourceManager.sharedInstance().load(model: componentModel) { (component) in
+                        guard let component = component as? ComponentModel else {
+                            return
+                        }
+                        
+                        self.sectionsDataSourceArray?.insert(component, at: 1)
+                        self.insertComponent(index: 1, components: [component])
+                    }
+                }
+            }
+            if let recommendation = extensions["recommendation"] as? String {
+               if !recommendation.isEmptyOrWhitespace() {
+                    let componentModel = ComponentModel.init(entry: APAtomFeed.init(url: recommendation))
+                    componentModel.dsUrl = recommendation
+                    DatasourceManager.sharedInstance().load(model: componentModel) { (component) in
+                        guard let component = component as? ComponentModel else {
+                            return
+                        }
+                        
+                        self.sectionsDataSourceArray?.insert(contentsOf: component.childerns!, at: 2)
+                        self.insertComponent(index: 2, components: component.childerns!)
+                    }
                 }
             }
         }
