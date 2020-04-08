@@ -150,7 +150,7 @@ import ApplicasterSDK
             var minimumLineSpacing: CGFloat = 8
             var minimumInteritemSpacing: CGFloat = 8
             
-            if sectionIndex < self.sectionsDataSourceArray!.count, let component: ComponentModel = self.sectionsDataSourceArray![sectionIndex] as? ComponentModel, let styleHelper = component.styleHelper {
+            if self.sectionsDataSourceArray != nil, sectionIndex < self.sectionsDataSourceArray!.count, let component: ComponentModel = self.sectionsDataSourceArray![sectionIndex] as? ComponentModel, let styleHelper = component.styleHelper {
                 minimumLineSpacing = styleHelper.minimumLineSpacing
                 minimumInteritemSpacing = styleHelper.minimumInteritemSpacing
             }
@@ -286,7 +286,7 @@ import ApplicasterSDK
             var minimumLineSpacing: CGFloat = 8
             var minimumInteritemSpacing: CGFloat = 8
             
-            if sectionIndex < self.sectionsDataSourceArray!.count, let component: ComponentModel = self.sectionsDataSourceArray![sectionIndex] as? ComponentModel, let styleHelper = component.styleHelper {
+            if self.sectionsDataSourceArray != nil, sectionIndex < self.sectionsDataSourceArray!.count, let component: ComponentModel = self.sectionsDataSourceArray![sectionIndex] as? ComponentModel, let styleHelper = component.styleHelper {
                 minimumLineSpacing = styleHelper.minimumLineSpacing
                 minimumInteritemSpacing = styleHelper.minimumInteritemSpacing
             }

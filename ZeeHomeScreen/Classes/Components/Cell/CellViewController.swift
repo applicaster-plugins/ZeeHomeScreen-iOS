@@ -30,8 +30,8 @@ import ApplicasterSDK
     @IBOutlet public weak var descriptionTextView: UITextView!
     
     @IBOutlet public weak var borderView: UIView!
-
-  //  var videoBackgroundView: APVideoBackgroundView?
+    
+//    public var dgroundView: APVideoBackgroundView? // APVideoBackgroundView? //APVideoBackgroundView?
     
     @IBOutlet public weak var promoVideoContainerView: UIView!
 
@@ -215,6 +215,11 @@ import ApplicasterSDK
     }
     
     func updateShadowImage() {
+        
+        guard shadowImageView != nil else {
+            return
+        }
+        
         let componentCustomization = ComponentModelCustomization()
         let attributesDictionary = componentCustomization.value(forAttributeKey: kAttributeImageShadowKey, withModel: componentDataSourceModel)
         guard attributesDictionary != nil else {
@@ -226,17 +231,20 @@ import ApplicasterSDK
             shadowImageView.image = UIImage.init(named: imageName)
         }
     }
-    /*
+    
     func setupPromoVideo() {
         var promoVideoURL: URL?
         let componentCustomization = ComponentModelCustomization()
-        if let componentDataSourceModel = componentDataSourceModel as? APAtomEntryProtocol {
-            let atomEntry: APAtomEntryProtocol = componentDataSourceModel
+        
+        if let _ = self.promoVideoContainerView, let componentDataSourceModel = componentDataSourceModel as? ComponentModel, let atomEntry = componentDataSourceModel.entry {
+           
             var promoVideoKey: String? = componentCustomization.value(forAttributeKey: kAttributePromoVideoKey, withModel: componentDataSourceModel as? NSObject) as? String
             if promoVideoKey == nil {
                 promoVideoKey = "promo_video"
             }
-            promoVideoURL = URL.init(string: APAtomMediaGroup.stringURL(fromMediaItems: atomEntry.mediaGroups as? [Any], key: promoVideoKey))
+            if let promoUrl = APAtomMediaGroup.stringURL(fromMediaItems: atomEntry.mediaGroups as? [Any], key: promoVideoKey) {
+                promoVideoURL = URL.init(string: promoUrl)
+            }
         } else if let apModel = componentDataSourceModel as? APModel {
             promoVideoURL = apModel.promoVideoURL as URL?
         }
@@ -245,23 +253,23 @@ import ApplicasterSDK
             componentCustomization.customization(for: promoVideoContainerView, attibuteKey: kAttributePromoVideoContainer, withModel: componentDataSourceModel)
  
             stopPromoVideo()
-            videoBackgroundView = APVideoBackgroundView()
-            promoVideoContainerView.addSubview(videoBackgroundView!)
-            videoBackgroundView!.setVideoNSURL(videoURL: promoVideoURL! as NSURL)
-            videoBackgroundView!.player!.isMuted = true
-            videoBackgroundView?.matchParent()
+            let videoBackgroundView = APVideoBackgroundView()
+            promoVideoContainerView.addSubview(videoBackgroundView)
+            videoBackgroundView.setVideoNSURL(videoURL: promoVideoURL! as NSURL)
+            videoBackgroundView.player!.isMuted = true
+            videoBackgroundView.matchParent()
             promoVideoContainerView.alpha = 1.0;
             animatePromoVideo()
         }
     }
     
     func stopPromoVideo() {
-        guard promoVideoContainerView != nil, videoBackgroundView != nil else {
+        guard promoVideoContainerView != nil else {//, videoBackgroundView != nil else {
             return
         }
         promoVideoContainerView.alpha = 0.0;
-        videoBackgroundView?.removeFromSuperview()
-        videoBackgroundView = nil
+//        videoBackgroundView?.removeFromSuperview()
+//        videoBackgroundView = nil
     }
     
     func animatePromoVideo() {
@@ -292,7 +300,7 @@ import ApplicasterSDK
             view.exchangeSubview(at: indexOfPromoContainer, withSubviewAt: indexOfItemImage)
         }
     }
- */
+ 
     open func fillEntryData() {
         if self.isViewLoaded
         {
@@ -308,16 +316,7 @@ import ApplicasterSDK
             
             customizeBackground()
             updateShadowImage()
-            //setupPromoVideo()
-            /*x
-
-             [self setupPromoVideo];
-             [self setupHTMLTicker];
-             self.shouldSendLoadingFinishedDelegate = YES;
-             
-             // Setup accessibility identifier for automaiton matters
-             [self setupAccessibilityIdentifiers];
-             */
+            setupPromoVideo()
             
             if  self.itemNameLabel != nil {
                 
@@ -360,6 +359,7 @@ import ApplicasterSDK
             if let imageMediaGroup = (componentModel.entry as AnyObject).mediaGroup(with: .image),
                 let imageUrl = imageMediaGroup.mediaItemStringURL(forKey: componentModel.imageKey ?? "image_base"),
                 let parsedImageUrl = URL(string: imageUrl) {
+                self.itemImageView.contentMode = .scaleAspectFill
                 self.itemImageView.setImageWith(parsedImageUrl, placeholderImage:placeholderImage, serverResizable: true)
             }
             else {

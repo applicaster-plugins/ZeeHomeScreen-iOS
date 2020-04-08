@@ -50,7 +50,6 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol, ZPAppLoadin
         self.style = screenModel.style?.object as? PluginKeys ?? PluginKeys()
         
         guard
-           // case let .atomFeed(model) = screenModel.dataSource,
             let atomFeed = dataSourceModel as? APAtomFeed else {
                 
        
