@@ -48,11 +48,10 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol /*ZPAppLoadi
     required public init?(pluginModel: ZPPluginModel, screenModel: ZLScreenModel, dataSourceModel: NSObject?) {
         self.config = screenModel.general as? PluginKeys ?? PluginKeys()
         self.style = screenModel.style?.object as? PluginKeys ?? PluginKeys()
+        //build version c9fd52d0-3f68-493d-9ac9-89e7556364cc
         
         guard
             let atomFeed = dataSourceModel as? APAtomFeed else {
-                
-       
                 return
         }
        
