@@ -574,7 +574,15 @@ import ZappPlugins
     }
     
     @objc func didReceiveActionNotification(_ notification:Notification) {
-
+        if let object = notification.object as? NSDictionary, let componentType = object[kActionComponentType] as? NSNumber {
+            let actionType: CAActionType = CAActionType(rawValue: UInt(truncating: componentType))
+            if actionType == .updateSectionBody {
+                if let _ = object[kActionCallerComponentModel] as? ComponentModel,
+                    let model = object[kActionComponentDataSourceModel] as? APModel {
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: model.screenViewTitle(true), parameters: [:])
+                }
+            }
+        }
     }
     
     func performCompletionAndStopLoadingIndicator() {

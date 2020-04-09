@@ -133,7 +133,7 @@ extension SectionCompositeViewController {
                     componentsArray.count > 0 {
                     let liveComponentsArray = self.liveComponentsWithLazyLoading(componentsArray: componentsArray, liveComponents: self.sectionsDataSourceArray)
                     DispatchQueue.main.async(execute: {
-                        if self.currentComponentModel?.isVertical == true {
+                        if self.currentComponentModel?.isVertical == true &&  self.currentComponentModel?.type != "GRID" {
                             self.insertSections(sectionToInsert: liveComponentsArray)
                         }
                         else {
@@ -174,7 +174,7 @@ extension SectionCompositeViewController {
         let lazyComponentIndex = liveComponents.count - 1
         let lazyLoadingItem = liveItems.remove(at: lazyComponentIndex)
         sectionsDataSourceArray = liveItems
-        if self.currentComponentModel?.isVertical == true {
+        if self.currentComponentModel?.isVertical == true &&  self.currentComponentModel?.type != "GRID" {
             self.collectionView?.deleteSections(IndexSet(integer: lazyComponentIndex))
         }
         else {
@@ -253,7 +253,7 @@ extension SectionCompositeViewController {
     func deleteLazyLoadingCellIfNeeded(at index: Int) {
         if isLazyLoadingCellExists() == true,
             index > 0 {
-            if self.currentComponentModel?.isVertical == true {
+            if self.currentComponentModel?.isVertical == true &&  self.currentComponentModel?.type != "GRID" {
                 self.collectionView?.deleteSections(IndexSet(integer: index))
             }
             else {

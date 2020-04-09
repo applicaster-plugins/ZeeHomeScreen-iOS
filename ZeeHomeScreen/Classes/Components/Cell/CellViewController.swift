@@ -361,15 +361,18 @@ import ApplicasterSDK
             if let placeholderImageString: String = componentCustomization.value(forAttributeKey: kAttributeCellPlaceholderImageNameKey, withModel: componentDataSourceModel) as? String {
                 placeholderImage = UIImage(named: placeholderImageString)
             }
-                
-            if let imageMediaGroup = (componentModel.entry as AnyObject).mediaGroup(with: .image),
-                let imageUrl = imageMediaGroup.mediaItemStringURL(forKey: componentModel.imageKey ?? "image_base"),
-                let parsedImageUrl = URL(string: imageUrl) {
-                self.itemImageView.contentMode = .scaleAspectFill
-                self.itemImageView.setImageWith(parsedImageUrl, placeholderImage:placeholderImage, serverResizable: true)
-            }
-            else {
-                 self.itemImageView.image = placeholderImage
+            
+            if let mediaGroups = componentModel.entry?.mediaGroups {
+                for item in mediaGroups {
+                    if let item = item as? APAtomMediaGroup,
+                    let imageUrl = item.mediaItemStringURL(forKey: componentModel.imageKey ?? "image_base"),
+                        let parsedImageUrl = URL(string: imageUrl) {
+                        self.itemImageView.contentMode = .scaleAspectFill
+                        self.itemImageView.setImageWith(parsedImageUrl, placeholderImage:placeholderImage, serverResizable: true)
+                    }
+                }
+            } else {
+                self.itemImageView.image = placeholderImage
             }
         }
         
