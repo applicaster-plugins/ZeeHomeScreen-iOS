@@ -9,6 +9,8 @@ import Foundation
 import ZappPlugins
 import ApplicasterSDK
 
+
+
 extension SectionCompositeViewController {
     
     func prepareSections() {
@@ -44,8 +46,8 @@ extension SectionCompositeViewController {
                 }
                 
                 self.setComponentModel(component)
-                
-                self.loadAdditionalContent(component: component)
+                let additionalContent = self.prepareAdditionalContent(component)
+                self.loadAdditionalContent(indexToInsert: 1, for: additionalContent, component: component)
                 
                 DispatchQueue.main.async {
                     self.showInterstitial()
@@ -54,33 +56,103 @@ extension SectionCompositeViewController {
         }
     }
     
-    func loadAdditionalContent(component: ComponentModel) {
-        if let extensions = component.entry?.extensions {
-            if let continueWatching = extensions["continue_watching"] as? String {
-                if !continueWatching.isEmptyOrWhitespace() {
-                    let componentModel = ComponentModel.init(entry: APAtomFeed.init(url: continueWatching))
-                    componentModel.dsUrl = continueWatching
-                    DatasourceManager.sharedInstance().load(model: componentModel) { (component) in
-                        guard let component = component as? ComponentModel else {
-                            return
-                        }
+    func prepareAdditionalContent(_ component: ComponentModel) -> [AdditionalContent] {
+        
+        guard let config = component.entry?.extensions else {
+            return []
+        }
+        
+        var additionalContent: [AdditionalContent] = []
+        
+        if let continueWatching = config[AdditionalContentType.continueWatching.rawValue] as? String {
+            let continueWatching = AdditionalContent.init(dsType: .continueWatching, dsUrl: continueWatching)
+            additionalContent.append(continueWatching)
+        }
 
-                        self.insertComponents(index: 1, from: component)
-                    }
-                }
-            }
-            if let recommendation = extensions["recommendation"] as? String {
-               if !recommendation.isEmptyOrWhitespace() {
-                    let componentModel = ComponentModel.init(entry: APAtomFeed.init(url: recommendation))
-                    componentModel.dsUrl = recommendation
-                    DatasourceManager.sharedInstance().load(model: componentModel) { (component) in
-                        guard let component = component as? ComponentModel else {
+        if let recommendation = config[AdditionalContentType.recommendations.rawValue] as? String {
+            
+            ////TEST
+            
+//            let continueWatching = AdditionalContent.init(dsType: .continueWatching, dsUrl: "zee5://fetchData?type=continue_watching")
+//            additionalContent.append(continueWatching)
+            
+            ///TEST
+            
+            
+            let recommendation = AdditionalContent.init(dsType: .recommendations, dsUrl: recommendation)
+            additionalContent.append(recommendation)
+        }
+        
+        if let relatedCollection = config[AdditionalContentType.relatedCollection.rawValue] as? String {
+            let relatedCollection = AdditionalContent.init(dsType: .relatedCollection, dsUrl: relatedCollection)
+            additionalContent.append(relatedCollection)
+        }
+        
+        if let adConfigs = config["ad_config"] as? [AnyHashable: Any], let banners = adConfigs[AdditionalContentType.banners.rawValue] as? String {
+            let banners = AdditionalContent.init(dsType: .banners, dsUrl: banners)
+            additionalContent.append(banners)
+        }
+        
+        return additionalContent
+    }
+    
+    func loadAdditionalContent(indexToInsert: Int, for contents: [AdditionalContent], component: ComponentModel) {
+        
+        if let additionalContent = contents.first, let type = additionalContent.dsType {
+            if let typeLink = additionalContent.dsUrl, !typeLink.isEmptyOrWhitespace() {
+                    let componentModel = ComponentModel.init(entry: APAtomFeed.init(url: typeLink))
+                    componentModel.dsUrl = typeLink
+                    DatasourceManager.sharedInstance().load(model: componentModel) { (feedComponent) in
+                        
+                        var nContents = contents
+                        nContents.removeFirst()
+                        
+                        guard let feedComponent = feedComponent as? ComponentModel else {
+                            
+                            switch type {
+                            case .continueWatching:
+                                self.loadAdditionalContent(indexToInsert: indexToInsert + 1 , for: nContents, component: component)
+                            case .recommendations:
+                                self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
+                            case .relatedCollection:
+                                self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
+                            case .banners:
+                                break
+                            }
+                            
                             return
                         }
                         
-                        self.insertComponents(index: 2, from: component)
+                        switch type {
+                        case .continueWatching:
+                            self.insertComponents(index: indexToInsert, from: [feedComponent])
+                            self.loadAdditionalContent(indexToInsert: indexToInsert + 1 , for: nContents, component: component)
+                        case .recommendations:
+                            self.insertComponents(index: indexToInsert, from: feedComponent.childerns!)
+                            self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
+                        case .relatedCollection:
+                            self.insertComponents(index: indexToInsert, from: feedComponent.childerns!)
+                            self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
+                        case .banners:
+                            if let childrens = feedComponent.childerns {
+                                
+                                var indexesArray: [Int] = []
+                                for item in childrens {
+                                    guard let extensions = item.entry?.extensions, let ad_config = extensions["ad_config"] as? [String: Any], let position = ad_config["position"] as? Int else {
+                                        return
+                                    }
+                                    indexesArray.append(position)
+                                }
+                                
+                                self.insertBanners(indexes: indexesArray, from: feedComponent)
+                            }
+                        }
                     }
-                }
+                } else {
+                    var nContents = contents
+                    nContents.removeFirst()
+                    
+                    loadAdditionalContent(indexToInsert: indexToInsert, for: nContents, component: component)
             }
         }
     }

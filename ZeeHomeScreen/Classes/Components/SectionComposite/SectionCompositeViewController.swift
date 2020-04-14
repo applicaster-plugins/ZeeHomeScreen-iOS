@@ -121,11 +121,57 @@ import ZappPlugins
         }
     }
     
-    func insertComponents(index: Int, from component: ComponentModelProtocol) {
+    func insertBanners(indexes: [Int], from component: ComponentModelProtocol) {
         
         guard let components = component.childerns else {
             return
         }
+        
+        registerLayouts(sectionsArray: components)
+        collectionView?.performBatchUpdates({
+            
+            var newIndexes: [Int] = []
+            
+            
+            components.enumerated().forEach { (offset, item) in
+                let index = getNewIndex(for: item, thatShouldBeInIndex: indexes[offset])
+                self.sectionsDataSourceArray?.insert(item, at: index)
+                newIndexes.append(index)
+            }
+            self.collectionView?.insertSections(IndexSet(newIndexes))
+        })
+    }
+    
+    func getNewIndex(for banner: ComponentModelProtocol, thatShouldBeInIndex: Int) -> Int {
+        
+        guard thatShouldBeInIndex != 0 else {
+            return thatShouldBeInIndex
+        }
+        var thatShouldBeInIndex = thatShouldBeInIndex
+        let count: Int = sectionsDataSourceArray!.count
+        var newIndex: Int = 0
+        for index in 0..<count {
+            if let componentModel: ComponentModel = sectionsDataSourceArray![index] as? ComponentModel {
+                if componentModel.type == "BANNER" {
+                    newIndex = newIndex + 1
+                    continue
+                } else if componentModel.type == "LAZY_LOADING" {
+                    return newIndex
+                } else {
+                    if thatShouldBeInIndex == 0 {
+                        return newIndex
+                    } else {
+                        newIndex = newIndex + 1
+                        thatShouldBeInIndex = thatShouldBeInIndex - 1
+                        continue
+                    }
+                }
+            }
+        }
+        return newIndex
+    }
+    
+    func insertComponents(index: Int, from components: [ComponentModelProtocol]) {
         
         var indexes: [Int] = []
         for item in components {
@@ -136,6 +182,7 @@ import ZappPlugins
         }
 
         let indexSet = IndexSet(indexes)
+        registerLayouts(sectionsArray: components)
         if let _ = componentModel as? ComponentModel {
             collectionView?.performBatchUpdates({
                 self.sectionsDataSourceArray?.insert(contentsOf: components, at: index)
