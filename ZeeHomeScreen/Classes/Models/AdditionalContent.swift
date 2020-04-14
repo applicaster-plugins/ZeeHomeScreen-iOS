@@ -9,14 +9,13 @@ import Foundation
 
 struct AdditionalContent {
     
-    var dsName: String?
+    var dsType: AdditionalContentType!
     var dsUrl: String?
  
     /// Init
-    init(dsName: String?, dsUrl: String?) {
-        if let dsName = dsName {
-            self.dsName = dsName
-        }
+    init(dsType: AdditionalContentType!, dsUrl: String?) {
+        self.dsType = dsType
+        
         if let dsUrl = dsUrl {
             self.dsUrl = dsUrl
         }

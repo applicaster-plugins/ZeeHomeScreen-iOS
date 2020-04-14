@@ -8,6 +8,13 @@
 import Foundation
 import ApplicasterSDK
 
+enum AdditionalContentType: String {
+    case continueWatching = "continue_watching"
+    case recommendations = "recommendation"
+    case relatedCollection = "related_collections"
+    case banners = "banner_ds"
+}
+
 struct ScreenConfiguration {
     
     var feed: APAtomFeed?
@@ -66,16 +73,6 @@ struct ScreenConfiguration {
         if let dividerStr = style["list_divider"] as? String,
             let divider = Int(dividerStr) {
             self.divider = divider
-        }
-
-        if let recommendation = config["recommendation"] as? String {
-            let recommendation = AdditionalContent.init(dsName: "recommendation", dsUrl: recommendation)
-            additionalContent.append(recommendation)
-        }
-        
-        if let continueWatching = config["continue_watching"] as? String {
-            let continueWatching = AdditionalContent.init(dsName: "continue_watching", dsUrl: continueWatching)
-            additionalContent.append(continueWatching)
         }
         
         if let configurationJSON = configurationJSON as? [String: Any], let showInterstitial: Int = configurationJSON["should_display_interstitial"] as? Int {
