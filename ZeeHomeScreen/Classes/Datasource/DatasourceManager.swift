@@ -119,7 +119,8 @@ import ApplicasterSDK
                                   imageKey: cellModel.imageKey,
                                   isClickable: cellModel.isClickable,
                                   containerType: cellModel.containerType,
-                                  cellKey: cellModel.cellKey)
+                                  cellKey: cellModel.cellKey,
+                                  itemsPerRow: cellModel.itemsPerRow, divider: cellModel.divider)
         }
         else {
             return ComponentModel.init(entry: entry,

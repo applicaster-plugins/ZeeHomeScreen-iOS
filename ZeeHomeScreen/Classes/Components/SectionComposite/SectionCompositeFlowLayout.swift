@@ -11,6 +11,8 @@ import ApplicasterSDK
 
 @objc public class SectionCompositeFlowLayout: UICollectionViewFlowLayout {
     
+    var screenConfiguration: ScreenConfiguration!
+    
     weak var componentModel:ComponentModelProtocol? {
         didSet {
             if let oldValue = oldValue as? ComponentModel,
@@ -283,15 +285,18 @@ import ApplicasterSDK
             // Retrieve margings from Collection CAComponentModel (base collection component) or Group Cell CAComponentModel,
             // Group component model rertrieving from first cell data from section body
             
-            var minimumLineSpacing: CGFloat = 8
-            var minimumInteritemSpacing: CGFloat = 8
+            var minimumLineSpacing: CGFloat = CGFloat(screenConfiguration.divider)
+            var minimumInteritemSpacing: CGFloat = CGFloat(screenConfiguration.divider)
             
-            if self.sectionsDataSourceArray != nil, sectionIndex < self.sectionsDataSourceArray!.count, let component: ComponentModel = self.sectionsDataSourceArray![sectionIndex] as? ComponentModel, let styleHelper = component.styleHelper {
-                minimumLineSpacing = styleHelper.minimumLineSpacing
-                minimumInteritemSpacing = styleHelper.minimumInteritemSpacing
+            if self.sectionsDataSourceArray != nil, sectionIndex < self.sectionsDataSourceArray!.count, let component: ComponentModel = self.sectionsDataSourceArray![sectionIndex] as? CellModel, let divider = component.divider  {
+                minimumLineSpacing = CGFloat(divider)
+                minimumInteritemSpacing = CGFloat(divider)
             }
 
-            let edgeInsets              =  UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+            var edgeInsets              =  UIEdgeInsets.init(top: 0.0, left: CGFloat(screenConfiguration.paddingHorizontal), bottom: 0.0, right: CGFloat(screenConfiguration.paddingHorizontal))
+            if self.sectionsDataSourceArray != nil, sectionIndex < self.sectionsDataSourceArray!.count, let component: ComponentModel = self.sectionsDataSourceArray![sectionIndex] as? CellModel, let divider = component.divider {
+                edgeInsets = UIEdgeInsets.init(top: 0.0, left: CGFloat(divider), bottom: 0.0, right: CGFloat(divider))
+            }
             //                estimatedEdgeInsets(for: sectionIndex,
             //                                                              сollectionItemTypes: .body)
             

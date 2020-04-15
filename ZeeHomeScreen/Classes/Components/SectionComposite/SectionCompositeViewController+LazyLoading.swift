@@ -70,15 +70,6 @@ extension SectionCompositeViewController {
         }
 
         if let recommendation = config[AdditionalContentType.recommendations.rawValue] as? String {
-            
-            ////TEST
-            
-//            let continueWatching = AdditionalContent.init(dsType: .continueWatching, dsUrl: "zee5://fetchData?type=continue_watching")
-//            additionalContent.append(continueWatching)
-            
-            ///TEST
-            
-            
             let recommendation = AdditionalContent.init(dsType: .recommendations, dsUrl: recommendation)
             additionalContent.append(recommendation)
         }
@@ -92,7 +83,7 @@ extension SectionCompositeViewController {
             let banners = AdditionalContent.init(dsType: .banners, dsUrl: banners)
             additionalContent.append(banners)
         }
-        
+
         return additionalContent
     }
     

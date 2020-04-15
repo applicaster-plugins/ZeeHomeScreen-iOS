@@ -24,7 +24,7 @@ import ApplicasterSDK
     
     var isClickable: Bool = true
     
-//    open var containerType: String?
+    var itemsPerRow: Int?
 
     /// Init
     public init(layoutStyle: String?,
@@ -38,7 +38,9 @@ import ApplicasterSDK
                 imageKey: String?,
                 isClickable: Bool,
                 containerType: String?,
-                cellKey: String?) {
+                cellKey: String?,
+                itemsPerRow: Int?,
+                divider: Int?) {
            
         super.init(type: "Cell")
         self.layoutStyle = layoutStyle
@@ -53,6 +55,8 @@ import ApplicasterSDK
         self.isClickable = isClickable
         self.containerType = containerType
         self.cellKey = cellKey
+        self.itemsPerRow = itemsPerRow
+        self.divider = divider
     }
    
 }
