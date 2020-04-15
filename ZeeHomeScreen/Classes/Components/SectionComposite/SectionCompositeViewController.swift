@@ -39,6 +39,7 @@ import ZappPlugins
         
         didSet {
             if let flowLayout = collectionView?.collectionViewLayout as? SectionCompositeFlowLayout {
+                flowLayout.screenConfiguration = screenConfiguration
                 flowLayout.sectionsDataSourceArray = sectionsDataSourceArray
                 flowLayout.numberOfSections = self.sectionsDataSourceArray?.count ?? 0
             }

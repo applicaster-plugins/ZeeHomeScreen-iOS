@@ -166,7 +166,7 @@ import ApplicasterSDK
                 self.cellKey = "HORIZONTAL_LIST_11"
             }
                    
-                   self.styleHelper = GangasFamilyStyleHelper.init(entry: entry, cellKey: cellKey, imageKey: imageKey, containerType: self.type)
+            self.styleHelper = GangasFamilyStyleHelper.init(entry: entry, cellKey: cellKey, imageKey: imageKey, containerType: self.type)
                    self.layoutStyle = self.styleHelper?.componentStyle
                    self.aspectRatio = self.styleHelper?.componentAspectRatio
                    

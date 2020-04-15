@@ -24,12 +24,14 @@ class GangasFamilyStyleHelper {
     var isClickable = true
     var paddingVertical: Int = 16
     var paddingHorizontal = 16
-    var divider = 8
+    var divider: Int?
     var cellStyle = ""
     var componentStyle = "component_rv_default"
     var containerType = ""
     var minimumLineSpacing: CGFloat = 8
     var minimumInteritemSpacing: CGFloat = 8
+    var itemsPerRow: Int?
+
     
     //HEADERS
     var headerStyle: String?
@@ -79,50 +81,100 @@ class GangasFamilyStyleHelper {
         case "GRID_1":
             self.componentStyle = "ZeeHomeScreen_Family_Ganges_grid_1"
             self.cellStyle = "ZeeHomeScreen_Family_Ganges_grid_1"
-            self.iphoneHeight = 159.0
-            self.iphoneWidth = 106.0
             
-            self.minimumLineSpacing = 16
-            self.minimumInteritemSpacing = 16
             
-            self.ipadHeight = 210.0
-            self.ipadWidth = 140.0
+            self.itemsPerRow = UIDevice.current.userInterfaceIdiom == .pad ? 4 : 2
+            
+            self.divider = 16
+            let resizedWidthForCell: CGFloat = (UIScreen.main.bounds.width - (2 * CGFloat(divider!)) - ((CGFloat(self.itemsPerRow!) - 1) * CGFloat(divider!))) / CGFloat(self.itemsPerRow!)
+            
+            self.iphoneHeight = 204.0
+            self.iphoneWidth = 136.0
+            
+            self.ipadHeight = 258.0
+            self.ipadWidth = 172.0
+            
+            let iPhoneRatio: CGFloat = iphoneWidth / iphoneHeight
+            let iPadRatio: CGFloat = ipadWidth / ipadHeight
+            
+            self.iphoneHeight = resizedWidthForCell / iPhoneRatio
+            self.iphoneWidth = resizedWidthForCell
+            
+            self.ipadHeight = resizedWidthForCell / iPadRatio
+            self.ipadWidth = resizedWidthForCell
             break
         case "GRID_2":
             self.componentStyle = "ZeeHomeScreen_Family_Ganges_grid_2"
             self.cellStyle = "ZeeHomeScreen_Family_Ganges_grid_2"
-            self.iphoneHeight = 1000.0
-            self.iphoneWidth = 106.0
             
-            self.minimumLineSpacing = 16
-            self.minimumInteritemSpacing = 16
+            self.itemsPerRow = UIDevice.current.userInterfaceIdiom == .pad ? 6 : 3
             
-            self.ipadHeight = 210.0
-            self.ipadWidth = 140.0
+            self.divider = 16
+            let resizedWidthForCell: CGFloat = (UIScreen.main.bounds.width - (2 * CGFloat(divider!)) - ((CGFloat(self.itemsPerRow!) - 1) * CGFloat(divider!))) / CGFloat(self.itemsPerRow!)
+            
+            self.iphoneHeight = 127.0
+            self.iphoneWidth = 85.0
+            
+            self.ipadHeight = 161.0
+            self.ipadWidth = 109.0
+            
+            let iPhoneRatio: CGFloat = iphoneWidth / iphoneHeight
+            let iPadRatio: CGFloat = ipadWidth / ipadHeight
+            
+            self.iphoneHeight = resizedWidthForCell / iPhoneRatio
+            self.iphoneWidth = resizedWidthForCell
+            
+            self.ipadHeight = resizedWidthForCell / iPadRatio
+            self.ipadWidth = resizedWidthForCell
+            
             break
         case "GRID_3":
             self.componentStyle = "ZeeHomeScreen_Family_Ganges_grid_3"
             self.cellStyle = "ZeeHomeScreen_Family_Ganges_grid_3"
-            self.iphoneHeight = 159.0
-            self.iphoneWidth = 106.0
             
-            self.minimumLineSpacing = 16
-            self.minimumInteritemSpacing = 16
+            self.itemsPerRow = UIDevice.current.userInterfaceIdiom == .pad ? 4 : 2
             
-            self.ipadHeight = 210.0
-            self.ipadWidth = 140.0
+            self.divider = 16
+            let resizedWidthForCell: CGFloat = (UIScreen.main.bounds.width - 2 * CGFloat(divider!) - ((CGFloat(self.itemsPerRow!) - 1) * CGFloat(divider!))) / CGFloat(self.itemsPerRow!)
+            
+            self.iphoneHeight = 76.0
+            self.iphoneWidth = 136.0
+            
+            self.ipadHeight = 98.0
+            self.ipadWidth = 172.0
+            
+            let iPhoneRatio: CGFloat = iphoneWidth / iphoneHeight
+            let iPadRatio: CGFloat = ipadWidth / ipadHeight
+            
+            self.iphoneHeight = resizedWidthForCell / iPhoneRatio
+            self.iphoneWidth = resizedWidthForCell
+            
+            self.ipadHeight = resizedWidthForCell / iPadRatio
+            self.ipadWidth = resizedWidthForCell
             break
         case "GRID_4":
             self.componentStyle = "ZeeHomeScreen_Family_Ganges_grid_4"
             self.cellStyle = "ZeeHomeScreen_Family_Ganges_grid_4"
-            self.iphoneHeight = 159.0
-            self.iphoneWidth = 106.0
             
-            self.minimumLineSpacing = 16
-            self.minimumInteritemSpacing = 16
+            self.itemsPerRow = UIDevice.current.userInterfaceIdiom == .pad ? 4 : 2
             
-            self.ipadHeight = 210.0
-            self.ipadWidth = 140.0
+            self.divider = 16
+            let resizedWidthForCell: CGFloat = (UIScreen.main.bounds.width - (2 * CGFloat(divider!)) - ((CGFloat(self.itemsPerRow!) - 1) * CGFloat(divider!))) / CGFloat(self.itemsPerRow!)
+            
+            self.iphoneHeight = 109.0
+            self.iphoneWidth = 137.0
+            
+            self.ipadHeight = 130.0
+            self.ipadWidth = 172.0
+            
+            let iPhoneRatio: CGFloat = iphoneWidth / iphoneHeight
+            let iPadRatio: CGFloat = ipadWidth / ipadHeight
+            
+            self.iphoneHeight = resizedWidthForCell / iPhoneRatio
+            self.iphoneWidth = resizedWidthForCell
+            
+            self.ipadHeight = resizedWidthForCell / iPadRatio
+            self.ipadWidth = resizedWidthForCell
             break
         case "HORIZONTAL_LIST_1":
             self.componentStyle = "SectionCompositeViewController"
@@ -344,7 +396,7 @@ class GangasFamilyStyleHelper {
     }
     
     func getCellModel() -> CellModel {
-        return CellModel.init(layoutStyle: self.cellStyle, aspectRatio: self.cellAspectRatio, entry: self.entry, iphoneWidth: self.iphoneWidth, ipadWidth: self.ipadWidth, iphoneHeight: self.iphoneHeight, ipadHeight: self.ipadHeight, placeHolder: self.placeHolder, imageKey: self.imageKey, isClickable: self.isClickable, containerType: self.containerType, cellKey: self.cellKey)
+        return CellModel.init(layoutStyle: self.cellStyle, aspectRatio: self.cellAspectRatio, entry: self.entry, iphoneWidth: self.iphoneWidth, ipadWidth: self.ipadWidth, iphoneHeight: self.iphoneHeight, ipadHeight: self.ipadHeight, placeHolder: self.placeHolder, imageKey: self.imageKey, isClickable: self.isClickable, containerType: self.containerType, cellKey: self.cellKey, itemsPerRow: self.itemsPerRow, divider: self.divider)
     }
     
     func getHeader(entry: APAtomEntryProtocol, style: String?, headerUrlScheme: String?) -> HeaderModel? {
