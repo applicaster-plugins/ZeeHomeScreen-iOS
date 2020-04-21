@@ -420,6 +420,9 @@ import ZappPlugins
         if let sectionsDataSourceArray = sectionsDataSourceArray,
             let componentModel = sectionsDataSourceArray[indexPath.row] as? ComponentModel {
             if let atomEntry = componentModel.entry as? APAtomEntry {
+                
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Thumbnail Click", parameters: analyticsParams(for: componentModel))
+
                 if atomEntry.entryType == .video ||  atomEntry.entryType == .channel || atomEntry.entryType == .audio {
                     if let playable = atomEntry.playable() {
                         if let p = atomEntry.parentFeed,
@@ -541,6 +544,13 @@ import ZappPlugins
         
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if collectionViewFlowLayout?.isVertical() == false {
+            ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Carousal Bucket Swipe", parameters: analyticsParams(for: self.currentComponentModel))
+
+        }
+    }
+
     // MARK: - ComponentDelegate
     
     @nonobjc func componentViewController(_ componentViewController: (UIViewController & ComponentProtocol)?,
@@ -639,6 +649,18 @@ import ZappPlugins
                                             object: self)
         }
     }
+    
+    // MARK: - Analytics
+
+    func analyticsParams(for model: ComponentModel?) -> [String : Any] {
+        guard let model = model,
+            let entry = model.entry,
+            let extensions = entry.extensions,
+            let analyticsParams = extensions["analytics"] as? [String : Any] else {
+                return [:]
+        }
+        return analyticsParams
+    }
 }
 
 extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterViewDelegate {
@@ -673,17 +695,21 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
     func headerFooterViewDidSelect(_ headerFooterView: UniversalCollectionViewHeaderFooterView,
                                    at indexPath: IndexPath) {
         
-        guard let sectionsDataSourceArray = sectionsDataSourceArray,
-            let componentModel = sectionsDataSourceArray[indexPath.section] as? ComponentModel,
-            let headerModel =  componentModel.componentHeaderModel,
-            let urlScheme = headerModel.actionUrlScheme,
-            let linkURL = URL(string: urlScheme),
-            APUtils.shouldOpenURLExternally(linkURL) else {
-                return
-        }
+        if let sectionsDataSourceArray = sectionsDataSourceArray,
+            let componentModel = sectionsDataSourceArray[indexPath.section] as? ComponentModel {
+           
+            ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "View More Selected", parameters: analyticsParams(for: componentModel))
+            
+            guard let headerModel =  componentModel.componentHeaderModel,
+                let urlScheme = headerModel.actionUrlScheme,
+                let linkURL = URL(string: urlScheme),
+                APUtils.shouldOpenURLExternally(linkURL) else {
+                    return
+            }
 
-        self.dismiss(animated: true) {
-            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+            self.dismiss(animated: true) {
+                UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+            }
         }
     }
 }
