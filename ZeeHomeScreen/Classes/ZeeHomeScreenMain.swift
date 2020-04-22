@@ -12,7 +12,7 @@ import ZappSDK
 
 typealias PluginKeys = [String: String]
 
-public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol /*ZPAppLoadingHookProtocol*/ {
+public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol {
     
     public var configurationJSON: NSDictionary?
     
@@ -25,30 +25,13 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol /*ZPAppLoadi
     fileprivate var atomFeedUrl: String?
     var atomFeed: APAtomFeed?
     
-    //MARK: ZPAppLoadingHookProtocol
-    
-    required public override init() {
-        super.init()
-    }
 
-      public required init(configurationJSON: NSDictionary?) {
-          self.configurationJSON = configurationJSON
-      }
-/*
-    public func executeOnApplicationReady(displayViewController: UIViewController?, completion: (() -> Void)?) {
-
-        guard completion != nil else {
-            return
-        }
-        completion!()
-    }
-*/
     // MARK: ZPPluggableScreenProtocol
         
     required public init?(pluginModel: ZPPluginModel, screenModel: ZLScreenModel, dataSourceModel: NSObject?) {
         self.config = screenModel.general as? PluginKeys ?? PluginKeys()
         self.style = screenModel.style?.object as? PluginKeys ?? PluginKeys()
-        //build version c9fd52d0-3f68-493d-9ac9-89e7556364cc
+        self.configurationJSON = pluginModel.object["configuration_json"] as? NSDictionary
         
         guard
             let atomFeed = dataSourceModel as? APAtomFeed else {
@@ -63,10 +46,12 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol /*ZPAppLoadi
     public func createScreen() -> UIViewController {
         let bundle = Bundle.init(for: type(of: self))
         let result = SectionCompositeViewController(nibName: "SectionCompositeViewController", bundle: bundle)
-        result.modalPresentationStyle = .fullScreen
+
+        result.screenConfiguration = ScreenConfiguration.init(config: config, style: style, dataSource: atomFeed, configurationJSON: configurationJSON)
         result.setComponentModel((self.getBaseComponent())!)
         result.atomFeedUrl = self.atomFeedUrl
-        result.screenConfiguration = ScreenConfiguration.init(config: config, style: style, dataSource: atomFeed, configurationJSON: configurationJSON)
+        result.modalPresentationStyle = .fullScreen
+        
         return result
     }
     
