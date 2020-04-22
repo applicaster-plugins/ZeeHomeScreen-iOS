@@ -302,19 +302,25 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 
 - (void)promotionView:(APPromotionView *)promotionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     APModel *currentModel = self.dataSource[indexPath.row];
+    
+    [[[ZAAppConnector sharedInstance] analyticsDelegate] trackEventWithName:@"Carousal Banner Click" parameters:[self analyticsParamsForModel:currentModel]];
+    
+    UniversalCollectionViewCell *cell = (UniversalCollectionViewCell *)[self promotionView:promotionView
+                                                                    cellForItemAtIndexPath:indexPath];
+    
+    if ([self.delegate respondsToSelector:@selector(componentViewController:didSelectModel:componentModel:atIndexPath:completion:)]) {
+        [self.delegate componentViewController:self
+                                didSelectModel:currentModel
+                                componentModel:cell.componentViewController.componentModel
+                                   atIndexPath:indexPath
+                                    completion:nil];
+    }
+    
+}
 
-     UniversalCollectionViewCell *cell = (UniversalCollectionViewCell *)[self promotionView:promotionView
-                                                                                  cellForItemAtIndexPath:indexPath];
-              
-              if ([self.delegate respondsToSelector:@selector(componentViewController:didSelectModel:componentModel:atIndexPath:completion:)]) {
-                  [self.delegate componentViewController:self
-                                          didSelectModel:currentModel
-                                          componentModel:cell.componentViewController.componentModel
-                                             atIndexPath:indexPath
-                                              completion:nil];
-              }
-              
-       
+- (void)promotionViewWillBeginDragging:(APPromotionView *)promotionView {
+    [[[ZAAppConnector sharedInstance] analyticsDelegate] trackEventWithName:@"Carousal Banner Swipe" parameters:[self analyticsParamsForModel:self.currentComponentModel]];
+
 }
 
 - (void)promotionViewDidEndScrollingAnimation:(APPromotionView *)promotionView{
@@ -445,6 +451,22 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     UniversalCollectionViewCell *cell = (UniversalCollectionViewCell *)[self promotionView:self.carouselView
                                                                     cellForItemAtIndexPath:indexPath];
     cell.componentViewController.selectedModel = self.selectedModel;
+}
+
+#pragma mark - analytics
+
+- (NSDictionary *)analyticsParamsForModel:(APModel *)model {
+    NSDictionary *retval;
+    if ([model isKindOfClass:[ComponentModel class]]) {
+        ComponentModel *componentModel = (ComponentModel *)model;
+        if (componentModel.entry.extensions != nil) {
+            NSDictionary *extensions = componentModel.entry.extensions;
+            if (extensions[@"analytics"] != nil) {
+                retval = [[NSDictionary alloc] initWithDictionary: extensions[@"analytics"]];
+            }
+        }
+    }
+    return retval;
 }
 
 @end
