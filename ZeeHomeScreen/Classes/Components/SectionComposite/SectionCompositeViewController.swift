@@ -21,6 +21,11 @@ import ZappPlugins
     @IBOutlet weak var noDataLabel:UILabel?
     @IBOutlet weak var horizontalListInnerLabel: UILabel?
     
+    @IBOutlet weak var toggleSegmentedControl: CustomSegmentedControl?
+    @IBOutlet weak var epgContentView: UIView?
+    
+    @IBOutlet weak var topDistanceConstraint:NSLayoutConstraint?
+    
     public var atomFeedUrl: String?
     
     var screenConfiguration: ScreenConfiguration?
@@ -263,6 +268,36 @@ import ZappPlugins
         }
     }
     
+    private func prepareToggle() {
+        guard let toggle = toggleSegmentedControl else {
+            return
+        }
+        
+        toggle.isHidden = false
+    }
+    
+    @IBAction private func toggleControlAction(sender: UISegmentedControl) {
+        collectionView?.isHidden = sender.selectedSegmentIndex == 0 ? false : true
+        epgContentView?.isHidden = sender.selectedSegmentIndex == 0 ? true : false
+    }
+    
+    private func prepareEPGView() {
+
+        let screenID = screenConfiguration?.epgScreenID
+        guard let viewController = GARootHelper.uiBuilderScreen(by: screenID!,
+                                                                model: nil,
+                                                                fromURLScheme:nil) else {
+                                                                    APLoggerError("Can not create view controller with ScreenType: \(screenID!) isn't found")
+                                                                    return
+        }
+        (viewController as! GAScreenPluginGenericViewController).isContainerViewController = true
+        
+        addChild(viewController)
+        
+        epgContentView!.addSubview(viewController.view)
+        viewController.view.matchParent()
+    }
+    
     func loadComponent() {
      
         noDataLabel?.isHidden = true
@@ -284,7 +319,17 @@ import ZappPlugins
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-       // collectionView?.delegate = self
+        
+        if let config = self.screenConfiguration {
+            if config.shouldDisplayEPG && currentComponentModel?.title == "Live TV" {
+                if config.epgScreenID != nil {
+                    topDistanceConstraint?.constant = -64
+                    prepareToggle()
+                    prepareEPGView()
+                }
+            }
+        }
+
         collectionView?.collectionViewLayout = collectionFlowLayout()
         self.view.backgroundColor = UIColor.black
         
@@ -744,4 +789,37 @@ extension SectionCompositeViewController: ZPAdViewProtocol {
         
         adPresenter?.load(adConfig: adConfig)
     }
+}
+
+class CustomSegmentedControl: UISegmentedControl {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "NotoSans-SemiBold", size: 12)!,
+            NSAttributedString.Key.foregroundColor: UIColor.white
+        ], for: .normal)
+        
+        setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "NotoSans-SemiBold", size: 12)!,
+            NSAttributedString.Key.foregroundColor: UIColor.init(hex: "ff0091")
+        ], for: .selected)
+        layer.cornerRadius = self.bounds.size.height / 2.0
+        layer.borderColor = UIColor.white.withAlphaComponent(0.5).cgColor
+        tintColor = .red
+        layer.borderWidth = 0.5
+        layer.masksToBounds = true
+        clipsToBounds = true
+        for i in 0...subviews.count - 1 {
+            if let subview = subviews[i] as? UIImageView{
+                subview.layer.cornerRadius = self.bounds.size.height / 2.0
+                if i == self.selectedSegmentIndex {
+                    subview.backgroundColor = .white
+                } else {
+                    subview.backgroundColor = .clear
+                }
+            }
+        }
+    }
+    
 }

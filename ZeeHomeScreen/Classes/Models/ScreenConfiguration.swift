@@ -34,6 +34,8 @@ struct ScreenConfiguration {
     var paddingBottom: Int = 10
     var divider: Int = 10
     var shouldShowInterstitial = true
+    var shouldDisplayEPG = false
+    var epgScreenID: String?
 
     /// Init
     public init(config: [String: Any]?, style: [String: Any]?, dataSource: APAtomFeed?, configurationJSON: NSDictionary?) {
@@ -43,6 +45,14 @@ struct ScreenConfiguration {
         
         if let dataSource = dataSource {
             self.feed = dataSource
+        }
+        
+        if let shouldDisplayEPG = style["should_display_epg"] as? Int {
+            self.shouldDisplayEPG = shouldDisplayEPG != 0
+            
+            if let epgScreenID = style["epg_screen_id"] as? String {
+                self.epgScreenID = epgScreenID
+            }
         }
         
         if let numberOfComponentsToLoadStr = style["numberOfComponentsToLoad"] as? String,
