@@ -47,10 +47,10 @@ struct ScreenConfiguration {
             self.feed = dataSource
         }
         
-        if let shouldDisplayEPG = style["should_display_epg"] as? Int {
-            self.shouldDisplayEPG = shouldDisplayEPG != 0
+        if let shouldDisplayEPG = config["should_display_epg"] as? String {
+            self.shouldDisplayEPG = Int(shouldDisplayEPG) != 0
             
-            if let epgScreenID = style["epg_screen_id"] as? String {
+            if let epgScreenID = config["epg_screen_id"] as? String {
                 self.epgScreenID = epgScreenID
             }
         }
