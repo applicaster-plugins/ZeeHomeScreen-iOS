@@ -319,6 +319,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 }
 
 - (void)promotionViewWillBeginDragging:(APPromotionView *)promotionView {
+     self.carouselView.autoSwipeEnabled = YES;
     [[[ZAAppConnector sharedInstance] analyticsDelegate] trackEventWithName:@"Carousal Banner Swipe" parameters:[self analyticsParamsForModel:self.currentComponentModel]];
 
 }
