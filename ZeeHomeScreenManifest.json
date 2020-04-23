@@ -12,7 +12,7 @@
   "platform": "ios",
   "author_name": "Miri Vecselboim",
   "author_email": "m.vecselboim@applicaster.com",
-  "manifest_version": "2.1.4",
+  "manifest_version": "2.1.7",
   "name": "Zee5HomeScreen",
   "description": "Zee5 Home Screen",
   "type": "general",
@@ -20,7 +20,7 @@
   "identifier": "zee5_home_screen",
   "ui_builder_support": true,
   "dependency_name": "ZeeHomeScreen",
-  "dependency_version": "2.1.4",
+  "dependency_version": "2.1.7",
   "whitelisted_account_ids": [
     "5cb825e102507200087bbdcc",
     "5c3b12762756be0008779106"
@@ -83,17 +83,37 @@
         "placeholder": "3",
         "initial_value": "3",
         "label_tooltip": "Represent the max gap between the last visible component to the last compoentn. for example: if the list has 8 componenet the next loadin invoke once the 5 component will be visible."
+      },
+      {
+        "group": true,
+        "label": "EPG section",
+        "tooltip": "Add more content for the screen ( additional DS )",
+        "folded": true,
+        "fields": [
+          {
+            "key": "should_display_epg",
+            "tooltip_text": "The screen should support EPG as part of the screen( use for LIVE TV tab)",
+            "type": "checkbox",
+            "initial_value": 0,
+            "default": 0
+          },
+          {
+            "type": "text_input",
+            "key": "epg_screen_id",
+            "label": "EPG Screen ID"
+          }
+        ]
       }
     ]
   },
   "custom_configuration_fields": [
-    {
-      "type": "checkbox",
-      "key": "should_display_interstitial",
-      "tooltip_text": "Display Interstitial",
-      "initial_value": 1,
-      "default": 1
-    }
+      {
+        "type": "checkbox",
+        "key": "should_display_interstitial",
+        "tooltip_text": "Display Interstitial",
+        "initial_value": 1,
+        "default": 1
+      }
   ],
   "targets": [
     "mobile"

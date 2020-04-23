@@ -285,15 +285,15 @@ import ApplicasterSDK
             // Retrieve margings from Collection CAComponentModel (base collection component) or Group Cell CAComponentModel,
             // Group component model rertrieving from first cell data from section body
             
-            var minimumLineSpacing: CGFloat = CGFloat(screenConfiguration.divider)
-            var minimumInteritemSpacing: CGFloat = CGFloat(screenConfiguration.divider)
+            var minimumLineSpacing: CGFloat = screenConfiguration != nil ? CGFloat(screenConfiguration.divider) : 10.0
+            var minimumInteritemSpacing: CGFloat = screenConfiguration != nil ? CGFloat(screenConfiguration.divider) : 10.0
             
             if self.sectionsDataSourceArray != nil, sectionIndex < self.sectionsDataSourceArray!.count, let component: ComponentModel = self.sectionsDataSourceArray![sectionIndex] as? CellModel, let divider = component.divider  {
                 minimumLineSpacing = CGFloat(divider)
                 minimumInteritemSpacing = CGFloat(divider)
             }
 
-            var edgeInsets              =  UIEdgeInsets.init(top: 0.0, left: CGFloat(screenConfiguration.paddingHorizontal), bottom: 0.0, right: CGFloat(screenConfiguration.paddingHorizontal))
+            var edgeInsets              =  UIEdgeInsets.init(top: 0.0, left: screenConfiguration != nil ? CGFloat(screenConfiguration.paddingHorizontal) : 0.0, bottom: 0.0, right: screenConfiguration != nil ? CGFloat(screenConfiguration.paddingHorizontal) : 0.0)
             if self.sectionsDataSourceArray != nil, sectionIndex < self.sectionsDataSourceArray!.count, let component: ComponentModel = self.sectionsDataSourceArray![sectionIndex] as? CellModel, let divider = component.divider {
                 edgeInsets = UIEdgeInsets.init(top: 0.0, left: CGFloat(divider), bottom: 0.0, right: CGFloat(divider))
             }
