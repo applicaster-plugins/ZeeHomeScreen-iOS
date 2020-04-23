@@ -70,6 +70,12 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol /*ZPAppLoadi
         return result
     }
     
+    public var customTitle: String? {
+        return CustomizationManager.manager.customTitle
+    }
+    
+    // MARK: Private
+    
     func getBaseComponent() -> ComponentModelProtocol? {
         if let feed = self.atomFeed {
             let model = ComponentModel.init(entry: feed, threshold: 3)

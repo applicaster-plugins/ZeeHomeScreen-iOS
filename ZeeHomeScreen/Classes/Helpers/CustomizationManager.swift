@@ -94,6 +94,7 @@ public enum ComponentTypes: Equatable, ComponentTypeProtocol {
         return currValue as? [String: [String: [String: Any]]]
     }()
     
+    public var customTitle: String?
     
     class func plistPathForName(_ name: String) -> String? {
         return Bundle(for: CustomizationManager.self).path(forResource: name,

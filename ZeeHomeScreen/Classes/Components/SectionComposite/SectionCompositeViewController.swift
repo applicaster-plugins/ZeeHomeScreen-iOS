@@ -421,6 +421,7 @@ import ZappPlugins
             let componentModel = sectionsDataSourceArray[indexPath.row] as? ComponentModel {
             if let atomEntry = componentModel.entry as? APAtomEntry {
                 
+                CustomizationManager.manager.customTitle = componentModel.title
                 ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Thumbnail Click", parameters: analyticsParams(for: componentModel))
 
                 if atomEntry.entryType == .video ||  atomEntry.entryType == .channel || atomEntry.entryType == .audio {
@@ -698,6 +699,7 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
         if let sectionsDataSourceArray = sectionsDataSourceArray,
             let componentModel = sectionsDataSourceArray[indexPath.section] as? ComponentModel {
            
+            CustomizationManager.manager.customTitle = componentModel.title
             ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "View More Selected", parameters: analyticsParams(for: componentModel))
             
             guard let headerModel =  componentModel.componentHeaderModel,
@@ -706,6 +708,7 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
                 APUtils.shouldOpenURLExternally(linkURL) else {
                     return
             }
+            
 
             self.dismiss(animated: true) {
                 UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
