@@ -599,7 +599,7 @@ import ZappPlugins
 
     // MARK: - ComponentDelegate
     
-    @nonobjc func componentViewController(_ componentViewController: (UIViewController & ComponentProtocol)?,
+    @objc public func componentViewController(_ componentViewController: (UIViewController & ComponentProtocol)?,
                                  didSelectModel model: NSObject?,
                                  componentModel: ComponentModelProtocol?,
                                  at indexPath: IndexPath?,
@@ -613,6 +613,7 @@ import ZappPlugins
                         if let p = atomEntry.parentFeed,
                             let pipesObject = p.pipesObject {
                             playable.pipesObject = pipesObject as NSDictionary
+                            playable.play()
                         }
                         else {
                             playable.play()
