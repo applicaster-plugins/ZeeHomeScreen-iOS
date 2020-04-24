@@ -52,6 +52,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 - (void)setComponentModel:(ComponentModel *)model {
     _componentModel = model;
     
+    self.carouselView.delegate = self;
     [self removeObservers];
     [self addObservers];
     
@@ -292,7 +293,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
         [cell.componentViewController setComponentModel:cellModel];
     }
     if ([cell.componentViewController respondsToSelector:@selector(setComponentDataSourceModel:)]) {
-        [cell.componentViewController setComponentDataSourceModel:cellModel]; 
+        [cell.componentViewController setComponentDataSourceModel:cellModel];
     }
    
     return cell;
@@ -319,7 +320,6 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 }
 
 - (void)promotionViewWillBeginDragging:(APPromotionView *)promotionView {
-     self.carouselView.autoSwipeEnabled = YES;
     [[[ZAAppConnector sharedInstance] analyticsDelegate] trackEventWithName:@"Carousal Banner Swipe" parameters:[self analyticsParamsForModel:self.currentComponentModel]];
 
 }
