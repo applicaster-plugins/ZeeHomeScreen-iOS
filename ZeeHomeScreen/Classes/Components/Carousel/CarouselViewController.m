@@ -17,6 +17,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 @interface CarouselViewController ()
 
 @property (nonatomic, assign) BOOL isRTL;
+@property (nonatomic, assign) NSInteger itemsLimit;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, assign) BOOL componentInitialized;
 @property (nonatomic, strong) ComponentModel *fallbackComponent;
@@ -51,7 +52,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 
 - (void)setComponentModel:(ComponentModel *)model {
     _componentModel = model;
-    
+    _itemsLimit = model.screenConfiguration.heroCellItemsLimit;
     self.carouselView.delegate = self;
     [self removeObservers];
     [self addObservers];
@@ -149,8 +150,8 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 
 - (void)setDataSource:(id)dataSource {
     _dataSource = dataSource;
-    //TO DO: GET THE DATA SOURCE LIMIT FROM PLUGIN CONFIGURATION
-    NSInteger dataSourceLimit = 10;
+
+    NSInteger dataSourceLimit = self.itemsLimit;
     
     if (_dataSource.count > dataSourceLimit) {
         NSMutableArray *newDataSource = [[NSMutableArray alloc] initWithCapacity:dataSourceLimit];

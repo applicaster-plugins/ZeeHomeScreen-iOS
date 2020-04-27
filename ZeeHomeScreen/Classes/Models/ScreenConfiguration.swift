@@ -15,7 +15,7 @@ enum AdditionalContentType: String {
     case banners = "banner_ds"
 }
 
-struct ScreenConfiguration {
+@objc open class ScreenConfiguration: NSObject {
     
     var feed: APAtomFeed?
     
@@ -36,6 +36,7 @@ struct ScreenConfiguration {
     var shouldShowInterstitial = true
     var shouldDisplayEPG = false
     var epgScreenID: String?
+    @objc open var heroCellItemsLimit = 7
 
     /// Init
     public init(config: [String: Any]?, style: [String: Any]?, dataSource: APAtomFeed?, configurationJSON: NSDictionary?) {
@@ -87,6 +88,10 @@ struct ScreenConfiguration {
         
         if let configurationJSON = configurationJSON as? [String: Any], let showInterstitial: Int = configurationJSON["should_display_interstitial"] as? Int {
             shouldShowInterstitial = showInterstitial != 0
+        }
+        
+        if let configurationJSON = configurationJSON as? [String: Any], let itemsInHeroCell: Int = configurationJSON["hero_cell_items_limit"] as? Int {
+            heroCellItemsLimit = itemsInHeroCell
         }
         
         ds = dataSource?.linkURL as String?

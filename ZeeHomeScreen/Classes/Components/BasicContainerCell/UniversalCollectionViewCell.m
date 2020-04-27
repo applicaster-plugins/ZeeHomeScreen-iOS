@@ -68,10 +68,6 @@
     if ([self.componentViewController respondsToSelector:@selector(setComponentModel:)]) {
         self.componentViewController.componentModel = componentModel;
     }
-
-//    if (componentModel.attributes[kAttributesFlexibleHeight] || componentModel.attributes[kAttributesFlexibleWidth]) {
-//        [self updateFlexibilityConstraints:componentModel];
-//    }
 }
 
 - (void)setBackgroundImage:(nullable NSString *)imageName {
