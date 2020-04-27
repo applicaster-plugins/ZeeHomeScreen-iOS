@@ -77,6 +77,8 @@ import ApplicasterSDK
     
     open var componentHeaderModel: HeaderModel?
     
+    @objc open var screenConfiguration: ScreenConfiguration?
+    
     // the component cellModel description.
     open var cellModel: CellModel?
     

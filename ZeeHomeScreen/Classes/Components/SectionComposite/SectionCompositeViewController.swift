@@ -444,6 +444,7 @@ import ZappPlugins
             if let componentModel = sectionsDataSourceArray[index] as? ComponentModel,
                 let layoutName = componentModel.layoutStyle {
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewCell {
+                    componentModel.screenConfiguration = screenConfiguration
                     cell.backgroundColor = UIColor.darkGray
                     cell.setComponentModel(componentModel,
                                            model: componentModel,
@@ -755,10 +756,7 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
                     return
             }
             
-
-            self.dismiss(animated: true) {
-                UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
-            }
+             UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
         }
     }
 }

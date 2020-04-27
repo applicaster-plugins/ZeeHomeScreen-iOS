@@ -23,7 +23,6 @@ extern NSString * const kCarouselSwipedNotification;
 @interface CarouselViewController : UIViewController  <ComponentProtocol, ComponentDelegate, APPromotionViewDataSource, APPromotionViewDelegate>
 
 @property (nonatomic, weak) id <ComponentDelegate> delegate;
-
 @property (nonatomic, weak) IBOutlet APPromotionView *carouselView;
 @property (nonatomic, weak) IBOutlet UIView *borderView;
 @property (strong, nonatomic) IBOutletCollection(APImageView) NSArray *imageViewCollectin;
