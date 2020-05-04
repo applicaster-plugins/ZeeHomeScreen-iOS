@@ -63,9 +63,7 @@ import ZappPlugins
             if let sectionsDataSourceArray = sectionsDataSourceArray,
                 sectionsDataSourceArray.count > 0 {
                 registerLayouts(sectionsArray: sectionsDataSourceArray)
-                DispatchQueue.main.async {
-                    self.collectionView?.reloadData()
-                }
+                collectionView?.reloadData()
             }
         }
     }
