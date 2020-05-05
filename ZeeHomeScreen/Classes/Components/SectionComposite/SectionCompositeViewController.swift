@@ -443,7 +443,11 @@ import ZappPlugins
                 let layoutName = componentModel.layoutStyle {
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewCell {
                     componentModel.screenConfiguration = screenConfiguration
-                    cell.backgroundColor = UIColor.darkGray
+                    if layoutName == "Family_Ganges_lazy_loading_1" {
+                        cell.backgroundColor = UIColor.clear
+                    } else {
+                        cell.backgroundColor = UIColor.darkGray
+                    }
                     cell.setComponentModel(componentModel,
                                            model: componentModel,
                                            view: cell.contentView,

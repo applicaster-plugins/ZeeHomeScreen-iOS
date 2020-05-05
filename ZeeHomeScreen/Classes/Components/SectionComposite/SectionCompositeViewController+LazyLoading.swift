@@ -188,6 +188,22 @@ extension SectionCompositeViewController {
             DatasourceManager.sharedInstance().load(atomFeedUrl: nextPageUrl, parentModel: liveComponentModel) { (component) in
                 guard let component = component as? ComponentModel else {
                     self.isLoading = false
+                    var indexPath: IndexPath!
+                    
+                    if let _ = self.sectionsDataSourceArray![self.sectionsDataSourceArray!.count - 2] as? CellModel {
+                        indexPath = IndexPath.init(row: self.sectionsDataSourceArray!.count - 2, section: 0)
+                        UIView.animate(withDuration: 0.2) {
+                             self.collectionView?.scrollToItem(at: indexPath, at: .right, animated: false)
+                        }
+                    } else {
+                        indexPath = IndexPath.init(row: 0, section: self.sectionsDataSourceArray!.count - 2)
+                        UIView.animate(withDuration: 0.2) {
+                             self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: false)
+                        }
+                        
+                    }
+                    
+                    
                     return
                 }
                 self.liveComponentModel = component

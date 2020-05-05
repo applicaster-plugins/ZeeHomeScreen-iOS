@@ -10,13 +10,11 @@ import Foundation
 class LazyLoadingViewController: UIViewController, ComponentProtocol, ComponentDelegate {
     var componentDataSourceModel: NSObject?
     
-    let activityLoader: ActivityLoader = ActivityLoader(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-//    @IBOutlet weak var loadingIndicator : UIActivityIndicatorView?
+    @IBOutlet weak var loadingIndicator : UIActivityIndicatorView?
     
     public var componentModel: ComponentModelProtocol? {
         didSet {
-            //activityLoader.startAnimating()
-//            loadingIndicator?.startAnimating()
+            loadingIndicator?.startAnimating()
         }
     }
     
@@ -31,16 +29,11 @@ class LazyLoadingViewController: UIViewController, ComponentProtocol, ComponentD
         super.viewDidLoad()
 
         view.backgroundColor = .clear
-        view.addSubview(activityLoader)
-        activityLoader.startAnimating()
-        activityLoader.translatesAutoresizingMaskIntoConstraints = false
-        activityLoader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        activityLoader.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     deinit {
-        activityLoader.stopAnimating()
-//        loadingIndicator?.stopAnimating()
+        
+        loadingIndicator?.stopAnimating()
     }
     
 }

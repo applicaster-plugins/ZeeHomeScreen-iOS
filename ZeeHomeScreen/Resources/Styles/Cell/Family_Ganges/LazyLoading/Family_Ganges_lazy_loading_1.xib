@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LazyLoadingViewController" customModule="ZeeHomeScreen" customModuleProvider="target">
             <connections>
+                <outlet property="loadingIndicator" destination="Ddz-Ye-Ej8" id="s9o-eE-Wqm"/>
                 <outlet property="view" destination="XHA-JW-44b" id="sgm-MG-a6i"/>
             </connections>
         </placeholder>
@@ -18,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="346" height="94"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Ddz-Ye-Ej8">
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Ddz-Ye-Ej8">
                     <rect key="frame" x="163" y="37" width="20" height="20"/>
                 </activityIndicatorView>
             </subviews>
