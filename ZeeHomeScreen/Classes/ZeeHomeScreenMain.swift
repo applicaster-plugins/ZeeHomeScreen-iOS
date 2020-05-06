@@ -46,7 +46,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol {
     public func createScreen() -> UIViewController {
         let bundle = Bundle.init(for: type(of: self))
         let result = SectionCompositeViewController(nibName: "SectionCompositeViewController", bundle: bundle)
-
+        mainViewController = result
         result.screenConfiguration = ScreenConfiguration.init(config: config, style: style, dataSource: atomFeed, configurationJSON: configurationJSON)
         result.setComponentModel((self.getBaseComponent())!)
         result.atomFeedUrl = self.atomFeedUrl
@@ -56,7 +56,8 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol {
     }
     
     public var customTitle: String? {
-        return CustomizationManager.manager.customTitle
+        return mainViewController?.currentComponentModel?.title
+        ?? String()
     }
     
     // MARK: Private
