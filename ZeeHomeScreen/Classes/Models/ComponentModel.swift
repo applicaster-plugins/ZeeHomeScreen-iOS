@@ -111,6 +111,7 @@ import ApplicasterSDK
         self.entry = entry
         self.title = entry.title
         self.identifier = entry.identifier
+        
         if let content = entry.content,
             let src = content.src {
             self.dsUrl = src
