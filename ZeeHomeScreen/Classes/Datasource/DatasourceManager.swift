@@ -83,6 +83,8 @@ import ApplicasterSDK
         var feedComponent: ComponentModel!
         if let extensions = componentModel.entry?.extensions, let _ = extensions["ui_component"] {
             feedComponent = ComponentModel.init(entry: componentModel.entry!, threshold: 3)
+            feedComponent.nextPage = feedComponent.getNextPageFromFeed(entry: feed)
+            
         } else {
             feedComponent = ComponentModel.init(entry: feed, threshold: 3)
         }
