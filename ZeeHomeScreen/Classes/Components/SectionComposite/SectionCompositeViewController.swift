@@ -8,6 +8,7 @@
 import ApplicasterSDK
 import Foundation
 import ZappPlugins
+import Zee5CoreSDK
 
 @objc class SectionCompositeViewController: BaseCollectionComponentViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ComponentProtocol, ComponentDelegate, UIScrollViewDelegate {
     
@@ -29,7 +30,7 @@ import ZappPlugins
     public var atomFeedUrl: String?
     
     var screenConfiguration: ScreenConfiguration?
-    
+    var userSettings: [SettingsDataModel]? = Zee5UserSettingsManager.shared.getUserSettingsModal()
     var liveComponents = [ComponentModelProtocol]()
     
     private var adPresenter: ZPAdPresenterProtocol?
@@ -350,6 +351,17 @@ import ZappPlugins
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if let oldUserSettings = userSettings {
+            let newUserSettings = Zee5UserSettingsManager.shared.getUserSettingsModal()//ZAAppConnector.sharedInstance().storageDelegate?.sessionStorageValue(for: "user_settings", namespace: "zee5sessionstorage") //"zee5sessionstorage"
+
+            if oldUserSettings != newUserSettings {
+                userSettings = Zee5UserSettingsManager.shared.getUserSettingsModal()//ZAAppConnector.sharedInstance().storageDelegate?.sessionStorageValue(for: "user_settings", namespace: "zee5sessionstorage")
+//                sectionsDataSourceArray = nil
+//                prepareSections()
+            }
+        }
+        
         if componentInitialized == false {
             componentInitialized = true
             collectionView?.collectionViewLayout = collectionFlowLayout()
