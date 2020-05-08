@@ -30,7 +30,7 @@ import Zee5CoreSDK
     public var atomFeedUrl: String?
     
     var screenConfiguration: ScreenConfiguration?
-    var userSettings: [SettingsDataModel]? = Zee5UserSettingsManager.shared.getUserSettingsModal()
+    var userSettings: [SettingsDataModel]?
     var liveComponents = [ComponentModelProtocol]()
     
     private var adPresenter: ZPAdPresenterProtocol?
@@ -352,13 +352,28 @@ import Zee5CoreSDK
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let oldUserSettings = userSettings {
-            let newUserSettings = Zee5UserSettingsManager.shared.getUserSettingsModal()//ZAAppConnector.sharedInstance().storageDelegate?.sessionStorageValue(for: "user_settings", namespace: "zee5sessionstorage") //"zee5sessionstorage"
-
-            if oldUserSettings != newUserSettings {
-                userSettings = Zee5UserSettingsManager.shared.getUserSettingsModal()//ZAAppConnector.sharedInstance().storageDelegate?.sessionStorageValue(for: "user_settings", namespace: "zee5sessionstorage")
-//                sectionsDataSourceArray = nil
-//                prepareSections()
+        if let oldUserSettings = userSettings, let newUserSettings = Zee5UserSettingsManager.shared.getUserSettingsModal() {
+            
+            let newUserSettingsDisplayLanguage = newUserSettings.first(where: { (model) -> Bool in
+                return model.key == "display_language"
+            })
+            let oldUserSettingsDisplayLanguage = oldUserSettings.first(where: { (model) -> Bool in
+                return model.key == "display_language"
+            })
+            
+            let newUserSettingsContentLanguage = newUserSettings.first(where: { (model) -> Bool in
+                return model.key == "content_language"
+            })
+            let oldUserSettingsContentLanguage = oldUserSettings.first(where: { (model) -> Bool in
+                return model.key == "content_language"
+            })
+            
+            //check if display / content languages was changed and we need to reload root view controller of the home screen
+            if newUserSettingsDisplayLanguage?.value != oldUserSettingsDisplayLanguage?.value || newUserSettingsContentLanguage?.value != oldUserSettingsContentLanguage?.value {
+                userSettings = newUserSettings
+                DispatchQueue.main.async {
+                    ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
+                }
             }
         }
         
