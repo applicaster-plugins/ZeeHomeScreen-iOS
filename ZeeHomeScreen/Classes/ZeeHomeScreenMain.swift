@@ -9,6 +9,7 @@ import ZappPlugins
 import UIKit
 import ApplicasterSDK
 import ZappSDK
+import Zee5CoreSDK
 
 typealias PluginKeys = [String: String]
 
@@ -47,6 +48,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol {
         let bundle = Bundle.init(for: type(of: self))
         let result = SectionCompositeViewController(nibName: "SectionCompositeViewController", bundle: bundle)
         mainViewController = result
+        result.userSettings = Zee5UserSettingsManager.shared.getUserSettingsModal()
         result.screenConfiguration = ScreenConfiguration.init(config: config, style: style, dataSource: atomFeed, configurationJSON: configurationJSON)
         result.setComponentModel((self.getBaseComponent())!)
         result.atomFeedUrl = self.atomFeedUrl
