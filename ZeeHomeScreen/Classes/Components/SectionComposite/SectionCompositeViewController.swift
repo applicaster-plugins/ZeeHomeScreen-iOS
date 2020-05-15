@@ -283,6 +283,7 @@ import Zee5CoreSDK
     private func prepareEPGView() {
 
         let screenID = screenConfiguration?.epgScreenID
+
         guard let viewController = GARootHelper.uiBuilderScreen(by: screenID!,
                                                                 model: nil,
                                                                 fromURLScheme:nil) else {
@@ -290,9 +291,8 @@ import Zee5CoreSDK
                                                                     return
         }
         (viewController as! GAScreenPluginGenericViewController).isContainerViewController = true
-        
         addChild(viewController)
-        
+
         epgContentView!.addSubview(viewController.view)
         viewController.view.matchParent()
     }
@@ -352,29 +352,8 @@ import Zee5CoreSDK
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let oldUserSettings = userSettings, let newUserSettings = Zee5UserSettingsManager.shared.getUserSettingsModal() {
-            
-            let newUserSettingsDisplayLanguage = newUserSettings.first(where: { (model) -> Bool in
-                return model.key == "display_language"
-            })
-            let oldUserSettingsDisplayLanguage = oldUserSettings.first(where: { (model) -> Bool in
-                return model.key == "display_language"
-            })
-            
-            let newUserSettingsContentLanguage = newUserSettings.first(where: { (model) -> Bool in
-                return model.key == "content_language"
-            })
-            let oldUserSettingsContentLanguage = oldUserSettings.first(where: { (model) -> Bool in
-                return model.key == "content_language"
-            })
-            
-            //check if display / content languages was changed and we need to reload root view controller of the home screen
-            if newUserSettingsDisplayLanguage?.value != oldUserSettingsDisplayLanguage?.value || newUserSettingsContentLanguage?.value != oldUserSettingsContentLanguage?.value {
-                userSettings = newUserSettings
-                DispatchQueue.main.async {
-                    ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
-                }
-            }
+        if !updateContentAndDisplayLanguageIfNeeded() {
+            reloadContinueWatchingRailsIfNeeded()
         }
         
         if componentInitialized == false {
@@ -416,6 +395,40 @@ import Zee5CoreSDK
     
     deinit {
         
+    }
+    
+    private func reloadContinueWatchingRailsIfNeeded() {
+
+    }
+    
+    private func updateContentAndDisplayLanguageIfNeeded() -> Bool {
+        if let oldUserSettings = userSettings, let newUserSettings = Zee5UserSettingsManager.shared.getUserSettingsModal() {
+            
+            let newUserSettingsDisplayLanguage = newUserSettings.first(where: { (model) -> Bool in
+                return model.key == "display_language"
+            })
+            let oldUserSettingsDisplayLanguage = oldUserSettings.first(where: { (model) -> Bool in
+                return model.key == "display_language"
+            })
+            
+            let newUserSettingsContentLanguage = newUserSettings.first(where: { (model) -> Bool in
+                return model.key == "content_language"
+            })
+            let oldUserSettingsContentLanguage = oldUserSettings.first(where: { (model) -> Bool in
+                return model.key == "content_language"
+            })
+            
+            //check if display / content languages was changed and we need to reload root view controller of the home screen
+            if newUserSettingsDisplayLanguage?.value != oldUserSettingsDisplayLanguage?.value || newUserSettingsContentLanguage?.value != oldUserSettingsContentLanguage?.value {
+                userSettings = newUserSettings
+                DispatchQueue.main.async {
+                    ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
+                }
+                return true
+            }
+            return false
+        }
+        return false
     }
     
     // MARK: - CollectionFlowLayout Customization
@@ -784,8 +797,9 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
                 APUtils.shouldOpenURLExternally(linkURL) else {
                     return
             }
-            
-             UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+            self.dismiss(animated: true) {
+                UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+            }
         }
     }
 }
