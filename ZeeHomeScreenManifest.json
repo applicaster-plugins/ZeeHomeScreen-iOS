@@ -10,9 +10,9 @@
     "git@github.com:applicaster-plugins/ZeeHomeScreen-iOS.git"
   ],
   "platform": "ios",
-  "author_name": "Miri Vecselboim",
-  "author_email": "m.vecselboim@applicaster.com",
-  "manifest_version": "2.2.8",
+  "author_name": "S. Borkin",
+  "author_email": "s.borkin@applicaster.com",
+  "manifest_version": "2.2.9",
   "name": "Zee5HomeScreen",
   "description": "Zee5 Home Screen",
   "type": "general",

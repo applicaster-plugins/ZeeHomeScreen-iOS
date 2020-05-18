@@ -699,6 +699,22 @@ import ApplicasterSDK
     @objc public func isVertical() -> Bool {
         return scrollDirection == .vertical
     }
+    
+    
+    //    /**
+    //     For a given index path, retrieve the cached cell size, if it exists, otherwise get the estimated size from the
+    //     cell's component attributes.
+    //
+    //     - parameters indexPath: The index path of the cell whose size is being calculated.
+    //     - parameters сollectionItemTypes: Items type of the section group
+    //
+    //     - returns: The size to be used for the cell.
+    //     */
+    func cellSize(for indexPath: IndexPath,
+                  сollectionItemTypes: ComponentHelper.ComponentItemTypes) -> CGSize? {
+        //        return CGSize.init(width: 150.0, height: 150.0)
+        return  /*cachedIndexPathSizes[indexPath] ??*/ estimatedCellSize(for: indexPath, сollectionItemTypes: сollectionItemTypes)
+    }
 }
 
 extension SectionCompositeFlowLayout {
@@ -784,21 +800,6 @@ extension SectionCompositeFlowLayout {
         }
         
         return CGSize.zero //init(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 4)
-    }
-
-    //    /**
-    //     For a given index path, retrieve the cached cell size, if it exists, otherwise get the estimated size from the
-    //     cell's component attributes.
-    //
-    //     - parameters indexPath: The index path of the cell whose size is being calculated.
-    //     - parameters сollectionItemTypes: Items type of the section group
-    //
-    //     - returns: The size to be used for the cell.
-    //     */
-    func cellSize(for indexPath: IndexPath,
-                  сollectionItemTypes: ComponentHelper.ComponentItemTypes) -> CGSize? {
-        //        return CGSize.init(width: 150.0, height: 150.0)
-        return  /*cachedIndexPathSizes[indexPath] ??*/ estimatedCellSize(for: indexPath, сollectionItemTypes: сollectionItemTypes)
     }
     
     //    /**
