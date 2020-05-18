@@ -29,5 +29,6 @@ Pod::Spec.new do |s|
   s.dependency 'ApplicasterSDK'
   s.dependency 'ApplicasterUIKit'
   s.dependency 'ZappSDK'
+  s.dependency 'Zee5CoreSDK'
 
 end
