@@ -30,7 +30,9 @@ import Zee5CoreSDK
     public var atomFeedUrl: String?
     
     var screenConfiguration: ScreenConfiguration?
-    var userSettings: [SettingsDataModel]?
+    var userType: UserType?
+    var displayLanguage: String?
+    var contentLanguages: String?
     var liveComponents = [ComponentModelProtocol]()
     
     private var adPresenter: ZPAdPresenterProtocol?
@@ -311,8 +313,9 @@ import Zee5CoreSDK
                                                                                       value: "",
                                                                                       namespace: nil)
         }
-        
-        prepareSections()
+        if currentComponentModel?.identifier != "ContinueWatching" {
+            prepareSections()
+        }
     }
     
     // MARK: - View lifecycle
@@ -352,14 +355,16 @@ import Zee5CoreSDK
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !updateContentAndDisplayLanguageIfNeeded() {
-            reloadContinueWatchingRailsIfNeeded()
-        }
-        
         if componentInitialized == false {
             componentInitialized = true
             collectionView?.collectionViewLayout = collectionFlowLayout()
             loadComponent()
+        }
+        
+        if !updateContentAndDisplayLanguageIfNeeded() {
+            if !updateUserStatusIfNeeded() {
+                reloadContinueWatchingRailsIfNeeded()
+            }
         }
     }
     
@@ -398,35 +403,34 @@ import Zee5CoreSDK
     }
     
     private func reloadContinueWatchingRailsIfNeeded() {
-
+        if currentComponentModel?.identifier == "ContinueWatching" {
+            sectionsDataSourceArray = []
+            prepareSections()
+        }
+    }
+    
+    private func updateUserStatusIfNeeded() -> Bool {
+        if let userType = userType, userType != User.shared.getType() {
+            self.userType = User.shared.getType()
+            DispatchQueue.main.async {
+                ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
+            }
+            return true
+        }
+        return false
     }
     
     private func updateContentAndDisplayLanguageIfNeeded() -> Bool {
-        if let oldUserSettings = userSettings, let newUserSettings = Zee5UserSettingsManager.shared.getUserSettingsModal() {
+        if let oldDisplayLanguage = displayLanguage, let oldContentLanguages = contentLanguages {
             
-            let newUserSettingsDisplayLanguage = newUserSettings.first(where: { (model) -> Bool in
-                return model.key == "display_language"
-            })
-            let oldUserSettingsDisplayLanguage = oldUserSettings.first(where: { (model) -> Bool in
-                return model.key == "display_language"
-            })
-            
-            let newUserSettingsContentLanguage = newUserSettings.first(where: { (model) -> Bool in
-                return model.key == "content_language"
-            })
-            let oldUserSettingsContentLanguage = oldUserSettings.first(where: { (model) -> Bool in
-                return model.key == "content_language"
-            })
-            
-            //check if display / content languages was changed and we need to reload root view controller of the home screen
-            if newUserSettingsDisplayLanguage?.value != oldUserSettingsDisplayLanguage?.value || newUserSettingsContentLanguage?.value != oldUserSettingsContentLanguage?.value {
-                userSettings = newUserSettings
+            if oldDisplayLanguage != Zee5UserDefaultsManager.shared.getSelectedDisplayLanguage() || oldContentLanguages != Zee5UserDefaultsManager.shared.getSelectedContentLanguages() {
+                displayLanguage = Zee5UserDefaultsManager.shared.getSelectedDisplayLanguage()
+                contentLanguages = Zee5UserDefaultsManager.shared.getSelectedContentLanguages()
                 DispatchQueue.main.async {
                     ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
                 }
                 return true
             }
-            return false
         }
         return false
     }
