@@ -802,6 +802,7 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
                     return
             }
             self.dismiss(animated: true) {
+                ZAAppConnector.sharedInstance().audioSessionDelegate?.deactivateAudioSession()
                 UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
             }
         }
