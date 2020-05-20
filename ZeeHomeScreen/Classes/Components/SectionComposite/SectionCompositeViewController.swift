@@ -487,7 +487,8 @@ import Zee5CoreSDK
                 let layoutName = componentModel.layoutStyle {
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewCell {
                     componentModel.screenConfiguration = screenConfiguration
-                    if layoutName == "Family_Ganges_lazy_loading_1" {
+                    if layoutName == "Family_Ganges_lazy_loading_1" ||
+                       layoutName == "ZeeHomeScreen_Family_Ganges_banner_1" {
                         cell.backgroundColor = UIColor.clear
                     } else {
                         cell.backgroundColor = UIColor.darkGray
