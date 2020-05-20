@@ -273,13 +273,12 @@ import Zee5CoreSDK
         guard let toggle = toggleSegmentedControl else {
             return
         }
-        
+        toggle.setButtonsTitles(buttonsTitles: ["Live TV", "Channel Guide"])
+        toggle.changeToIndex = { [weak self] index in
+            self?.collectionView?.isHidden = index == 0 ? false : true
+            self?.epgContentView?.isHidden = index == 0 ? true : false
+        }
         toggle.isHidden = false
-    }
-    
-    @IBAction private func toggleControlAction(sender: UISegmentedControl) {
-        collectionView?.isHidden = sender.selectedSegmentIndex == 0 ? false : true
-        epgContentView?.isHidden = sender.selectedSegmentIndex == 0 ? true : false
     }
     
     private func prepareEPGView() {
@@ -488,7 +487,7 @@ import Zee5CoreSDK
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewCell {
                     componentModel.screenConfiguration = screenConfiguration
                     if layoutName == "Family_Ganges_lazy_loading_1" ||
-                       layoutName == "ZeeHomeScreen_Family_Ganges_banner_1" {
+                    layoutName == "ZeeHomeScreen_Family_Ganges_banner_1" {
                         cell.backgroundColor = UIColor.clear
                     } else {
                         cell.backgroundColor = UIColor.darkGray
@@ -842,35 +841,81 @@ extension SectionCompositeViewController: ZPAdViewProtocol {
     }
 }
 
-class CustomSegmentedControl: UISegmentedControl {
-    override func layoutSubviews() {
-        super.layoutSubviews()
+class CustomSegmentedControl: UIView {
+    
+    private var buttonsTitles: [String]!
+    private var buttons: [UIButton]!
+    
+    var changeToIndex: ((Int)->())!
+    
+    var textColor: UIColor = .white
+    var selectorTextColor: UIColor = UIColor.init(hex: "ff0091")
+    var selectorViewColor: UIColor = .white
+    
+    private func configStackView() {
+        let stack = UIStackView.init(arrangedSubviews: buttons)
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        addSubview(stack)
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        stack.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        stack.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        stack.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+    }
+    
+    private func createButtons() {
+        buttons = []
+        buttons.removeAll()
+        subviews.forEach { (view) in
+            view.removeFromSuperview()
+        }
         
-        setTitleTextAttributes([
-            NSAttributedString.Key.font : UIFont(name: "NotoSans-SemiBold", size: 12)!,
-            NSAttributedString.Key.foregroundColor: UIColor.white
-        ], for: .normal)
-        
-        setTitleTextAttributes([
-            NSAttributedString.Key.font : UIFont(name: "NotoSans-SemiBold", size: 12)!,
-            NSAttributedString.Key.foregroundColor: UIColor.init(hex: "ff0091")
-        ], for: .selected)
-        layer.cornerRadius = self.bounds.size.height / 2.0
-        layer.borderColor = UIColor.white.withAlphaComponent(0.5).cgColor
-        tintColor = .red
-        layer.borderWidth = 0.5
-        layer.masksToBounds = true
-        clipsToBounds = true
-        for i in 0...subviews.count - 1 {
-            if let subview = subviews[i] as? UIImageView{
-                subview.layer.cornerRadius = self.bounds.size.height / 2.0
-                if i == self.selectedSegmentIndex {
-                    subview.backgroundColor = .white
-                } else {
-                    subview.backgroundColor = .clear
-                }
+        for title in buttonsTitles {
+            let button = UIButton.init(type: .custom)
+            button.setTitle(title, for: .normal)
+            button.layer.masksToBounds = true
+            button.addTarget(self, action: #selector(buttonAction(sender:)), for: .touchUpInside)
+            button.backgroundColor = .clear
+            button.titleLabel?.font = UIFont(name: "NotoSans-SemiBold", size: 12)!
+            button.layer.cornerRadius = bounds.size.height / 2.0
+            button.setTitleColor(textColor, for: .normal)
+            buttons.append(button)
+        }
+        buttons.first?.setTitleColor(selectorTextColor, for: .normal)
+        buttons.first?.backgroundColor = selectorViewColor
+    }
+    
+    @objc private func buttonAction(sender: UIButton) {
+        for (index, button) in buttons.enumerated() {
+            button.setTitleColor(.white, for: .normal)
+            button.backgroundColor = .clear
+            
+            if button == sender {
+                button.setTitleColor(selectorTextColor, for: .normal)
+                button.backgroundColor = selectorViewColor
+                changeToIndex(index)
             }
         }
     }
     
+    private func updateView() {
+        backgroundColor = .clear
+        layer.borderWidth = 0.5
+        layer.borderColor = UIColor.white.withAlphaComponent(0.5).cgColor
+        layer.cornerRadius = bounds.size.height / 2.0
+        createButtons()
+        configStackView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    func setButtonsTitles(buttonsTitles: [String]!) {
+        self.buttonsTitles = buttonsTitles
+        updateView()
+    }
+
 }

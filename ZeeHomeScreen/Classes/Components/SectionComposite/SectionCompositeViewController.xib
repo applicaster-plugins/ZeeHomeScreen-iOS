@@ -14,7 +14,7 @@
                 <outlet property="collectionView" destination="zbv-WY-xRs" id="Lk5-Fu-Ggj"/>
                 <outlet property="epgContentView" destination="Njh-X0-spA" id="aM9-fE-KcJ"/>
                 <outlet property="noDataLabel" destination="imO-bI-2cl" id="ixO-dr-QIO"/>
-                <outlet property="toggleSegmentedControl" destination="rwm-T1-RdB" id="uGe-kl-N62"/>
+                <outlet property="toggleSegmentedControl" destination="HhQ-d7-adA" id="hlD-AC-the"/>
                 <outlet property="topDistanceConstraint" destination="gfy-vl-bXB" id="HmO-cA-fwF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -27,23 +27,14 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z76-Xr-Lga" userLabel="background View" customClass="APImageView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rwm-T1-RdB" customClass="CustomSegmentedControl" customModule="ZeeHomeScreen" customModuleProvider="target">
-                    <rect key="frame" x="67.5" y="16" width="240" height="33"/>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HhQ-d7-adA" customClass="CustomSegmentedControl" customModule="ZeeHomeScreen" customModuleProvider="target">
+                    <rect key="frame" x="67.5" y="16" width="240" height="32"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="240" id="04g-7v-OQh"/>
-                        <constraint firstAttribute="height" constant="32" id="3qW-XO-S1u"/>
+                        <constraint firstAttribute="width" constant="240" id="HTs-LU-il9"/>
+                        <constraint firstAttribute="height" constant="32" id="qsh-up-5gr"/>
                     </constraints>
-                    <segments>
-                        <segment title="Live TV"/>
-                        <segment title="Channel Guide"/>
-                    </segments>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <color key="selectedSegmentTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <connections>
-                        <action selector="toggleControlActionWithSender:" destination="-1" eventType="valueChanged" id="yAZ-hX-7BT"/>
-                    </connections>
-                </segmentedControl>
+                </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Njh-X0-spA">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -73,9 +64,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="imO-bI-2cl" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="12m-Yc-KKf"/>
-                <constraint firstItem="rwm-T1-RdB" firstAttribute="top" secondItem="z76-Xr-Lga" secondAttribute="top" constant="16" id="3Xu-r3-x2R"/>
                 <constraint firstItem="z76-Xr-Lga" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ASr-n7-T1H"/>
-                <constraint firstItem="rwm-T1-RdB" firstAttribute="centerX" secondItem="auB-e5-KDi" secondAttribute="centerX" id="Ce1-Pd-pXf"/>
                 <constraint firstItem="Njh-X0-spA" firstAttribute="bottom" secondItem="zbv-WY-xRs" secondAttribute="bottom" id="Dqd-Df-dfY"/>
                 <constraint firstItem="auB-e5-KDi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ElR-Zs-3T2"/>
                 <constraint firstItem="zbv-WY-xRs" firstAttribute="bottom" secondItem="jTD-qT-iWI" secondAttribute="bottom" id="HM2-iY-c0k"/>
@@ -83,6 +72,8 @@
                 <constraint firstItem="Njh-X0-spA" firstAttribute="top" secondItem="zbv-WY-xRs" secondAttribute="top" id="TUb-cT-KDW"/>
                 <constraint firstItem="z76-Xr-Lga" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="USp-tc-ego"/>
                 <constraint firstItem="Njh-X0-spA" firstAttribute="leading" secondItem="zbv-WY-xRs" secondAttribute="leading" id="UWK-5V-VhC"/>
+                <constraint firstItem="HhQ-d7-adA" firstAttribute="top" secondItem="jTD-qT-iWI" secondAttribute="top" constant="16" id="Ziu-0c-S4z"/>
+                <constraint firstItem="HhQ-d7-adA" firstAttribute="centerX" secondItem="jTD-qT-iWI" secondAttribute="centerX" id="aVK-MC-Qs6"/>
                 <constraint firstAttribute="trailing" secondItem="imO-bI-2cl" secondAttribute="trailing" constant="35" id="bPH-9f-SGc"/>
                 <constraint firstItem="imO-bI-2cl" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gcL-ek-xnX"/>
                 <constraint firstItem="jTD-qT-iWI" firstAttribute="top" secondItem="zbv-WY-xRs" secondAttribute="top" id="gfy-vl-bXB"/>
