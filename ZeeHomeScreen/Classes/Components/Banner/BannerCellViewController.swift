@@ -185,6 +185,9 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         view.layoutIfNeeded()
         if currentComponentModel().styleHelper?.iphoneHeight != bannerView.size.height {
             currentComponentModel().styleHelper?.iphoneHeight = bannerView.size.height
+            currentComponentModel().styleHelper?.ipadHeight = bannerView.size.height
+            currentComponentModel().cellModel?.iphoneHeight = bannerView.size.height
+            currentComponentModel().cellModel?.ipadHeight = bannerView.size.height
             if delegate.responds(to: #selector(ComponentDelegate.reloadComponent(forModel:andComponentModel:))) {
                 delegate.reloadComponent?(forModel: currentComponentModel().entry as? NSObject, andComponentModel: currentComponentModel())
             }

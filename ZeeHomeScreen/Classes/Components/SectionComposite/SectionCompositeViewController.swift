@@ -118,10 +118,13 @@ import Zee5CoreSDK
             if let index = sectionsDataSourceArray?.firstIndex(where: { (component) -> Bool in
                 return componentModel.identifier == component.identifier && componentModel.containerType == component.containerType
             }) {
+                sectionsDataSourceArray?.remove(at: index)
+                sectionsDataSourceArray?.insert(componentModel, at: index)
+
+                collectionViewFlowLayout?.sectionsDataSourceArray = sectionsDataSourceArray
                 collectionView?.performBatchUpdates({
                     
                     self.collectionView?.reloadSections(IndexSet.init(integer: index))
-                    
                 })
                 
             }
