@@ -385,7 +385,7 @@ import Zee5CoreSDK
                                                    name: NSNotification.Name(rawValue: uiTag),
                                                    object: nil)
         }
-        AnalyticsUtil().reportTabChangeAnalyticsIfApplicable(atomFeedUrl: self.atomFeedUrl)
+        AnalyticsUtil().reportTabVisitedAnalyticsIfApplicable(atomFeedUrl: self.atomFeedUrl)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

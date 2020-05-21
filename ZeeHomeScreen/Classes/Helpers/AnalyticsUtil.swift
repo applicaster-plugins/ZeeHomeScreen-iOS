@@ -2,7 +2,7 @@ import Zee5CoreSDK
 
 class AnalyticsUtil {
     
-    func reportTabChangeAnalyticsIfApplicable(atomFeedUrl: String?) {
+    func reportTabVisitedAnalyticsIfApplicable(atomFeedUrl: String?) {
         guard let atomFeedUrl = atomFeedUrl else { return }
         guard let base64Url = findQueryStringParameter(url: atomFeedUrl, parameter: "url") else { return }
         guard let dataSourceUrl = decodeBase64(from: base64Url) else { return }
