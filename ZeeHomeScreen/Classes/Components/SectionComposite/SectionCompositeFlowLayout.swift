@@ -51,6 +51,9 @@ import ApplicasterSDK
     // This key is using to allow temporary rebuild layout, can be used with collection batch updates where cells will be insert
     public var isCollectionInsertCells = false
     
+    // This key is using to allow temporary rebuild layout, can be used with collection batch updates where cells will be deleted
+    public var isCollectionDeleteCells = false
+    
     // Content size of collection layout
     var contentSize:CGSize = CGSize.zero
     fileprivate var contentHeight: CGFloat = 0
@@ -112,7 +115,7 @@ import ApplicasterSDK
     func prepareForHorizontal(forceUpdate: Bool) {
         
         //Check if flow layout can generate attributes, look variables description
-        guard forceUpdate || allowRebuildFlowLayout || isCollectionChangeCells || isCollectionInsertCells,
+        guard forceUpdate || allowRebuildFlowLayout || isCollectionChangeCells || isCollectionInsertCells || isCollectionDeleteCells,
             let collectionView = collectionView else {
                 return
         }
