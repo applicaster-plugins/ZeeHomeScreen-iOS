@@ -256,7 +256,12 @@ extension SectionCompositeViewController {
             self.collectionView?.deleteSections(IndexSet(integer: lazyComponentIndex))
         }
         else {
-            self.collectionView?.deleteItems(at: [IndexPath(row: lazyComponentIndex, section: 0)])
+            collectionView?.performBatchUpdates({
+                self.collectionViewFlowLayout?.isCollectionDeleteCells = true
+                self.collectionView?.deleteItems(at: [IndexPath(row: lazyComponentIndex, section: 0)])
+            }, completion: { (success) in
+                self.collectionViewFlowLayout?.isCollectionDeleteCells = false
+            })
         }
         
         // add lazy loading cell at the end
