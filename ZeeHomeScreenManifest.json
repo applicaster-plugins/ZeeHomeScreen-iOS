@@ -10,8 +10,8 @@
     "git@github.com:applicaster-plugins/ZeeHomeScreen-iOS.git"
   ],
   "platform": "ios",
-  "author_name": "S. Borkin",
-  "author_email": "s.borkin@applicaster.com",
+  "author_name": "O. Liashko",
+  "author_email": "o.laksano@applicaster.com",
   "manifest_version": "2.3.7",
   "name": "Zee5HomeScreen",
   "description": "Zee5 Home Screen",
