@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "ZeeHomeScreen"
-  s.version          = '2.3.7'
+  s.version          = '2.3.8'
   s.summary          = "ZeeHomeScreen"
   s.description      = <<-DESC
                       Zee Home Screen
