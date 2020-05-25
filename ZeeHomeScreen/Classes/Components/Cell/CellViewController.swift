@@ -211,14 +211,14 @@ import ApplicasterSDK
         }
     }
     
-    func customizeBackground() {
-        let componentCustomization = ComponentModelCustomization()
-        if let color: UIColor = componentCustomization.color(forAttributeKey: kAttributeBackgroundColorKey, attributesDict: nil, withModel: componentDataSourceModel, componentState: componentState()) {
-            view.backgroundColor = color
-        } else {
-            view.backgroundColor = .black
-        }
-    }
+//    func customizeBackground() {
+//        let componentCustomization = ComponentModelCustomization()
+//        if let color: UIColor = componentCustomization.color(forAttributeKey: kAttributeBackgroundColorKey, attributesDict: nil, withModel: componentDataSourceModel, componentState: componentState()) {
+//            view.backgroundColor = color
+//        } else {
+//            view.backgroundColor = .black
+//        }
+//    }
     
     func updateShadowImage() {
         
@@ -320,7 +320,8 @@ import ApplicasterSDK
             customizeButtonsViewCollection()
             customizeLabelsCollection()
             
-            customizeBackground()
+            self.view.backgroundColor = .clear
+            //customizeBackground()
             updateShadowImage()
             setupPromoVideo()
             

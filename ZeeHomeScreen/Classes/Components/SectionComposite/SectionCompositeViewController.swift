@@ -497,7 +497,7 @@ import Zee5CoreSDK
                     layoutName == "ZeeHomeScreen_Family_Ganges_banner_1" {
                         cell.backgroundColor = UIColor.clear
                     } else {
-                        cell.backgroundColor = UIColor.darkGray
+                        cell.backgroundColor = UIColor.clear
                     }
                     cell.setComponentModel(componentModel,
                                            model: componentModel,
