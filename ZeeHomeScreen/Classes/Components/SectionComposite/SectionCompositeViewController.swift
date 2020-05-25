@@ -536,9 +536,8 @@ import Zee5CoreSDK
                     if let urlstring = atomEntry.link,
                         let linkURL = URL(string: urlstring),
                         APUtils.shouldOpenURLExternally(linkURL) {
-                        self.dismiss(animated: true) {
-                            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
-                        }
+                        self.dismiss(animated: true)
+                        UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
                     }
                 }
             }
@@ -678,9 +677,8 @@ import Zee5CoreSDK
                     if let urlstring = atomEntry.link,
                         let linkURL = URL(string: urlstring),
                         APUtils.shouldOpenURLExternally(linkURL) {
-                        self.dismiss(animated: true) {
-                            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
-                        }
+                        self.dismiss(animated: true)
+                        UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
                     }
                 }
             }
@@ -833,10 +831,9 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
                 APUtils.shouldOpenURLExternally(linkURL) else {
                     return
             }
-            self.dismiss(animated: true) {
-                ZAAppConnector.sharedInstance().audioSessionDelegate?.deactivateAudioSession()
-                UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
-            }
+            self.dismiss(animated: true)
+            ZAAppConnector.sharedInstance().audioSessionDelegate?.deactivateAudioSession()
+            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
         }
     }
 }
