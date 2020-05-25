@@ -43,6 +43,12 @@ public class StaticViewCollectionViewController: UIViewController {
         flowLayout.invalidateLayout()
     }
     
+    override public func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = .clear
+    }
+
     fileprivate func updateStaticView(_ staticView: UIView) {
         guard
             let sectionCompositeViewController = self.sectionCompositeViewController,
@@ -90,6 +96,8 @@ fileprivate class StaticViewSectionCompositeViewController: SectionCompositeView
         result.view.addSubview(collectionView)
         collectionView.fillParent()
 
+        collectionView.backgroundColor = .clear
+        
         result.screenConfiguration = ScreenConfiguration.init(config: config, style: style, dataSource: atomFeed, configurationJSON: pluginConfiguration)
         result.setComponentModel((Zee5dsAdapter.getBaseComponent(for: atomFeed))!)
         result.atomFeedUrl = atomFeed?.link
@@ -100,7 +108,23 @@ fileprivate class StaticViewSectionCompositeViewController: SectionCompositeView
         
         return result
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        self.view.backgroundColor = .clear
+    }
+    
+    override func customizeBackgroundColor() {
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let result = super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
+        result.backgroundColor = .clear
+        
+        return result
+    }
+
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var result: UICollectionViewCell!
                 
@@ -117,6 +141,8 @@ fileprivate class StaticViewSectionCompositeViewController: SectionCompositeView
         if result == nil {
             result = super.collectionView(collectionView, cellForItemAt: indexPath)
         }
+        
+        result.backgroundColor = .clear
         
         return result
     }
