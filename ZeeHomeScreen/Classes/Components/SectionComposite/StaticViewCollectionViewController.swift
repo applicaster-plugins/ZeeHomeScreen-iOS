@@ -98,7 +98,10 @@ fileprivate class StaticViewSectionCompositeViewController: SectionCompositeView
 
         collectionView.backgroundColor = .clear
         
-        result.screenConfiguration = ScreenConfiguration.init(config: config, style: style, dataSource: atomFeed, configurationJSON: pluginConfiguration)
+        let screenConfig = ScreenConfiguration(config: config, style: style, dataSource: atomFeed, configurationJSON: pluginConfiguration)
+        screenConfig.paddingHorizontal = 0
+        
+        result.screenConfiguration = screenConfig
         result.setComponentModel((Zee5dsAdapter.getBaseComponent(for: atomFeed))!)
         result.atomFeedUrl = atomFeed?.link
         result.modalPresentationStyle = .fullScreen
@@ -135,7 +138,6 @@ fileprivate class StaticViewSectionCompositeViewController: SectionCompositeView
                 result.contentView.addSubview(view)
                 view.fillParent()
             }
-            
         }
         
         if result == nil {
@@ -154,8 +156,6 @@ fileprivate class StaticViewSectionCompositeViewController: SectionCompositeView
         return result
     }
 }
-
-
 
 fileprivate class StaticViewFlowLayout: SectionCompositeFlowLayout {
     var staticView: UIView?
