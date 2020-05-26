@@ -358,6 +358,7 @@ import Zee5CoreSDK
     }
     
     override func viewDidLayoutSubviews () {
+        super.viewDidLayoutSubviews()
         
     let gradient:CAGradientLayer = CAGradientLayer()
         gradient.frame.size = self.view.size
