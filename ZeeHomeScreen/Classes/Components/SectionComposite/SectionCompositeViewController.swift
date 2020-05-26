@@ -332,8 +332,11 @@ import Zee5CoreSDK
                     prepareEPGView()
                 }
             }
+            
         }
 
+        
+        
         collectionView?.collectionViewLayout = collectionFlowLayout()
         self.view.backgroundColor = UIColor.black
         
@@ -352,6 +355,38 @@ import Zee5CoreSDK
         collectionView?.bounces = collectionViewBounces
         collectionView?.showsHorizontalScrollIndicator = collectionViewHorizontalScrollIndicator
         collectionView?.showsVerticalScrollIndicator = collectionViewVerticalScrollIndicator
+    }
+    
+    override func viewDidLayoutSubviews () {
+        super.viewDidLayoutSubviews()
+        
+    let gradient:CAGradientLayer = CAGradientLayer()
+        gradient.frame.size = self.view.size
+        gradient.colors = [hexStringToUIColor(hex: "#130014").cgColor,hexStringToUIColor(hex: "#2b0225").cgColor] //Or any colors
+        self.view.layer.insertSublayer(gradient, at:0)
+               
+    }
+    
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+
+        var rgbValue:UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
+
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -494,7 +529,7 @@ import Zee5CoreSDK
                     layoutName == "ZeeHomeScreen_Family_Ganges_banner_1" {
                         cell.backgroundColor = UIColor.clear
                     } else {
-                        cell.backgroundColor = UIColor.darkGray
+                        cell.backgroundColor = UIColor.clear
                     }
                     cell.setComponentModel(componentModel,
                                            model: componentModel,
@@ -711,10 +746,11 @@ import Zee5CoreSDK
       if let color = color, color.isNotEmpty() {
           view.backgroundColor = color
       } else {
-        view.backgroundColor = .black
+        
       }
     }
     
+      
     // MARK: - Helper functions
     
     private func refreshFromDataSourceArray() {
