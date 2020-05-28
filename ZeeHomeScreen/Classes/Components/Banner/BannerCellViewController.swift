@@ -123,7 +123,6 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
 
     func adLoaded(view: UIView?) {
         bannerView = view
-        self.view.layoutIfNeeded()
         
         updateFlexibleCellSizeConstraints()
     }
@@ -162,7 +161,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         guard let bannerView = bannerView else {
             return
         }
-        view.layoutIfNeeded()
+        
         bannerContainerView.removeAllSubviews()
         
         var frame: CGRect = view.frame
@@ -182,7 +181,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         setConstantConstraintWith(attribute: .width, value: view.size.width, inView: contentView)
         bannerContainerView.addSubview(bannerView)
         bannerView.centerInSuperview()
-        view.layoutIfNeeded()
+        
         if currentComponentModel().styleHelper?.iphoneHeight != bannerView.size.height {
             currentComponentModel().styleHelper?.iphoneHeight = bannerView.size.height
             currentComponentModel().styleHelper?.ipadHeight = bannerView.size.height
