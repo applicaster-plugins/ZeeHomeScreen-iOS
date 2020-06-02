@@ -181,6 +181,17 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         bannerContainerView.backgroundColor = .clear
         bannerContainerView.addSubview(bannerView)
 
+        if bannerView.frame.width < bannerContainerView.superview!.width {
+            bannerView.centerInSuperview()
+        } else {
+            NSLayoutConstraint(item: bannerContainerView as Any,
+                               attribute: NSLayoutConstraint.Attribute.leading,
+                               relatedBy: NSLayoutConstraint.Relation.equal,
+                               toItem: bannerContainerView.superview,
+                               attribute: NSLayoutConstraint.Attribute.leading,
+                               multiplier: 1,
+                               constant: 0).isActive = true
+        }
         
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         bannerView.centerYAnchor.constraint(equalTo: bannerContainerView.centerYAnchor).isActive = true
