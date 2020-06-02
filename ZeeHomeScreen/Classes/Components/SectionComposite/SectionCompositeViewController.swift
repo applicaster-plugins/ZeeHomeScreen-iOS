@@ -361,7 +361,7 @@ import Zee5CoreSDK
     override func viewDidLayoutSubviews () {
         super.viewDidLayoutSubviews()
         
-    let gradient:CAGradientLayer = CAGradientLayer()
+        let gradient:CAGradientLayer = CAGradientLayer()
         gradient.frame.size = self.view.size
         gradient.colors = [hexStringToUIColor(hex: "#130014").cgColor,hexStringToUIColor(hex: "#2b0225").cgColor] //Or any colors
         self.view.layer.insertSublayer(gradient, at:0)
@@ -550,6 +550,10 @@ import Zee5CoreSDK
                                            view: cell.contentView,
                                            delegate: self,
                                            parentViewController: self)
+                    
+                    cell.layer.shouldRasterize = true
+                    cell.layer.rasterizationScale = UIScreen.main.scale
+                    
                     return cell
                 }
             }
@@ -628,6 +632,9 @@ import Zee5CoreSDK
             reusableview.frame.size.width = 0
         }
         
+        reusableview.layer.shouldRasterize = true
+        reusableview.layer.rasterizationScale = UIScreen.main.scale
+        
         return reusableview
     }
     
@@ -674,7 +681,8 @@ import Zee5CoreSDK
         
         if collectionViewFlowLayout?.isVertical() == true  {
             let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
-            if (bottomEdge >= scrollView.contentSize.height && !isLoading),
+            let reloadMargin:CGFloat = scrollView.frame.size.height*2 // load next items before getting to the end of the collection view
+            if (bottomEdge >= scrollView.contentSize.height - reloadMargin && !isLoading),
                 shouldLoadMoreItems() == true {
                 loadMoreItems()
             }
