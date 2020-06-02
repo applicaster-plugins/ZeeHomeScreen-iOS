@@ -113,7 +113,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
             bannerContainerView.removeAllSubviews()
             let adConfig: ZPAdConfig = ZPAdConfig.init(adUnitId: config["ad_tag"] as! String , inlineBannerSize: config["ad_size"] as! String)
             if let size: CGSize = adPlugin?.size(forInlineBannerSize: config["ad_size"] as! String) {
-                bannerContainerWidthConstraint.constant = size.width
+                //bannerContainerWidthConstraint.constant = size.width
             }
             adPresenter?.load(adConfig: adConfig)
         }
@@ -123,7 +123,6 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
 
     func adLoaded(view: UIView?) {
         bannerView = view
-        
         updateFlexibleCellSizeConstraints()
     }
     
@@ -179,9 +178,16 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         view.translatesAutoresizingMaskIntoConstraints = false
         setConstantConstraintWith(attribute: .height, value: bannerView.size.height, inView: bannerContainerView)
         setConstantConstraintWith(attribute: .width, value: view.size.width, inView: contentView)
+        bannerContainerView.backgroundColor = .clear
         bannerContainerView.addSubview(bannerView)
-        bannerView.centerInSuperview()
+
         
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        bannerView.centerYAnchor.constraint(equalTo: bannerContainerView.centerYAnchor).isActive = true
+        bannerView.centerXAnchor.constraint(equalTo: bannerContainerView.centerXAnchor).isActive = true
+        bannerView.heightAnchor.constraint(equalToConstant: bannerView.height).isActive = true
+        bannerView.widthAnchor.constraint(equalToConstant: bannerView.width).isActive = true
+       
         if currentComponentModel().styleHelper?.iphoneHeight != bannerView.size.height {
             currentComponentModel().styleHelper?.iphoneHeight = bannerView.size.height
             currentComponentModel().styleHelper?.ipadHeight = bannerView.size.height
@@ -191,6 +197,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
                 delegate.reloadComponent?(forModel: currentComponentModel().entry as? NSObject, andComponentModel: currentComponentModel())
             }
         } else {
+            
             contentView.backgroundColor = .black
         }
     }
