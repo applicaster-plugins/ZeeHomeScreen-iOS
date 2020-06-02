@@ -31,6 +31,7 @@ import Zee5CoreSDK
     
     var screenConfiguration: ScreenConfiguration?
     var userType: UserType?
+    var isUserSubscribed: Bool?
     var displayLanguage: String?
     var contentLanguages: String?
     var liveComponents = [ComponentModelProtocol]()
@@ -276,7 +277,7 @@ import Zee5CoreSDK
         guard let toggle = toggleSegmentedControl else {
             return
         }
-        toggle.setButtonsTitles(buttonsTitles: ["Live TV", "Channel Guide"])
+        toggle.setButtonsTitles(buttonsTitles: ["nav_livetv".localized(hashMap: [:]), "EPG_Header_ChannelGuide_Text".localized(hashMap: [:])])
         toggle.changeToIndex = { [weak self] index in
             self?.collectionView?.isHidden = index == 0 ? false : true
             self?.epgContentView?.isHidden = index == 0 ? true : false
@@ -325,7 +326,7 @@ import Zee5CoreSDK
         super.viewDidLoad()
         
         if let config = self.screenConfiguration {
-            if config.shouldDisplayEPG && currentComponentModel?.title == "Live TV" {
+            if config.shouldDisplayEPG && currentComponentModel?.title == "nav_livetv".localized(hashMap: [:]) {
                 if config.epgScreenID != nil {
                     topDistanceConstraint?.constant = -64
                     prepareToggle()
@@ -400,7 +401,9 @@ import Zee5CoreSDK
         
         if !updateContentAndDisplayLanguageIfNeeded() {
             if !updateUserStatusIfNeeded() {
-                reloadContinueWatchingRailsIfNeeded()
+                if !updateUserSubscriptionsIfNeeded() {
+                    reloadContinueWatchingRailsIfNeeded()
+                }
             }
         }
     }
@@ -450,6 +453,17 @@ import Zee5CoreSDK
     private func updateUserStatusIfNeeded() -> Bool {
         if let userType = userType, userType != User.shared.getType() {
             self.userType = User.shared.getType()
+            DispatchQueue.main.async {
+                ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
+            }
+            return true
+        }
+        return false
+    }
+    
+    private func updateUserSubscriptionsIfNeeded() -> Bool {
+        if let isSubscribed = isUserSubscribed, isSubscribed != User.shared.isSubscribed() {
+            isUserSubscribed = User.shared.isSubscribed()
             DispatchQueue.main.async {
                 ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
             }

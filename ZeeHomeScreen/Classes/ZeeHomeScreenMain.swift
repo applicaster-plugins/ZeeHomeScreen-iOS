@@ -49,6 +49,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol {
         let result = SectionCompositeViewController(nibName: "SectionCompositeViewController", bundle: bundle)
         mainViewController = result
         result.userType = User.shared.getType()
+        result.isUserSubscribed = User.shared.isSubscribed()
         result.displayLanguage = Zee5UserDefaultsManager.shared.getSelectedDisplayLanguage()
         result.contentLanguages = Zee5UserDefaultsManager.shared.getSelectedContentLanguages()
         result.screenConfiguration = ScreenConfiguration.init(config: config, style: style, dataSource: atomFeed, configurationJSON: configurationJSON)
