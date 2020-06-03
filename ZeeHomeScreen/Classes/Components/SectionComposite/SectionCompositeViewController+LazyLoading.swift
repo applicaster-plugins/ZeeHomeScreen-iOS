@@ -197,10 +197,6 @@ extension SectionCompositeViewController {
                         }
                     } else {
                         indexPath = IndexPath.init(row: 0, section: self.sectionsDataSourceArray!.count - 2)
-                        UIView.animate(withDuration: 0.2) {
-                             self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: false)
-                        }
-                        
                     }
                     
                     
