@@ -619,6 +619,15 @@ import Zee5CoreSDK
                     _ = headerView.componentViewController?.perform(#selector( setter: ComponentProtocol.componentDataSourceModel), with: header)
                 }
                 reusableview = headerView
+                if let actionSheme =  header.actionUrlScheme{
+                    if actionSheme.isEmpty{
+                        if let arrowParent = reusableview.subviews.first(where: {$0 is UIView}){
+                            if let arrow = arrowParent.subviews.first(where: {$0 is UIImageView}){
+                                arrow.isHidden = true
+                            }
+                        }
+                    }
+                }
             }
         }
         
