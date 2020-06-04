@@ -94,7 +94,13 @@ import ApplicasterSDK
         }
         
         for (index, entry) in entries.enumerated() {
-            if let component = self.parseComponent(at: index, entry: entry, componentModel: feedComponent) {
+            
+            //parse entries inside component but don't parse BANNER component, becaus it is single component without entries
+            if let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, let uiComponents: [String: AnyHashable] = extensions["ui_component"] as? [String : AnyHashable], let type: String = uiComponents["type"] as? String, type != "BANNER" {
+                if let component = parse(data: entry as? NSObject, componentModel: componentModel, isParentModel: true) {
+                    components.append(component)
+                }
+            } else if let component = self.parseComponent(at: index, entry: entry, componentModel: feedComponent) {
                 component.parentModel = feedComponent
                 components.append(component)
             }

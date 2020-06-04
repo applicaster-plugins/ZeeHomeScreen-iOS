@@ -41,14 +41,52 @@
     _componentViewController = componentViewController;
 }
 
-- (void)setComponentModel:(nullable ComponentModel *)componentModel
+- (void)updateComponentViewController:(nullable UIViewController<ComponentProtocol> *) vc  componentModel:(nullable ComponentModel *)componentModel view:(nullable UIView *)view delegate:(nullable id<ComponentDelegate>)delegate parentViewController:(nullable UIViewController *)parentViewController {
+    
+    if (self.componentViewController == vc) {
+        return;
+    }
+    
+    self.componentViewController = vc;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (view == nil) {
+            __block view = parentViewController.view;
+        }
+        
+        if (view) {
+
+            
+            UIEdgeInsets paddingInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
+
+            [view removeAllSubviews];
+            
+            if (parentViewController) {
+                [self.componentViewController willMoveToParentViewController:parentViewController];
+                [view addSubview:self.componentViewController.view];
+                [parentViewController addChildViewController:self.componentViewController];
+              
+            }
+            self.componentViewController.view.backgroundColor = [UIColor redColor];
+
+            [self.componentViewController.view matchParent];
+            [self.componentViewController.view setInsetsFromParent:paddingInsets];
+        }
+        
+        if (parentViewController) {
+            [self.componentViewController didMoveToParentViewController:parentViewController];
+        }
+    });
+}
+
+- (UIViewController<ComponentProtocol> *)setComponentModel:(nullable ComponentModel *)componentModel
                     model:(nullable NSObject *)model
                      view:(nullable UIView *)view
                  delegate:(nullable id<ComponentDelegate>)delegate
      parentViewController:(nullable UIViewController *)parentViewController
 {
     
-    
+    self.componentViewController = nil;
 //    if (self.componentViewController == nil) {
         self.componentViewController = [ComponenttFactory componentViewControllerWithComponentModel:componentModel
                                                                                            andModel:model
@@ -60,14 +98,14 @@
     if ([self.componentViewController respondsToSelector:@selector(setDelegate:)]) {
         self.componentViewController.delegate = delegate;
     }
-
+    if ([self.componentViewController respondsToSelector:@selector(setComponentModel:)]) {
+        self.componentViewController.componentModel = componentModel;
+    }
     if ([self.componentViewController respondsToSelector:@selector(setComponentDataSourceModel:)]) {
         self.componentViewController.componentDataSourceModel = componentModel;
     }
 
-    if ([self.componentViewController respondsToSelector:@selector(setComponentModel:)]) {
-        self.componentViewController.componentModel = componentModel;
-    }
+    return self.componentViewController;
 }
 
 - (void)setBackgroundImage:(nullable NSString *)imageName {

@@ -22,6 +22,36 @@ extension SectionCompositeViewController {
             sectionsDataSourceArray = []
         }
         
+        //check if we already have entries inside the feed
+        
+        if let component = currentComponentModel, component.childerns != nil, component.childerns!.count > 0 {
+            
+            self.liveComponentModel = component
+
+                           if let componentsArray = component.childerns,
+                               componentsArray.count > 0 {
+                               let liveComponentsArray = self.liveComponentsWithLazyLoading(componentsArray: componentsArray, liveComponents: self.sectionsDataSourceArray)
+                               
+                                   if component.isVertical == true && component.type != "GRID" {
+                                       self.prepareCollectionSections(sections: liveComponentsArray)
+                                   }
+                                   else {
+                                       self.prepareCollectionItems(items: liveComponentsArray)
+                                   }
+                           }
+                           else {
+                               // delete lazy loading components if needed
+                           }
+                           
+                           self.setComponentModel(component)
+                           let additionalContent = self.prepareAdditionalContent(component)
+                           self.loadAdditionalContent(indexToInsert: 1, for: additionalContent, component: component)
+            return
+        }
+        
+        
+        //load entries for current component
+        
         if let currentComponentModel = self.currentComponentModel {
             DatasourceManager.sharedInstance().load(model: currentComponentModel) { (component) in
                 guard let component = component as? ComponentModel else {

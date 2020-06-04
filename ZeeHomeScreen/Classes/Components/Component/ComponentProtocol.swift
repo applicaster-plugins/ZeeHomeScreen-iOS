@@ -34,4 +34,5 @@ import Foundation
     @objc optional func didEndDisplaying(with: ZeeComponentEndDisplayingReason)
     @objc optional func didStartDisplaying()
     @objc optional func didEndDisplaying()
+    @objc optional func prepareComponentToReuse()
 }

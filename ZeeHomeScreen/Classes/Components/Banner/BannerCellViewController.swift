@@ -54,7 +54,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         
         override func viewDidLayoutSubviews() {
             super.viewDidLayoutSubviews()
-            updateFlexibleCellSizeConstraints()
+           // updateFlexibleCellSizeConstraints()
         }
 
         

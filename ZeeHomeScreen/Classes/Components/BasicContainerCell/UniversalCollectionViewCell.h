@@ -19,11 +19,13 @@
 
 @property (nullable, nonatomic, strong) UIViewController<ComponentProtocol> *componentViewController;
 
-- (void)setComponentModel:(nullable ComponentModel *)componentModel
-                    model:(nullable NSObject *)model
-                     view:(nullable UIView *)view
-                 delegate:(nullable id<ComponentDelegate>)delegate
-     parentViewController:(nullable UIViewController *)parentViewController;
+- (UIViewController<ComponentProtocol> *_Nullable)setComponentModel:(nullable ComponentModel *)componentModel
+               model:(nullable NSObject *)model
+                view:(nullable UIView *)view
+            delegate:(nullable id<ComponentDelegate>)delegate
+                                      parentViewController:(nullable UIViewController *)parentViewController;
+
+- (void)updateComponentViewController:(nullable UIViewController<ComponentProtocol> *) vc  componentModel:(nullable ComponentModel *)componentModel view:(nullable UIView *)view delegate:(nullable id<ComponentDelegate>)delegate parentViewController:(nullable UIViewController *)parentViewController;
 
 - (void)setBackgroundImage:(nullable NSString *)imageName;
 
