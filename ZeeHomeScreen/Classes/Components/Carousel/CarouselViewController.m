@@ -57,7 +57,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     [self removeObservers];
     [self addObservers];
     
-    [self reloadComponent];
+//    [self reloadComponent];
 }
 
 - (void)didStartDisplaying {
@@ -99,6 +99,15 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 }
 
 - (void)reloadComponent {
+    
+    if (self.componentModel.childerns != nil && self.componentModel.childerns.count > 0) {
+        
+        self.dataSource = self.componentModel.childerns;
+        [self registerCarouselItems: self.componentModel.childerns];
+        [self.carouselView reloadData];
+        [self updateDataArrayAndReload: self.componentModel.childerns];
+        return;
+    }
     
     if (self.componentInitialized) {
         if (self.fallbackComponent) {
@@ -171,8 +180,12 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     
     self.carouselView.isRTL = self.isRTL;
     self.carouselView.pageControl.numberOfPages = self.dataSource.count;
-    [self registerCarouselItems: self.dataSource];
-    [self.carouselView reloadData];
+    
+    if (self.carouselView != nil) {
+        [self registerCarouselItems: self.dataSource];
+         [self.carouselView reloadData];
+    }
+   
 }
 
 - (NSObject *)topParentForComponentModel:(ComponentModel *)componentModel withDataSourceModel:(NSObject *)model {
@@ -203,8 +216,8 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.borderView.hidden = YES;
-    [self registerCarouselItems: self.dataSource];
-    [self loadComponent];
+//    [self registerCarouselItems: self.dataSource];
+//    [self loadComponent];
     [self updateBorderColor];
     [self customizePromotionView];
 }
@@ -215,6 +228,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self loadComponent];
     [self customizeBackground];
 }
 
@@ -224,7 +238,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
         self.componentInitialized = YES;
         [self.view layoutIfNeeded];
         
-        [self loadComponent];
+//        [self loadComponent];
     }
 }
 

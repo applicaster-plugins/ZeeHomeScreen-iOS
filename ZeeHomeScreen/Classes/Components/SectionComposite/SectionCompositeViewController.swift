@@ -36,6 +36,8 @@ import Zee5CoreSDK
     var contentLanguages: String?
     var liveComponents = [ComponentModelProtocol]()
     
+    private var cachedCells: [String: ComponentProtocol?] = [:]
+    
     private var adPresenter: ZPAdPresenterProtocol?
     
     weak var delegate:ComponentDelegate?
@@ -104,6 +106,7 @@ import Zee5CoreSDK
                 collectionView?.performBatchUpdates({
                     
                     self.sectionsDataSourceArray?.remove(at: index)
+                    cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = nil
                     self.collectionView?.deleteSections(IndexSet(integer: index))
                     if self.shouldLoadMoreItems() == true && !isLoading {
                         self.loadMoreItems()
@@ -120,6 +123,7 @@ import Zee5CoreSDK
                 return componentModel.identifier == component.identifier && componentModel.containerType == component.containerType
             }) {
                 sectionsDataSourceArray?.remove(at: index)
+                cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = nil
                 sectionsDataSourceArray?.insert(componentModel, at: index)
 
                 collectionViewFlowLayout?.sectionsDataSourceArray = sectionsDataSourceArray
@@ -300,6 +304,22 @@ import Zee5CoreSDK
 
         epgContentView!.addSubview(viewController.view)
         viewController.view.matchParent()
+    }
+    
+    func prepareComponentToReuse() {
+        if sectionsDataSourceArray == nil {
+            if collectionView?.collectionViewLayout == nil {
+                collectionView?.collectionViewLayout = collectionFlowLayout()
+                self.view.backgroundColor = UIColor.black
+                
+                setupLoadingActivityIndicator()
+                
+                collectionView?.bounces = collectionViewBounces
+                collectionView?.showsHorizontalScrollIndicator = collectionViewHorizontalScrollIndicator
+                collectionView?.showsVerticalScrollIndicator = collectionViewVerticalScrollIndicator
+            }
+            prepareSections()
+        }
     }
     
     func loadComponent() {
@@ -539,18 +559,31 @@ import Zee5CoreSDK
                 let layoutName = componentModel.layoutStyle {
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewCell {
                     componentModel.screenConfiguration = screenConfiguration
-                    if layoutName == "Family_Ganges_lazy_loading_1" ||
-                    layoutName == "ZeeHomeScreen_Family_Ganges_banner_1" {
-                        cell.backgroundColor = UIColor.clear
-                    } else {
-                        cell.backgroundColor = UIColor.clear
-                    }
-                    cell.setComponentModel(componentModel,
-                                           model: componentModel,
-                                           view: cell.contentView,
-                                           delegate: self,
-                                           parentViewController: self)
+                    cell.backgroundColor = UIColor.clear
                     
+                    let _ = cell.setComponentModel(componentModel,
+                    model: componentModel,
+                    view: cell.contentView,
+                    delegate: self,
+                    parentViewController: self)
+                    
+                    //will uncommit in future, don't delete please
+                    
+//                    if layoutName != "Family_Ganges_lazy_loading_1", let componentViewController = cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!
+//                        ], index > 4 /* this magic number should be removed */ {
+//
+//                            cell.updateComponentViewController(componentViewController as? UIViewController & ComponentProtocol, componentModel: componentModel, view: cell.contentView, delegate: self, parentViewController: self)
+//                    } else {
+//                        let componentViewController = cell.setComponentModel(componentModel,
+//                        model: componentModel,
+//                        view: cell.contentView,
+//                        delegate: self,
+//                        parentViewController: self)
+//                        if layoutName != "Family_Ganges_lazy_loading_1" {
+//                            cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = componentViewController
+//                        }
+//                    }
+
                     cell.layer.shouldRasterize = true
                     cell.layer.rasterizationScale = UIScreen.main.scale
                     
