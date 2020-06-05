@@ -153,7 +153,7 @@ extension SectionCompositeViewController {
                             self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
                         case .relatedCollection:
                             self.insertComponents(index: indexToInsert, from: feedComponent.childerns!)
-                            self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
+                            self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count > 1 ? self.sectionsDataSourceArray!.count - 2 : self.sectionsDataSourceArray!.count, for: nContents, component: component)
                         case .banners:
                             if let childrens = feedComponent.childerns {
                                 
