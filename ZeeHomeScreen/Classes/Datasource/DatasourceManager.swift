@@ -94,7 +94,7 @@ import ApplicasterSDK
         }
         
         for (index, entry) in entries.enumerated() {
-            
+          
             //parse entries inside component but don't parse BANNER component and RECOMMENDATIONS, becaus banner is a single component without entries and RECOMMENDATIONS don't have entries, they needs to load
             if let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, let uiComponents: [String: AnyHashable] = extensions["ui_component"] as? [String : AnyHashable], let type: String = uiComponents["type"] as? String, type != "BANNER", let asset_subtype: String = extensions["asset_subtype"] as? String, asset_subtype != "Reco"  {
                 if let component = parse(data: entry as? NSObject, componentModel: componentModel, isParentModel: true) {
