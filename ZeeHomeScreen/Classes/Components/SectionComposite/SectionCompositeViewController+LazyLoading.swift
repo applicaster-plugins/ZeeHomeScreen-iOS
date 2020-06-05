@@ -76,6 +76,12 @@ extension SectionCompositeViewController {
                 }
                 
                 self.setComponentModel(component)
+                
+                // update the title after setting ComponentModel. the nav bar is taking the title from the component
+                if let zappNavigationController = self.navigationController as? ZPNavigationController {
+                    zappNavigationController.navigationBarManager?.updateNavBarTitle()
+                }
+                
                 let additionalContent = self.prepareAdditionalContent(component)
                 self.loadAdditionalContent(indexToInsert: 1, for: additionalContent, component: component)
                 
