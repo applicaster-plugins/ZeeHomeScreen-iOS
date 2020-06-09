@@ -60,7 +60,7 @@ import Zee5CoreSDK
     
     var componentModel: ComponentModelProtocol? {
         didSet {
-            customizeBackground()
+            //customizeBackground()
             
             if let flowLayout = collectionView?.collectionViewLayout as? SectionCompositeFlowLayout {
                 flowLayout.componentModel = componentModel
@@ -359,7 +359,7 @@ import Zee5CoreSDK
         
         
         collectionView?.collectionViewLayout = collectionFlowLayout()
-        self.view.backgroundColor = UIColor.black
+        self.view.backgroundColor = UIColor.clear
         
         
         if let componentModel = componentModel,
@@ -380,35 +380,35 @@ import Zee5CoreSDK
     
     override func viewDidLayoutSubviews () {
         super.viewDidLayoutSubviews()
-        
-        let gradient:CAGradientLayer = CAGradientLayer()
-        gradient.frame.size = self.view.size
-        gradient.colors = [hexStringToUIColor(hex: "#130014").cgColor,hexStringToUIColor(hex: "#2b0225").cgColor] //Or any colors
-        self.view.layer.insertSublayer(gradient, at:0)
-               
-    }
-    
-    func hexStringToUIColor (hex:String) -> UIColor {
-        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        if currentComponentModel?.containerType == nil{
+               let gradient:CAGradientLayer = CAGradientLayer()
+               gradient.frame.size = self.view.size
+               gradient.colors = [hexStringToUIColor(hex: "#130014").cgColor,hexStringToUIColor(hex: "#2b0225").cgColor]
+               self.view.layer.insertSublayer(gradient, at:0)
+           }
+       }
+       
+   func hexStringToUIColor (hex:String) -> UIColor {
+       var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
-        if (cString.hasPrefix("#")) {
-            cString.remove(at: cString.startIndex)
-        }
+       if (cString.hasPrefix("#")) {
+           cString.remove(at: cString.startIndex)
+       }
 
-        if ((cString.count) != 6) {
-            return UIColor.gray
-        }
+       if ((cString.count) != 6) {
+           return UIColor.gray
+       }
 
-        var rgbValue:UInt64 = 0
-        Scanner(string: cString).scanHexInt64(&rgbValue)
+       var rgbValue:UInt64 = 0
+       Scanner(string: cString).scanHexInt64(&rgbValue)
 
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
+       return UIColor(
+           red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+           green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+           blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+           alpha: CGFloat(1.0)
+       )
+   }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
