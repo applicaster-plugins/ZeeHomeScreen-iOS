@@ -53,6 +53,12 @@
         "initial_value": "10"
       },
       {
+        "key": "nav_bar_id",
+        "type": "nav_bar_selector",
+        "label": "Navigation Bar",
+        "placeholder": "Choose Nav Bar"
+      },
+      {
         "key": "padding_horizontal",
         "type": "text_input",
         "placeholder": "10",

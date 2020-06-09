@@ -76,6 +76,12 @@ extension SectionCompositeViewController {
                 }
                 
                 self.setComponentModel(component)
+                
+                // update the title after setting ComponentModel. the nav bar is taking the title from the component
+                if let zappNavigationController = self.navigationController as? ZPNavigationController {
+                    zappNavigationController.navigationBarManager?.updateNavBarTitle()
+                }
+                
                 let additionalContent = self.prepareAdditionalContent(component)
                 self.loadAdditionalContent(indexToInsert: 1, for: additionalContent, component: component)
                 
@@ -149,8 +155,26 @@ extension SectionCompositeViewController {
                             self.insertComponents(index: indexToInsert, from: [feedComponent])
                             self.loadAdditionalContent(indexToInsert: indexToInsert + 1 , for: nContents, component: component)
                         case .recommendations:
-                            self.insertComponents(index: indexToInsert, from: feedComponent.childerns!)
-                            self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
+                            
+                            var indexOfItem = 0
+                            
+                            func loadNextSubRecoComponent(indexToInsert: Int, component: ComponentModel) {
+                                DatasourceManager.sharedInstance().load(model: component) { (donwloadedSubComponent) in
+                                    self.insertComponents(index: indexToInsert, from: [donwloadedSubComponent!])
+                                    
+                                    if component == feedComponent.childerns?.last as! ComponentModel {
+                                        self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
+                                    } else {
+                                        indexOfItem = indexOfItem + 1
+                                        loadNextSubRecoComponent(indexToInsert: indexToInsert + 1, component: feedComponent.childerns![indexOfItem] as! ComponentModel)
+                                    }
+                                }
+                            }
+                            
+                            loadNextSubRecoComponent(indexToInsert: indexToInsert, component: feedComponent.childerns?.first as! ComponentModel)
+
+                            
+                            
                         case .relatedCollection:
                             self.insertComponents(index: indexToInsert, from: feedComponent.childerns!)
                             self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count > 1 ? self.sectionsDataSourceArray!.count - 2 : self.sectionsDataSourceArray!.count, for: nContents, component: component)
