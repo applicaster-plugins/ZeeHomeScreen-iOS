@@ -102,17 +102,10 @@ import Zee5CoreSDK
             if let index = sectionsDataSourceArray?.firstIndex(where: { (component) -> Bool in
                 return componentModel.identifier == component.identifier && componentModel.containerType == component.containerType
             }) {
-                
-                collectionView?.performBatchUpdates({
-                    
                     self.sectionsDataSourceArray?.remove(at: index)
                     cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = nil
+  
                     self.collectionView?.deleteSections(IndexSet(integer: index))
-                    if self.shouldLoadMoreItems() == true && !isLoading {
-                        self.loadMoreItems()
-                    }
-                    
-                })
             }
         }
     }
@@ -122,16 +115,12 @@ import Zee5CoreSDK
             if let index = sectionsDataSourceArray?.firstIndex(where: { (component) -> Bool in
                 return componentModel.identifier == component.identifier && componentModel.containerType == component.containerType
             }) {
+
                 sectionsDataSourceArray?.remove(at: index)
-                cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = nil
                 sectionsDataSourceArray?.insert(componentModel, at: index)
 
                 collectionViewFlowLayout?.sectionsDataSourceArray = sectionsDataSourceArray
-                collectionView?.performBatchUpdates({
-                    
-                    self.collectionView?.reloadSections(IndexSet.init(integer: index))
-                })
-                
+                self.collectionView?.reloadData()
             }
         }
     }
@@ -143,7 +132,6 @@ import Zee5CoreSDK
         }
         
         registerLayouts(sectionsArray: components)
-        collectionView?.performBatchUpdates({
             
             var newIndexes: [Int] = []
             
@@ -153,8 +141,8 @@ import Zee5CoreSDK
                 self.sectionsDataSourceArray?.insert(item, at: index)
                 newIndexes.append(index)
             }
+
             self.collectionView?.insertSections(IndexSet(newIndexes))
-        })
     }
     
     func getNewIndex(for banner: ComponentModelProtocol, thatShouldBeInIndex: Int) -> Int {
@@ -199,10 +187,9 @@ import Zee5CoreSDK
         let indexSet = IndexSet(indexes)
         registerLayouts(sectionsArray: components)
         if let _ = componentModel as? ComponentModel {
-            collectionView?.performBatchUpdates({
                 self.sectionsDataSourceArray?.insert(contentsOf: components, at: index)
+           
                 self.collectionView?.insertSections(indexSet)
-            })
         }
     }
     
@@ -561,6 +548,22 @@ import Zee5CoreSDK
                     componentModel.screenConfiguration = screenConfiguration
                     cell.backgroundColor = UIColor.clear
                     
+                    if layoutName.hasPrefix("ZeeHomeScreen_Family_Ganges_banner") {
+                        if let componentViewController: UIViewController = cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] as? UIViewController {
+                            cell.componentViewController = componentViewController as! UIViewController & ComponentProtocol
+               
+                        } else {
+                            let componentViewController = cell.setComponentModel(componentModel,
+                                                                                 model: componentModel,
+                                                                                 view: cell.contentView,
+                                                                                 delegate: self,
+                                                                                 parentViewController: self)
+                            
+                            cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = componentViewController
+                        }
+                            return cell
+                    }
+                    
                     let _ = cell.setComponentModel(componentModel,
                     model: componentModel,
                     view: cell.contentView,
@@ -572,7 +575,7 @@ import Zee5CoreSDK
 //                    if layoutName != "Family_Ganges_lazy_loading_1", let componentViewController = cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!
 //                        ], index > 4 /* this magic number should be removed */ {
 //
-//                            cell.updateComponentViewController(componentViewController as? UIViewController & ComponentProtocol, componentModel: componentModel, view: cell.contentView, delegate: self, parentViewController: self)
+//
 //                    } else {
 //                        let componentViewController = cell.setComponentModel(componentModel,
 //                        model: componentModel,
@@ -671,40 +674,54 @@ import Zee5CoreSDK
         return reusableview
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? UniversalCollectionViewCell {
+            if !children.contains(cell.componentViewController!) {
+                DispatchQueue.main.async {
+                    cell.addViewController(toParentViewController: self)
+                }
+            }
+        }
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        self.handleCellDidEndDisplaying(cell: cell, reason: .cellQueued)
+        if let cell = cell as? UniversalCollectionViewCell {
+            cell.removeViewControllerFromParentViewController()
+ 
+        }
     }
     
     func handleCellDidEndDisplaying(cell: UICollectionViewCell, reason: ZeeComponentEndDisplayingReason) {
-        if  let universalCollectionViewCell = cell as? UniversalCollectionViewCell,
-            let componentViewController = universalCollectionViewCell.componentViewController
-        {
-            componentViewController.didEndDisplaying?(with: reason)
-        }
+//        if  let universalCollectionViewCell = cell as? UniversalCollectionViewCell,
+//            let componentViewController = universalCollectionViewCell.componentViewController
+//        {
+//            componentViewController.didEndDisplaying?(with: reason)
+//        }
     }
     
     func handleCellDidStart(cell: UICollectionViewCell) {
-        if  let universalCollectionViewCell = cell as? UniversalCollectionViewCell,
-            let componentViewController = universalCollectionViewCell.componentViewController
-        {
-            componentViewController.didStartDisplaying?()
-        }
+//        if  let universalCollectionViewCell = cell as? UniversalCollectionViewCell,
+//            let componentViewController = universalCollectionViewCell.componentViewController
+//        {
+//            componentViewController.didStartDisplaying?()
+//        }
     }
     
     func didStartDisplaying() {
-        if let visibleCells = self.collectionView?.visibleCells {
-            for visibleCell in visibleCells {
-                self.handleCellDidStart(cell: visibleCell)
-            }
-        }
+//        if let visibleCells = self.collectionView?.visibleCells {
+//            for visibleCell in visibleCells {
+//                self.handleCellDidStart(cell: visibleCell)
+//            }
+//        }
     }
     
     func didEndDisplaying(with reason: ZeeComponentEndDisplayingReason) {
-        if let visibleCells = self.collectionView?.visibleCells {
-            for visibleCell in visibleCells {
-                self.handleCellDidEndDisplaying(cell: visibleCell, reason: .parent)
-            }
-        }
+//        if let visibleCells = self.collectionView?.visibleCells {
+//            for visibleCell in visibleCells {
+//                self.handleCellDidEndDisplaying(cell: visibleCell, reason: .parent)
+//            }
+//        }
     }
     
     var isLoading = false
