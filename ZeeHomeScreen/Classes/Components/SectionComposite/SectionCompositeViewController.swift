@@ -735,7 +735,8 @@ import Zee5CoreSDK
         }
         else {
             let rightEdge = scrollView.contentOffset.x + scrollView.frame.size.width
-            if rightEdge >= scrollView.contentSize.width && !isLoading,
+            let reloadMargin:CGFloat = scrollView.frame.size.width*2 // load next items before getting to the end of the collection view
+            if rightEdge >= scrollView.contentSize.width - reloadMargin && !isLoading,
                 shouldLoadMoreItems() == true {
                 loadMoreItems()
             }
