@@ -102,10 +102,14 @@ import Zee5CoreSDK
             if let index = sectionsDataSourceArray?.firstIndex(where: { (component) -> Bool in
                 return componentModel.identifier == component.identifier && componentModel.containerType == component.containerType
             }) {
-                    self.sectionsDataSourceArray?.remove(at: index)
-                    cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = nil
-  
-                    self.collectionView?.deleteSections(IndexSet(integer: index))
+                collectionView?.performBatchUpdates({
+                    let indexSet = IndexSet(integer: index)
+                        self.sectionsDataSourceArray?.remove(at: index)
+                        self.cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = nil
+                        self.collectionViewFlowLayout?.sectionsDataSourceArray = self.sectionsDataSourceArray
+                    self.collectionView?.deleteSections(indexSet)
+                }, completion: nil)
+                
             }
         }
     }
@@ -135,14 +139,15 @@ import Zee5CoreSDK
             
             var newIndexes: [Int] = []
             
-            
+        collectionView?.performBatchUpdates({
             components.enumerated().forEach { (offset, item) in
                 let index = getNewIndex(for: item, thatShouldBeInIndex: indexes[offset])
                 self.sectionsDataSourceArray?.insert(item, at: index)
                 newIndexes.append(index)
             }
-
+            self.collectionViewFlowLayout?.sectionsDataSourceArray = self.sectionsDataSourceArray
             self.collectionView?.insertSections(IndexSet(newIndexes))
+        }, completion: nil)
     }
     
     func getNewIndex(for banner: ComponentModelProtocol, thatShouldBeInIndex: Int) -> Int {
@@ -187,9 +192,12 @@ import Zee5CoreSDK
         let indexSet = IndexSet(indexes)
         registerLayouts(sectionsArray: components)
         if let _ = componentModel as? ComponentModel {
+            
+            collectionView?.performBatchUpdates({
                 self.sectionsDataSourceArray?.insert(contentsOf: components, at: index)
-           
+                self.collectionViewFlowLayout?.sectionsDataSourceArray = self.sectionsDataSourceArray
                 self.collectionView?.insertSections(indexSet)
+            }, completion: nil)
         }
     }
     
@@ -557,7 +565,11 @@ import Zee5CoreSDK
                                                                                  view: cell.contentView,
                                                                                  delegate: self,
                                                                                  parentViewController: self)
-                            if layoutName != "Family_Ganges_lazy_loading_1" {
+                            if layoutName != "Family_Ganges_lazy_loading_1"
+                            {
+                                if let extensions = componentModel.entry?.extensions, let subtype: String = extensions["asset_subtype"] as? String, subtype == "Reco" {
+                                    return cell
+                                }
                                 cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = componentViewController
                             }
                             
