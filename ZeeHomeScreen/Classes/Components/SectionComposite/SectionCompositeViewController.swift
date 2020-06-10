@@ -548,8 +548,7 @@ import Zee5CoreSDK
                     componentModel.screenConfiguration = screenConfiguration
                     cell.backgroundColor = UIColor.clear
                     
-                    if layoutName.hasPrefix("ZeeHomeScreen_Family_Ganges_banner") {
-                        if let componentViewController: UIViewController = cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] as? UIViewController {
+                        if layoutName != "Family_Ganges_lazy_loading_1", let componentViewController: UIViewController = cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] as? UIViewController {
                             cell.componentViewController = componentViewController as! UIViewController & ComponentProtocol
                
                         } else {
@@ -558,34 +557,19 @@ import Zee5CoreSDK
                                                                                  view: cell.contentView,
                                                                                  delegate: self,
                                                                                  parentViewController: self)
+                            if layoutName != "Family_Ganges_lazy_loading_1" {
+                                cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = componentViewController
+                            }
                             
-                            cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = componentViewController
                         }
                             return cell
-                    }
                     
                     let _ = cell.setComponentModel(componentModel,
                     model: componentModel,
                     view: cell.contentView,
                     delegate: self,
                     parentViewController: self)
-                    
-                    //will uncommit in future, don't delete please
-                    
-//                    if layoutName != "Family_Ganges_lazy_loading_1", let componentViewController = cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!
-//                        ], index > 4 /* this magic number should be removed */ {
-//
-//
-//                    } else {
-//                        let componentViewController = cell.setComponentModel(componentModel,
-//                        model: componentModel,
-//                        view: cell.contentView,
-//                        delegate: self,
-//                        parentViewController: self)
-//                        if layoutName != "Family_Ganges_lazy_loading_1" {
-//                            cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = componentViewController
-//                        }
-//                    }
+
 
                     cell.layer.shouldRasterize = true
                     cell.layer.rasterizationScale = UIScreen.main.scale
