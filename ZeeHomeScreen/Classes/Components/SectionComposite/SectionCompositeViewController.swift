@@ -406,6 +406,7 @@ import Zee5CoreSDK
    }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         
         if componentInitialized == false {
@@ -413,14 +414,13 @@ import Zee5CoreSDK
             collectionView?.collectionViewLayout = collectionFlowLayout()
             loadComponent()
         }
-        
-        if !updateContentAndDisplayLanguageIfNeeded() {
-            if !updateUserStatusIfNeeded() {
-                if !updateUserSubscriptionsIfNeeded() {
-                    reloadContinueWatchingRailsIfNeeded()
+            if !updateContentAndDisplayLanguageIfNeeded() {
+                if !updateUserStatusIfNeeded() {
+                    if !updateUserSubscriptionsIfNeeded() {
+                        reloadContinueWatchingRailsIfNeeded()
+                    }
                 }
             }
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -468,6 +468,7 @@ import Zee5CoreSDK
     private func updateUserStatusIfNeeded() -> Bool {
         if let userType = userType, userType != User.shared.getType() {
             self.userType = User.shared.getType()
+            self.showActivityIndicator()
             DispatchQueue.main.async {
                 ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
             }
@@ -479,7 +480,9 @@ import Zee5CoreSDK
     private func updateUserSubscriptionsIfNeeded() -> Bool {
         if let isSubscribed = isUserSubscribed, isSubscribed != User.shared.isSubscribed() {
             isUserSubscribed = User.shared.isSubscribed()
+         self.showActivityIndicator()
             DispatchQueue.main.async {
+                
                 ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
             }
             return true
@@ -493,7 +496,9 @@ import Zee5CoreSDK
             if oldDisplayLanguage != Zee5UserDefaultsManager.shared.getSelectedDisplayLanguage() || oldContentLanguages != Zee5UserDefaultsManager.shared.getSelectedContentLanguages() {
                 displayLanguage = Zee5UserDefaultsManager.shared.getSelectedDisplayLanguage()
                 contentLanguages = Zee5UserDefaultsManager.shared.getSelectedContentLanguages()
+             self.showActivityIndicator()
                 DispatchQueue.main.async {
+                    
                     ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
                 }
                 return true
