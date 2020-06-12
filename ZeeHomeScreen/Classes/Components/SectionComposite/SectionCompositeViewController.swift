@@ -39,7 +39,7 @@ import Zee5CoreSDK
     private var cachedCells: [String: ComponentProtocol?] = [:]
     
     private var adPresenter: ZPAdPresenterProtocol?
-    
+
     weak var delegate:ComponentDelegate?
     var collectionViewFlowLayout:SectionCompositeFlowLayout? {
         return collectionView?.collectionViewLayout as? SectionCompositeFlowLayout
@@ -105,9 +105,17 @@ import Zee5CoreSDK
                 collectionView?.performBatchUpdates({
                     let indexSet = IndexSet(integer: index)
                         self.sectionsDataSourceArray?.remove(at: index)
-                        self.cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = nil
-                        self.collectionViewFlowLayout?.sectionsDataSourceArray = self.sectionsDataSourceArray
-                    self.collectionView?.deleteSections(indexSet)
+                    self.collectionViewFlowLayout?.sectionsDataSourceArray = self.sectionsDataSourceArray
+                    if componentModel.type != "LAZY_LOADING" {
+                       self.cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] = nil
+                        self.collectionView?.deleteSections(indexSet)
+                    } else {
+                        if let currentComponentModel = currentComponentModel, currentComponentModel.isVertical && currentComponentModel.type != "GRID" {
+                            self.collectionView?.deleteSections(indexSet)
+                        } else {
+                            self.collectionView?.deleteItems(at: [IndexPath.init(row: index, section: 0)])
+                        }
+                    }
                 }, completion: nil)
                 
             }
@@ -561,7 +569,7 @@ import Zee5CoreSDK
                     componentModel.screenConfiguration = screenConfiguration
                     cell.backgroundColor = UIColor.clear
                     
-                        if layoutName != "Family_Ganges_lazy_loading_1", let componentViewController: UIViewController = cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] as? UIViewController {
+                        if layoutName != "Family_Ganges_lazy_loading_1", let componentViewController: UIViewController = cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] as? UIViewController {
                             cell.componentViewController = componentViewController as! UIViewController & ComponentProtocol
                
                         } else {
@@ -575,7 +583,7 @@ import Zee5CoreSDK
                                 if let extensions = componentModel.entry?.extensions, let subtype: String = extensions["asset_subtype"] as? String, subtype == "Reco" {
                                     return cell
                                 }
-                                cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = componentViewController
+                                cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] = componentViewController
                             }
                             
                         }
@@ -602,6 +610,10 @@ import Zee5CoreSDK
     // MARK: - UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        //TODO: implement analytics for the reco rails
+//        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Click Reco", parameters: <#T##Dictionary<String, Any>#>)
+        
         
         if let sectionsDataSourceArray = sectionsDataSourceArray,
             let componentModel = sectionsDataSourceArray[indexPath.row] as? ComponentModel {

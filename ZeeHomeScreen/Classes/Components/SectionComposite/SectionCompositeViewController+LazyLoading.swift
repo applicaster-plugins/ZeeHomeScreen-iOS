@@ -241,21 +241,26 @@ extension SectionCompositeViewController {
             
             DatasourceManager.sharedInstance().load(atomFeedUrl: nextPageUrl, parentModel: liveComponentModel) { (component) in
                 guard let component = component as? ComponentModel else {
-                    self.isLoading = false
+                    
                     var indexPath: IndexPath!
                     
-                    if let _ = self.sectionsDataSourceArray![self.sectionsDataSourceArray!.count - 2] as? CellModel {
-                        indexPath = IndexPath.init(row: self.sectionsDataSourceArray!.count - 2, section: 0)
-                        UIView.animate(withDuration: 0.2) {
-                             self.collectionView?.scrollToItem(at: indexPath, at: .right, animated: false)
-                        }
-                    } else {
-                        indexPath = IndexPath.init(row: 0, section: self.sectionsDataSourceArray!.count - 2)
+                    if self.sectionsDataSourceArray?.last?.type == "LAZY_LOADING" {
+                        self.removeComponent(forModel:  self.sectionsDataSourceArray?.last as? NSObject, andComponentModel:  self.sectionsDataSourceArray?.last)
                     }
+                    
+//                    if let _ = self.sectionsDataSourceArray![self.sectionsDataSourceArray!.count - 1] as? CellModel {
+//                        indexPath = IndexPath.init(row: self.sectionsDataSourceArray!.count - 1, section: 0)
+//                        UIView.animate(withDuration: 0.2) {
+//                             self.collectionView?.scrollToItem(at: indexPath, at: .right, animated: false)
+//                        }
+//                    } else {
+//                        indexPath = IndexPath.init(row: 0, section: self.sectionsDataSourceArray!.count - 1)
+//                    }
                     
                     
                     return
                 }
+                self.isLoading = false
                 self.liveComponentModel = component
 
                 if let componentsArray = component.childerns,
