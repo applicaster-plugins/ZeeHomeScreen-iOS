@@ -611,13 +611,19 @@ import Zee5CoreSDK
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        //TODO: implement analytics for the reco rails
 //        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Click Reco", parameters: <#T##Dictionary<String, Any>#>)
         
         
         if let sectionsDataSourceArray = sectionsDataSourceArray,
             let componentModel = sectionsDataSourceArray[indexPath.row] as? ComponentModel {
             if let atomEntry = componentModel.entry as? APAtomEntry {
+                
+                //check if selected item is reco entry
+                if let extensions = atomEntry.extensions, let analytics = extensions["analytics"] as? [String: AnyHashable], let type = analytics["type"] as? String, type == "reco" {
+                    let homeClickEvent = HomeContentClickApi()
+                    homeClickEvent.contentConsumption(for: atomEntry)
+                }
+                
                 
                 CustomizationManager.manager.customTitle = componentModel.title
                 ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Thumbnail Click", parameters: analyticsParams(for: componentModel))
