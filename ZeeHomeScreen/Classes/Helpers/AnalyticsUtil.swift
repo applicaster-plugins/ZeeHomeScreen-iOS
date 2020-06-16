@@ -8,6 +8,7 @@ class AnalyticsUtil {
         guard let dataSourceUrl = decodeBase64(from: base64Url) else { return }
         guard let screenType = findQueryStringParameter(url: dataSourceUrl, parameter: "screen_type") else { return }
         analytics.track(mapScreenTypeToEvent(screenType: screenType), trackedProperties: Set<TrackedProperty>())
+        analytics.track(mapScreenTypeToEventV2(screenType: screenType), trackedProperties: Set<TrackedProperty>())
     }
 
     func findQueryStringParameter(url: String, parameter: String) -> String? {
@@ -20,7 +21,7 @@ class AnalyticsUtil {
         return String(data: data, encoding: .utf8)
     }
 
-    func mapScreenTypeToEvent(screenType: String) -> Events {
+    private func mapScreenTypeToEvent(screenType: String) -> Events {
         switch (screenType) {
         case "home":
             return Events.HOMEPAGE_VISITED
@@ -40,6 +41,29 @@ class AnalyticsUtil {
             return Events.ORIGINALSECTION_VISITED
         default:
             return Events.HOMEPAGE_VISITED
+        }
+    }
+    
+    private func mapScreenTypeToEventV2(screenType: String) -> Events {
+        switch (screenType) {
+        case "home":
+            return Events.HOME_CLICK_HOME
+        case "tvshows":
+            return Events.HOME_CLICK_TVSHOWS
+        case "premium":
+            return Events.HOME_CLICK_PREMIUM
+        case "movies":
+            return Events.HOME_CLICK_MOVIES
+        case "videos":
+            return Events.HOME_CLICK_VIDEOS
+        case "livetv":
+            return Events.HOME_CLICK_LIVETV
+        case "news":
+            return Events.HOME_CLICK_NEWS
+        case "originals":
+            return Events.HOME_CLICK_ORIGINALS
+        default:
+            return Events.HOME_CLICK_HOME
         }
     }
 }
