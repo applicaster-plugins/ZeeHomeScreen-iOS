@@ -7,8 +7,8 @@ class AnalyticsUtil {
         guard let base64Url = findQueryStringParameter(url: atomFeedUrl, parameter: "url") else { return }
         guard let dataSourceUrl = decodeBase64(from: base64Url) else { return }
         guard let screenType = findQueryStringParameter(url: dataSourceUrl, parameter: "screen_type") else { return }
-        analytics.track(mapScreenTypeToEvent(screenType: screenType), trackedProperties: Set<TrackedProperty>())
-        analytics.track(mapScreenTypeToEventV2(screenType: screenType), trackedProperties: Set<TrackedProperty>())
+        analytics.track(mapScreenTypeToVisitedEvent(screenType: screenType), trackedProperties: Set<TrackedProperty>())
+        analytics.track(mapScreenTypeToClickEvent(screenType: screenType), trackedProperties: Set<TrackedProperty>())
     }
 
     func findQueryStringParameter(url: String, parameter: String) -> String? {
@@ -21,7 +21,7 @@ class AnalyticsUtil {
         return String(data: data, encoding: .utf8)
     }
 
-    private func mapScreenTypeToEvent(screenType: String) -> Events {
+    private func mapScreenTypeToVisitedEvent(screenType: String) -> Events {
         switch (screenType) {
         case "home":
             return Events.HOMEPAGE_VISITED
@@ -44,7 +44,7 @@ class AnalyticsUtil {
         }
     }
     
-    private func mapScreenTypeToEventV2(screenType: String) -> Events {
+    private func mapScreenTypeToClickEvent(screenType: String) -> Events {
         switch (screenType) {
         case "home":
             return Events.HOME_CLICK_HOME
