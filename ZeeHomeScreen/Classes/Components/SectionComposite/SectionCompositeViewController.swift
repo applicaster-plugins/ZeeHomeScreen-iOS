@@ -349,7 +349,7 @@ import Zee5CoreSDK
         super.viewDidLoad()
         
         if let config = self.screenConfiguration {
-            if config.shouldDisplayEPG && currentComponentModel?.title == "nav_livetv".localized(hashMap: [:]) {
+            if config.shouldDisplayEPG {
                 if config.epgScreenID != nil {
                     topDistanceConstraint?.constant = -64
                     prepareToggle()
