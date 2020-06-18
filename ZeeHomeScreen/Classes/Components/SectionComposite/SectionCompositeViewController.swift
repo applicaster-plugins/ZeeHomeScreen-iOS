@@ -639,10 +639,11 @@ import Zee5CoreSDK
                 }
                 else if atomEntry.entryType == .link {
                     if let urlstring = atomEntry.link,
-                        let linkURL = URL(string: urlstring),
+                        let linkURL = URL(string: urlstring.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!),
                         APUtils.shouldOpenURLExternally(linkURL) {
-                        self.dismiss(animated: true)
-                        UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+                        self.dismiss(animated: false) {
+                            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+                        }
                     }
                 }
             }
@@ -799,10 +800,11 @@ import Zee5CoreSDK
                 }
                 else if atomEntry.entryType == .link {
                     if let urlstring = atomEntry.link,
-                        let linkURL = URL(string: urlstring),
+                        let linkURL = URL(string: urlstring.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!),
                         APUtils.shouldOpenURLExternally(linkURL) {
-                        self.dismiss(animated: true)
-                        UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+                        self.dismiss(animated: false) {
+                            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+                        }
                     }
                 }
             }
