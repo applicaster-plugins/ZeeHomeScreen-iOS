@@ -37,8 +37,6 @@ import Zee5CoreSDK
     var liveComponents = [ComponentModelProtocol]()
     
     private var cachedCells: [String: ComponentProtocol?] = [:]
-    
-    private var adPresenter: ZPAdPresenterProtocol?
 
     weak var delegate:ComponentDelegate?
     var collectionViewFlowLayout:SectionCompositeFlowLayout? {
@@ -940,35 +938,15 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
     }
 }
 
-extension SectionCompositeViewController: ZPAdViewProtocol {
-    
-    //MARK: ZPAdViewProtocol
-    
-    func adLoaded(view: UIView?) {
-        adPresenter?.showInterstitial()
-    }
-    
-    func stateChanged(adViewState: ZPAdViewState) {
-    }
-    
-    func adLoadFailed(error: Error) {
-    }
-    
+extension SectionCompositeViewController {
+
     func showInterstitial() {
         
         guard let screenConfiguration = self.screenConfiguration, screenConfiguration.shouldShowInterstitial == true else {
             return
         }
         
-        guard let extensions = currentComponentModel?.entry?.extensions, let ad_config = extensions["ad_config"] as? [String: Any], let adID = ad_config["interstitial_ad_tag"] as? String, let _ = ad_config["interstitial_video_view_duration"] as? Int  else {
-            return
-        }
-        let adPlugin = ZPAdvertisementManager.sharedInstance.getAdPlugin()
-        adPresenter = adPlugin?.createAdPresenter(adView: self, parentVC: self)
-        
-        let adConfig: ZPAdConfig = ZPAdConfig.init(adUnitId: adID, adType: .interstitial)
-        
-        adPresenter?.load(adConfig: adConfig)
+        ZeeHomeInterstitialManager.instance.showInterstitial(componentModel: currentComponentModel!, on: self)
     }
 }
 
