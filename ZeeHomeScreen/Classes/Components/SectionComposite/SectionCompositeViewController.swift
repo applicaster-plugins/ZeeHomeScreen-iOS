@@ -37,9 +37,7 @@ import Zee5CoreSDK
     var liveComponents = [ComponentModelProtocol]()
     
     private var cachedCells: [String: ComponentProtocol?] = [:]
-    
-    private var adPresenter: ZPAdPresenterProtocol?
-    
+
     weak var delegate:ComponentDelegate?
     var collectionViewFlowLayout:SectionCompositeFlowLayout? {
         return collectionView?.collectionViewLayout as? SectionCompositeFlowLayout
@@ -102,17 +100,22 @@ import Zee5CoreSDK
             if let index = sectionsDataSourceArray?.firstIndex(where: { (component) -> Bool in
                 return componentModel.identifier == component.identifier && componentModel.containerType == component.containerType
             }) {
-                
                 collectionView?.performBatchUpdates({
-                    
-                    self.sectionsDataSourceArray?.remove(at: index)
-                    cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = nil
-                    self.collectionView?.deleteSections(IndexSet(integer: index))
-                    if self.shouldLoadMoreItems() == true && !isLoading {
-                        self.loadMoreItems()
+                    let indexSet = IndexSet(integer: index)
+                        self.sectionsDataSourceArray?.remove(at: index)
+                    self.collectionViewFlowLayout?.sectionsDataSourceArray = self.sectionsDataSourceArray
+                    if componentModel.type != "LAZY_LOADING" {
+                       self.cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] = nil
+                        self.collectionView?.deleteSections(indexSet)
+                    } else {
+                        if let currentComponentModel = currentComponentModel, currentComponentModel.isVertical && currentComponentModel.type != "GRID" {
+                            self.collectionView?.deleteSections(indexSet)
+                        } else {
+                            self.collectionView?.deleteItems(at: [IndexPath.init(row: index, section: 0)])
+                        }
                     }
-                    
-                })
+                }, completion: nil)
+                
             }
         }
     }
@@ -122,16 +125,12 @@ import Zee5CoreSDK
             if let index = sectionsDataSourceArray?.firstIndex(where: { (component) -> Bool in
                 return componentModel.identifier == component.identifier && componentModel.containerType == component.containerType
             }) {
+
                 sectionsDataSourceArray?.remove(at: index)
-                cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = nil
                 sectionsDataSourceArray?.insert(componentModel, at: index)
 
                 collectionViewFlowLayout?.sectionsDataSourceArray = sectionsDataSourceArray
-                collectionView?.performBatchUpdates({
-                    
-                    self.collectionView?.reloadSections(IndexSet.init(integer: index))
-                })
-                
+                self.collectionView?.reloadData()
             }
         }
     }
@@ -143,18 +142,18 @@ import Zee5CoreSDK
         }
         
         registerLayouts(sectionsArray: components)
-        collectionView?.performBatchUpdates({
             
             var newIndexes: [Int] = []
             
-            
+        collectionView?.performBatchUpdates({
             components.enumerated().forEach { (offset, item) in
                 let index = getNewIndex(for: item, thatShouldBeInIndex: indexes[offset])
                 self.sectionsDataSourceArray?.insert(item, at: index)
                 newIndexes.append(index)
             }
+            self.collectionViewFlowLayout?.sectionsDataSourceArray = self.sectionsDataSourceArray
             self.collectionView?.insertSections(IndexSet(newIndexes))
-        })
+        }, completion: nil)
     }
     
     func getNewIndex(for banner: ComponentModelProtocol, thatShouldBeInIndex: Int) -> Int {
@@ -199,10 +198,12 @@ import Zee5CoreSDK
         let indexSet = IndexSet(indexes)
         registerLayouts(sectionsArray: components)
         if let _ = componentModel as? ComponentModel {
+            
             collectionView?.performBatchUpdates({
                 self.sectionsDataSourceArray?.insert(contentsOf: components, at: index)
+                self.collectionViewFlowLayout?.sectionsDataSourceArray = self.sectionsDataSourceArray
                 self.collectionView?.insertSections(indexSet)
-            })
+            }, completion: nil)
         }
     }
     
@@ -346,7 +347,7 @@ import Zee5CoreSDK
         super.viewDidLoad()
         
         if let config = self.screenConfiguration {
-            if config.shouldDisplayEPG && currentComponentModel?.title == "nav_livetv".localized(hashMap: [:]) {
+            if config.shouldDisplayEPG {
                 if config.epgScreenID != nil {
                     topDistanceConstraint?.constant = -64
                     prepareToggle()
@@ -376,9 +377,11 @@ import Zee5CoreSDK
         collectionView?.bounces = collectionViewBounces
         collectionView?.showsHorizontalScrollIndicator = collectionViewHorizontalScrollIndicator
         collectionView?.showsVerticalScrollIndicator = collectionViewVerticalScrollIndicator
+        
+        AnalyticsUtil().reportHomeLandingOnHomeScreenIfApplicable(atomFeedUrl: self.atomFeedUrl)
     }
     
-    override func viewDidLayoutSubviews () {
+   override func viewDidLayoutSubviews () {
         super.viewDidLayoutSubviews()
         if let parent = self.parent {
             if parent.isKind(of: GAScreenPluginGenericViewController.self) {
@@ -413,6 +416,7 @@ import Zee5CoreSDK
    }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         
         if componentInitialized == false {
@@ -420,14 +424,13 @@ import Zee5CoreSDK
             collectionView?.collectionViewLayout = collectionFlowLayout()
             loadComponent()
         }
-        
-        if !updateContentAndDisplayLanguageIfNeeded() {
-            if !updateUserStatusIfNeeded() {
-                if !updateUserSubscriptionsIfNeeded() {
-                    reloadContinueWatchingRailsIfNeeded()
+            if !updateContentAndDisplayLanguageIfNeeded() {
+                if !updateUserStatusIfNeeded() {
+                    if !updateUserSubscriptionsIfNeeded() {
+                        reloadContinueWatchingRailsIfNeeded()
+                    }
                 }
             }
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -475,6 +478,7 @@ import Zee5CoreSDK
     private func updateUserStatusIfNeeded() -> Bool {
         if let userType = userType, userType != User.shared.getType() {
             self.userType = User.shared.getType()
+            self.showActivityIndicator()
             DispatchQueue.main.async {
                 ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
             }
@@ -486,7 +490,9 @@ import Zee5CoreSDK
     private func updateUserSubscriptionsIfNeeded() -> Bool {
         if let isSubscribed = isUserSubscribed, isSubscribed != User.shared.isSubscribed() {
             isUserSubscribed = User.shared.isSubscribed()
+         self.showActivityIndicator()
             DispatchQueue.main.async {
+                
                 ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
             }
             return true
@@ -500,7 +506,9 @@ import Zee5CoreSDK
             if oldDisplayLanguage != Zee5UserDefaultsManager.shared.getSelectedDisplayLanguage() || oldContentLanguages != Zee5UserDefaultsManager.shared.getSelectedContentLanguages() {
                 displayLanguage = Zee5UserDefaultsManager.shared.getSelectedDisplayLanguage()
                 contentLanguages = Zee5UserDefaultsManager.shared.getSelectedContentLanguages()
+             self.showActivityIndicator()
                 DispatchQueue.main.async {
+                    
                     ZAAppConnector.sharedInstance().navigationDelegate.reloadRootViewController()
                 }
                 return true
@@ -563,28 +571,32 @@ import Zee5CoreSDK
                     componentModel.screenConfiguration = screenConfiguration
                     cell.backgroundColor = UIColor.clear
                     
+                        if layoutName != "Family_Ganges_lazy_loading_1", let componentViewController: UIViewController = cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] as? UIViewController {
+                            cell.componentViewController = componentViewController as! UIViewController & ComponentProtocol
+               
+                        } else {
+                            let componentViewController = cell.setComponentModel(componentModel,
+                                                                                 model: componentModel,
+                                                                                 view: cell.contentView,
+                                                                                 delegate: self,
+                                                                                 parentViewController: self)
+                            if layoutName != "Family_Ganges_lazy_loading_1"
+                            {
+                                if let extensions = componentModel.entry?.extensions, let subtype: String = extensions["asset_subtype"] as? String, subtype == "Reco" {
+                                    return cell
+                                }
+                                cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] = componentViewController
+                            }
+                            
+                        }
+                            return cell
+                    
                     let _ = cell.setComponentModel(componentModel,
                     model: componentModel,
                     view: cell.contentView,
                     delegate: self,
                     parentViewController: self)
-                    
-                    //will uncommit in future, don't delete please
-                    
-//                    if layoutName != "Family_Ganges_lazy_loading_1", let componentViewController = cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!
-//                        ], index > 4 /* this magic number should be removed */ {
-//
-//                            cell.updateComponentViewController(componentViewController as? UIViewController & ComponentProtocol, componentModel: componentModel, view: cell.contentView, delegate: self, parentViewController: self)
-//                    } else {
-//                        let componentViewController = cell.setComponentModel(componentModel,
-//                        model: componentModel,
-//                        view: cell.contentView,
-//                        delegate: self,
-//                        parentViewController: self)
-//                        if layoutName != "Family_Ganges_lazy_loading_1" {
-//                            cachedCells[componentModel.entry?.identifier ?? componentModel.identifier!] = componentViewController
-//                        }
-//                    }
+
 
                     cell.layer.shouldRasterize = true
                     cell.layer.rasterizationScale = UIScreen.main.scale
@@ -601,9 +613,19 @@ import Zee5CoreSDK
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+//        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Click Reco", parameters: <#T##Dictionary<String, Any>#>)
+        
+        
         if let sectionsDataSourceArray = sectionsDataSourceArray,
             let componentModel = sectionsDataSourceArray[indexPath.row] as? ComponentModel {
             if let atomEntry = componentModel.entry as? APAtomEntry {
+                
+                //check if selected item is reco entry
+                if let extensions = atomEntry.extensions, let analytics = extensions["analytics"] as? [String: AnyHashable], let type = analytics["type"] as? String, type == "reco" {
+                    let homeClickEvent = HomeContentClickApi()
+                    homeClickEvent.contentConsumption(for: atomEntry)
+                }
+                
                 
                 CustomizationManager.manager.customTitle = componentModel.title
                 ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Thumbnail Click", parameters: analyticsParams(for: componentModel))
@@ -619,10 +641,11 @@ import Zee5CoreSDK
                 }
                 else if atomEntry.entryType == .link {
                     if let urlstring = atomEntry.link,
-                        let linkURL = URL(string: urlstring),
+                        let linkURL = URL(string: urlstring.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!),
                         APUtils.shouldOpenURLExternally(linkURL) {
-                        self.dismiss(animated: true)
-                        UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+                        self.dismiss(animated: false) {
+                            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+                        }
                     }
                 }
             }
@@ -673,40 +696,54 @@ import Zee5CoreSDK
         return reusableview
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? UniversalCollectionViewCell {
+            if !children.contains(cell.componentViewController!) {
+                DispatchQueue.main.async {
+                    cell.addViewController(toParentViewController: self)
+                }
+            }
+        }
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        self.handleCellDidEndDisplaying(cell: cell, reason: .cellQueued)
+        if let cell = cell as? UniversalCollectionViewCell {
+            cell.removeViewControllerFromParentViewController()
+ 
+        }
     }
     
     func handleCellDidEndDisplaying(cell: UICollectionViewCell, reason: ZeeComponentEndDisplayingReason) {
-        if  let universalCollectionViewCell = cell as? UniversalCollectionViewCell,
-            let componentViewController = universalCollectionViewCell.componentViewController
-        {
-            componentViewController.didEndDisplaying?(with: reason)
-        }
+//        if  let universalCollectionViewCell = cell as? UniversalCollectionViewCell,
+//            let componentViewController = universalCollectionViewCell.componentViewController
+//        {
+//            componentViewController.didEndDisplaying?(with: reason)
+//        }
     }
     
     func handleCellDidStart(cell: UICollectionViewCell) {
-        if  let universalCollectionViewCell = cell as? UniversalCollectionViewCell,
-            let componentViewController = universalCollectionViewCell.componentViewController
-        {
-            componentViewController.didStartDisplaying?()
-        }
+//        if  let universalCollectionViewCell = cell as? UniversalCollectionViewCell,
+//            let componentViewController = universalCollectionViewCell.componentViewController
+//        {
+//            componentViewController.didStartDisplaying?()
+//        }
     }
     
     func didStartDisplaying() {
-        if let visibleCells = self.collectionView?.visibleCells {
-            for visibleCell in visibleCells {
-                self.handleCellDidStart(cell: visibleCell)
-            }
-        }
+//        if let visibleCells = self.collectionView?.visibleCells {
+//            for visibleCell in visibleCells {
+//                self.handleCellDidStart(cell: visibleCell)
+//            }
+//        }
     }
     
     func didEndDisplaying(with reason: ZeeComponentEndDisplayingReason) {
-        if let visibleCells = self.collectionView?.visibleCells {
-            for visibleCell in visibleCells {
-                self.handleCellDidEndDisplaying(cell: visibleCell, reason: .parent)
-            }
-        }
+//        if let visibleCells = self.collectionView?.visibleCells {
+//            for visibleCell in visibleCells {
+//                self.handleCellDidEndDisplaying(cell: visibleCell, reason: .parent)
+//            }
+//        }
     }
     
     var isLoading = false
@@ -724,7 +761,8 @@ import Zee5CoreSDK
         }
         else {
             let rightEdge = scrollView.contentOffset.x + scrollView.frame.size.width
-            if rightEdge >= scrollView.contentSize.width && !isLoading,
+            let reloadMargin:CGFloat = scrollView.frame.size.width*2 // load next items before getting to the end of the collection view
+            if rightEdge >= scrollView.contentSize.width - reloadMargin && !isLoading,
                 shouldLoadMoreItems() == true {
                 loadMoreItems()
             }
@@ -764,10 +802,11 @@ import Zee5CoreSDK
                 }
                 else if atomEntry.entryType == .link {
                     if let urlstring = atomEntry.link,
-                        let linkURL = URL(string: urlstring),
+                        let linkURL = URL(string: urlstring.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!),
                         APUtils.shouldOpenURLExternally(linkURL) {
-                        self.dismiss(animated: true)
-                        UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+                        self.dismiss(animated: false) {
+                            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+                        }
                     }
                 }
             }
@@ -903,35 +942,15 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
     }
 }
 
-extension SectionCompositeViewController: ZPAdViewProtocol {
-    
-    //MARK: ZPAdViewProtocol
-    
-    func adLoaded(view: UIView?) {
-        adPresenter?.showInterstitial()
-    }
-    
-    func stateChanged(adViewState: ZPAdViewState) {
-    }
-    
-    func adLoadFailed(error: Error) {
-    }
-    
+extension SectionCompositeViewController {
+
     func showInterstitial() {
         
         guard let screenConfiguration = self.screenConfiguration, screenConfiguration.shouldShowInterstitial == true else {
             return
         }
         
-        guard let extensions = currentComponentModel?.entry?.extensions, let ad_config = extensions["ad_config"] as? [String: Any], let adID = ad_config["interstitial_ad_tag"] as? String, let _ = ad_config["interstitial_video_view_duration"] as? Int  else {
-            return
-        }
-        let adPlugin = ZPAdvertisementManager.sharedInstance.getAdPlugin()
-        adPresenter = adPlugin?.createAdPresenter(adView: self, parentVC: self)
-        
-        let adConfig: ZPAdConfig = ZPAdConfig.init(adUnitId: adID, adType: .interstitial)
-        
-        adPresenter?.load(adConfig: adConfig)
+        ZeeHomeInterstitialManager.instance.showInterstitial(componentModel: currentComponentModel!, on: self)
     }
 }
 

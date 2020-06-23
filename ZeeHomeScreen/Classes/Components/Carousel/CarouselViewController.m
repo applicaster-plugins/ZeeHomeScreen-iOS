@@ -31,15 +31,15 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 @synthesize componentDataSourceModel = _componentDataSourceModel;
 @synthesize selectedModel = _selectedModel;
 
-- (void)prepareComponentForReuse {
-    [self removeObservers];
-    
-    _componentModel = nil;
-    _componentDataSourceModel = nil;
-    _dataSource = nil;
-    _selectedModel = nil;
-    self.fallbackComponent = nil;
-}
+//- (void)prepareComponentForReuse {
+//    [self removeObservers];
+//
+//    _componentModel = nil;
+//    _componentDataSourceModel = nil;
+//    _dataSource = nil;
+//    _selectedModel = nil;
+//    self.fallbackComponent = nil;
+//}
 
 #pragma mark - CAComponentProtocol
 
@@ -56,8 +56,6 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     self.carouselView.delegate = self;
     [self removeObservers];
     [self addObservers];
-    
-//    [self reloadComponent];
 }
 
 - (void)didStartDisplaying {
@@ -217,7 +215,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     [super viewDidLoad];
     self.borderView.hidden = YES;
 //    [self registerCarouselItems: self.dataSource];
-//    [self loadComponent];
+    [self loadComponent];
     [self updateBorderColor];
     [self customizePromotionView];
 }
@@ -228,7 +226,6 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self loadComponent];
     [self customizeBackground];
 }
 
@@ -237,8 +234,6 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     if (!self.componentInitialized) {
         self.componentInitialized = YES;
         [self.view layoutIfNeeded];
-        
-//        [self loadComponent];
     }
 }
 

@@ -767,7 +767,7 @@ extension SectionCompositeFlowLayout {
         }
         
         if сollectionItemTypes == .body {
-            if indexPath.row == sectionsDataSourceArray.count - 1 { //LAZY LOADING CELL
+            if indexPath.row == sectionsDataSourceArray.count - 1, let component: ComponentModel = sectionsDataSourceArray[indexPath.row] as? ComponentModel, component.type == "LAZY_LOADING"  { //LAZY LOADING CELL
                 if isVertical() == true  {
                     return CGSize.init(width: UIScreen.main.bounds.width, height: lazyLoadingHeight)
                 }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "ZeeHomeScreen"
-  s.version          = '2.7.5'
+  s.version          = '2.6.2'
   s.summary          = "ZeeHomeScreen"
   s.description      = <<-DESC
                       Zee Home Screen
@@ -30,6 +30,5 @@ Pod::Spec.new do |s|
   s.dependency 'ApplicasterUIKit'
   s.dependency 'ZappSDK'
   s.dependency 'Zee5CoreSDK'
-  s.dependency 'zee5mixpanelplugin'
 
 end

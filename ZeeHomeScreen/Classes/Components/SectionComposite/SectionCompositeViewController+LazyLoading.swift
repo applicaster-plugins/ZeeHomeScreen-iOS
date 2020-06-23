@@ -76,6 +76,12 @@ extension SectionCompositeViewController {
                 }
                 
                 self.setComponentModel(component)
+                
+                // update the title after setting ComponentModel. the nav bar is taking the title from the component
+                if let zappNavigationController = self.navigationController as? ZPNavigationController {
+                    zappNavigationController.navigationBarManager?.updateNavBarTitle()
+                }
+                
                 let additionalContent = self.prepareAdditionalContent(component)
                 self.loadAdditionalContent(indexToInsert: 1, for: additionalContent, component: component)
                 
@@ -149,8 +155,26 @@ extension SectionCompositeViewController {
                             self.insertComponents(index: indexToInsert, from: [feedComponent])
                             self.loadAdditionalContent(indexToInsert: indexToInsert + 1 , for: nContents, component: component)
                         case .recommendations:
-                            self.insertComponents(index: indexToInsert, from: feedComponent.childerns!)
-                            self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
+                            
+                            var indexOfItem = 0
+                            
+                            func loadNextSubRecoComponent(indexToInsert: Int, component: ComponentModel) {
+                                DatasourceManager.sharedInstance().load(model: component) { (donwloadedSubComponent) in
+                                    self.insertComponents(index: indexToInsert, from: [donwloadedSubComponent!])
+                                    
+                                    if component == feedComponent.childerns?.last as! ComponentModel {
+                                        self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
+                                    } else {
+                                        indexOfItem = indexOfItem + 1
+                                        loadNextSubRecoComponent(indexToInsert: indexToInsert + 1, component: feedComponent.childerns![indexOfItem] as! ComponentModel)
+                                    }
+                                }
+                            }
+                            
+                            loadNextSubRecoComponent(indexToInsert: indexToInsert, component: feedComponent.childerns?.first as! ComponentModel)
+
+                            
+                            
                         case .relatedCollection:
                             self.insertComponents(index: indexToInsert, from: feedComponent.childerns!)
                             self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count > 1 ? self.sectionsDataSourceArray!.count - 2 : self.sectionsDataSourceArray!.count, for: nContents, component: component)
@@ -217,21 +241,26 @@ extension SectionCompositeViewController {
             
             DatasourceManager.sharedInstance().load(atomFeedUrl: nextPageUrl, parentModel: liveComponentModel) { (component) in
                 guard let component = component as? ComponentModel else {
-                    self.isLoading = false
+                    
                     var indexPath: IndexPath!
                     
-                    if let _ = self.sectionsDataSourceArray![self.sectionsDataSourceArray!.count - 2] as? CellModel {
-                        indexPath = IndexPath.init(row: self.sectionsDataSourceArray!.count - 2, section: 0)
-                        UIView.animate(withDuration: 0.2) {
-                             self.collectionView?.scrollToItem(at: indexPath, at: .right, animated: false)
-                        }
-                    } else {
-                        indexPath = IndexPath.init(row: 0, section: self.sectionsDataSourceArray!.count - 2)
+                    if self.sectionsDataSourceArray?.last?.type == "LAZY_LOADING" {
+                        self.removeComponent(forModel:  self.sectionsDataSourceArray?.last as? NSObject, andComponentModel:  self.sectionsDataSourceArray?.last)
                     }
+                    
+//                    if let _ = self.sectionsDataSourceArray![self.sectionsDataSourceArray!.count - 1] as? CellModel {
+//                        indexPath = IndexPath.init(row: self.sectionsDataSourceArray!.count - 1, section: 0)
+//                        UIView.animate(withDuration: 0.2) {
+//                             self.collectionView?.scrollToItem(at: indexPath, at: .right, animated: false)
+//                        }
+//                    } else {
+//                        indexPath = IndexPath.init(row: 0, section: self.sectionsDataSourceArray!.count - 1)
+//                    }
                     
                     
                     return
                 }
+                self.isLoading = false
                 self.liveComponentModel = component
 
                 if let componentsArray = component.childerns,
@@ -296,12 +325,12 @@ extension SectionCompositeViewController {
         return components
     }
     
-    func lazyLoadingComponent() -> ComponentModel {
+    func lazyLoadingComponent() -> ComponentModel? {
         let lazyComponent = ComponentModel.init(type: "LAZY_LOADING")
         lazyComponent.layoutStyle = "Family_Ganges_lazy_loading_1"
         lazyComponent.isVertical = currentComponentModel?.isVertical ?? false
         lazyComponent.styleHelper = GangasFamilyStyleHelper.init(cellKey: "LAZY_LOADING", containerType: "LAZY_LOADING")
-        return lazyComponent
+        return currentComponentModel?.identifier == "ContinueWatching" ? nil :  lazyComponent
     }
     
     func insertItems(itemToInsert: [ComponentModelProtocol]) {

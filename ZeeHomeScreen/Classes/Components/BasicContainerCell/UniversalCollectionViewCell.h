@@ -25,8 +25,10 @@
             delegate:(nullable id<ComponentDelegate>)delegate
                                       parentViewController:(nullable UIViewController *)parentViewController;
 
-- (void)updateComponentViewController:(nullable UIViewController<ComponentProtocol> *) vc  componentModel:(nullable ComponentModel *)componentModel view:(nullable UIView *)view delegate:(nullable id<ComponentDelegate>)delegate parentViewController:(nullable UIViewController *)parentViewController;
 
 - (void)setBackgroundImage:(nullable NSString *)imageName;
+
+- (void)addViewControllerToParentViewController:(UIViewController *)parentViewController;
+- (void)removeViewControllerFromParentViewController;
 
 @end

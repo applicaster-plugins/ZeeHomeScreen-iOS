@@ -48,9 +48,13 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
-            
-            updateComponentData()
+
         }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateComponentData()
+    }
         
         override func viewDidLayoutSubviews() {
             super.viewDidLayoutSubviews()
@@ -124,12 +128,13 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
     func adLoaded(view: UIView?) {
         bannerView = view
         updateFlexibleCellSizeConstraints()
+        loadingActivityIndicator.stopAnimating()
     }
     
     func stateChanged(adViewState: ZPAdViewState) {
         switch (adViewState) {
         case .loaded:
-            loadingActivityIndicator.stopAnimating()
+           // loadingActivityIndicator.stopAnimating()
                 break;
                 
         case .impressed:

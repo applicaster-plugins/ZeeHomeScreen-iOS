@@ -45,6 +45,9 @@
 		3E8F4D382428EF9D0020B6A8 /* AtomHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD12428EF9D0020B6A8 /* AtomHelper.swift */; };
 		3E8F4D392428EF9D0020B6A8 /* ComponenttFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F4CD42428EF9D0020B6A8 /* ComponenttFactory.m */; };
 		3E8F4D572428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F4CFF2428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib */; };
+		3ED3363824A0BA7C00E2D2C3 /* ZeeHomeInterstitialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3363724A0BA7C00E2D2C3 /* ZeeHomeInterstitialManager.swift */; };
+		3EE613752498AA6E0079BE93 /* HomeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE613732498AA6E0079BE93 /* HomeNetworkManager.swift */; };
+		3EE613762498AA6E0079BE93 /* HomeContentClickApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE613742498AA6E0079BE93 /* HomeContentClickApi.swift */; };
 		43F447AB2476778E00FB8D50 /* AnalyticsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F447AA2476778E00FB8D50 /* AnalyticsUtil.swift */; };
 		4D6DC6FD243CA7BB00F24177 /* Zee5dsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6DC6FC243CA7BB00F24177 /* Zee5dsAdapter.swift */; };
 		4DF603AA23B938F400DD621F /* ZeeHomeScreen_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF603A923B938F400DD621F /* ZeeHomeScreen_iOSTests.swift */; };
@@ -114,8 +117,11 @@
 		3E8F4CD42428EF9D0020B6A8 /* ComponenttFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponenttFactory.m; sourceTree = "<group>"; };
 		3E8F4CD52428EF9D0020B6A8 /* ZeeHomeScreenPlugin_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZeeHomeScreenPlugin_iOS.h; sourceTree = "<group>"; };
 		3E8F4CFF2428EF9D0020B6A8 /* Family_Ganges_lazy_loading_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Family_Ganges_lazy_loading_1.xib; sourceTree = "<group>"; };
+		3ED3363724A0BA7C00E2D2C3 /* ZeeHomeInterstitialManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZeeHomeInterstitialManager.swift; sourceTree = "<group>"; };
 		3ED5879D242B6ED8008AF7B7 /* ZeeHomeScreen-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZeeHomeScreen-Bridging-Header.h"; sourceTree = "<group>"; };
 		3ED587B1242B9842008AF7B7 /* ZeeHomeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZeeHomeScreen.h; sourceTree = "<group>"; };
+		3EE613732498AA6E0079BE93 /* HomeNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNetworkManager.swift; sourceTree = "<group>"; };
+		3EE613742498AA6E0079BE93 /* HomeContentClickApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeContentClickApi.swift; sourceTree = "<group>"; };
 		43F447AA2476778E00FB8D50 /* AnalyticsUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsUtil.swift; sourceTree = "<group>"; };
 		4D6DC6FC243CA7BB00F24177 /* Zee5dsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Zee5dsAdapter.swift; path = ZeeHomeScreen/Classes/Zee5dsAdapter.swift; sourceTree = SOURCE_ROOT; };
 		4DF6038F23B938F300DD621F /* ZeeHomeScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZeeHomeScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +167,7 @@
 				3E8F4CD52428EF9D0020B6A8 /* ZeeHomeScreenPlugin_iOS.h */,
 				3ED5879D242B6ED8008AF7B7 /* ZeeHomeScreen-Bridging-Header.h */,
 				3ED587B1242B9842008AF7B7 /* ZeeHomeScreen.h */,
+				3ED3363724A0BA7C00E2D2C3 /* ZeeHomeInterstitialManager.swift */,
 				3E8F4CD62428EF9D0020B6A8 /* Resources */,
 			);
 			path = ZeeHomeScreen;
@@ -169,6 +176,8 @@
 		3E8F4C922428EF9D0020B6A8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3EE613742498AA6E0079BE93 /* HomeContentClickApi.swift */,
+				3EE613732498AA6E0079BE93 /* HomeNetworkManager.swift */,
 				3E8F4C932428EF9D0020B6A8 /* Datasource */,
 				3E8F4C952428EF9D0020B6A8 /* ZeeHomeScreenMain.swift */,
 				3E8F4C962428EF9D0020B6A8 /* Models */,
@@ -702,6 +711,7 @@
 				3E8F4D342428EF9D0020B6A8 /* GangasFamilyStyleHelper.swift in Sources */,
 				3E8F4D252428EF9D0020B6A8 /* SectionCompositeFlowLayout.swift in Sources */,
 				3E8F4D392428EF9D0020B6A8 /* ComponenttFactory.m in Sources */,
+				3ED3363824A0BA7C00E2D2C3 /* ZeeHomeInterstitialManager.swift in Sources */,
 				3E8F4D2A2428EF9D0020B6A8 /* ComponentsCustomization.m in Sources */,
 				3E51F51F242AA9310028642B /* ComponentProtocol.swift in Sources */,
 				3E8F4D172428EF9D0020B6A8 /* ZeeHomeScreenMain.swift in Sources */,
@@ -713,6 +723,7 @@
 				3E8F4D1F2428EF9D0020B6A8 /* BaseModel.swift in Sources */,
 				3E8F4D312428EF9D0020B6A8 /* BannerCellViewController.swift in Sources */,
 				3E8F4D1C2428EF9D0020B6A8 /* SectionComponentModelProtocol.swift in Sources */,
+				3EE613762498AA6E0079BE93 /* HomeContentClickApi.swift in Sources */,
 				3E8F4D232428EF9D0020B6A8 /* SectionCompositeViewController+LazyLoading.swift in Sources */,
 				3E8F4D222428EF9D0020B6A8 /* SectionCompositeViewController.swift in Sources */,
 				3E8F4D1B2428EF9D0020B6A8 /* AbstractModel.m in Sources */,
@@ -723,6 +734,7 @@
 				3E8F4D182428EF9D0020B6A8 /* CellModel.swift in Sources */,
 				3E8F4D362428EF9D0020B6A8 /* CustomizationManager.swift in Sources */,
 				3E8F4D2D2428EF9D0020B6A8 /* CommandPattern.m in Sources */,
+				3EE613752498AA6E0079BE93 /* HomeNetworkManager.swift in Sources */,
 				3E8F4D192428EF9D0020B6A8 /* ComponentModel.swift in Sources */,
 				3E8F4D382428EF9D0020B6A8 /* AtomHelper.swift in Sources */,
 			);
