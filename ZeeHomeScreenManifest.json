@@ -92,22 +92,33 @@
         "label_tooltip": "Represent the max gap between the last visible component to the last compoentn. for example: if the list has 8 componenet the next loadin invoke once the 5 component will be visible."
       },
       {
-        "group": true,
-        "label": "EPG section",
-        "tooltip": "Add more content for the screen ( additional DS )",
-        "folded": true,
-        "fields": [
+        "group":true,
+        "label":"Screen Type",
+        "tooltip":"Choose one of screen type of the home plugin",
+        "folded":true,
+        "fields":[
           {
-            "key": "should_display_epg",
-            "tooltip_text": "The screen should support EPG as part of the screen( use for LIVE TV tab)",
-            "type": "checkbox",
-            "initial_value": 0,
-            "default": 0
-          },
-          {
-            "type": "text_input",
+            "type":"select",
+            "key":"screen_type",
+            "multiple":false,
+            "options":[
+              "DEFAULT",
+              "EPG",
+              "SEARCH"
+            ],
+            "initial_value": "DEFAULT",
+            "default": "DEFAULT"
+          },  {
             "key": "epg_screen_id",
-            "label": "EPG Screen ID"
+            "type": "text_input",
+            "label": "EPG Screen ID",
+            "rules": "conditional",
+            "conditional_fields": [
+              {
+                "key": "general/screen_type",
+                "condition_value": "EPG"
+              }
+            ]
           }
         ]
       }
