@@ -48,11 +48,12 @@ enum AdditionalContentType: String {
             self.feed = dataSource
         }
         
-        if let shouldDisplayEPG = config["should_display_epg"] as? String {
-            self.shouldDisplayEPG = Int(shouldDisplayEPG) != 0
-            
-            if let epgScreenID = config["epg_screen_id"] as? String {
-                self.epgScreenID = epgScreenID
+        if let screenType = config["screen_type"] as? String {
+            self.shouldDisplayEPG = screenType == "EPG"
+            if self.shouldDisplayEPG {
+                if let epgScreenID = config["epg_screen_id"] as? String {
+                    self.epgScreenID = epgScreenID
+                }
             }
         }
         
