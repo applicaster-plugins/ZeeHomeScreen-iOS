@@ -377,6 +377,8 @@ import Zee5CoreSDK
         collectionView?.bounces = collectionViewBounces
         collectionView?.showsHorizontalScrollIndicator = collectionViewHorizontalScrollIndicator
         collectionView?.showsVerticalScrollIndicator = collectionViewVerticalScrollIndicator
+        
+        AnalyticsUtil().reportHomeLandingOnHomeScreenIfApplicable(atomFeedUrl: self.atomFeedUrl)
     }
     
     override func viewDidLayoutSubviews () {

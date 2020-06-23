@@ -10,6 +10,18 @@ class AnalyticsUtil {
         analytics.track(mapScreenTypeToVisitedEvent(screenType: screenType), trackedProperties: Set<TrackedProperty>())
         analytics.track(mapScreenTypeToClickEvent(screenType: screenType), trackedProperties: Set<TrackedProperty>())
     }
+    
+    func reportHomeLandingOnHomeScreenIfApplicable(atomFeedUrl: String?) {
+        guard let atomFeedUrl = atomFeedUrl,
+              let base64Url = findQueryStringParameter(url: atomFeedUrl, parameter: "url"),
+              let dataSourceUrl = decodeBase64(from: base64Url),
+              let screenType = findQueryStringParameter(url: dataSourceUrl, parameter: "screen_type")
+        else { return }
+            
+        if screenType == "home" {
+            analytics.track(Events.LANDING_ON_HOME_SCREEN, trackedProperties: Set<TrackedProperty>())
+        }
+    }
 
     func findQueryStringParameter(url: String, parameter: String) -> String? {
       guard let url = URLComponents(string: url) else { return nil }
