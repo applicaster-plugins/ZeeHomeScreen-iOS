@@ -380,13 +380,15 @@ import Zee5CoreSDK
     
     override func viewDidLayoutSubviews () {
         super.viewDidLayoutSubviews()
-        if currentComponentModel?.containerType == nil{
+        if let parent = self.parent {
+            if parent.isKind(of: GAScreenPluginGenericViewController.self) {
                let gradient:CAGradientLayer = CAGradientLayer()
                gradient.frame.size = self.view.size
                gradient.colors = [hexStringToUIColor(hex: "#130014").cgColor,hexStringToUIColor(hex: "#2b0225").cgColor]
                self.view.layer.insertSublayer(gradient, at:0)
            }
        }
+    }
        
    func hexStringToUIColor (hex:String) -> UIColor {
        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
