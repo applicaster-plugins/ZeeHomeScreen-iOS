@@ -571,25 +571,19 @@ import Zee5CoreSDK
                     componentModel.screenConfiguration = screenConfiguration
                     cell.backgroundColor = UIColor.clear
                     
-                        if layoutName != "Family_Ganges_lazy_loading_1", let componentViewController: UIViewController = cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] as? UIViewController {
+                    if layoutName.hasPrefix("ZeeHomeScreen_Family_Ganges_banner") {
+                        if let componentViewController: UIViewController = cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] as? UIViewController {
                             cell.componentViewController = componentViewController as! UIViewController & ComponentProtocol
-               
                         } else {
                             let componentViewController = cell.setComponentModel(componentModel,
                                                                                  model: componentModel,
                                                                                  view: cell.contentView,
                                                                                  delegate: self,
                                                                                  parentViewController: self)
-                            if layoutName != "Family_Ganges_lazy_loading_1"
-                            {
-                                if let extensions = componentModel.entry?.extensions, let subtype: String = extensions["asset_subtype"] as? String, subtype == "Reco" {
-                                    return cell
-                                }
-                                cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] = componentViewController
-                            }
-                            
+                            cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] = componentViewController
                         }
-                            return cell
+                        return cell
+                    }
                     
                     let _ = cell.setComponentModel(componentModel,
                     model: componentModel,
