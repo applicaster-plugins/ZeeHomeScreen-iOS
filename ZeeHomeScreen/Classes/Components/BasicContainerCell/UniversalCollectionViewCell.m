@@ -34,6 +34,10 @@
     
     [self removeViewControllerFromParentViewController];
     
+    if (self.componentViewController != nil) {
+        [ViewControllerRepository.shared addViewControllerWithViewController:self.componentViewController];
+    }
+    
     if ([self.componentViewController respondsToSelector:@selector(prepareComponentForReuse)]) {
         [self.componentViewController prepareComponentForReuse];
     }
@@ -52,11 +56,6 @@
                  delegate:(nullable id<ComponentDelegate>)delegate
      parentViewController:(nullable UIViewController *)parentViewController
 {
-    if (self.componentViewController != nil &&
-        ![componentModel.type isEqualToString: self.componentViewController.componentModel.type]) {
-        [ViewControllerRepository.shared addViewControllerWithViewController:self.componentViewController];
-    }
-    
     self.componentViewController = [ComponenttFactory componentViewControllerWithComponentModel:componentModel
         andModel:model
         forView:view
