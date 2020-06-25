@@ -32,13 +32,18 @@
 -(void)prepareForReuse {
     [super prepareForReuse];
     
+    [self removeViewControllerFromParentViewController];
+    
     if ([self.componentViewController respondsToSelector:@selector(prepareComponentForReuse)]) {
         [self.componentViewController prepareComponentForReuse];
+    }
+    if ([self.componentViewController respondsToSelector:@selector(prepareComponentToReuse)]) {
+        [self.componentViewController prepareComponentToReuse];
     }
 }
 
 -(void)setComponentViewController:(UIViewController<ComponentProtocol> *)componentViewController {
-    _componentViewController = componentViewController;
+     _componentViewController = componentViewController;
 }
 
 - (UIViewController<ComponentProtocol> *)setComponentModel:(nullable ComponentModel *)componentModel
@@ -47,15 +52,16 @@
                  delegate:(nullable id<ComponentDelegate>)delegate
      parentViewController:(nullable UIViewController *)parentViewController
 {
+    if (self.componentViewController != nil &&
+        ![componentModel.type isEqualToString: self.componentViewController.componentModel.type]) {
+        [ViewControllerRepository.shared addViewControllerWithViewController:self.componentViewController];
+    }
     
-    self.componentViewController = nil;
-//    if (self.componentViewController == nil) {
-        self.componentViewController = [ComponenttFactory componentViewControllerWithComponentModel:componentModel
-                                                                                           andModel:model
-                                                                                            forView:view
-                                                                                           delegate:delegate
-                                                                               parentViewController:parentViewController];
-//    }
+    self.componentViewController = [ComponenttFactory componentViewControllerWithComponentModel:componentModel
+        andModel:model
+        forView:view
+        delegate:delegate
+        parentViewController:parentViewController];
 
     if ([self.componentViewController respondsToSelector:@selector(setDelegate:)]) {
         self.componentViewController.delegate = delegate;
