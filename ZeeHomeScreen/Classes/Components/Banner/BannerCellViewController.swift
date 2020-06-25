@@ -48,7 +48,6 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
-
         }
     
     override func viewDidLoad() {
@@ -58,7 +57,6 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         
         override func viewDidLayoutSubviews() {
             super.viewDidLayoutSubviews()
-           
         }
 
         
@@ -136,15 +134,12 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
             loadingActivityIndicator.startAnimating()
         case .loaded:
                 break;
-                
         case .impressed:
                 reportBannerImpression()
                 break;
-                
         case .clicked:
                 bannerPressed()
                 break;
-                
             default:
                 break;
         }

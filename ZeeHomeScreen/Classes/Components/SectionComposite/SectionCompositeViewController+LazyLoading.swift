@@ -168,9 +168,6 @@ extension SectionCompositeViewController {
                             }
                             
                             loadNextSubRecoComponent(indexToInsert: indexToInsert, component: feedComponent.childerns?.first as! ComponentModel)
-
-                            
-                            
                         case .relatedCollection:
                             self.insertComponents(index: indexToInsert, from: feedComponent.childerns!)
                             self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count > 1 ? self.sectionsDataSourceArray!.count - 2 : self.sectionsDataSourceArray!.count, for: nContents, component: component)
@@ -184,9 +181,8 @@ extension SectionCompositeViewController {
                                     }
                                     indexesArray.append(position)
                                 }
-                                
                                 self.insertBanners(indexes: indexesArray, from: feedComponent)
-                                 self.loadAdditionalContent(indexToInsert: indexToInsert + 1, for: nContents, component: component)
+                                self.loadAdditionalContent(indexToInsert: indexToInsert + 1, for: nContents, component: component)
                             }
                         }
                     }
