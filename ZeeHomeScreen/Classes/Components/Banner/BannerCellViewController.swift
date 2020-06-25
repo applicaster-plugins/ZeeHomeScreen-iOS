@@ -48,7 +48,6 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
-
         }
     
     override func viewDidLoad() {
@@ -58,14 +57,12 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         
         override func viewDidLayoutSubviews() {
             super.viewDidLayoutSubviews()
-           // updateFlexibleCellSizeConstraints()
         }
 
         
         //MARK: CAComponentProtocol
 
         func prepareComponentForReuse() {
-//            loadingActivityIndicator.stopAnimating()
         }
 
 
@@ -133,18 +130,16 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
     
     func stateChanged(adViewState: ZPAdViewState) {
         switch (adViewState) {
+        case .loading:
+            loadingActivityIndicator.startAnimating()
         case .loaded:
-           // loadingActivityIndicator.stopAnimating()
                 break;
-                
         case .impressed:
                 reportBannerImpression()
                 break;
-                
         case .clicked:
                 bannerPressed()
                 break;
-                
             default:
                 break;
         }

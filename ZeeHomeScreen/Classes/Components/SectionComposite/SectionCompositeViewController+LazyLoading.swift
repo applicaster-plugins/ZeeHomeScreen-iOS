@@ -84,10 +84,6 @@ extension SectionCompositeViewController {
                 
                 let additionalContent = self.prepareAdditionalContent(component)
                 self.loadAdditionalContent(indexToInsert: 1, for: additionalContent, component: component)
-                
-                DispatchQueue.main.async {
-                    self.showInterstitial()
-                }
             }
         }
     }
@@ -99,6 +95,11 @@ extension SectionCompositeViewController {
         }
         
         var additionalContent: [AdditionalContent] = []
+        
+        if let adConfigs = config["ad_config"] as? [AnyHashable: Any], let banners = adConfigs[AdditionalContentType.banners.rawValue] as? String {
+            let banners = AdditionalContent.init(dsType: .banners, dsUrl: banners)
+            additionalContent.append(banners)
+        }
         
         if let continueWatching = config[AdditionalContentType.continueWatching.rawValue] as? String {
             let continueWatching = AdditionalContent.init(dsType: .continueWatching, dsUrl: continueWatching)
@@ -113,11 +114,6 @@ extension SectionCompositeViewController {
         if let relatedCollection = config[AdditionalContentType.relatedCollection.rawValue] as? String {
             let relatedCollection = AdditionalContent.init(dsType: .relatedCollection, dsUrl: relatedCollection)
             additionalContent.append(relatedCollection)
-        }
-        
-        if let adConfigs = config["ad_config"] as? [AnyHashable: Any], let banners = adConfigs[AdditionalContentType.banners.rawValue] as? String {
-            let banners = AdditionalContent.init(dsType: .banners, dsUrl: banners)
-            additionalContent.append(banners)
         }
 
         return additionalContent
@@ -142,9 +138,9 @@ extension SectionCompositeViewController {
                             case .recommendations:
                                 self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
                             case .relatedCollection:
-                                self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
-                            case .banners:
                                 break
+                            case .banners:
+                                self.loadAdditionalContent(indexToInsert: indexToInsert + 1 , for: nContents, component: component)
                             }
                             
                             return
@@ -172,9 +168,6 @@ extension SectionCompositeViewController {
                             }
                             
                             loadNextSubRecoComponent(indexToInsert: indexToInsert, component: feedComponent.childerns?.first as! ComponentModel)
-
-                            
-                            
                         case .relatedCollection:
                             self.insertComponents(index: indexToInsert, from: feedComponent.childerns!)
                             self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count > 1 ? self.sectionsDataSourceArray!.count - 2 : self.sectionsDataSourceArray!.count, for: nContents, component: component)
@@ -188,8 +181,8 @@ extension SectionCompositeViewController {
                                     }
                                     indexesArray.append(position)
                                 }
-                                
                                 self.insertBanners(indexes: indexesArray, from: feedComponent)
+                                self.loadAdditionalContent(indexToInsert: indexToInsert + 1, for: nContents, component: component)
                             }
                         }
                     }
