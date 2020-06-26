@@ -147,6 +147,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
     
     func adLoadFailed(error: Error) {
         loadingActivityIndicator.stopAnimating()
+        
         if !isRemoved {
             isRemoved = true
             if delegate.responds(to: #selector(ComponentDelegate.removeComponent(forModel:andComponentModel:))) {

@@ -337,7 +337,7 @@ import Zee5CoreSDK
                                                                                       value: "",
                                                                                       namespace: nil)
         }
-        if currentComponentModel?.identifier != "ContinueWatching" {
+        if let currentComponentModel = currentComponentModel, !currentComponentModel.isContinueWatchingType() {
             prepareSections()
         }
     }
@@ -469,7 +469,7 @@ import Zee5CoreSDK
     }
     
     private func reloadContinueWatchingRailsIfNeeded() {
-        if currentComponentModel?.identifier == "ContinueWatching" {
+        if let currentComponentModel = currentComponentModel, currentComponentModel.isContinueWatchingType() {
             sectionsDataSourceArray = []
             prepareSections()
         }
@@ -573,6 +573,7 @@ import Zee5CoreSDK
                     
                     if layoutName.hasPrefix("ZeeHomeScreen_Family_Ganges_banner") {
                         if let componentViewController: UIViewController = cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] as? UIViewController {
+                           
                             cell.componentViewController = componentViewController as! UIViewController & ComponentProtocol
                         } else {
                             let componentViewController = cell.setComponentModel(componentModel,
@@ -615,7 +616,7 @@ import Zee5CoreSDK
             if let atomEntry = componentModel.entry as? APAtomEntry {
                 
                 //check if selected item is reco entry
-                if let extensions = atomEntry.extensions, let analytics = extensions["analytics"] as? [String: AnyHashable], let type = analytics["type"] as? String, type == "reco" {
+                if componentModel.isRecoType() {
                     let homeClickEvent = HomeContentClickApi()
                     homeClickEvent.contentConsumption(for: atomEntry)
                 }
@@ -704,7 +705,7 @@ import Zee5CoreSDK
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cell = cell as? UniversalCollectionViewCell {
             cell.removeViewControllerFromParentViewController()
- 
+
         }
     }
     

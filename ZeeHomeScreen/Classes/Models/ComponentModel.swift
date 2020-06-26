@@ -201,4 +201,41 @@ import ApplicasterSDK
         return self.styleHelper?.getHeader(entry: entry, style: headerStyle, headerUrlScheme: headerUrlScheme)
     }
     
+    func isRecoType() -> Bool {
+        if let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, let analytics = extensions["analytics"] as? [String: AnyHashable], let type = analytics["type"] as? String, type == "reco" {
+            return true
+        } else if let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, let asset_subtype: String = extensions["asset_subtype"] as? String, asset_subtype == "Reco" {
+            return true
+        }
+        return false
+    }
+    
+    func isContinueWatchingType() -> Bool {
+        return identifier == "ContinueWatching" ? true : false
+    }
+}
+
+extension APAtomEntryProtocol {
+    func isRelatedCollectionsType() -> Bool {
+        if let extensions = extensions, let analytics: [String: AnyHashable] = extensions["analytics"] as? [String : AnyHashable], let collection_id: String = analytics["collection_id"] as? String, collection_id == "related-collections" {
+            return true
+        }
+        return false
+    }
+    
+    func isBannerType() -> Bool {
+        if let extensions = extensions, let uiComponents: [String: AnyHashable] = extensions["ui_component"] as? [String : AnyHashable], let type: String = uiComponents["type"] as? String, type == "BANNER" {
+            return true
+        }
+        return false
+    }
+    
+    func isRecoType() -> Bool {
+        if let extensions = extensions, let analytics = extensions["analytics"] as? [String: AnyHashable], let type = analytics["type"] as? String, type == "reco" {
+            return true
+        } else if let extensions = extensions, let asset_subtype: String = extensions["asset_subtype"] as? String, asset_subtype == "Reco" {
+            return true
+        }
+        return false
+    }
 }
