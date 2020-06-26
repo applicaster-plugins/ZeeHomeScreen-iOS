@@ -96,12 +96,12 @@ import ApplicasterSDK
         for (index, entry) in entries.enumerated() {
             
             //parse entries inside component but don't parse BANNER component and RECOMMENDATIONS, becaus banner is a single component without entries and RECOMMENDATIONS don't have entries, they needs to load them
-            if let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, let uiComponents: [String: AnyHashable] = extensions["ui_component"] as? [String : AnyHashable], let type: String = uiComponents["type"] as? String, type != "BANNER", let asset_subtype: String = extensions["asset_subtype"] as? String, asset_subtype != "Reco", extensions["related_collections"] == nil  {
+            if !feedComponent.isBannerType(), !feedComponent.isRecoType(), let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, extensions["related_collections"] == nil  {
                 if let component = parse(data: entry as? NSObject, componentModel: componentModel, isParentModel: true) {
                     components.append(component)
                 }
                 //use entries from the related collections
-            } else if let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, let analytics: [String: AnyHashable] = extensions["analytics"] as? [String : AnyHashable], let collection_id: String = analytics["collection_id"] as? String, collection_id == "related-collections" {
+            } else if feedComponent.isRelatedCollectionsType() {
                 if let component = parse(data: entry as? NSObject, componentModel: componentModel, isParentModel: true) {
                     components.append(component)
                 }

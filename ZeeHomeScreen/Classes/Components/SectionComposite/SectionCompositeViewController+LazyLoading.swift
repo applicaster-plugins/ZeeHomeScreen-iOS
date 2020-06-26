@@ -323,7 +323,7 @@ extension SectionCompositeViewController {
         lazyComponent.layoutStyle = "Family_Ganges_lazy_loading_1"
         lazyComponent.isVertical = currentComponentModel?.isVertical ?? false
         lazyComponent.styleHelper = GangasFamilyStyleHelper.init(cellKey: "LAZY_LOADING", containerType: "LAZY_LOADING")
-        return currentComponentModel?.identifier == "ContinueWatching" ? nil :  lazyComponent
+        return currentComponentModel!.isContinueWatchingType() || currentComponentModel!.isRecoType() ? nil :  lazyComponent
     }
     
     func insertItems(itemToInsert: [ComponentModelProtocol]) {
