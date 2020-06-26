@@ -126,15 +126,11 @@ import Zee5CoreSDK
                 return componentModel.identifier == component.identifier && componentModel.containerType == component.containerType
             }) {
 
-//                collectionView?.performBatchUpdates({
-                    sectionsDataSourceArray?.remove(at: index)
-                    sectionsDataSourceArray?.insert(componentModel, at: index)
+                sectionsDataSourceArray?.remove(at: index)
+                sectionsDataSourceArray?.insert(componentModel, at: index)
 
-                    collectionViewFlowLayout?.sectionsDataSourceArray = sectionsDataSourceArray
-                    self.collectionView?.reloadData()
-//                    self.collectionView?.reloadSections(IndexSet.init(arrayLiteral: index))
-//                }, completion: nil)
-                
+                collectionViewFlowLayout?.sectionsDataSourceArray = sectionsDataSourceArray
+                self.collectionView?.reloadData()
             }
         }
     }
