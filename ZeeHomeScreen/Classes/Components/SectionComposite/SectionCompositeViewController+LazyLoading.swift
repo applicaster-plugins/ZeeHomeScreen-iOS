@@ -180,8 +180,9 @@ extension SectionCompositeViewController {
                                     }
                                     indexesArray.append(position)
                                 }
+                                
                                 self.insertBanners(indexes: indexesArray, from: feedComponent)
-                                 self.loadAdditionalContent(indexToInsert: indexToInsert, for: nContents, component: component)
+                                self.loadAdditionalContent(indexToInsert: indexToInsert + 1, for: nContents, component: component)
                             }
                         }
                     }

@@ -96,7 +96,7 @@ import ApplicasterSDK
         for (index, entry) in entries.enumerated() {
             
             //parse entries inside component but don't parse BANNER component and RECOMMENDATIONS, becaus banner is a single component without entries and RECOMMENDATIONS don't have entries, they needs to load them
-            if !feedComponent.isBannerType(), !entry.isRecoType(), let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, extensions["related_collections"] == nil  {
+            if !entry.isBannerType(), !entry.isRecoType(), let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, extensions["related_collections"] == nil  {
                 if let component = parse(data: entry as? NSObject, componentModel: componentModel, isParentModel: true) {
                     components.append(component)
                 }
