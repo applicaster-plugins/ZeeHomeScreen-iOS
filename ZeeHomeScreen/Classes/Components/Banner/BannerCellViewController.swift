@@ -57,7 +57,6 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         
         override func viewDidLayoutSubviews() {
             super.viewDidLayoutSubviews()
-           
         }
 
         
@@ -110,7 +109,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         
         let adPlugin = ZPAdvertisementManager.sharedInstance.getAdPlugin()
         adPresenter = adPlugin?.createAdPresenter(adView: self, parentVC: self)
-
+        
         if let bannerModel = currentComponentModel().entry, let extensions: [String: Any] = bannerModel.pipesObject!["extensions"] as? [String : Any], let config: [String: Any] = extensions["ad_config"] as? [String: Any] {
             bannerContainerView.removeAllSubviews()
             let adConfig: ZPAdConfig = ZPAdConfig.init(adUnitId: config["ad_tag"] as! String , inlineBannerSize: config["ad_size"] as! String)
@@ -135,22 +134,20 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
             loadingActivityIndicator.startAnimating()
         case .loaded:
                 break;
-                
         case .impressed:
                 reportBannerImpression()
                 break;
-                
         case .clicked:
                 bannerPressed()
                 break;
-                
             default:
                 break;
         }
     }
     
     func adLoadFailed(error: Error) {
-  
+        loadingActivityIndicator.stopAnimating()
+        
         if !isRemoved {
             isRemoved = true
             if delegate.responds(to: #selector(ComponentDelegate.removeComponent(forModel:andComponentModel:))) {
