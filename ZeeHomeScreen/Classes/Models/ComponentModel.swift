@@ -214,18 +214,28 @@ import ApplicasterSDK
         return identifier == "ContinueWatching" ? true : false
     }
     
-    func isRelatedCollectionsType() -> Bool {
-        if let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, let analytics: [String: AnyHashable] = extensions["analytics"] as? [String : AnyHashable], let collection_id: String = analytics["collection_id"] as? String, collection_id == "related-collections" {
-            return true
-        }
-        return false
-    }
-    
     func isBannerType() -> Bool {
         if let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, let uiComponents: [String: AnyHashable] = extensions["ui_component"] as? [String : AnyHashable], let type: String = uiComponents["type"] as? String, type == "BANNER" {
             return true
         }
         return false
     }
+}
+
+extension APAtomEntryProtocol {
+    func isRelatedCollectionsType() -> Bool {
+        if let extensions = extensions, let analytics: [String: AnyHashable] = extensions["analytics"] as? [String : AnyHashable], let collection_id: String = analytics["collection_id"] as? String, collection_id == "related-collections" {
+            return true
+        }
+        return false
+    }
     
+    func isRecoType() -> Bool {
+        if let extensions = extensions, let analytics = extensions["analytics"] as? [String: AnyHashable], let type = analytics["type"] as? String, type == "reco" {
+            return true
+        } else if let extensions = extensions, let asset_subtype: String = extensions["asset_subtype"] as? String, asset_subtype == "Reco" {
+            return true
+        }
+        return false
+    }
 }

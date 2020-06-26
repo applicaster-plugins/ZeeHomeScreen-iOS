@@ -169,8 +169,7 @@ extension SectionCompositeViewController {
                             
                             loadNextSubRecoComponent(indexToInsert: indexToInsert, component: feedComponent.childerns?.first as! ComponentModel)
                         case .relatedCollection:
-                            self.insertComponents(index: indexToInsert, from: feedComponent.childerns!)
-                            self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count > 1 ? self.sectionsDataSourceArray!.count - 2 : self.sectionsDataSourceArray!.count, for: nContents, component: component)
+                            self.insertComponents(index: self.sectionsDataSourceArray!.count, from: feedComponent.childerns!)
                         case .banners:
                             if let childrens = feedComponent.childerns {
                                 
@@ -182,7 +181,7 @@ extension SectionCompositeViewController {
                                     indexesArray.append(position)
                                 }
                                 self.insertBanners(indexes: indexesArray, from: feedComponent)
-                                self.loadAdditionalContent(indexToInsert: indexToInsert + 1, for: nContents, component: component)
+                                 self.loadAdditionalContent(indexToInsert: indexToInsert, for: nContents, component: component)
                             }
                         }
                     }
@@ -323,7 +322,7 @@ extension SectionCompositeViewController {
         lazyComponent.layoutStyle = "Family_Ganges_lazy_loading_1"
         lazyComponent.isVertical = currentComponentModel?.isVertical ?? false
         lazyComponent.styleHelper = GangasFamilyStyleHelper.init(cellKey: "LAZY_LOADING", containerType: "LAZY_LOADING")
-        return currentComponentModel!.isContinueWatchingType() || currentComponentModel!.isRecoType() ? nil :  lazyComponent
+        return currentComponentModel!.isContinueWatchingType() || currentComponentModel!.isRecoType() || currentComponentModel!.entry!.isRelatedCollectionsType() ? nil :  lazyComponent
     }
     
     func insertItems(itemToInsert: [ComponentModelProtocol]) {

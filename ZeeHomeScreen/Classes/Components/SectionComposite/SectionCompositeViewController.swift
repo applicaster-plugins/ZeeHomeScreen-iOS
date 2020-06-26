@@ -126,11 +126,15 @@ import Zee5CoreSDK
                 return componentModel.identifier == component.identifier && componentModel.containerType == component.containerType
             }) {
 
-                sectionsDataSourceArray?.remove(at: index)
-                sectionsDataSourceArray?.insert(componentModel, at: index)
+//                collectionView?.performBatchUpdates({
+                    sectionsDataSourceArray?.remove(at: index)
+                    sectionsDataSourceArray?.insert(componentModel, at: index)
 
-                collectionViewFlowLayout?.sectionsDataSourceArray = sectionsDataSourceArray
-                self.collectionView?.reloadData()
+                    collectionViewFlowLayout?.sectionsDataSourceArray = sectionsDataSourceArray
+                    self.collectionView?.reloadData()
+//                    self.collectionView?.reloadSections(IndexSet.init(arrayLiteral: index))
+//                }, completion: nil)
+                
             }
         }
     }
@@ -573,6 +577,7 @@ import Zee5CoreSDK
                     
                     if layoutName.hasPrefix("ZeeHomeScreen_Family_Ganges_banner") {
                         if let componentViewController: UIViewController = cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] as? UIViewController {
+                           
                             cell.componentViewController = componentViewController as! UIViewController & ComponentProtocol
                         } else {
                             let componentViewController = cell.setComponentModel(componentModel,
@@ -704,7 +709,7 @@ import Zee5CoreSDK
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cell = cell as? UniversalCollectionViewCell {
             cell.removeViewControllerFromParentViewController()
- 
+
         }
     }
     
