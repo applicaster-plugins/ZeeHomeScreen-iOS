@@ -151,8 +151,9 @@ extension SectionCompositeViewController {
                             self.insertComponents(index: indexToInsert, from: [feedComponent])
                             self.loadAdditionalContent(indexToInsert: indexToInsert + 1 , for: nContents, component: component)
                         case .recommendations:
-                            if let childerns = feedComponent.childerns {
-                                self.insertComponents(index: indexToInsert, from: childerns)
+                            // This works with a data source version that supports feed of feeds (12.1.41 or higher)
+                            if let children = feedComponent.childerns {
+                                self.insertComponents(index: indexToInsert, from: children)
                             }
                             self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
                         case .relatedCollection:
