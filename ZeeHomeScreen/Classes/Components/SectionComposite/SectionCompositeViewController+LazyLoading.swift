@@ -151,23 +151,10 @@ extension SectionCompositeViewController {
                             self.insertComponents(index: indexToInsert, from: [feedComponent])
                             self.loadAdditionalContent(indexToInsert: indexToInsert + 1 , for: nContents, component: component)
                         case .recommendations:
-                            
-                            var indexOfItem = 0
-                            
-                            func loadNextSubRecoComponent(indexToInsert: Int, component: ComponentModel) {
-                                DatasourceManager.sharedInstance().load(model: component) { (donwloadedSubComponent) in
-                                    self.insertComponents(index: indexToInsert, from: [donwloadedSubComponent!])
-                                    
-                                    if component == feedComponent.childerns?.last as! ComponentModel {
-                                        self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
-                                    } else {
-                                        indexOfItem = indexOfItem + 1
-                                        loadNextSubRecoComponent(indexToInsert: indexToInsert + 1, component: feedComponent.childerns![indexOfItem] as! ComponentModel)
-                                    }
-                                }
+                            if let childerns = feedComponent.childerns {
+                                self.insertComponents(index: indexToInsert, from: childerns)
                             }
-                            
-                            loadNextSubRecoComponent(indexToInsert: indexToInsert, component: feedComponent.childerns?.first as! ComponentModel)
+                            self.loadAdditionalContent(indexToInsert: self.sectionsDataSourceArray!.count - 2, for: nContents, component: component)
                         case .relatedCollection:
                             self.insertComponents(index: self.sectionsDataSourceArray!.count, from: feedComponent.childerns!)
                         case .banners:

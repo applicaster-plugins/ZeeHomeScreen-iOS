@@ -12,7 +12,7 @@
   "platform": "ios",
   "author_name": "N. Smorgun",
   "author_email": "n.smorgun@applicaster.com",
-  "manifest_version": "2.8.4",
+  "manifest_version": "2.8.5",
   "name": "Zee5HomeScreen",
   "description": "Zee5 Home Screen",
   "type": "general",
@@ -20,7 +20,7 @@
   "identifier": "zee5_home_screen",
   "ui_builder_support": true,
   "dependency_name": "ZeeHomeScreen",
-  "dependency_version": "2.8.4",
+  "dependency_version": "2.8.5",
 
   "whitelisted_account_ids": [
     "5cb825e102507200087bbdcc",
