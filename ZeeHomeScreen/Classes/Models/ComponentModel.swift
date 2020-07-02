@@ -213,6 +213,10 @@ import ApplicasterSDK
     func isContinueWatchingType() -> Bool {
         return identifier == "ContinueWatching" ? true : false
     }
+    
+    func isGridType() -> Bool {
+        return type == "GRID"
+    }
 }
 
 extension APAtomEntryProtocol {
