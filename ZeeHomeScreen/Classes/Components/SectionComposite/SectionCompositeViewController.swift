@@ -108,7 +108,7 @@ import Zee5CoreSDK
                        self.cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] = nil
                         self.collectionView?.deleteSections(indexSet)
                     } else {
-                        if let currentComponentModel = currentComponentModel, currentComponentModel.isVertical && currentComponentModel.type != "GRID" {
+                        if let currentComponentModel = currentComponentModel, currentComponentModel.isVertical && !currentComponentModel.isGridType() {
                             self.collectionView?.deleteSections(indexSet)
                         } else {
                             self.collectionView?.deleteItems(at: [IndexPath.init(row: index, section: 0)])
@@ -424,13 +424,14 @@ import Zee5CoreSDK
             collectionView?.collectionViewLayout = collectionFlowLayout()
             loadComponent()
         }
-            if !updateContentAndDisplayLanguageIfNeeded() {
-                if !updateUserStatusIfNeeded() {
-                    if !updateUserSubscriptionsIfNeeded() {
-                        reloadContinueWatchingRailsIfNeeded()
-                    }
+        
+        if !updateContentAndDisplayLanguageIfNeeded() {
+            if !updateUserStatusIfNeeded() {
+                if !updateUserSubscriptionsIfNeeded() {
+                    reloadContinueWatchingRailsIfNeeded()
                 }
             }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -536,7 +537,7 @@ import Zee5CoreSDK
     // MARK: - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let currentComponentModel = currentComponentModel,
-        currentComponentModel.isVertical == true && currentComponentModel.type != "GRID" {
+        currentComponentModel.isVertical == true && !currentComponentModel.isGridType() {
             return 1
         }
         return sectionsDataSourceArray?.count ?? 0
@@ -547,7 +548,7 @@ import Zee5CoreSDK
             return 1
         }
         if let currentComponentModel = currentComponentModel,
-        currentComponentModel.isVertical == true && currentComponentModel.type != "GRID"  {
+        currentComponentModel.isVertical == true && !currentComponentModel.isGridType()  {
             return sectionsDataSourceArray.count
         }
         return  1
@@ -746,6 +747,10 @@ import Zee5CoreSDK
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.componentViewController?(self, didChangedContentOffset: scrollView.contentOffset)
         
+        preloadNextContentPage(scrollView)
+    }
+    
+    func preloadNextContentPage(_ scrollView: UIScrollView) {
         if collectionViewFlowLayout?.isVertical() == true  {
             let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
             let reloadMargin:CGFloat = scrollView.frame.size.height*2 // load next items before getting to the end of the collection view

@@ -27,25 +27,34 @@ extension SectionCompositeViewController {
         if let component = currentComponentModel, component.childerns != nil, component.childerns!.count > 0 {
             
             self.liveComponentModel = component
-
-                           if let componentsArray = component.childerns,
-                               componentsArray.count > 0 {
-                               let liveComponentsArray = self.liveComponentsWithLazyLoading(componentsArray: componentsArray, liveComponents: self.sectionsDataSourceArray)
-                               
-                                   if component.isVertical == true && component.type != "GRID" {
-                                       self.prepareCollectionSections(sections: liveComponentsArray)
-                                   }
-                                   else {
-                                       self.prepareCollectionItems(items: liveComponentsArray)
-                                   }
-                           }
-                           else {
-                               // delete lazy loading components if needed
-                           }
-                           
-                           self.setComponentModel(component)
-                           let additionalContent = self.prepareAdditionalContent(component)
-                           self.loadAdditionalContent(indexToInsert: 1, for: additionalContent, component: component)
+            
+            if let componentsArray = component.childerns,
+                componentsArray.count > 0 {
+                let liveComponentsArray = self.liveComponentsWithLazyLoading(componentsArray: componentsArray, liveComponents: self.sectionsDataSourceArray)
+                
+                if component.isVertical == true && !component.isGridType() {
+                    self.prepareCollectionSections(sections: liveComponentsArray)
+                }
+                else {
+                    self.prepareCollectionItems(items: liveComponentsArray)
+                }
+            }
+            else {
+                // delete lazy loading components if needed
+            }
+            
+            self.setComponentModel(component)
+            let additionalContent = self.prepareAdditionalContent(component)
+            self.loadAdditionalContent(indexToInsert: 1, for: additionalContent, component: component)
+            
+            //load next content page if current screen == inner screen
+            if let collectionView = collectionView,
+                component.isVertical == true && component.isGridType() {
+                //there should be a small delay because collectionView crashes when tries to remove loading cell that is not created yet, because response comes immediately (line 303 in this class)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.preloadNextContentPage(collectionView)
+                }
+            }
             return
         }
         
@@ -64,7 +73,7 @@ extension SectionCompositeViewController {
                     componentsArray.count > 0 {
                     let liveComponentsArray = self.liveComponentsWithLazyLoading(componentsArray: componentsArray, liveComponents: self.sectionsDataSourceArray)
                     
-                        if currentComponentModel.isVertical == true && component.type != "GRID" {
+                    if currentComponentModel.isVertical == true && !component.isGridType() {
                             self.prepareCollectionSections(sections: liveComponentsArray)
                         }
                         else {
@@ -84,6 +93,15 @@ extension SectionCompositeViewController {
                 
                 let additionalContent = self.prepareAdditionalContent(component)
                 self.loadAdditionalContent(indexToInsert: 1, for: additionalContent, component: component)
+                
+                //load next content page if current screen == inner screen
+                if let collectionView = self.collectionView,
+                    component.isVertical == true && component.isGridType() {
+                    //there should be a small delay because collectionView crashes when tries to remove loading cell that is not created yet, because response comes immediately (line 303 in this class)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.preloadNextContentPage(collectionView)
+                    }
+                }
             }
         }
     }
@@ -228,17 +246,7 @@ extension SectionCompositeViewController {
                     if self.sectionsDataSourceArray?.last?.type == "LAZY_LOADING" {
                         self.removeComponent(forModel:  self.sectionsDataSourceArray?.last as? NSObject, andComponentModel:  self.sectionsDataSourceArray?.last)
                     }
-                    
-//                    if let _ = self.sectionsDataSourceArray![self.sectionsDataSourceArray!.count - 1] as? CellModel {
-//                        indexPath = IndexPath.init(row: self.sectionsDataSourceArray!.count - 1, section: 0)
-//                        UIView.animate(withDuration: 0.2) {
-//                             self.collectionView?.scrollToItem(at: indexPath, at: .right, animated: false)
-//                        }
-//                    } else {
-//                        indexPath = IndexPath.init(row: 0, section: self.sectionsDataSourceArray!.count - 1)
-//                    }
-                    
-                    
+           
                     return
                 }
                 self.isLoading = false
@@ -248,7 +256,7 @@ extension SectionCompositeViewController {
                     componentsArray.count > 0 {
                     let liveComponentsArray = self.liveComponentsWithLazyLoading(componentsArray: componentsArray, liveComponents: self.sectionsDataSourceArray)
 
-                        if self.currentComponentModel?.isVertical == true &&  self.currentComponentModel?.type != "GRID" {
+                        if let currentComponentModel = self.currentComponentModel, currentComponentModel.isVertical == true &&  !currentComponentModel.isGridType() {
                             self.insertSections(sectionToInsert: liveComponentsArray)
                         }
                         else {
@@ -288,18 +296,15 @@ extension SectionCompositeViewController {
         let lazyComponentIndex = liveComponents.count - 1
         let lazyLoadingItem = liveItems.remove(at: lazyComponentIndex)
         sectionsDataSourceArray = liveItems
-        if self.currentComponentModel?.isVertical == true &&  self.currentComponentModel?.type != "GRID" {
+        if let currentComponentModel = self.currentComponentModel, currentComponentModel.isVertical == true &&  !currentComponentModel.isGridType() {
             self.collectionView?.deleteSections(IndexSet(integer: lazyComponentIndex))
         }
         else {
-            collectionView?.performBatchUpdates({
-                self.collectionViewFlowLayout?.isCollectionDeleteCells = true
-                self.collectionView?.deleteItems(at: [IndexPath(row: lazyComponentIndex, section: 0)])
-            }, completion: { (success) in
-                self.collectionViewFlowLayout?.isCollectionDeleteCells = false
-            })
+            self.collectionViewFlowLayout?.isCollectionDeleteCells = true
+            self.collectionView?.deleteItems(at: [IndexPath(row: lazyComponentIndex, section: 0)])
+            self.collectionViewFlowLayout?.isCollectionDeleteCells = false
         }
-        
+
         // add lazy loading cell at the end
         components.insert(lazyLoadingItem, at: components.count)
         liveItems.append(contentsOf: components)
@@ -375,7 +380,7 @@ extension SectionCompositeViewController {
     func deleteLazyLoadingCellIfNeeded(at index: Int) {
         if isLazyLoadingCellExists() == true,
             index > 0 {
-            if self.currentComponentModel?.isVertical == true &&  self.currentComponentModel?.type != "GRID" {
+            if let currentComponentModel = self.currentComponentModel, currentComponentModel.isVertical == true &&  !currentComponentModel.isGridType() {
                 self.collectionView?.deleteSections(IndexSet(integer: index))
             }
             else {
