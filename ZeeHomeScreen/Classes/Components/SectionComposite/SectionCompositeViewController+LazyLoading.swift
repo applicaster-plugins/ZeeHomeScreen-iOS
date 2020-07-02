@@ -13,6 +13,8 @@ import ApplicasterSDK
 
 extension SectionCompositeViewController {
     
+    private static let LOADING_EXTRA_CONTENT_DELAY = 0.5
+    
     func prepareSections() {
         guard currentComponentModel != nil else {
             return
@@ -51,7 +53,7 @@ extension SectionCompositeViewController {
             if let collectionView = collectionView,
                 component.isVertical == true && component.isGridType() {
                 //there should be a small delay because collectionView crashes when tries to remove loading cell that is not created yet, because response comes immediately (line 303 in this class)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + SectionCompositeViewController.LOADING_EXTRA_CONTENT_DELAY) {
                     self.preloadNextContentPage(collectionView)
                 }
             }
@@ -98,7 +100,7 @@ extension SectionCompositeViewController {
                 if let collectionView = self.collectionView,
                     component.isVertical == true && component.isGridType() {
                     //there should be a small delay because collectionView crashes when tries to remove loading cell that is not created yet, because response comes immediately (line 303 in this class)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + SectionCompositeViewController.LOADING_EXTRA_CONTENT_DELAY) {
                         self.preloadNextContentPage(collectionView)
                     }
                 }
