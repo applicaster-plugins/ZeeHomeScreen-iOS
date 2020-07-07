@@ -287,7 +287,9 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     
     UniversalCollectionViewCell *cell = [promotionView dequeueReusableCellWithReuseIdentifier:cellModel.layoutStyle
                                                                                  forIndexPath:indexPath];
-    
+    CGFloat width = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone ? cellModel.iphoneWidth : cellModel.ipadWidth;
+    CGFloat height = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone ? cellModel.iphoneHeight : cellModel.ipadHeight;
+    cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, width, height);
     if (cell.componentViewController == nil) {
         cell.componentViewController = [ComponenttFactory componentViewControllerWithComponentModel:cellModel
                                                                                            andModel:cellModel.entry
