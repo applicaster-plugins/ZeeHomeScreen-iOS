@@ -10,13 +10,13 @@ import ApplicasterSDK
 
 @objc open class CellModel: ComponentModel {
     
-    var iphoneWidth: CGFloat = UIScreen.main.bounds.width
+    @objc open var iphoneWidth: CGFloat = UIScreen.main.bounds.width
     
-    var ipadWidth: CGFloat = UIScreen.main.bounds.width
+    @objc open var ipadWidth: CGFloat = UIScreen.main.bounds.width
 
-    var iphoneHeight: CGFloat = 20.0
+    @objc open var iphoneHeight: CGFloat = 20.0
     
-    var ipadHeight: CGFloat = 20.0
+    @objc open var ipadHeight: CGFloat = 20.0
 
     var placeHolder: String?
     
