@@ -146,15 +146,10 @@ class HomeContentClickApi {
         postData["itemID"] = item.identifier
         postData["clickID"] = self.Model_ClickId
         postData["origin"] = ""
-        postData["region"] = "IN-MH"
+        postData["region"] = getCountry()
         
         
-        var userID = "a027e306-1707-48af-991d-4597a91e0a92"       // Get userId of User
-        
-        if User.shared.getType() == .guest
-        {
-            userID = getUserAccessToken()
-        }
+        let userID = getUserAccessToken() // Get userId of User
         
         let requestheaders: [String: String] = ["Content-Type": "application/json",
         "Authorization": userID,
