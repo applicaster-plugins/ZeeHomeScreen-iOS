@@ -202,7 +202,7 @@ import ApplicasterSDK
     }
     
     func isRecoType() -> Bool {
-        if let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, let analytics = extensions["analytics"] as? [String: AnyHashable], let type = analytics["type"] as? String, type == "reco" {
+        if let entry = entry, let extensions = entry.extensions, let analytics = extensions["analytics"] as? [String: AnyHashable], let type = analytics["type"] as? String, type == "reco" {
             return true
         } else if let entry = entry as? APAtomContainerProtocol, let extensions = entry.extensions, let asset_subtype: String = extensions["asset_subtype"] as? String, asset_subtype == "Reco" {
             return true
