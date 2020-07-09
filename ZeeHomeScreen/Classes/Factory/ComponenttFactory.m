@@ -23,13 +23,18 @@
 #pragma mark - Definitions
 
 + (UIViewController <ComponentProtocol>  *)componentViewControllerWithComponentModel:(ComponentModel *)componentModel
-                                                                              andModel:(NSObject *)model
-                                                                               forView:(UIView *)view
-                                                                              delegate:(id <ComponentDelegate>) delegate
-                                                                  parentViewController:(UIViewController *)parentViewController {
+        andModel:(NSObject *)model
+        forView:(UIView *)view
+        delegate:(id <ComponentDelegate>) delegate
+        parentViewController:(UIViewController *)parentViewController {
     
-    UIViewController <ComponentProtocol>  *retVal = [self viewControllerForComponentModel:componentModel
-                                                                                  withModel:(APModel *)model];
+    UIViewController<ComponentProtocol> *retVal = [ViewControllerRepository.shared removeViewControllerWithType:componentModel.type];
+    
+    if (retVal == nil) {
+        retVal = [self viewControllerForComponentModel:componentModel
+        withModel:(APModel *)model];
+    }
+    
     if (retVal != nil) {
         
         // If the view (container) is not pass or nil use the parent view.
