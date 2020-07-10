@@ -39,6 +39,8 @@ import ApplicasterSDK
     @IBOutlet public var buttonsViewCollection: [UIButton]!
     @IBOutlet public var labelsCollection: [UILabel]!
     @IBOutlet public var viewCollection: [UIView]!
+    
+    var numberOfImageFetchingOperationsInProgress = 0
 
     public required override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -369,7 +371,8 @@ import ApplicasterSDK
                     let imageUrl = item.mediaItemStringURL(forKey: componentModel.imageKey ?? "image_base"),
                         let parsedImageUrl = URL(string: imageUrl) {
                         self.itemImageView.contentMode = .scaleAspectFill
-                        self.itemImageView.setImageWith(parsedImageUrl, placeholderImage:placeholderImage, serverResizable: true)
+                        
+                        setImage(to: self.itemImageView, url: parsedImageUrl, maskImage: nil, fallbackImage: nil, placeholderImage: placeholderImage, serverResizable: true)
                     }
                 }
             } else {
