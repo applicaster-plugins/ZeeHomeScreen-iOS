@@ -36,8 +36,6 @@ import Zee5CoreSDK
     var contentLanguages: String?
     var liveComponents = [ComponentModelProtocol]()
     
-    private var cachedCells: [String: ComponentProtocol?] = [:]
-
     weak var delegate:ComponentDelegate?
     var collectionViewFlowLayout:SectionCompositeFlowLayout? {
         return collectionView?.collectionViewLayout as? SectionCompositeFlowLayout
@@ -105,7 +103,6 @@ import Zee5CoreSDK
                         self.sectionsDataSourceArray?.remove(at: index)
                     self.collectionViewFlowLayout?.sectionsDataSourceArray = self.sectionsDataSourceArray
                     if componentModel.type != "LAZY_LOADING" {
-                       self.cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] = nil
                         self.collectionView?.deleteSections(indexSet)
                     } else {
                         if let currentComponentModel = currentComponentModel, currentComponentModel.isVertical && !currentComponentModel.isGridType() {
@@ -571,21 +568,6 @@ import Zee5CoreSDK
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewCell {
                     componentModel.screenConfiguration = screenConfiguration
                     cell.backgroundColor = UIColor.clear
-                    
-                    if layoutName.hasPrefix("ZeeHomeScreen_Family_Ganges_banner") {
-                        if let componentViewController: UIViewController = cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] as? UIViewController {
-                           
-                            cell.componentViewController = componentViewController as! UIViewController & ComponentProtocol
-                        } else {
-                            let componentViewController = cell.setComponentModel(componentModel,
-                                                                                 model: componentModel,
-                                                                                 view: cell.contentView,
-                                                                                 delegate: self,
-                                                                                 parentViewController: self)
-                            cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] = componentViewController
-                        }
-                        return cell
-                    }
                     
                     let _ = cell.setComponentModel(componentModel,
                     model: componentModel,
