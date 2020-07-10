@@ -47,22 +47,24 @@
                  delegate:(nullable id<ComponentDelegate>)delegate
      parentViewController:(nullable UIViewController *)parentViewController
 {
-    
-    self.componentViewController = nil;
-//    if (self.componentViewController == nil) {
+    if (self.componentViewController == nil) {
         self.componentViewController = [ComponenttFactory componentViewControllerWithComponentModel:componentModel
-                                                                                           andModel:model
-                                                                                            forView:view
-                                                                                           delegate:delegate
-                                                                               parentViewController:parentViewController];
-//    }
-
+            andModel:model
+            forView:view
+            delegate:delegate
+            parentViewController:parentViewController];
+    } else {
+        if ([self.componentViewController respondsToSelector:@selector(setComponentModel:)]) {
+            self.componentViewController.componentModel = componentModel;
+        }
+    }
+    
     if ([self.componentViewController respondsToSelector:@selector(setDelegate:)]) {
         self.componentViewController.delegate = delegate;
     }
-    if ([self.componentViewController respondsToSelector:@selector(setComponentModel:)]) {
-        self.componentViewController.componentModel = componentModel;
-    }
+
+    // This is setting the component model to CellViewControllers
+    // TODO: Refactor so that the component model is set as in the other view controllers
     if ([self.componentViewController respondsToSelector:@selector(setComponentDataSourceModel:)]) {
         self.componentViewController.componentDataSourceModel = componentModel;
     }
