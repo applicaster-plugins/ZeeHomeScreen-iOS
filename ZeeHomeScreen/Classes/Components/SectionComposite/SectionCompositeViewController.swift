@@ -674,24 +674,6 @@ import Zee5CoreSDK
         return reusableview
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? UniversalCollectionViewCell {
-            if !children.contains(cell.componentViewController!) {
-                DispatchQueue.main.async {
-                    cell.addViewController(toParentViewController: self)
-                }
-            }
-        }
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? UniversalCollectionViewCell {
-            cell.removeViewControllerFromParentViewController()
-
-        }
-    }
-    
     func handleCellDidEndDisplaying(cell: UICollectionViewCell, reason: ZeeComponentEndDisplayingReason) {
 //        if  let universalCollectionViewCell = cell as? UniversalCollectionViewCell,
 //            let componentViewController = universalCollectionViewCell.componentViewController
