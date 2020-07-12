@@ -10,9 +10,9 @@
     "git@github.com:applicaster-plugins/ZeeHomeScreen-iOS.git"
   ],
   "platform": "ios",
-  "author_name": "N. Smorgun",
-  "author_email": "n.smorgun@applicaster.com",
-  "manifest_version": "2.9.3",
+  "author_name": "Simon Borkin",
+  "author_email": "s.borkin@applicaster.com",
+  "manifest_version": "2.9.5",
   "name": "Zee5HomeScreen",
   "description": "Zee5 Home Screen",
   "type": "general",
@@ -20,8 +20,7 @@
   "identifier": "zee5_home_screen",
   "ui_builder_support": true,
   "dependency_name": "ZeeHomeScreen",
-  "dependency_version": "2.9.3",
-
+  "dependency_version": "2.9.5",
   "whitelisted_account_ids": [
     "5cb825e102507200087bbdcc",
     "5c3b12762756be0008779106"
@@ -29,9 +28,7 @@
   "min_zapp_sdk": "13.0.0-Dev",
   "deprecated_since_zapp_sdk": "",
   "unsupported_since_zapp_sdk": "",
-  "supported_nav_items": [
-    
-  ],
+  "supported_nav_items": [],
   "react_native": false,
   "data": {
     "fields": [
@@ -92,23 +89,24 @@
         "label_tooltip": "Represent the max gap between the last visible component to the last compoentn. for example: if the list has 8 componenet the next loadin invoke once the 5 component will be visible."
       },
       {
-        "group":true,
-        "label":"Screen Type",
-        "tooltip":"Choose one of screen type of the home plugin",
-        "folded":true,
-        "fields":[
+        "group": true,
+        "label": "Screen Type",
+        "tooltip": "Choose one of screen type of the home plugin",
+        "folded": true,
+        "fields": [
           {
-            "type":"select",
-            "key":"screen_type",
-            "multiple":false,
-            "options":[
+            "type": "select",
+            "key": "screen_type",
+            "multiple": false,
+            "options": [
               "DEFAULT",
               "EPG",
               "SEARCH"
             ],
             "initial_value": "DEFAULT",
             "default": "DEFAULT"
-          },  {
+          },
+          {
             "key": "epg_screen_id",
             "type": "text_input",
             "label": "EPG Screen ID",
@@ -125,19 +123,19 @@
     ]
   },
   "custom_configuration_fields": [
-      {
-        "type": "checkbox",
-        "key": "should_display_interstitial",
-        "tooltip_text": "Display Interstitial",
-        "initial_value": 1,
-        "default": 1
-      },
-      {
-        "type": "number_input",
-        "key": "hero_cell_items_limit",
-        "tooltip_text": "Max count of items inside the Hero cell",
-        "default": 7
-      }
+    {
+      "type": "checkbox",
+      "key": "should_display_interstitial",
+      "tooltip_text": "Display Interstitial",
+      "initial_value": 1,
+      "default": 1
+    },
+    {
+      "type": "number_input",
+      "key": "hero_cell_items_limit",
+      "tooltip_text": "Max count of items inside the Hero cell",
+      "default": 7
+    }
   ],
   "targets": [
     "mobile"
