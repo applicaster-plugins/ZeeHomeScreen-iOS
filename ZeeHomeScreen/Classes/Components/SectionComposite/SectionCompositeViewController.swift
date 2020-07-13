@@ -138,10 +138,8 @@ import Zee5CoreSDK
         guard let components = component.childerns else {
             return
         }
-        
-        registerLayouts(sectionsArray: components)
-            
-            var newIndexes: [Int] = []
+                    
+        var newIndexes: [Int] = []
             
         collectionView?.performBatchUpdates({
             components.enumerated().forEach { (offset, item) in
