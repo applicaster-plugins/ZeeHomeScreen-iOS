@@ -28,6 +28,7 @@ import Zee5CoreSDK
     @IBOutlet weak var topDistanceConstraint:NSLayoutConstraint?
     
     public var atomFeedUrl: String?
+    private var bannerCellReuseIdentifiers: [String] = []
     
     var screenConfiguration: ScreenConfiguration?
     var userType: UserType?
@@ -137,10 +138,8 @@ import Zee5CoreSDK
         guard let components = component.childerns else {
             return
         }
-        
-        registerLayouts(sectionsArray: components)
-            
-            var newIndexes: [Int] = []
+                    
+        var newIndexes: [Int] = []
             
         collectionView?.performBatchUpdates({
             components.enumerated().forEach { (offset, item) in
@@ -565,7 +564,10 @@ import Zee5CoreSDK
             
             if let componentModel = sectionsDataSourceArray[index] as? ComponentModel,
                 let layoutName = componentModel.layoutStyle {
-                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewCell {
+                
+                let reuseIdentifier = (componentModel.type == "BANNER") ? reuseIdentifierForBanner(layoutName: layoutName, index: index) : layoutName
+                
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? UniversalCollectionViewCell {
                     componentModel.screenConfiguration = screenConfiguration
                     cell.backgroundColor = UIColor.clear
                     
@@ -585,6 +587,16 @@ import Zee5CoreSDK
         }
         
         return collectionView.dequeueReusableCell(withReuseIdentifier: "ZeeHomeScreen_Family_Ganges_horizontal_list_1", for: indexPath)
+    }
+    
+    // The banner must be loaded once per cell at position
+    private func reuseIdentifierForBanner(layoutName: String, index: Int) -> String {
+        let reuseIdentifier = layoutName + "_at_" + String(index)
+        if (!bannerCellReuseIdentifiers.contains(reuseIdentifier)) {
+            self.collectionView?.register(UniversalCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+            bannerCellReuseIdentifiers.append(reuseIdentifier)
+        }
+        return reuseIdentifier
     }
     
     // MARK: - UICollectionViewDelegate
