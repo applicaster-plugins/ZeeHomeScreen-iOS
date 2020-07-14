@@ -412,15 +412,17 @@ import Zee5CoreSDK
    }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
-        
+        rebuildComponent()
+    }
+    
+    @objc public func rebuildComponent() {
         if componentInitialized == false {
+            sectionsDataSourceArray = []
             componentInitialized = true
             collectionView?.collectionViewLayout = collectionFlowLayout()
             loadComponent()
         }
-        
         if !updateContentAndDisplayLanguageIfNeeded() {
             if !updateUserStatusIfNeeded() {
                 if !updateUserSubscriptionsIfNeeded() {
