@@ -215,6 +215,7 @@ import Zee5CoreSDK
         componentModel = nil
         componentDataSourceModel = nil
         isLoading = false
+        componentInitialized = false
         
     }
     
