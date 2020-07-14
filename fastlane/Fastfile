@@ -1,0 +1,30 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Publish new plugin version"
+  lane :publish_plugin do
+    commit = last_git_commit
+    user = commit[:author]
+    email = commit[:author_email]
+
+    manifest = "#{ENV['PWD']}/ZeeHomeScreenManifest.json"
+    version = version_bump_podspec(path: "ZeeHomeScreen.podspec", bump_type: "patch")
+
+    spec_name = "ZeeHomeScreen.podspec"
+    new_spec_path = "#{ENV['PWD']}/Specs/ZeeHomeScreen/#{version}"
+
+    sh("mkdir", "-p", "#{new_spec_path}")
+    sh("cp", "#{ENV['PWD']}/#{spec_name}", "#{new_spec_path}/#{spec_name}")
+
+    sh("#{ENV['PWD']}/fastlane/scripts/update_manifest.sh", "#{version}", "#{user}", "#{email}", "#{manifest}")
+
+    sh("git", "add", "#{new_spec_path}")
+    sh("git", "commit", "-a", "-m", "Update version")
+    add_git_tag(tag: "#{version}")
+    
+    sh("git", "push")
+    sh("git", "push", "origin", "#{version}")
+
+    sh("#{ENV['PWD']}/fastlane/scripts/publish_manifest.sh #{manifest}")
+  end
+end
