@@ -28,6 +28,7 @@ import Zee5CoreSDK
     @IBOutlet weak var topDistanceConstraint:NSLayoutConstraint?
     
     public var atomFeedUrl: String?
+    private var bannerCellReuseIdentifiers: [String] = []
     
     var screenConfiguration: ScreenConfiguration?
     var userType: UserType?
@@ -36,8 +37,6 @@ import Zee5CoreSDK
     var contentLanguages: String?
     var liveComponents = [ComponentModelProtocol]()
     
-    private var cachedCells: [String: ComponentProtocol?] = [:]
-
     weak var delegate:ComponentDelegate?
     var collectionViewFlowLayout:SectionCompositeFlowLayout? {
         return collectionView?.collectionViewLayout as? SectionCompositeFlowLayout
@@ -105,7 +104,6 @@ import Zee5CoreSDK
                         self.sectionsDataSourceArray?.remove(at: index)
                     self.collectionViewFlowLayout?.sectionsDataSourceArray = self.sectionsDataSourceArray
                     if componentModel.type != "LAZY_LOADING" {
-                       self.cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] = nil
                         self.collectionView?.deleteSections(indexSet)
                     } else {
                         if let currentComponentModel = currentComponentModel, currentComponentModel.isVertical && !currentComponentModel.isGridType() {
@@ -140,10 +138,8 @@ import Zee5CoreSDK
         guard let components = component.childerns else {
             return
         }
-        
-        registerLayouts(sectionsArray: components)
-            
-            var newIndexes: [Int] = []
+                    
+        var newIndexes: [Int] = []
             
         collectionView?.performBatchUpdates({
             components.enumerated().forEach { (offset, item) in
@@ -416,15 +412,17 @@ import Zee5CoreSDK
    }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
-        
+        rebuildComponent()
+    }
+    
+    @objc public func rebuildComponent() {
         if componentInitialized == false {
+            sectionsDataSourceArray = []
             componentInitialized = true
             collectionView?.collectionViewLayout = collectionFlowLayout()
             loadComponent()
         }
-        
         if !updateContentAndDisplayLanguageIfNeeded() {
             if !updateUserStatusIfNeeded() {
                 if !updateUserSubscriptionsIfNeeded() {
@@ -568,24 +566,12 @@ import Zee5CoreSDK
             
             if let componentModel = sectionsDataSourceArray[index] as? ComponentModel,
                 let layoutName = componentModel.layoutStyle {
-                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewCell {
+                
+                let reuseIdentifier = (componentModel.type == "BANNER") ? reuseIdentifierForBanner(layoutName: layoutName, index: index) : layoutName
+                
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? UniversalCollectionViewCell {
                     componentModel.screenConfiguration = screenConfiguration
                     cell.backgroundColor = UIColor.clear
-                    
-                    if layoutName.hasPrefix("ZeeHomeScreen_Family_Ganges_banner") {
-                        if let componentViewController: UIViewController = cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] as? UIViewController {
-                           
-                            cell.componentViewController = componentViewController as! UIViewController & ComponentProtocol
-                        } else {
-                            let componentViewController = cell.setComponentModel(componentModel,
-                                                                                 model: componentModel,
-                                                                                 view: cell.contentView,
-                                                                                 delegate: self,
-                                                                                 parentViewController: self)
-                            cachedCells["\(componentModel.entry?.identifier ?? componentModel.identifier!)_\(index)"] = componentViewController
-                        }
-                        return cell
-                    }
                     
                     let _ = cell.setComponentModel(componentModel,
                     model: componentModel,
@@ -603,6 +589,16 @@ import Zee5CoreSDK
         }
         
         return collectionView.dequeueReusableCell(withReuseIdentifier: "ZeeHomeScreen_Family_Ganges_horizontal_list_1", for: indexPath)
+    }
+    
+    // The banner must be loaded once per cell at position
+    private func reuseIdentifierForBanner(layoutName: String, index: Int) -> String {
+        let reuseIdentifier = layoutName + "_at_" + String(index)
+        if (!bannerCellReuseIdentifiers.contains(reuseIdentifier)) {
+            self.collectionView?.register(UniversalCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+            bannerCellReuseIdentifiers.append(reuseIdentifier)
+        }
+        return reuseIdentifier
     }
     
     // MARK: - UICollectionViewDelegate
@@ -690,24 +686,6 @@ import Zee5CoreSDK
         reusableview.layer.rasterizationScale = UIScreen.main.scale
         
         return reusableview
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? UniversalCollectionViewCell {
-            if !children.contains(cell.componentViewController!) {
-                DispatchQueue.main.async {
-                    cell.addViewController(toParentViewController: self)
-                }
-            }
-        }
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? UniversalCollectionViewCell {
-            cell.removeViewControllerFromParentViewController()
-
-        }
     }
     
     func handleCellDidEndDisplaying(cell: UICollectionViewCell, reason: ZeeComponentEndDisplayingReason) {

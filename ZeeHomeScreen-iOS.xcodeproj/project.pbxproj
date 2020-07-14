@@ -48,6 +48,7 @@
 		3ED3363824A0BA7C00E2D2C3 /* ZeeHomeInterstitialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3363724A0BA7C00E2D2C3 /* ZeeHomeInterstitialManager.swift */; };
 		3EE613752498AA6E0079BE93 /* HomeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE613732498AA6E0079BE93 /* HomeNetworkManager.swift */; };
 		3EE613762498AA6E0079BE93 /* HomeContentClickApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE613742498AA6E0079BE93 /* HomeContentClickApi.swift */; };
+		43CDF26624B896B1002EA367 /* CellViewController+ImageLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CDF26524B896B1002EA367 /* CellViewController+ImageLoading.swift */; };
 		43F447AB2476778E00FB8D50 /* AnalyticsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F447AA2476778E00FB8D50 /* AnalyticsUtil.swift */; };
 		4D6DC6FD243CA7BB00F24177 /* Zee5dsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6DC6FC243CA7BB00F24177 /* Zee5dsAdapter.swift */; };
 		4DF603AA23B938F400DD621F /* ZeeHomeScreen_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF603A923B938F400DD621F /* ZeeHomeScreen_iOSTests.swift */; };
@@ -122,6 +123,7 @@
 		3ED587B1242B9842008AF7B7 /* ZeeHomeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZeeHomeScreen.h; sourceTree = "<group>"; };
 		3EE613732498AA6E0079BE93 /* HomeNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNetworkManager.swift; sourceTree = "<group>"; };
 		3EE613742498AA6E0079BE93 /* HomeContentClickApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeContentClickApi.swift; sourceTree = "<group>"; };
+		43CDF26524B896B1002EA367 /* CellViewController+ImageLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CellViewController+ImageLoading.swift"; sourceTree = "<group>"; };
 		43F447AA2476778E00FB8D50 /* AnalyticsUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsUtil.swift; sourceTree = "<group>"; };
 		4D6DC6FC243CA7BB00F24177 /* Zee5dsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Zee5dsAdapter.swift; path = ZeeHomeScreen/Classes/Zee5dsAdapter.swift; sourceTree = SOURCE_ROOT; };
 		4DF6038F23B938F300DD621F /* ZeeHomeScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZeeHomeScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -275,6 +277,7 @@
 			children = (
 				3E8F4CB32428EF9D0020B6A8 /* Customization */,
 				3E8F4CB82428EF9D0020B6A8 /* CellViewController.swift */,
+				43CDF26524B896B1002EA367 /* CellViewController+ImageLoading.swift */,
 				3E8F4CB92428EF9D0020B6A8 /* CommandsPattern */,
 			);
 			path = Cell;
@@ -730,6 +733,7 @@
 				3E8F4D282428EF9D0020B6A8 /* CarouselViewController.m in Sources */,
 				3E8F4D262428EF9D0020B6A8 /* CollectionViewLayoutAttributesList.swift in Sources */,
 				3E8F4D1D2428EF9D0020B6A8 /* Pagination.swift in Sources */,
+				43CDF26624B896B1002EA367 /* CellViewController+ImageLoading.swift in Sources */,
 				3E8F4D202428EF9D0020B6A8 /* ScreenConfiguration.swift in Sources */,
 				3E8F4D182428EF9D0020B6A8 /* CellModel.swift in Sources */,
 				3E8F4D362428EF9D0020B6A8 /* CustomizationManager.swift in Sources */,
