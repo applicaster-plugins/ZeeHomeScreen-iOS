@@ -57,6 +57,9 @@
         if ([self.componentViewController respondsToSelector:@selector(setComponentModel:)]) {
             self.componentViewController.componentModel = componentModel;
         }
+        if ([self.componentViewController respondsToSelector:@selector(rebuildComponent)]) {
+            [self.componentViewController rebuildComponent];
+        }
     }
     
     if ([self.componentViewController respondsToSelector:@selector(setDelegate:)]) {
