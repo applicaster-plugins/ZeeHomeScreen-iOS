@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'ZappPlugins'
   s.dependency 'ApplicasterSDK'
-  s.dependency 'ApplicasterUIKit'
+  s.dependency 'ApplicasterUIKit', '~> 8.1.0'
   s.dependency 'ZappSDK'
   s.dependency 'Zee5CoreSDK'
   s.dependency 'zee5mixpanelplugin'
