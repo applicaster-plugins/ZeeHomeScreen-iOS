@@ -25,86 +25,62 @@ extension SectionCompositeViewController {
         }
         
         //check if we already have entries inside the feed
-        
-        if let component = currentComponentModel, component.childerns != nil, component.childerns!.count > 0 {
+        if let component = currentComponentModel, let componentsArray = component.childerns,
+            componentsArray.count > 0 {
             
-            self.liveComponentModel = component
-            
-            if let componentsArray = component.childerns,
-                componentsArray.count > 0 {
-                let liveComponentsArray = self.liveComponentsWithLazyLoading(componentsArray: componentsArray, liveComponents: self.sectionsDataSourceArray)
-                
-                if component.isVertical == true && !component.isGridType() {
-                    self.prepareCollectionSections(sections: liveComponentsArray)
-                }
-                else {
-                    self.prepareCollectionItems(items: liveComponentsArray)
-                }
-            }
-            else {
-                // delete lazy loading components if needed
-            }
-            
-            self.setComponentModel(component)
-            let additionalContent = self.prepareAdditionalContent(component)
-            self.loadAdditionalContent(indexToInsert: 1, for: additionalContent, component: component)
-            
-            //load next content page if current screen == inner screen
-            if let collectionView = collectionView,
-                component.isVertical == true && component.isGridType() {
-                //there should be a small delay because collectionView crashes when tries to remove loading cell that is not created yet, because response comes immediately (line 303 in this class)
-                DispatchQueue.main.asyncAfter(deadline: .now() + SectionCompositeViewController.LOADING_EXTRA_CONTENT_DELAY) {
-                    self.preloadNextContentPage(collectionView)
-                }
-            }
+            prepareContent(component: component)
             return
         }
         
         
         //load entries for current component
-        
         if let currentComponentModel = self.currentComponentModel {
             DatasourceManager.sharedInstance().load(model: currentComponentModel) { (component) in
                 guard let component = component as? ComponentModel else {
                     return
                 }
-                
-                self.liveComponentModel = component
-
-                if let componentsArray = component.childerns,
-                    componentsArray.count > 0 {
-                    let liveComponentsArray = self.liveComponentsWithLazyLoading(componentsArray: componentsArray, liveComponents: self.sectionsDataSourceArray)
-                    
-                    if currentComponentModel.isVertical == true && !component.isGridType() {
-                            self.prepareCollectionSections(sections: liveComponentsArray)
-                        }
-                        else {
-                            self.prepareCollectionItems(items: liveComponentsArray)
-                        }
-                }
-                else {
-                    // delete lazy loading components if needed
-                }
-                
-                self.setComponentModel(component)
-                
-                // update the title after setting ComponentModel. the nav bar is taking the title from the component
-                if let zappNavigationController = self.navigationController as? ZPNavigationController {
-                    zappNavigationController.navigationBarManager?.updateNavBarTitle()
-                }
-                
-                let additionalContent = self.prepareAdditionalContent(component)
-                self.loadAdditionalContent(indexToInsert: 1, for: additionalContent, component: component)
-                
-                //load next content page if current screen == inner screen
-                if let collectionView = self.collectionView,
-                    component.isVertical == true && component.isGridType() {
-                    //there should be a small delay because collectionView crashes when tries to remove loading cell that is not created yet, because response comes immediately (line 303 in this class)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + SectionCompositeViewController.LOADING_EXTRA_CONTENT_DELAY) {
-                        self.preloadNextContentPage(collectionView)
-                    }
-                }
+                self.prepareContent(component: component)
             }
+        }
+    }
+    
+    private func prepareContent(component: ComponentModel) {
+        
+        liveComponentModel = component
+        
+        if let componentsArray = component.childerns,
+            componentsArray.count > 0 {
+            var liveComponentsArray: [ComponentModelProtocol]
+            
+            //check if there is nextPage != nil, otherwise - don't add a loading cell
+            if component.hasNextPage() {
+                liveComponentsArray = self.liveComponentsWithLazyLoading(componentsArray: componentsArray, liveComponents: self.sectionsDataSourceArray)
+            } else {
+                liveComponentsArray = componentsArray
+            }
+            
+            prepareCollectionItems(items: liveComponentsArray)
+        }
+
+        self.setComponentModel(component)
+        
+        // update the title after setting ComponentModel. the nav bar is taking the title from the component
+        if let zappNavigationController = self.navigationController as? ZPNavigationController {
+            zappNavigationController.navigationBarManager?.updateNavBarTitle()
+        }
+        
+        let additionalContent = self.prepareAdditionalContent(component)
+        self.loadAdditionalContent(indexToInsert: 1, for: additionalContent, component: component)
+        
+        //load next content page if current screen == inner screen
+        if let collectionView = collectionView, component.isVertical == true && component.isGridType() {
+            //there should be a small delay because collectionView crashes when tries to remove loading cell that is not created yet, because response comes immediately (line 303 in this class)
+            DispatchQueue.main.asyncAfter(deadline: .now() + SectionCompositeViewController.LOADING_EXTRA_CONTENT_DELAY) {
+                self.preloadNextContentPage(collectionView)
+            }
+        } else if let collectionView = collectionView, component.hasNextPage(), let componentsArray = component.childerns, componentsArray.count <= 5 {
+            //load next content page if there is not much entries and scrollViewDidScroll cannot be called for lazy loading
+            preloadNextContentPage(collectionView)
         }
     }
     
@@ -203,13 +179,6 @@ extension SectionCompositeViewController {
         }
     }
     
-    func prepareCollectionSections(sections: [ComponentModelProtocol]) {
-        if sectionsDataSourceArray == nil {
-            sectionsDataSourceArray = []
-        }
-        sectionsDataSourceArray = sectionsDataSourceArray! + sections
-    }
-    
     func prepareCollectionItems(items: [ComponentModelProtocol]) {
         if sectionsDataSourceArray == nil {
             sectionsDataSourceArray = []
@@ -218,29 +187,25 @@ extension SectionCompositeViewController {
     }
     
     func shouldLoadMoreItems() -> Bool {
-        if let sectionsDataSourceArray = sectionsDataSourceArray,
-            let lastComponent = sectionsDataSourceArray[sectionsDataSourceArray.count - 1] as? ComponentModel,
-            lastComponent.type == "LAZY_LOADING" {
+        if let currentComponentModel = currentComponentModel, currentComponentModel.hasNextPage() {
             return true
         }
         return false
     }
     
     func loadMoreItems() {
-        if !self.isLoading {
-            self.isLoading = true
-            // Download more data
-            // Send the indexpath of the last component before lazy loading component
-            self.loadNextComponents(lastIndexPath: self.sectionsDataSourceArray!.count - 2)
-        }
+        // Download more data
+        // Send the indexpath of the last component before lazy loading component
+        self.loadNextComponents(lastIndexPath: self.sectionsDataSourceArray!.count - 2)
     }
     
     func loadNextComponents(lastIndexPath: Int) {
         if let liveComponentModel = self.liveComponentModel,
             let nextPage = liveComponentModel.nextPage,
             let nextPageUrl = nextPage.nextPageUrl {
-            
+            isLoading = true
             DatasourceManager.sharedInstance().load(atomFeedUrl: nextPageUrl, parentModel: liveComponentModel) { (component) in
+                self.isLoading = false
                 guard let component = component as? ComponentModel else {
                     
                     var indexPath: IndexPath!
@@ -248,10 +213,15 @@ extension SectionCompositeViewController {
                     if self.sectionsDataSourceArray?.last?.type == "LAZY_LOADING" {
                         self.removeComponent(forModel:  self.sectionsDataSourceArray?.last as? NSObject, andComponentModel:  self.sectionsDataSourceArray?.last)
                     }
+                    //set hasNext to false because loaded component model in nil, no need to load it again
+                    if let currentComponentModel = self.currentComponentModel{
+                        currentComponentModel.nextPage?.hasNext = false
+                        currentComponentModel.nextPage?.nextPageUrl = String()
+                    }
            
                     return
                 }
-                self.isLoading = false
+                
                 self.liveComponentModel = component
 
                 if let componentsArray = component.childerns,
