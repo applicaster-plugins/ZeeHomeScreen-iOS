@@ -217,6 +217,14 @@ import ApplicasterSDK
     func isGridType() -> Bool {
         return type == "GRID"
     }
+    
+    func hasNextPage() -> Bool {
+        if let nextPage = nextPage {
+            return nextPage.hasNext
+        }
+        
+        return false
+    }
 }
 
 extension APAtomEntryProtocol {
