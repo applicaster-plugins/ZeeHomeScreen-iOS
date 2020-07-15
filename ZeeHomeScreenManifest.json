@@ -25,7 +25,7 @@
     "5cb825e102507200087bbdcc",
     "5c3b12762756be0008779106"
   ],
-  "min_zapp_sdk": "13.0.0-Dev",
+  "min_zapp_sdk": "14.1.9",
   "deprecated_since_zapp_sdk": "",
   "unsupported_since_zapp_sdk": "",
   "supported_nav_items": [],
