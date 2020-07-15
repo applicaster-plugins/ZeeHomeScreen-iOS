@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "ZeeHomeScreen"
-  s.version          = '3.0.4'
+  s.version          = '3.1.1'
   s.summary          = "ZeeHomeScreen"
   s.description      = <<-DESC
                       Zee Home Screen
@@ -22,12 +22,12 @@ Pod::Spec.new do |s|
 
   s.xcconfig =  { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
                   'ENABLE_BITCODE' => 'YES',
-                  'SWIFT_VERSION' => '5.1'
+                  'SWIFT_VERSION' => '5.2'
                 }
 
   s.dependency 'ZappPlugins'
   s.dependency 'ApplicasterSDK'
-  s.dependency 'ApplicasterUIKit', '~> 8.1.0'
+  s.dependency 'ApplicasterUIKit'
   s.dependency 'ZappSDK'
   s.dependency 'Zee5CoreSDK'
   s.dependency 'zee5mixpanelplugin'
