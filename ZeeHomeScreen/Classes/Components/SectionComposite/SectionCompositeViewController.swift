@@ -622,6 +622,7 @@ import Zee5CoreSDK
                 
                 CustomizationManager.manager.customTitle = componentModel.title
                 ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Thumbnail Click", parameters: analyticsParams(for: componentModel))
+                AnalyticsUtil().thumbnailClickerAnalyticsIfApplicable(componentModel: componentModel)
 
                 if atomEntry.entryType == .video ||  atomEntry.entryType == .channel || atomEntry.entryType == .audio {
                     if let playable = atomEntry.playable() {

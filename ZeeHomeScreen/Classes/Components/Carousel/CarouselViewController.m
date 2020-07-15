@@ -321,6 +321,9 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     UniversalCollectionViewCell *cell = (UniversalCollectionViewCell *)[self promotionView:promotionView
                                                                     cellForItemAtIndexPath:indexPath];
     
+    ComponentModel *componentModel = (ComponentModel *)currentModel;
+    [[AnalyticsUtil alloc] carouselClickerAnalyticsIfApplicableWithComponentModel:componentModel];
+    
     if ([self.delegate respondsToSelector:@selector(componentViewController:didSelectModel:componentModel:atIndexPath:completion:)]) {
         [self.delegate componentViewController:self
                                 didSelectModel:currentModel
