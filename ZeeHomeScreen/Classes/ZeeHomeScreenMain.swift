@@ -56,6 +56,8 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol {
         result.setComponentModel((self.getBaseComponent())!)
         result.atomFeedUrl = self.atomFeedUrl
         result.modalPresentationStyle = .fullScreen
+        UserDefaults.standard.set("N/A", forKey: "analyticsSource")
+        UserDefaults.standard.set("", forKey: "currentlyTab")
         
         return result
     }
