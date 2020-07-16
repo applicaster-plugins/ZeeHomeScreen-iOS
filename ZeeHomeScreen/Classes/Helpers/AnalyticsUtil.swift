@@ -3,7 +3,7 @@ import zee5mixpanelplugin
 import Foundation
 import SystemConfiguration
 
-class AnalyticsUtil {
+@objc public final class AnalyticsUtil: NSObject {
     
     func reportTabVisitedAnalyticsIfApplicable(atomFeedUrl: String?) {
         guard let atomFeedUrl = atomFeedUrl else { return }
