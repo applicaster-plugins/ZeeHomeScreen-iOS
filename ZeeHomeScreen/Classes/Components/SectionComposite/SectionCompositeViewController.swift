@@ -183,14 +183,7 @@ import Zee5CoreSDK
     
     func insertComponents(index: Int, from components: [ComponentModelProtocol]) {
         
-        var indexes: [Int] = []
-        for item in components {
-            let componentIndex = components.firstIndex(where: { (component) -> Bool in
-                return component.identifier == item.identifier && component.containerType == item.containerType && component.title == item.title && (component.entry?.isEqual(item.entry))!
-            })
-            indexes.append(index + componentIndex!)
-        }
-
+        let indexes = components.enumerated().map { $0.offset + index }
         let indexSet = IndexSet(indexes)
         registerLayouts(sectionsArray: components)
         if let _ = componentModel as? ComponentModel {
