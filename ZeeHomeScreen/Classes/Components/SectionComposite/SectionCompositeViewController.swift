@@ -463,6 +463,7 @@ import Zee5CoreSDK
     
     private func reloadContinueWatchingRailsIfNeeded() {
         if let currentComponentModel = currentComponentModel, currentComponentModel.isContinueWatchingType() {
+            currentComponentModel.childerns = nil
             sectionsDataSourceArray = []
             prepareSections()
         }
@@ -727,7 +728,7 @@ import Zee5CoreSDK
         if collectionViewFlowLayout?.isVertical() == true  {
             let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
             let reloadMargin:CGFloat = scrollView.frame.size.height*2 // load next items before getting to the end of the collection view
-            if (bottomEdge >= scrollView.contentSize.height - reloadMargin && !isLoading),
+            if bottomEdge >= scrollView.contentSize.height - reloadMargin, !isLoading,
                 shouldLoadMoreItems() == true {
                 loadMoreItems()
             }
@@ -735,7 +736,7 @@ import Zee5CoreSDK
         else {
             let rightEdge = scrollView.contentOffset.x + scrollView.frame.size.width
             let reloadMargin:CGFloat = scrollView.frame.size.width*2 // load next items before getting to the end of the collection view
-            if rightEdge >= scrollView.contentSize.width - reloadMargin && !isLoading,
+            if rightEdge >= scrollView.contentSize.width - reloadMargin, !isLoading,
                 shouldLoadMoreItems() == true {
                 loadMoreItems()
             }
