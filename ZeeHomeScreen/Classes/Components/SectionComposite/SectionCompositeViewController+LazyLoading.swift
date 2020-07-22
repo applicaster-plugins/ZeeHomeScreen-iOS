@@ -180,14 +180,11 @@ extension SectionCompositeViewController {
     }
     
     func prepareCollectionItems(items: [ComponentModelProtocol]) {
-        if sectionsDataSourceArray == nil {
-            sectionsDataSourceArray = []
-        }
-        sectionsDataSourceArray = sectionsDataSourceArray! + items
+        sectionsDataSourceArray = items
     }
     
     func shouldLoadMoreItems() -> Bool {
-        if let currentComponentModel = currentComponentModel, currentComponentModel.hasNextPage() {
+        if let currentComponentModel = liveComponentModel, currentComponentModel.hasNextPage() {
             return true
         }
         return false
@@ -205,25 +202,20 @@ extension SectionCompositeViewController {
             let nextPageUrl = nextPage.nextPageUrl {
             isLoading = true
             DatasourceManager.sharedInstance().load(atomFeedUrl: nextPageUrl, parentModel: liveComponentModel) { (component) in
-                self.isLoading = false
                 guard let component = component as? ComponentModel else {
-                    
-                    var indexPath: IndexPath!
-                    
+
                     if self.sectionsDataSourceArray?.last?.type == "LAZY_LOADING" {
                         self.removeComponent(forModel:  self.sectionsDataSourceArray?.last as? NSObject, andComponentModel:  self.sectionsDataSourceArray?.last)
                     }
                     //set hasNext to false because loaded component model in nil, no need to load it again
-                    if let currentComponentModel = self.currentComponentModel{
+                    if let currentComponentModel = self.liveComponentModel {
                         currentComponentModel.nextPage?.hasNext = false
                         currentComponentModel.nextPage?.nextPageUrl = String()
                     }
-           
+                    self.isLoading = false
                     return
                 }
                 
-                self.liveComponentModel = component
-
                 if let componentsArray = component.childerns,
                     componentsArray.count > 0 {
                     let liveComponentsArray = self.liveComponentsWithLazyLoading(componentsArray: componentsArray, liveComponents: self.sectionsDataSourceArray)
@@ -235,10 +227,9 @@ extension SectionCompositeViewController {
                             self.insertItems(itemToInsert: liveComponentsArray)
                         }
                 }
-                else {
-                    // delete lazy loading components if needed
-                    
-                }
+                
+                self.liveComponentModel = component
+                self.isLoading = false
             }
         }
     }
@@ -318,7 +309,6 @@ extension SectionCompositeViewController {
                 
             },completion: { (success) in
                 self.collectionViewFlowLayout?.isCollectionInsertCells = false
-                self.isLoading = false
             })
         }
     }
@@ -344,7 +334,6 @@ extension SectionCompositeViewController {
                 
             },completion: { (success) in
                 self.collectionViewFlowLayout?.isCollectionInsertCells = false
-                self.isLoading = false
             })
         }
     }
