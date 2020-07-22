@@ -32,5 +32,6 @@ Pod::Spec.new do |s|
   s.dependency 'Zee5CoreSDK'
   s.dependency 'zee5mixpanelplugin'
   s.dependency 'Kingfisher'
+  s.dependency 'Zee5Advertisement'
 
 end

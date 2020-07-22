@@ -47,6 +47,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol {
     public func createScreen() -> UIViewController {
         let bundle = Bundle.init(for: type(of: self))
         let result = SectionCompositeViewController(nibName: "SectionCompositeViewController", bundle: bundle)
+        NotificationCenter.default.addObserver(result, selector: #selector(SectionCompositeViewController.screenPickerTabSelected), name: NSNotification.Name(rawValue: "kScreenPickerTabSelected"), object: nil)
         mainViewController = result
         result.userType = User.shared.getType()
         result.isUserSubscribed = User.shared.isSubscribed()
@@ -56,8 +57,6 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol {
         result.setComponentModel((self.getBaseComponent())!)
         result.atomFeedUrl = self.atomFeedUrl
         result.modalPresentationStyle = .fullScreen
-        UserDefaults.standard.set("N/A", forKey: "analyticsSource")
-        UserDefaults.standard.set("", forKey: "currentlyTab")
         
         return result
     }

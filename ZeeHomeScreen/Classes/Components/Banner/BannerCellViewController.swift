@@ -7,11 +7,9 @@
 
 import Foundation
 import ApplicasterSDK
+//import Zee5Advertisement
 
 class BannerCellViewController : UIViewController, ComponentProtocol, ComponentDelegate, ZPAdViewProtocol {
-    
-    
-    
     
         private static let kBannerTopContainerMargin = 18.0
         private static let kBannerBottomContainerMargin = 5.0
@@ -28,7 +26,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         
         @IBOutlet weak var contentView: UIView!
         
-        private var adPresenter: ZPAdPresenterProtocol?
+        var adPresenter: ZPAdPresenterProtocol?
         private var backgroundEnabled: Bool?
         private var bannerView: UIView?
         var isRemoved = false

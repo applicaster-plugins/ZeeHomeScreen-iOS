@@ -9,6 +9,7 @@ import ApplicasterSDK
 import Foundation
 import ZappPlugins
 import Zee5CoreSDK
+import Zee5Advertisement
 
 @objc class SectionCompositeViewController: BaseCollectionComponentViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ComponentProtocol, ComponentDelegate, UIScrollViewDelegate {
     
@@ -36,6 +37,7 @@ import Zee5CoreSDK
     var displayLanguage: String?
     var contentLanguages: String?
     var liveComponents = [ComponentModelProtocol]()
+    private var adsViewControllers: [BannerCellViewController] = []
     
     weak var delegate:ComponentDelegate?
     var collectionViewFlowLayout:SectionCompositeFlowLayout? {
@@ -67,6 +69,32 @@ import Zee5CoreSDK
                 sectionsDataSourceArray.count > 0 {
                 registerLayouts(sectionsArray: sectionsDataSourceArray)
                 collectionView?.reloadData()
+            }
+        }
+    }
+    
+    @objc open func screenPickerTabSelected(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let currentCoomponentModel = currentComponentModel, let from: String = userInfo["from"] as? String, from == currentCoomponentModel.title {
+                pauseAllVideoAds()
+            } else if let currentCoomponentModel = currentComponentModel, let to: String = userInfo["to"] as? String, to == currentCoomponentModel.title {
+                resumeAllVideoAds()
+            }
+        }
+    }
+    
+    private func pauseAllVideoAds() {
+        for item in adsViewControllers {
+            if let item = item.adPresenter as? AdStateProtocol {
+                item.pause()
+            }
+        }
+    }
+    
+    private func resumeAllVideoAds() {
+        for item in adsViewControllers {
+            if let item = item.adPresenter as? AdStateProtocol {
+                item.resume()
             }
         }
     }
