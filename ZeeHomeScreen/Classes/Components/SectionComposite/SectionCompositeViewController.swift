@@ -747,7 +747,10 @@ import Zee5CoreSDK
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if collectionViewFlowLayout?.isVertical() == false {
             ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Carousal Bucket Swipe", parameters: analyticsParams(for: self.currentComponentModel))
-
+            
+            if let currentComponentModel = self.currentComponentModel {
+                AnalyticsUtil().contentBucketSwipeAnalyticsIfApplicable(componentModel: currentComponentModel)
+            }
         }
     }
 
@@ -901,6 +904,8 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
            
             CustomizationManager.manager.customTitle = componentModel.title
             ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "View More Selected", parameters: analyticsParams(for: componentModel))
+            
+            AnalyticsUtil().viewMoreSelectedAnalyticsIfApplicable(componentModel: componentModel)
             
             guard let headerModel =  componentModel.componentHeaderModel,
                 let urlScheme = headerModel.actionUrlScheme,

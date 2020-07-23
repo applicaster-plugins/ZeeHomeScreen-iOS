@@ -80,7 +80,6 @@ import SystemConfiguration
         return properties
     }
     
-    //carousele banner mixpanel analytics
     @objc public func carouselClickerAnalyticsIfApplicable(componentModel: ComponentModel) {
         let properties = getMixpanelProperties(events: Events.CAROUSAL_BANNER_CLICK, componentModel: componentModel)
         analytics.track(Events.CAROUSAL_BANNER_CLICK, trackedProperties: properties)
@@ -89,6 +88,21 @@ import SystemConfiguration
     @objc public func thumbnailClickerAnalyticsIfApplicable(componentModel: ComponentModel) {
         let properties = getMixpanelProperties(events: Events.THUMBNAIL_CLICK, componentModel: componentModel)
         analytics.track(Events.THUMBNAIL_CLICK, trackedProperties: properties)
+    }
+    
+    @objc public func carouselSwipeAnalyticsIfApplicable(componentModel: ComponentModel) {
+        let properties = getMixpanelProperties(events: Events.CAROUSAL_BANNER_SWIPE, componentModel: componentModel)
+        analytics.track(Events.CAROUSAL_BANNER_SWIPE, trackedProperties: properties)
+    }
+    
+    @objc public func contentBucketSwipeAnalyticsIfApplicable(componentModel: ComponentModel) {
+        let properties = getMixpanelProperties(events: Events.CONTENT_BUCKET_SWIPE, componentModel: componentModel)
+        analytics.track(Events.CONTENT_BUCKET_SWIPE, trackedProperties: properties)
+    }
+    
+    @objc public func viewMoreSelectedAnalyticsIfApplicable(componentModel: ComponentModel) {
+        let properties = getMixpanelProperties(events: Events.VIEW_MORE_SELECTED, componentModel: componentModel)
+        analytics.track(Events.VIEW_MORE_SELECTED, trackedProperties: properties)
     }
     
     private func getItemPosition (parameters: Dictionary<String, Any>) -> String{
