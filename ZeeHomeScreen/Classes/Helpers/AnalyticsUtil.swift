@@ -33,7 +33,7 @@ import SystemConfiguration
                 
     }
     
-    private func getMixpanelProperties(events: Events, componentModel: ComponentModel) -> Set<TrackedProperty>{
+    private func getProperties(events: Events, componentModel: ComponentModel) -> Set<TrackedProperty>{
         var properties = Set<TrackedProperty>()
         guard let extention = componentModel.entry?.extensions as? Dictionary <String, Any> else { return properties }
         guard let parameters = extention["analytics"] as? Dictionary <String, Any> else { return properties }
@@ -81,27 +81,27 @@ import SystemConfiguration
     }
     
     @objc public func carouselClickerAnalyticsIfApplicable(componentModel: ComponentModel) {
-        let properties = getMixpanelProperties(events: Events.CAROUSAL_BANNER_CLICK, componentModel: componentModel)
+        let properties = getProperties(events: Events.CAROUSAL_BANNER_CLICK, componentModel: componentModel)
         analytics.track(Events.CAROUSAL_BANNER_CLICK, trackedProperties: properties)
     }
     
     @objc public func thumbnailClickerAnalyticsIfApplicable(componentModel: ComponentModel) {
-        let properties = getMixpanelProperties(events: Events.THUMBNAIL_CLICK, componentModel: componentModel)
+        let properties = getProperties(events: Events.THUMBNAIL_CLICK, componentModel: componentModel)
         analytics.track(Events.THUMBNAIL_CLICK, trackedProperties: properties)
     }
     
     @objc public func carouselSwipeAnalyticsIfApplicable(componentModel: ComponentModel) {
-        let properties = getMixpanelProperties(events: Events.CAROUSAL_BANNER_SWIPE, componentModel: componentModel)
+        let properties = getProperties(events: Events.CAROUSAL_BANNER_SWIPE, componentModel: componentModel)
         analytics.track(Events.CAROUSAL_BANNER_SWIPE, trackedProperties: properties)
     }
     
     @objc public func contentBucketSwipeAnalyticsIfApplicable(componentModel: ComponentModel) {
-        let properties = getMixpanelProperties(events: Events.CONTENT_BUCKET_SWIPE, componentModel: componentModel)
+        let properties = getProperties(events: Events.CONTENT_BUCKET_SWIPE, componentModel: componentModel)
         analytics.track(Events.CONTENT_BUCKET_SWIPE, trackedProperties: properties)
     }
     
     @objc public func viewMoreSelectedAnalyticsIfApplicable(componentModel: ComponentModel) {
-        let properties = getMixpanelProperties(events: Events.VIEW_MORE_SELECTED, componentModel: componentModel)
+        let properties = getProperties(events: Events.VIEW_MORE_SELECTED, componentModel: componentModel)
         analytics.track(Events.VIEW_MORE_SELECTED, trackedProperties: properties)
     }
     
