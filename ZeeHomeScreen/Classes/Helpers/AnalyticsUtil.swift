@@ -105,6 +105,11 @@ import SystemConfiguration
         analytics.track(Events.VIEW_MORE_SELECTED, trackedProperties: properties)
     }
     
+    @objc public func pageScrollAnalyticsIfApplicable(componentModel: ComponentModel) {
+        let properties = getMixpanelProperties(events: Events.PAGE_SCROLL, componentModel: componentModel)
+        analytics.track(Events.PAGE_SCROLL, trackedProperties: properties)
+    }
+    
     private func getItemPosition (parameters: Dictionary<String, Any>) -> String{
        if let itemPosition = parameters["item_position"] as? Float {
         return String(itemPosition)

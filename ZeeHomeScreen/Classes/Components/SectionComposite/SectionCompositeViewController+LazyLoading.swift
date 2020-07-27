@@ -194,6 +194,10 @@ extension SectionCompositeViewController {
         // Download more data
         // Send the indexpath of the last component before lazy loading component
         self.loadNextComponents(lastIndexPath: self.sectionsDataSourceArray!.count - 2)
+        
+        if let model = currentComponentModel as? ComponentModel {
+            AnalyticsUtil().pageScrollAnalyticsIfApplicable(componentModel: model)
+            }
     }
     
     func loadNextComponents(lastIndexPath: Int) {
