@@ -7,8 +7,237 @@ class AnalyticsUtil {
         guard let base64Url = findQueryStringParameter(url: atomFeedUrl, parameter: "url") else { return }
         guard let dataSourceUrl = decodeBase64(from: base64Url) else { return }
         guard let screenType = findQueryStringParameter(url: dataSourceUrl, parameter: "screen_type") else { return }
-        analytics.track(mapScreenTypeToVisitedEvent(screenType: screenType), trackedProperties: Set<TrackedProperty>())
-        analytics.track(mapScreenTypeToClickEvent(screenType: screenType), trackedProperties: Set<TrackedProperty>())
+        var source = UserDefaults.standard.string(forKey: "analyticsSource")
+        let currentlyTab = UserDefaults.standard.string(forKey: "currentlyTab") ?? ""
+
+        if currentlyTab != "" {
+            source = currentlyTab
+        }
+        
+        UserDefaults.standard.set(source, forKey: "analyticsSource")
+        UserDefaults.standard.set(screenType, forKey: "currentlyTab")
+        
+        var properties = Set<TrackedProperty>()
+        properties.insert("TAB_NAME" ~>> screenType)
+        properties.insert("PAGE_NAME" ~>> screenType)
+        if let source = UserDefaults.standard.string(forKey: "analyticsSource") {
+            properties.insert("SOURCE" ~>> source)
+        }
+        properties.insert("TRACKINGMODE" ~>> String(isInternetAvailable()))
+        properties.insert("SUGAR_BOX_VALUE" ~>> false) // is user of sugar box, currently not implemented so pass false]
+        analytics.track(mapScreenTypeToVisitedEvent(screenType: screenType), trackedProperties: properties)
+        analytics.track(mapScreenTypeToClickEvent(screenType: screenType), trackedProperties: properties)
+                
+    }
+    
+    private func getProperties(events: Events, componentModel: ComponentModel) -> Set<TrackedProperty>{
+        var properties = Set<TrackedProperty>()
+        guard let extention = componentModel.entry?.extensions as? Dictionary <String, Any> else { return properties }
+        guard let parameters = extention["analytics"] as? Dictionary <String, Any> else { return properties }
+        guard let assetType = extention.intNumber(key:"asset_type") else { return properties }
+        let isFromRecomendation = parameters["type"] as? String == "reco"
+        
+        // default for all
+        properties.insert("TAB_NAME" ~>> getScreenName(extention: extention))
+        properties.insert("PAGE_NAME" ~>> getScreenName(extention: extention))
+        if let source = UserDefaults.standard.string(forKey: "analyticsSource") {
+            properties.insert("SOURCE" ~>> source)
+        }
+        properties.insert("TRACKINGMODE" ~>> String(isInternetAvailable()))
+        properties.insert("SUGAR_BOX_VALUE" ~>> false) // is user of sugar box, currently not implemented so pass false
+        
+        if events == Events.SCREEN_VIEW {
+            return properties
+        }
+        
+        if events == Events.ADD_TO_WATCHLIST || events == Events.REMOVE_FROM_WATCHLIST || events == Events.CAROUSAL_BANNER_SWIPE {
+            properties.insert("ELEMENT" ~>> getScreenName(extention: extention))
+        }
+        
+        // for all but not for View More selected
+        properties.insert("CAROUSAL_NAME" ~>> getCollectionName(parameters: parameters))
+        properties.insert("CAROUSAL_ID" ~>> getCollectionId(parameters: parameters))
+        properties.insert("VERTICAL_INDEX" ~>> getItemVerticalPosition(parameters: parameters))
+                
+        if events == Events.ADD_TO_WATCHLIST || events == Events.THUMBNAIL_CLICK || events == Events.CAROUSAL_BANNER_CLICK ||
+            events == Events.REMOVE_FROM_WATCHLIST || events == Events.CTAS {
+            properties.insert("HORIZONTAL_INDEX" ~>> getItemPosition(parameters: parameters))
+        }
+        
+        if events == Events.CAROUSAL_BANNER_CLICK || events == Events.THUMBNAIL_CLICK || events == Events.SCREEN_VIEW {
+            properties.insert( "TALAMOOS_ORIGIN" ~>> (isFromRecomendation ? "personalised" : "N/A"))
+            properties.insert( "TALAMOOS_MODELNAME" ~>> getModelName(isFromRecomendation: isFromRecomendation, parameters: parameters))
+            properties.insert( "TALAMOOS_CLICKID" ~>> getClickedId(isFromRecomendation: isFromRecomendation, parameters: parameters))
+            properties.insert( "HORIZONTAL_INDEX" ~>> getItemPosition(parameters: parameters))
+            properties.insert( "PREVIEW_STATUS" ~>> "N/A")
+            properties.insert( "TOP_CATEGORY" ~>> getTopCategory(extention: extention, assetType: assetType))
+            properties.insert( "CONTENT_SPECIFICATION" ~>> getContentSpecification(extention: extention, assetType: assetType))
+        }
+      
+        return properties
+    }
+    
+    @objc public func carouselClickerAnalyticsIfApplicable(componentModel: ComponentModel) {
+        let properties = getProperties(events: Events.CAROUSAL_BANNER_CLICK, componentModel: componentModel)
+        analytics.track(Events.CAROUSAL_BANNER_CLICK, trackedProperties: properties)
+    }
+    
+    @objc public func thumbnailClickerAnalyticsIfApplicable(componentModel: ComponentModel) {
+        let properties = getProperties(events: Events.THUMBNAIL_CLICK, componentModel: componentModel)
+        analytics.track(Events.THUMBNAIL_CLICK, trackedProperties: properties)
+    }
+    
+    @objc public func carouselSwipeAnalyticsIfApplicable(componentModel: ComponentModel) {
+        let properties = getProperties(events: Events.CAROUSAL_BANNER_SWIPE, componentModel: componentModel)
+        analytics.track(Events.CAROUSAL_BANNER_SWIPE, trackedProperties: properties)
+    }
+    
+    @objc public func contentBucketSwipeAnalyticsIfApplicable(componentModel: ComponentModel) {
+        let properties = getProperties(events: Events.CONTENT_BUCKET_SWIPE, componentModel: componentModel)
+        analytics.track(Events.CONTENT_BUCKET_SWIPE, trackedProperties: properties)
+    }
+    
+    @objc public func viewMoreSelectedAnalyticsIfApplicable(componentModel: ComponentModel) {
+        let properties = getProperties(events: Events.VIEW_MORE_SELECTED, componentModel: componentModel)
+        analytics.track(Events.VIEW_MORE_SELECTED, trackedProperties: properties)
+    }
+    
+    private func getItemPosition (parameters: Dictionary<String, Any>) -> String{
+       if let itemPosition = parameters["item_position"] as? Float {
+        return String(itemPosition)
+       } else{
+           return "N/A"
+       }
+    }
+    
+    private func getItemVerticalPosition (parameters: Dictionary<String, Any>) -> String{
+       if let itemVerticalPosition = parameters["vertical_position"] as? Int {
+           return String(itemVerticalPosition)
+       } else{
+           return "N/A"
+       }
+    }
+    
+    private func getCollectionName (parameters: Dictionary<String, Any>) -> String{
+       if let collectionName = parameters["collection_name"] as? String {
+           return collectionName
+       } else{
+           return "N/A"
+       }
+    }
+    
+    private func getCollectionId (parameters: Dictionary<String, Any>) -> String{
+       if let collectionId = parameters["collection_id"] as? String {
+           return collectionId
+       } else{
+           return "N/A"
+       }
+    }
+    
+    private func getModelName (isFromRecomendation: Bool, parameters: Dictionary<String, Any>) -> String{
+        if let modelName = parameters["model_name"] as? String, isFromRecomendation {
+            return modelName
+        } else{
+            return "N/A"
+        }
+     }
+    
+    private func getMainGenre (extention: Dictionary<String, Any>) -> String{
+       if let mainGenre = extention["main_genre"] as? String {
+           return mainGenre
+       } else{
+           return ""
+       }
+    }
+    
+    private func getScreenName (extention: Dictionary<String, Any>) -> String{
+       if let screenName = extention["screen_name"] as? String {
+           return screenName
+       } else{
+           return "N/A"
+       }
+    }
+    
+    private func getTopCategory (extention: Dictionary<String, Any>, assetType: Int) -> String{
+        let subtype = getSubType(extention: extention)
+        let mainGenre = getMainGenre(extention: extention)
+        print("subtype main genre \(subtype) ____ \(assetType) _______\(mainGenre)")
+        
+        if assetType == 0 {
+            if subtype == "movie" {
+                return "Movie"
+            } else if subtype == "video" && mainGenre == "news" {
+                return "News"
+            } else if subtype == "video" && mainGenre == "music" {
+                return "music"
+            } else if subtype == "video" {
+                return "Video"
+            } else {
+            return "N/A"
+            }
+        }
+        
+        else if assetType == 1 {
+            if subtype != "original" {
+                return "Tv show"
+            } else {
+                return "Original"
+            }
+        }
+        
+        else if assetType == 6 {
+            return subtype
+        }
+        
+        else {
+            return "N/A"
+        }
+    }
+    
+    private func getSubType (extention: Dictionary<String, Any>) -> String{
+       if let subType = extention["asset_subtype"] as? String {
+           return subType
+       } else{
+           return ""
+       }
+    }
+    
+    private func getClickedId (isFromRecomendation: Bool, parameters: Dictionary<String, Any>) -> String{
+       if let modelClickedId = parameters["click_id"] as? String, isFromRecomendation {
+           return modelClickedId
+       } else{
+           return "N/A"
+       }
+    }
+    
+    private func getContentSpecification (extention: Dictionary<String, Any>, assetType: Int) -> String{
+
+        if (assetType == 0 || assetType == 1 || assetType == 6) {
+           return getSubType(extention: extention)
+        } else {
+            return "N/A"
+        }
+    }
+    
+    func isInternetAvailable() -> Bool
+    {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+
+        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+            }
+        }
+
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+            return false
+        }
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        return (isReachable && !needsConnection)
     }
     
     func reportHomeLandingOnHomeScreenIfApplicable(atomFeedUrl: String?) {
