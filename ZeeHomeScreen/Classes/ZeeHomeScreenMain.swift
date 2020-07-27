@@ -15,6 +15,8 @@ typealias PluginKeys = [String: String]
 
 public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol {
     
+    private static let kScreenPickerTabSelected: String = "kScreenPickerTabSelected"
+    
     public var configurationJSON: NSDictionary?
     
     public var screenPluginDelegate: ZPPlugableScreenDelegate?
@@ -47,7 +49,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol {
     public func createScreen() -> UIViewController {
         let bundle = Bundle.init(for: type(of: self))
         let result = SectionCompositeViewController(nibName: "SectionCompositeViewController", bundle: bundle)
-        NotificationCenter.default.addObserver(result, selector: #selector(SectionCompositeViewController.screenPickerTabSelected), name: NSNotification.Name(rawValue: "kScreenPickerTabSelected"), object: nil)
+        NotificationCenter.default.addObserver(result, selector: #selector(SectionCompositeViewController.screenPickerTabSelected), name: NSNotification.Name(rawValue: ZeeHomeScreenMain.kScreenPickerTabSelected), object: nil)
         mainViewController = result
         result.userType = User.shared.getType()
         result.isUserSubscribed = User.shared.isSubscribed()
