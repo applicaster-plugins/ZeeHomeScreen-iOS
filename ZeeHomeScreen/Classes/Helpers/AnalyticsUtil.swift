@@ -120,6 +120,7 @@ import SystemConfiguration
     
     private func getItemVerticalPosition (parameters: Dictionary<String, Any>) -> String{
        if let itemVerticalPosition = parameters["vertical_position"] as? Int {
+        UserDefaults.standard.set(itemVerticalPosition, forKey: "carousal_index")
            return String(itemVerticalPosition)
        } else{
            return "N/A"
@@ -128,6 +129,7 @@ import SystemConfiguration
     
     private func getCollectionName (parameters: Dictionary<String, Any>) -> String{
        if let collectionName = parameters["collection_name"] as? String {
+        UserDefaults.standard.set(collectionName, forKey: "carousal_name")
            return collectionName
        } else{
            return "N/A"
