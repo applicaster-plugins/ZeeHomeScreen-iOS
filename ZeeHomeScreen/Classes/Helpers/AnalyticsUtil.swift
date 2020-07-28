@@ -58,8 +58,14 @@ import SystemConfiguration
         }
         
         // for all but not for View More selected
-        properties.insert("CAROUSAL_NAME" ~>> getCollectionName(parameters: parameters))
-        properties.insert("CAROUSAL_ID" ~>> getCollectionId(parameters: parameters))
+        let carousel_name = getCollectionName(parameters: parameters)
+        let carousel_id = getCollectionId(parameters: parameters)
+        
+        properties.insert("CAROUSAL_NAME" ~>> carousel_name)
+        UserDefaults.standard.set(carousel_name, forKey: "carousal_name")
+        properties.insert("CAROUSAL_ID" ~>> carousel_id)
+        UserDefaults.standard.set(carousel_id, forKey: "carousal_id")
+        
         properties.insert("VERTICAL_INDEX" ~>> getItemVerticalPosition(parameters: parameters))
                 
         if events == Events.ADD_TO_WATCHLIST || events == Events.THUMBNAIL_CLICK || events == Events.CAROUSAL_BANNER_CLICK ||
@@ -120,7 +126,6 @@ import SystemConfiguration
     
     private func getItemVerticalPosition (parameters: Dictionary<String, Any>) -> String{
        if let itemVerticalPosition = parameters["vertical_position"] as? Int {
-        UserDefaults.standard.set(itemVerticalPosition, forKey: "carousal_index")
            return String(itemVerticalPosition)
        } else{
            return "N/A"
@@ -129,7 +134,6 @@ import SystemConfiguration
     
     private func getCollectionName (parameters: Dictionary<String, Any>) -> String{
        if let collectionName = parameters["collection_name"] as? String {
-        UserDefaults.standard.set(collectionName, forKey: "carousal_name")
            return collectionName
        } else{
            return "N/A"
