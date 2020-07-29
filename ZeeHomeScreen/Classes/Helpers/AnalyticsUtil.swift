@@ -58,8 +58,14 @@ import SystemConfiguration
         }
         
         // for all but not for View More selected
-        properties.insert("CAROUSAL_NAME" ~>> getCollectionName(parameters: parameters))
-        properties.insert("CAROUSAL_ID" ~>> getCollectionId(parameters: parameters))
+        let carousel_name = getCollectionName(parameters: parameters)
+        let carousel_id = getCollectionId(parameters: parameters)
+        
+        properties.insert("CAROUSAL_NAME" ~>> carousel_name)
+        UserDefaults.standard.set(carousel_name, forKey: "carousal_name")
+        properties.insert("CAROUSAL_ID" ~>> carousel_id)
+        UserDefaults.standard.set(carousel_id, forKey: "carousal_id")
+        
         properties.insert("VERTICAL_INDEX" ~>> getItemVerticalPosition(parameters: parameters))
                 
         if events == Events.ADD_TO_WATCHLIST || events == Events.THUMBNAIL_CLICK || events == Events.CAROUSAL_BANNER_CLICK ||
@@ -103,6 +109,11 @@ import SystemConfiguration
     @objc public func viewMoreSelectedAnalyticsIfApplicable(componentModel: ComponentModel) {
         let properties = getProperties(events: Events.VIEW_MORE_SELECTED, componentModel: componentModel)
         analytics.track(Events.VIEW_MORE_SELECTED, trackedProperties: properties)
+    }
+    
+    @objc public func pageScrollAnalyticsIfApplicable(componentModel: ComponentModel) {
+        let properties = getMixpanelProperties(events: Events.PAGE_SCROLL, componentModel: componentModel)
+        analytics.track(Events.PAGE_SCROLL, trackedProperties: properties)
     }
     
     private func getItemPosition (parameters: Dictionary<String, Any>) -> String{
