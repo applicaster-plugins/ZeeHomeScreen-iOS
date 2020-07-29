@@ -40,11 +40,30 @@ import SystemConfiguration
         guard let assetType = extention.intNumber(key:"asset_type") else { return properties }
         let isFromRecomendation = parameters["type"] as? String == "reco"
         
+        //saved properties
+        let carousel_name = getCollectionName(parameters: parameters)
+        let carousel_id = getCollectionId(parameters: parameters)
+        let vertical_index = getItemVerticalPosition(parameters: parameters)
+        let horisontal_index = getItemPosition(parameters: parameters)
+        let talamoos_click_id = getClickedId(isFromRecomendation: isFromRecomendation, parameters: parameters)
+        let talamoos_model_name = getModelName(isFromRecomendation: isFromRecomendation, parameters: parameters)
+        let talamoos_origin = (isFromRecomendation ? "personalised" : "N/A")
+        let preview_status = "N/A"
+        
+        UserDefaults.standard.set(carousel_name, forKey: "carousal_name")
+        UserDefaults.standard.set(carousel_id, forKey: "carousal_id")
+        UserDefaults.standard.set(vertical_index, forKey: "vertical_index")
+        UserDefaults.standard.set(horisontal_index, forKey: "horisontal_index")
+        UserDefaults.standard.set(talamoos_click_id, forKey: "talamoos_click_id")
+        UserDefaults.standard.set(talamoos_model_name, forKey: "talamoos_model_name")
+        UserDefaults.standard.set(talamoos_origin, forKey: "talamoos_origin")
+        UserDefaults.standard.set(preview_status, forKey: "preview_status")
+
         // default for all
         properties.insert("TAB_NAME" ~>> getScreenName(extention: extention))
         properties.insert("PAGE_NAME" ~>> getScreenName(extention: extention))
         if let source = UserDefaults.standard.string(forKey: "analyticsSource") {
-            properties.insert("SOURCE" ~>> source)
+        properties.insert("SOURCE" ~>> source)
         }
         properties.insert("TRACKINGMODE" ~>> String(isInternetAvailable()))
         properties.insert("SUGAR_BOX_VALUE" ~>> false) // is user of sugar box, currently not implemented so pass false
@@ -58,26 +77,20 @@ import SystemConfiguration
         }
         
         // for all but not for View More selected
-        let carousel_name = getCollectionName(parameters: parameters)
-        let carousel_id = getCollectionId(parameters: parameters)
-        
         properties.insert("CAROUSAL_NAME" ~>> carousel_name)
-        UserDefaults.standard.set(carousel_name, forKey: "carousal_name")
         properties.insert("CAROUSAL_ID" ~>> carousel_id)
-        UserDefaults.standard.set(carousel_id, forKey: "carousal_id")
-        
-        properties.insert("VERTICAL_INDEX" ~>> getItemVerticalPosition(parameters: parameters))
+        properties.insert("VERTICAL_INDEX" ~>> vertical_index)
                 
         if events == Events.ADD_TO_WATCHLIST || events == Events.THUMBNAIL_CLICK || events == Events.CAROUSAL_BANNER_CLICK ||
             events == Events.REMOVE_FROM_WATCHLIST || events == Events.CTAS {
-            properties.insert("HORIZONTAL_INDEX" ~>> getItemPosition(parameters: parameters))
+            properties.insert("HORIZONTAL_INDEX" ~>> horisontal_index)
         }
         
         if events == Events.CAROUSAL_BANNER_CLICK || events == Events.THUMBNAIL_CLICK || events == Events.SCREEN_VIEW {
-            properties.insert( "TALAMOOS_ORIGIN" ~>> (isFromRecomendation ? "personalised" : "N/A"))
-            properties.insert( "TALAMOOS_MODELNAME" ~>> getModelName(isFromRecomendation: isFromRecomendation, parameters: parameters))
-            properties.insert( "TALAMOOS_CLICKID" ~>> getClickedId(isFromRecomendation: isFromRecomendation, parameters: parameters))
-            properties.insert( "HORIZONTAL_INDEX" ~>> getItemPosition(parameters: parameters))
+            properties.insert( "TALAMOOS_ORIGIN" ~>> talamoos_origin)
+            properties.insert( "TALAMOOS_MODELNAME" ~>> talamoos_model_name)
+            properties.insert( "TALAMOOS_CLICKID" ~>> talamoos_click_id)
+            properties.insert( "HORIZONTAL_INDEX" ~>> horisontal_index)
             properties.insert( "PREVIEW_STATUS" ~>> "N/A")
             properties.insert( "TOP_CATEGORY" ~>> getTopCategory(extention: extention, assetType: assetType))
             properties.insert( "CONTENT_SPECIFICATION" ~>> getContentSpecification(extention: extention, assetType: assetType))
