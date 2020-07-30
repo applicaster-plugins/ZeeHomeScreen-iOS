@@ -631,9 +631,8 @@ import Zee5CoreSDK
                     if let urlstring = atomEntry.link,
                         let linkURL = URL(string: urlstring.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!),
                         APUtils.shouldOpenURLExternally(linkURL) {
-                        self.dismiss(animated: false) {
-                            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
-                        }
+                        self.dismiss(animated: false)
+                        UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
                     }
                 }
             }
