@@ -125,7 +125,7 @@ import SystemConfiguration
     }
     
     @objc public func pageScrollAnalyticsIfApplicable(componentModel: ComponentModel) {
-        let properties = getMixpanelProperties(events: Events.PAGE_SCROLL, componentModel: componentModel)
+        let properties = getProperties(events: Events.PAGE_SCROLL, componentModel: componentModel)
         analytics.track(Events.PAGE_SCROLL, trackedProperties: properties)
     }
     
