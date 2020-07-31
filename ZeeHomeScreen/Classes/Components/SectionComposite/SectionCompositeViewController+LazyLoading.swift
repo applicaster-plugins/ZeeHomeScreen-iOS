@@ -180,7 +180,11 @@ extension SectionCompositeViewController {
     }
     
     func prepareCollectionItems(items: [ComponentModelProtocol]) {
-        sectionsDataSourceArray = items
+        if let currentComponentModel = currentComponentModel, currentComponentModel.isContinueWatchingType() {
+            sectionsDataSourceArray = items
+        } else {
+            sectionsDataSourceArray = sectionsDataSourceArray! + items
+        }
     }
     
     func shouldLoadMoreItems() -> Bool {
