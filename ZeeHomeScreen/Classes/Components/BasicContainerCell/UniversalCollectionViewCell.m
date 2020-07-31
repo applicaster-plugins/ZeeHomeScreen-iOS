@@ -6,14 +6,12 @@
 //
 
 #import "UniversalCollectionViewCell.h"
-#import "CarouselViewController.h"
-#import <ZeeHomeScreen/ComponenttFactory.h>
 #import <ZeeHomeScreen/ZeeHomeScreen-Swift.h>
 
 @interface UniversalCollectionViewCell()
 
-@property (nonatomic, strong) NSLayoutConstraint *cellWidthConstraint;
-@property (nonatomic, strong) NSLayoutConstraint *cellHeightConstraint;
+@property (nonatomic) NSLayoutConstraint *cellWidthConstraint;
+@property (nonatomic) NSLayoutConstraint *cellHeightConstraint;
 
 - (void)updateFlexibilityConstraints:(ComponentModel *)componentModel;
 
@@ -21,61 +19,32 @@
 
 @implementation UniversalCollectionViewCell
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-    
-    }
-    return self;
-}
-
 -(void)prepareForReuse {
     [super prepareForReuse];
-    
-    if ([self.componentViewController respondsToSelector:@selector(prepareComponentForReuse)]) {
-        [self.componentViewController prepareComponentForReuse];
+
+    if (self.parentHandlesReusingComponent) {
+        if ([self.componentViewController respondsToSelector:@selector(prepareComponentForReuse)]) {
+            [self.componentViewController prepareComponentForReuse];
+        }
+    } else {
+        [self.componentViewController removeViewFromParentViewController];
+        _componentViewController = nil;
     }
 }
 
 -(void)setComponentViewController:(UIViewController<ComponentProtocol> *)componentViewController {
+    if (_componentViewController != nil) {
+        [_componentViewController removeViewFromParentViewController];
+    }
+
     _componentViewController = componentViewController;
+
+    [self.contentView addSubview:_componentViewController.view];
+    [_componentViewController.view setInsetsFromParent:UIEdgeInsetsZero];
+    _componentViewController.view.backgroundColor = UIColor.clearColor;
 }
 
-- (UIViewController<ComponentProtocol> *)setComponentModel:(nullable ComponentModel *)componentModel
-                    model:(nullable NSObject *)model
-                     view:(nullable UIView *)view
-                 delegate:(nullable id<ComponentDelegate>)delegate
-     parentViewController:(nullable UIViewController *)parentViewController
-{
-    if (self.componentViewController == nil) {
-        self.componentViewController = [ComponenttFactory componentViewControllerWithComponentModel:componentModel
-            andModel:model
-            forView:view
-            delegate:delegate
-            parentViewController:parentViewController];
-    } else {
-        if ([self.componentViewController respondsToSelector:@selector(setComponentModel:)]) {
-            self.componentViewController.componentModel = componentModel;
-        }
-        if ([self.componentViewController respondsToSelector:@selector(rebuildComponent)]) {
-            [self.componentViewController rebuildComponent];
-        }
-    }
-    
-    if ([self.componentViewController respondsToSelector:@selector(setDelegate:)]) {
-        self.componentViewController.delegate = delegate;
-    }
-
-    // This is setting the component model to CellViewControllers
-    // TODO: Refactor so that the component model is set as in the other view controllers
-    if ([self.componentViewController respondsToSelector:@selector(setComponentDataSourceModel:)]) {
-        self.componentViewController.componentDataSourceModel = componentModel;
-    }
-
-    return self.componentViewController;
-}
-
-- (void)setBackgroundImage:(nullable NSString *)imageName {
+- (void)setBackgroundImage:(NSString *)imageName {
     UIImage *image = [UIImage imageNamed:imageName];
     if (self.width > image.size.width) {
         //resize image to cell size
@@ -107,20 +76,6 @@
 //        self.cellHeightConstraint.constant = CGRectGetHeight(self.frame);
 //        self.cellHeightConstraint.active = YES;
 //    }
-}
-
-- (void)addViewControllerToParentViewController:(UIViewController *)parentViewController {
-    [self.contentView removeAllSubviews];
-    [self.contentView addSubview:self.componentViewController.view];
-    [parentViewController addChildViewController:self.componentViewController];
-    [self.componentViewController didMoveToParentViewController:parentViewController];
-    
-}
-
-- (void)removeViewControllerFromParentViewController {
-    [self.componentViewController.view removeFromSuperview];
-    [self.componentViewController willMoveToParentViewController:nil];
-    [self.componentViewController removeFromParentViewController];
 }
 
 @end
