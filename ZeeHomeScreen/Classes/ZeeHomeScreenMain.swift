@@ -17,7 +17,7 @@ public class ZeeHomeScreenMain: NSObject, ZPPluggableScreenProtocol {
     
     public var configurationJSON: NSDictionary?
     
-    public var screenPluginDelegate: ZPPlugableScreenDelegate?
+    public weak var screenPluginDelegate: ZPPlugableScreenDelegate?
     var mainViewController: SectionCompositeViewController?
     
     fileprivate var config: PluginKeys?
