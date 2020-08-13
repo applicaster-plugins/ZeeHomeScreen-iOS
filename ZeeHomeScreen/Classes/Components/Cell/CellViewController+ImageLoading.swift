@@ -36,6 +36,9 @@ extension CellViewController {
             setAnimatedImage(forImageView: imageView,
                              url: url)
         } else {
+            // Set RAM and Disk Image Memory limited to 100 MB
+            ImageCache.default.memoryStorage.config.totalCostLimit = 100 * 1024 * 1024
+            ImageCache.default.diskStorage.config.sizeLimit = 100 * 1024 * 1024
             numberOfImageFetchingOperationsInProgress += 1
             imageView.kf.setImage(with: imageUrl,
                                   placeholder: updatedPlaceholderImage,

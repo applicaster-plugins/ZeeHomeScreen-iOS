@@ -12,8 +12,8 @@
 
 @interface UniversalCollectionViewCell()
 
-@property (nonatomic, strong) NSLayoutConstraint *cellWidthConstraint;
-@property (nonatomic, strong) NSLayoutConstraint *cellHeightConstraint;
+//@property (nonatomic, strong) NSLayoutConstraint *cellWidthConstraint;
+//@property (nonatomic, strong) NSLayoutConstraint *cellHeightConstraint;
 
 - (void)updateFlexibilityConstraints:(ComponentModel *)componentModel;
 

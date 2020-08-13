@@ -12,7 +12,7 @@
 @protocol UniversalCollectionViewHeaderFooterViewDelegate;
 
 @interface UniversalCollectionViewHeaderFooterView : UICollectionReusableView
-@property (nonatomic, strong) UIViewController <ComponentProtocol> *componentViewController;
+@property (nonatomic, weak) UIViewController <ComponentProtocol> *componentViewController;
 @property (nonatomic, weak)id <UniversalCollectionViewHeaderFooterViewDelegate>delegate;
 -(void)setBackgroundImage:(NSString *) imageName;
 @end

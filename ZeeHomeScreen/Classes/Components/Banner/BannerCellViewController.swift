@@ -39,7 +39,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
                
             }
         }
-
+   
     func currentComponentModel() -> ComponentModel {
         return componentModel as! ComponentModel
     }
@@ -52,7 +52,13 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateComponentData()
+        
+            updateComponentData()
+        
+        
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        adPresenter?.stopPlayer()
     }
         
         override func viewDidLayoutSubviews() {
