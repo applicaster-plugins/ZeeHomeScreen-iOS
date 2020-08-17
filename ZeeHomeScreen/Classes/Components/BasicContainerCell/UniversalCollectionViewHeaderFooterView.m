@@ -5,27 +5,33 @@
 //  Created by Miri on 28/01/2020.
 //
 
-
 #import "UniversalCollectionViewHeaderFooterView.h"
 #import <ZeeHomeScreen/ZeeHomeScreen-Swift.h>
 
 @implementation UniversalCollectionViewHeaderFooterView
 
-
 -(void)prepareForReuse {
     [super prepareForReuse];
+
     _delegate = nil;
-    if ([self.componentViewController respondsToSelector:@selector(prepareComponentForReuse)]) {
-//        [self.componentViewController prepareComponentForReuse];
-    }
+
+    [self.componentViewController removeViewFromParentViewController];
+    _componentViewController = nil;
 }
 
 -(void)setComponentViewController:(UIViewController<ComponentProtocol> *)componentViewController {
+    if (_componentViewController != nil) {
+        [_componentViewController removeViewFromParentViewController];
+    }
+    
     _componentViewController = componentViewController;
+
+    [self addSubview:_componentViewController.view];
+    [_componentViewController.view setInsetsFromParent:UIEdgeInsetsZero];
+    _componentViewController.view.backgroundColor = UIColor.clearColor;
 }
 
--(void)setBackgroundImage:(NSString *) imageName {
-    
+-(void)setBackgroundImage:(NSString *)imageName {
     UIImage *image = [UIImage imageNamed:imageName];
 //    if (self.width > image.size.width) {
 //        //resize image to cell size

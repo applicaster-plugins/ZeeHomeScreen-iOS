@@ -282,20 +282,19 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 - (UICollectionViewCell *)promotionView:(APPromotionView *)promotionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     CellModel *cellModel = self.dataSource[indexPath.row];
-    
-    NSString *reuseIdentifier = [cellModel.identifier stringByAppendingFormat:@"_%@", cellModel.layoutStyle];
-    
+
     UniversalCollectionViewCell *cell = [promotionView dequeueReusableCellWithReuseIdentifier:cellModel.layoutStyle
                                                                                  forIndexPath:indexPath];
     CGFloat width = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone ? cellModel.iphoneWidth : cellModel.ipadWidth;
     CGFloat height = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone ? cellModel.iphoneHeight : cellModel.ipadHeight;
     cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, width, height);
     if (cell.componentViewController == nil) {
-        cell.componentViewController = [ComponenttFactory componentViewControllerWithComponentModel:cellModel
-                                                                                           andModel:cellModel.entry
-                                                                                            forView:cell.contentView
-                                                                                           delegate:self.delegate
-                                                                               parentViewController:self];
+        UIViewController<ComponentProtocol> *componentViewController = [ComponenttFactory viewControllerForComponentModel:cellModel];
+        if (componentViewController != nil) {
+            [self addChildViewController:componentViewController];
+            cell.componentViewController = componentViewController;
+            [componentViewController didMoveToParentViewController:self];
+        }
     }
     
     if ([cell.componentViewController respondsToSelector:@selector(delegate)]) {

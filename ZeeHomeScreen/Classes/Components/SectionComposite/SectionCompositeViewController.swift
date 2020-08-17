@@ -567,13 +567,28 @@ import Zee5CoreSDK
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? UniversalCollectionViewCell {
                     componentModel.screenConfiguration = screenConfiguration
                     cell.backgroundColor = UIColor.clear
-                    
-                    let _ = cell.setComponentModel(componentModel,
-                    model: componentModel,
-                    view: cell.contentView,
-                    delegate: self,
-                    parentViewController: self)
 
+                    if (cell.componentViewController == nil) {
+                        if let componentViewController = ComponenttFactory.viewController(for: componentModel) {
+                            addChild(componentViewController)
+                            cell.componentViewController = componentViewController
+                            componentViewController.didMove(toParent: self)
+                        }
+                    } else {
+                        if cell.componentViewController?.responds(to: #selector(setter: ComponentProtocol.componentModel)) == true {
+                            _ = cell.componentViewController?.perform(#selector(setter: ComponentProtocol.componentModel), with: componentModel)
+                        }
+                        if cell.componentViewController?.responds(to: #selector(ComponentProtocol.rebuildComponent)) == true {
+                            _ = cell.componentViewController?.perform(#selector(ComponentProtocol.rebuildComponent))
+                        }
+                    }
+
+                    if cell.componentViewController?.responds(to: #selector(setter: ComponentProtocol.delegate)) == true {
+                        _ = cell.componentViewController?.perform(#selector(setter: ComponentProtocol.delegate), with: delegate)
+                    }
+                    if cell.componentViewController?.responds(to: #selector(setter: ComponentProtocol.componentDataSourceModel)) == true {
+                        _ = cell.componentViewController?.perform(#selector(setter: ComponentProtocol.componentDataSourceModel), with: componentModel)
+                    }
 
                     cell.layer.shouldRasterize = true
                     cell.layer.rasterizationScale = UIScreen.main.scale
@@ -648,25 +663,27 @@ import Zee5CoreSDK
             let header =  componentModel.componentHeaderModel,
             let layoutName =  header.layoutStyle {
             if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: layoutName, for: indexPath) as? UniversalCollectionViewHeaderFooterView {
-                
                 headerView.delegate = self
-                /*if headerView.componentViewController == nil,*/
-                    if let currentModel = header.entry as? APModel {
-                    headerView.componentViewController =  ComponenttFactory.componentViewController(with: header,
-                                                              andModel: currentModel,
-                                                              for: headerView,
-                                                              delegate: self,
-                                                              parentViewController: self)
+
+                if let _ = header.entry as? APModel {
+                    if let componentViewController = ComponenttFactory.viewController(for: header) {
+                        addChild(componentViewController)
+                        headerView.componentViewController = componentViewController
+                        componentViewController.didMove(toParent: self)
+                    }
+
                     if headerView.componentViewController?.responds(to: #selector(setter: ComponentProtocol.delegate)) == true {
                         _ = headerView.componentViewController?.perform(#selector(setter: ComponentProtocol.delegate), with: self)
                     }
                 }
+
                 if headerView.componentViewController?.responds(to: #selector(setter: ComponentProtocol.componentModel)) == true {
                     _ = headerView.componentViewController?.perform(#selector( setter: ComponentProtocol.componentModel), with: header)
                 }
                 if headerView.componentViewController?.responds(to: #selector(setter: ComponentProtocol.componentDataSourceModel)) == true {
-                    _ = headerView.componentViewController?.perform(#selector( setter: ComponentProtocol.componentDataSourceModel), with: header)
+                    _ = headerView.componentViewController?.perform(#selector(setter: ComponentProtocol.componentDataSourceModel), with: header)
                 }
+
                 reusableview = headerView
             }
         }

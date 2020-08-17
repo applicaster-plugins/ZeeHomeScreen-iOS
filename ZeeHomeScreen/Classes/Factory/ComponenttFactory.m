@@ -22,52 +22,6 @@
 
 #pragma mark - Definitions
 
-+ (UIViewController <ComponentProtocol>  *)componentViewControllerWithComponentModel:(ComponentModel *)componentModel
-                                                                              andModel:(NSObject *)model
-                                                                               forView:(UIView *)view
-                                                                              delegate:(id <ComponentDelegate>) delegate
-                                                                  parentViewController:(UIViewController *)parentViewController {
-    
-    UIViewController <ComponentProtocol>  *retVal = [self viewControllerForComponentModel:componentModel
-                                                                                  withModel:(APModel *)model];
-    if (retVal != nil) {
-        
-        // If the view (container) is not pass or nil use the parent view.
-        if (view == nil) {
-            view = parentViewController.view;
-        }
-        
-        if (view) {
-            if (delegate) {
-                if ([retVal respondsToSelector:@selector(delegate)]) {
-                    retVal.delegate = delegate;
-                }
-            }
-            
-            UIEdgeInsets paddingInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
-//            [CAUIBuilderRealScreenSizeHelper componentPaddingWithComponentModel:componentModel     model:model];
-            [view removeAllSubviews];
-            [view addSubview:retVal.view];
-            
-            [retVal.view matchParent];
-            [retVal.view setInsetsFromParent:paddingInsets];
-        }
-        
-        if (parentViewController) {
-            [parentViewController addChildViewController:retVal];
-            [retVal didMoveToParentViewController:parentViewController];
-        }
-        
-        retVal.view.backgroundColor = [UIColor clearColor];
-    }
-    else {
-        APLoggerError(@"Can't create component - %@", componentModel);
-    }
-    
-    
-    return retVal;
-}
-
 + (NSString *)viewControllerClassNameforType:(NSString *)type {
     NSString *retVal;
     if ([type isEqualToString:@"HERO"]) {
@@ -152,8 +106,7 @@
     return viewController;
 }
 
-+ (UIViewController <ComponentProtocol> *)viewControllerForComponentModel:(ComponentModel *)componentModel
-                                                                  withModel:(APModel *)model {
++ (UIViewController <ComponentProtocol> *)viewControllerForComponentModel:(ComponentModel *)componentModel {
     UIViewController <ComponentProtocol> *viewController = nil;
     NSString *xibKeyName = componentModel.layoutStyle;
     
@@ -178,6 +131,11 @@
             }
         }
     }
+
+    if (viewController == nil) {
+        APLoggerError(@"Can't create component - %@", componentModel);
+    }
+
     return viewController;
 }
 

@@ -5,30 +5,15 @@
 //  Created by Miri on 28/01/2020.
 //
 
+@import UIKit;
 
-@import ZappPlugins;
-#import <Foundation/Foundation.h>
-#import "ComponentDelegate.h"
-@class ComponentModel;
-@class ComponentProtocol;
+@protocol ComponentProtocol;
 
-/**
- *  This cell used as container for all components. Do not remove or modify anything without premission
- */
 @interface UniversalCollectionViewCell: UICollectionViewCell
 
-@property (nullable, nonatomic, strong) UIViewController<ComponentProtocol> *componentViewController;
+@property (nonatomic, weak) UIViewController<ComponentProtocol> *componentViewController;
+@property (nonatomic) BOOL parentHandlesReusingComponent;
 
-- (UIViewController<ComponentProtocol> *_Nullable)setComponentModel:(nullable ComponentModel *)componentModel
-               model:(nullable NSObject *)model
-                view:(nullable UIView *)view
-            delegate:(nullable id<ComponentDelegate>)delegate
-                                      parentViewController:(nullable UIViewController *)parentViewController;
-
-
-- (void)setBackgroundImage:(nullable NSString *)imageName;
-
-- (void)addViewControllerToParentViewController:(UIViewController *)parentViewController;
-- (void)removeViewControllerFromParentViewController;
+- (void)setBackgroundImage:(NSString *)imageName;
 
 @end
