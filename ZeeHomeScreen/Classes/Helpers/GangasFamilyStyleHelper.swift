@@ -374,8 +374,8 @@ class GangasFamilyStyleHelper {
         case "HEADER_1":
             self.componentStyle = "ZeeHomeScreen_Family_Ganges_header_cell_1"
             self.cellStyle = "ZeeHomeScreen_Family_Ganges_header_cell_1"
-            self.iphoneHeight = 25.0
-            self.ipadHeight = 25.0
+            self.iphoneHeight = 52.0
+            self.ipadHeight = 52.0
         case "HEADER_2":
             self.componentStyle = "ZeeHomeScreen_Family_Ganges_header_cell_2"
             self.cellStyle = "ZeeHomeScreen_Family_Ganges_header_cell_2"
@@ -408,7 +408,7 @@ class GangasFamilyStyleHelper {
         case "header_01":
             cell = "ZeeHomeScreen_Family_Ganges_header_cell_1"
             cellKey = "HEADER_1"
-            height = 25.0
+            height = 52.0
             break
             
         case "header_02":
