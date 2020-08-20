@@ -10,9 +10,9 @@
     "git@github.com:applicaster-plugins/ZeeHomeScreen-iOS.git"
   ],
   "platform": "ios",
-  "author_name": "Anton Klysa",
-  "author_email": "50232683+aklysaavantize@users.noreply.github.com",
-  "manifest_version": "3.1.10",
+  "author_name": "Magesh",
+  "author_email": "magesh@doodleblue.com",
+  "manifest_version": "3.1.11",
   "name": "Zee5HomeScreen",
   "description": "Zee5 Home Screen",
   "type": "general",
@@ -20,7 +20,7 @@
   "identifier": "zee5_home_screen",
   "ui_builder_support": true,
   "dependency_name": "ZeeHomeScreen",
-  "dependency_version": "3.1.10",
+  "dependency_version": "3.1.11",
   "whitelisted_account_ids": [
     "5cb825e102507200087bbdcc",
     "5c3b12762756be0008779106"
