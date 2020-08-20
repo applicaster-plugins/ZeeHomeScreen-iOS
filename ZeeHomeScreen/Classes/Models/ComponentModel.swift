@@ -39,7 +39,7 @@ import ApplicasterSDK
     @objc open var containerType: String?
     //, ComponentModelProtocol {
     
-    open weak var parentModel: ComponentModel?
+    open var parentModel: ComponentModel?
     open var title: String?
     
     open var identifier: String?
