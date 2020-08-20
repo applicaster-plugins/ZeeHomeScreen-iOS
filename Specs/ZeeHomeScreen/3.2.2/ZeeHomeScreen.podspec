@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
                        DESC
   s.homepage         = 'https://github.com/applicaster-plugins/ZeeHomeScreen-iOS'
   s.license          = 'CMPS'
-  s.author           = { "cmps" => "m.vecselboim@applicaster.com" }
+  s.author           = { "cmps" => "e.kyivskyi@applicaster.com" }
   s.source           = { :git => 'git@github.com:applicaster-plugins/ZeeHomeScreen-iOS.git', :tag => s.version.to_s }
   s.platform     = :ios, '10.0'
   s.requires_arc = true
@@ -32,6 +32,5 @@ Pod::Spec.new do |s|
   s.dependency 'Zee5CoreSDK'
   s.dependency 'zee5mixpanelplugin'
   s.dependency 'Kingfisher'
-  s.dependency 'Zee5Advertisement'
 
 end
