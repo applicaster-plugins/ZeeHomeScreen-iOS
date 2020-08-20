@@ -7,7 +7,7 @@
 
 import Foundation
 import ApplicasterSDK
-
+import Zee5Advertisement
 class BannerCellViewController : UIViewController, ComponentProtocol, ComponentDelegate, ZPAdViewProtocol {
     
     
@@ -28,7 +28,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         
         @IBOutlet weak var contentView: UIView!
         
-        private var adPresenter: ZPAdPresenterProtocol?
+        private var adPresenter: AdViewPresenter?
         private var backgroundEnabled: Bool?
         private var bannerView: UIView?
         var isRemoved = false
@@ -54,6 +54,10 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         super.viewDidLoad()
         updateComponentData()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+           adPresenter?.stopPlayer()
+       }
         
         override func viewDidLayoutSubviews() {
             super.viewDidLayoutSubviews()
@@ -107,15 +111,15 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
     
     func loadBanner() {
         
-        let adPlugin = ZPAdvertisementManager.sharedInstance.getAdPlugin()
-        adPresenter = adPlugin?.createAdPresenter(adView: self, parentVC: self)
+       let adPlugin = ZPAdvertisementManager.sharedInstance.getAdPlugin()
+        adPresenter = adPlugin?.createAdPresenter(adView: self, parentVC: self) as? AdViewPresenter
         
         if let bannerModel = currentComponentModel().entry, let extensions: [String: Any] = bannerModel.pipesObject!["extensions"] as? [String : Any], let config: [String: Any] = extensions["ad_config"] as? [String: Any] {
             bannerContainerView.removeAllSubviews()
             let adConfig: ZPAdConfig = ZPAdConfig.init(adUnitId: config["ad_tag"] as! String , inlineBannerSize: config["ad_size"] as! String)
-            if let size: CGSize = adPlugin?.size(forInlineBannerSize: config["ad_size"] as! String) {
-                //bannerContainerWidthConstraint.constant = size.width
-            }
+//            if let _: CGSize = adPresenter?.size(forInlineBannerSize: config["ad_size"] as! String) {
+//                //bannerContainerWidthConstraint.constant = size.width
+//            }
             adPresenter?.load(adConfig: adConfig)
         }
     }
@@ -268,8 +272,8 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
 
         
         // Banner Size Dimensions
-        let dimensionString: String = String.init(format: "%ldx%ld", lround(Double(adPresenter!.getSize().width)), lround(Double(adPresenter!.getSize().height)))
-        retVal["Banner Size Dimensions"] = dimensionString
+          let dimensionString: String = String.init(format: "%ldx%ld", lround(Double(adPresenter!.getSize().width)), lround(Double(adPresenter!.getSize().height)))
+                           retVal["Banner Size Dimensions"] = dimensionString
         
         // Banner location
         retVal["Banner Location"] = "Inline Banner"
