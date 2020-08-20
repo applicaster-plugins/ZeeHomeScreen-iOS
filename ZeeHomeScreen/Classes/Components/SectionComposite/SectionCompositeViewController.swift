@@ -274,43 +274,27 @@ import Zee5CoreSDK
         }
         toggle.setButtonsTitles(buttonsTitles: ["nav_livetv".localized(hashMap: [:]), "EPG_Header_ChannelGuide_Text".localized(hashMap: [:])])
         toggle.changeToIndex = { [weak self] index in
-            switch index {
-            case 0:
-                self?.collectionView?.isHidden = false
-                self?.epgContentView?.isHidden = true
-
-            case 1:
-                self?.prepareEPGViewIfNeeded()
-                self?.collectionView?.isHidden = true
-                self?.epgContentView?.isHidden = false
-
-            default: ()
-            }
+            self?.collectionView?.isHidden = index == 0 ? false : true
+            self?.epgContentView?.isHidden = index == 0 ? true : false
         }
         toggle.isHidden = false
     }
     
-    private func prepareEPGViewIfNeeded() {
-        guard epgContentView?.subviews.isEmpty == true else { return }
+    private func prepareEPGView() {
 
         let screenID = screenConfiguration?.epgScreenID
 
-        guard let viewController = GARootHelper.uiBuilderScreen(
-            by: screenID!,
-            model: nil,
-            fromURLScheme: nil
-        ) as? GAScreenPluginGenericViewController else {
-            APLoggerError("Can not create view controller with ScreenType: \(screenID!) isn't found")
-            return
+        guard let viewController = GARootHelper.uiBuilderScreen(by: screenID!,
+                                                                model: nil,
+                                                                fromURLScheme:nil) else {
+                                                                    APLoggerError("Can not create view controller with ScreenType: \(screenID!) isn't found")
+                                                                    return
         }
-
-        viewController.isContainerViewController = true
+        (viewController as! GAScreenPluginGenericViewController).isContainerViewController = true
         addChild(viewController)
 
-        epgContentView?.addSubview(viewController.view)
+        epgContentView!.addSubview(viewController.view)
         viewController.view.matchParent()
-
-        viewController.didMove(toParent: self)
     }
     
     func prepareComponentToReuse() {
@@ -357,6 +341,7 @@ import Zee5CoreSDK
                 if config.epgScreenID != nil {
                     topDistanceConstraint?.constant = -64
                     prepareToggle()
+                    prepareEPGView()
                 }
             }
             
