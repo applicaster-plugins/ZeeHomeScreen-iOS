@@ -15,7 +15,7 @@ import Foundation
     @objc var componentModel:ComponentModelProtocol? {get set}
     
     @objc optional var selectedModel:NSObject? {get set}
-    @objc optional var delegate:ComponentDelegate? {get set}
+    @objc optional var componentDelegate:ComponentDelegate? {get set}
     
     @objc optional func setDataSource(dataSource: Any)
     @objc optional func setComponentDataSource(componentDataSource: Any)

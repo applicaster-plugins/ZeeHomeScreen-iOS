@@ -24,7 +24,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         @IBOutlet weak var bannerBottomContainerConstraint: NSLayoutConstraint!
         @IBOutlet weak var backgroundView: UIView!
         @IBOutlet weak var advertisementLabel: UILabel!
-        @IBOutlet weak var delegate: ComponentDelegate!
+        @IBOutlet weak var componentDelegate: ComponentDelegate?
         
         @IBOutlet weak var contentView: UIView!
         
@@ -154,9 +154,10 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
         
         if !isRemoved {
             isRemoved = true
-            if delegate.responds(to: #selector(ComponentDelegate.removeComponent(forModel:andComponentModel:))) {
-                       delegate.removeComponent?(forModel: currentComponentModel().entry as? NSObject, andComponentModel: currentComponentModel())
-                   }
+            
+            if componentDelegate?.responds(to: #selector(ComponentDelegate.removeComponent(forModel:andComponentModel:))) == true {
+                componentDelegate?.removeComponent?(forModel: currentComponentModel().entry as? NSObject, andComponentModel: currentComponentModel())
+            }
         }
     }
     
@@ -178,7 +179,7 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
             bannerView.accessibilityIdentifier = config["ad_tag"] as? String
         }
 
-        delegate.loadingFinished?(with: Notification.init(name: NSNotification.Name.ZeeComponentLoaded, object: self))
+        componentDelegate?.loadingFinished?(with: Notification.init(name: NSNotification.Name.ZeeComponentLoaded, object: self))
 
         view.translatesAutoresizingMaskIntoConstraints = false
         setConstantConstraintWith(attribute: .height, value: bannerView.size.height, inView: bannerContainerView)
@@ -209,8 +210,8 @@ class BannerCellViewController : UIViewController, ComponentProtocol, ComponentD
             currentComponentModel().styleHelper?.ipadHeight = bannerView.size.height
             currentComponentModel().cellModel?.iphoneHeight = bannerView.size.height
             currentComponentModel().cellModel?.ipadHeight = bannerView.size.height
-            if delegate.responds(to: #selector(ComponentDelegate.reloadComponent(forModel:andComponentModel:))) {
-                delegate.reloadComponent?(forModel: currentComponentModel().entry as? NSObject, andComponentModel: currentComponentModel())
+            if componentDelegate?.responds(to: #selector(ComponentDelegate.reloadComponent(forModel:andComponentModel:))) == true {
+                componentDelegate?.reloadComponent?(forModel: currentComponentModel().entry as? NSObject, andComponentModel: currentComponentModel())
             }
         } else {
             

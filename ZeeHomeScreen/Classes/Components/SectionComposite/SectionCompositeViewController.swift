@@ -37,7 +37,7 @@ import Zee5CoreSDK
     var contentLanguages: String?
     var liveComponents = [ComponentModelProtocol]()
     
-    weak var delegate:ComponentDelegate?
+    weak var componentDelegate:ComponentDelegate?
     var collectionViewFlowLayout:SectionCompositeFlowLayout? {
         return collectionView?.collectionViewLayout as? SectionCompositeFlowLayout
     }
@@ -583,8 +583,8 @@ import Zee5CoreSDK
                         }
                     }
 
-                    if cell.componentViewController?.responds(to: #selector(setter: ComponentProtocol.delegate)) == true {
-                        _ = cell.componentViewController?.perform(#selector(setter: ComponentProtocol.delegate), with: delegate)
+                    if cell.componentViewController?.responds(to: #selector(setter: ComponentProtocol.componentDelegate)) == true {
+                        _ = cell.componentViewController?.perform(#selector(setter: ComponentProtocol.componentDelegate), with: componentDelegate)
                     }
                     if cell.componentViewController?.responds(to: #selector(setter: ComponentProtocol.componentDataSourceModel)) == true {
                         _ = cell.componentViewController?.perform(#selector(setter: ComponentProtocol.componentDataSourceModel), with: componentModel)
@@ -672,8 +672,8 @@ import Zee5CoreSDK
                         componentViewController.didMove(toParent: self)
                     }
 
-                    if headerView.componentViewController?.responds(to: #selector(setter: ComponentProtocol.delegate)) == true {
-                        _ = headerView.componentViewController?.perform(#selector(setter: ComponentProtocol.delegate), with: self)
+                    if headerView.componentViewController?.responds(to: #selector(setter: ComponentProtocol.componentDelegate)) == true {
+                        _ = headerView.componentViewController?.perform(#selector(setter: ComponentProtocol.componentDelegate), with: self)
                     }
                 }
 
@@ -735,7 +735,7 @@ import Zee5CoreSDK
     var isLoading = false
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        delegate?.componentViewController?(self, didChangedContentOffset: scrollView.contentOffset)
+        componentDelegate?.componentViewController?(self, didChangedContentOffset: scrollView.contentOffset)
         
         preloadNextContentPage(scrollView)
     }

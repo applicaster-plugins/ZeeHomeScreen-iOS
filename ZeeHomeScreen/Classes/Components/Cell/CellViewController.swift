@@ -12,7 +12,7 @@ import ApplicasterSDK
     
     public var selectedModel: NSObject?
     
-    public weak var delegate: ComponentDelegate?
+    public weak var componentDelegate: ComponentDelegate?
     
     
     //MARK: Properties

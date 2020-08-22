@@ -26,7 +26,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 
 @implementation CarouselViewController
 
-@synthesize delegate = _delegate;
+@synthesize componentDelegate = _componentDelegate;
 @synthesize componentModel = _componentModel;
 @synthesize componentDataSourceModel = _componentDataSourceModel;
 @synthesize selectedModel = _selectedModel;
@@ -188,9 +188,9 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
 
 - (NSObject *)topParentForComponentModel:(ComponentModel *)componentModel withDataSourceModel:(NSObject *)model {
     NSObject *retVal = nil;
-    if ([self.delegate respondsToSelector:@selector(topParentForComponentModel:withDataSourceModel:)]) {
-        retVal = [self.delegate topParentForComponentModel:self.currentComponentModel
-                                       withDataSourceModel:self.componentDataSourceModel];
+    if ([self.componentDelegate respondsToSelector:@selector(topParentForComponentModel:withDataSourceModel:)]) {
+        retVal = [self.componentDelegate topParentForComponentModel:self.currentComponentModel
+                                                withDataSourceModel:self.componentDataSourceModel];
     } else {
         retVal = self.componentDataSourceModel;
     }
@@ -298,7 +298,7 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     }
     
     if ([cell.componentViewController respondsToSelector:@selector(delegate)]) {
-        cell.componentViewController.delegate = self;
+        cell.componentViewController.componentDelegate = self;
     }
     if ([cell.componentViewController respondsToSelector:@selector(setComponentModel:)]) {
         [cell.componentViewController setComponentModel:cellModel];
@@ -323,12 +323,12 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
     ComponentModel *componentModel = (ComponentModel *)currentModel;
     [[AnalyticsUtil alloc] carouselClickerAnalyticsIfApplicableWithComponentModel:componentModel];
     
-    if ([self.delegate respondsToSelector:@selector(componentViewController:didSelectModel:componentModel:atIndexPath:completion:)]) {
-        [self.delegate componentViewController:self
-                                didSelectModel:currentModel
-                                componentModel:cell.componentViewController.componentModel
-                                   atIndexPath:indexPath
-                                    completion:nil];
+    if ([self.componentDelegate respondsToSelector:@selector(componentViewController:didSelectModel:componentModel:atIndexPath:completion:)]) {
+        [self.componentDelegate componentViewController:self
+                                         didSelectModel:currentModel
+                                         componentModel:cell.componentViewController.componentModel
+                                            atIndexPath:indexPath
+                                             completion:nil];
     }
     
 }
@@ -431,12 +431,12 @@ NSString * const kCarouselSwipedNotification = @"CarouselSwipedNotification";
                     atIndexPath:(NSIndexPath *)indexPath
                      completion:(void (^)(UIViewController *targetViewController))completion
 {
-    if ([self.delegate respondsToSelector:@selector(componentViewController:didSelectModel:componentModel:atIndexPath:completion:)]) {
-        [self.delegate componentViewController:componentViewController
-                                didSelectModel:model
-                                componentModel:componentModel
-                                   atIndexPath:indexPath
-                                    completion:completion];
+    if ([self.componentDelegate respondsToSelector:@selector(componentViewController:didSelectModel:componentModel:atIndexPath:completion:)]) {
+        [self.componentDelegate componentViewController:componentViewController
+                                         didSelectModel:model
+                                         componentModel:componentModel
+                                            atIndexPath:indexPath
+                                             completion:completion];
     }
 }
 
