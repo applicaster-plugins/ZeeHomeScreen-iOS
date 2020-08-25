@@ -614,42 +614,44 @@ import Zee5CoreSDK
     // MARK: - UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard
+            let sectionsDataSourceArray = sectionsDataSourceArray,
+            let componentModel = sectionsDataSourceArray[indexPath.row] as? ComponentModel,
+            let atomEntry = componentModel.entry as? APAtomEntry else {
+                return
+        }
         
-//        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Click Reco", parameters: <#T##Dictionary<String, Any>#>)
+        if  let extensions = atomEntry.extensions,
+            let isCellClickable = extensions["cell_is_clickable"] as? String,
+            isCellClickable == "false" {
+            
+            return
+        }
         
+        if componentModel.isRecoType() {
+            let homeClickEvent = HomeContentClickApi()
+            homeClickEvent.contentConsumption(for: atomEntry)
+        }
         
-        if let sectionsDataSourceArray = sectionsDataSourceArray,
-            let componentModel = sectionsDataSourceArray[indexPath.row] as? ComponentModel {
-            if let atomEntry = componentModel.entry as? APAtomEntry {
-                
-                //check if selected item is reco entry
-                if componentModel.isRecoType() {
-                    let homeClickEvent = HomeContentClickApi()
-                    homeClickEvent.contentConsumption(for: atomEntry)
+        CustomizationManager.manager.customTitle = componentModel.title
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Thumbnail Click", parameters: analyticsParams(for: componentModel))
+        AnalyticsUtil().thumbnailClickerAnalyticsIfApplicable(componentModel: componentModel)
+        
+        if atomEntry.entryType == .video ||  atomEntry.entryType == .channel || atomEntry.entryType == .audio {
+            if let playable = atomEntry.playable() {
+                if let p = atomEntry.parentFeed,
+                    let pipesObject = p.pipesObject {
+                    playable.pipesObject = pipesObject as NSDictionary
                 }
-                
-                
-                CustomizationManager.manager.customTitle = componentModel.title
-                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: "Thumbnail Click", parameters: analyticsParams(for: componentModel))
-                AnalyticsUtil().thumbnailClickerAnalyticsIfApplicable(componentModel: componentModel)
-
-                if atomEntry.entryType == .video ||  atomEntry.entryType == .channel || atomEntry.entryType == .audio {
-                    if let playable = atomEntry.playable() {
-                        if let p = atomEntry.parentFeed,
-                            let pipesObject = p.pipesObject {
-                            playable.pipesObject = pipesObject as NSDictionary
-                        }
-                        playable.play()
-                    }
-                }
-                else if atomEntry.entryType == .link {
-                    if let urlstring = atomEntry.link,
-                        let linkURL = URL(string: urlstring.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!),
-                        APUtils.shouldOpenURLExternally(linkURL) {
-                        self.dismiss(animated: false)
-                        UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
-                    }
-                }
+                playable.play()
+            }
+        }
+        else if atomEntry.entryType == .link {
+            if let urlstring = atomEntry.link,
+                let linkURL = URL(string: urlstring.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!),
+                APUtils.shouldOpenURLExternally(linkURL) {
+                self.dismiss(animated: false)
+                UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
             }
         }
     }
