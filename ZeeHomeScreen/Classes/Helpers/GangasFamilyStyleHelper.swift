@@ -260,10 +260,10 @@ class GangasFamilyStyleHelper {
         case "HORIZONTAL_LIST_10":
             self.componentStyle = "SectionCompositeViewController"
             self.cellStyle = "ZeeHomeScreen_Family_Ganges_horizontal_list_10"
-            self.iphoneHeight = 126.0
+            self.iphoneHeight = 109.0
             self.iphoneWidth = 151.0
             
-            self.ipadHeight = 152.0
+            self.ipadHeight = 135.0
             self.ipadWidth = 195.0
             break
         case "HORIZONTAL_LIST_11":
