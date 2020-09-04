@@ -11,6 +11,10 @@ import ZappPlugins
 import Zee5CoreSDK
 
 @objc class SectionCompositeViewController: BaseCollectionComponentViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ComponentProtocol, ComponentDelegate, UIScrollViewDelegate {
+    fileprivate struct Keys {
+        public static let tabReselected =  "cellstylefamily_ganges.screen_picker_types.tab.reselected"
+        public static let initialSegment =  "cellstylefamily_ganges.screen_picker_types.segment"
+    }
     
     // Don't want this to be too low, otherwise we would thrash the servers
     private static let minimumRefreshDelay = TimeInterval(2)
@@ -368,6 +372,11 @@ import Zee5CoreSDK
         collectionView?.showsHorizontalScrollIndicator = collectionViewHorizontalScrollIndicator
         collectionView?.showsVerticalScrollIndicator = collectionViewVerticalScrollIndicator
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didReceiveActionNotification),
+                                               name:NSNotification.Name(rawValue: Keys.tabReselected),
+                                               object: nil)
+        
         AnalyticsUtil().reportHomeLandingOnHomeScreenIfApplicable(atomFeedUrl: self.atomFeedUrl)
     }
     
@@ -442,6 +451,8 @@ import Zee5CoreSDK
                                                    object: nil)
         }
         AnalyticsUtil().reportTabVisitedAnalyticsIfApplicable(atomFeedUrl: self.atomFeedUrl)
+        
+        updateSelectionFromUrlScheme()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -863,6 +874,9 @@ import Zee5CoreSDK
                 }
             }
         }
+        else if notification.name.rawValue == Keys.tabReselected {
+            updateSelectionFromUrlScheme()
+        }
     }
     
     func performCompletionAndStopLoadingIndicator() {
@@ -936,6 +950,21 @@ extension SectionCompositeViewController: UniversalCollectionViewHeaderFooterVie
             UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
         }
     }
+    
+    fileprivate func updateSelectionFromUrlScheme() {
+        guard
+            let toggle = toggleSegmentedControl,
+            !toggle.isHidden,
+            let sessionStorage = ZAAppConnector.sharedInstance().storageDelegate else {
+                return
+        }
+        
+        if let initialSegmentTitle = sessionStorage.sessionStorageValue(for: Keys.initialSegment, namespace: nil), initialSegmentTitle.count > 0 {
+            toggle.selectSegment(with: initialSegmentTitle)
+        }
+        
+        _ = sessionStorage.sessionStorageSetValue(for: Keys.initialSegment, value: "", namespace: nil)
+    }
 }
 
 extension SectionCompositeViewController {
@@ -997,14 +1026,30 @@ class CustomSegmentedControl: UIView {
     }
     
     @objc private func buttonAction(sender: UIButton) {
-        for (index, button) in buttons.enumerated() {
+        highlightButton(sender)
+    }
+    
+    private func highlightButton(_ button: UIButton?, with title: String? = nil) {
+        func clearSelection(_ button: UIButton) {
             button.setTitleColor(.white, for: .normal)
             button.backgroundColor = .clear
-            
-            if button == sender {
-                button.setTitleColor(selectorTextColor, for: .normal)
-                button.backgroundColor = selectorViewColor
-                changeToIndex(index)
+        }
+        
+        func makeSelected(_ button: UIButton, _ index: Int) {
+            button.setTitleColor(selectorTextColor, for: .normal)
+            button.backgroundColor = selectorViewColor
+            changeToIndex(index)
+        }
+        
+        for (index, currentButton) in buttons.enumerated() {
+            if let button = button, button === currentButton {
+                makeSelected(currentButton, index)
+            }
+            else if let title = title, title == currentButton.title(for: .normal) {
+                makeSelected(currentButton, index)
+            }
+            else {
+                clearSelection(currentButton)
             }
         }
     }
@@ -1027,4 +1072,7 @@ class CustomSegmentedControl: UIView {
         updateView()
     }
 
+    func selectSegment(with title: String) {
+        highlightButton(nil, with: title.localized(hashMap: [:]))
+    }
 }
